@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/faculty-management/static/css/main.91b6b907.css",
-    "main.js": "/faculty-management/static/js/main.c8ac0eec.js",
+    "main.js": "/faculty-management/static/js/main.76fbd328.js",
     "static/media/Qw.png": "/faculty-management/static/media/Qw.452c5155aa2b298b2461.png",
     "index.html": "/faculty-management/index.html",
     "main.91b6b907.css.map": "/faculty-management/static/css/main.91b6b907.css.map",
-    "main.c8ac0eec.js.map": "/faculty-management/static/js/main.c8ac0eec.js.map"
+    "main.76fbd328.js.map": "/faculty-management/static/js/main.76fbd328.js.map"
   },
   "entrypoints": [
     "static/css/main.91b6b907.css",
-    "static/js/main.c8ac0eec.js"
+    "static/js/main.76fbd328.js"
   ]
 }

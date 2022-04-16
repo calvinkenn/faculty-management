@@ -1,0 +1,19 @@
+.training-container {
+    width: 100%;
+    display: flex;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.training-container__data {
+    width: 30%;
+}
+
+.training-container__image {
+    width: 50%;
+}
+
+.training-container__image img {
+    width: 350px;
+    height: 200px;
+}

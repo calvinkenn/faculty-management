@@ -1,4 +1,5 @@
 import React from "react";
+import TrainingEdit from "./TrainingEdit";
 
 import TrainingList from "./TrainingList";
 
@@ -29,8 +30,8 @@ const DUMMY_DATA = [
 ];
 
 const Training = (props) => {
-  if (props.isEditMode) {
-    return <h1>Edit form</h1>;
+  if (props.isAddMode) {
+    return <TrainingEdit />;
   } else {
     return <TrainingList list={DUMMY_DATA} />;
   }

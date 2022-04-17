@@ -1,4 +1,5 @@
 import React from "react";
+import EducationalEdit from "./EducationalEdit";
 
 import EducationalList from "./EducationalList";
 
@@ -11,7 +12,7 @@ const DUMMY_DATA = [
     from: "2020 1",
     to: "2020 1",
     yearGraduated: "2020 1",
-    awards: ["Best in english", "Best in pilipino"],
+    awards: ["Best in english", "Best in filipino"],
   },
   {
     level: "SECONDARY",
@@ -34,8 +35,8 @@ const DUMMY_DATA = [
 ];
 
 const EducationalBackground = (props) => {
-  if (props.isEditMode) {
-    return <h1>Edit form</h1>;
+  if (props.isAddMode) {
+    return <EducationalEdit />;
   } else {
     return <EducationalList items={DUMMY_DATA} />;
   }

@@ -1,4 +1,5 @@
 import React from "react";
+import BasicInfoEdit from "./BasicInfoEdit";
 
 import BasicInfoItem from "./BasicInfoItem";
 
@@ -25,32 +26,11 @@ const DUMMY_DATA = {
   sssNO: "TEST",
   tinNO: "TEST",
   citizenship: "TEST",
-  residentAddress: {
-    houseNo: "TEST",
-    street: "TEST",
-    locationType: "1",
-    barangay: "TEST",
-    city: "TEST",
-    province: "TEST",
-    zip: "TEST",
-  },
-  permanentAddress: {
-    houseNo: "TEST",
-    street: "TEST",
-    locationType: "1",
-    barangay: "TEST",
-    city: "TEST",
-    province: "TEST",
-    zip: "TEST",
-  },
-  telephoneNum: "TEST",
-  cellphoneNum: "TEST",
-  alternateEmail: "TEST",
 };
 
 const BasicInfo = (props) => {
   if (props.isEditMode) {
-    return <h1>Edit form</h1>;
+    return <BasicInfoEdit />;
   } else {
     return (
       <BasicInfoItem
@@ -77,15 +57,6 @@ const BasicInfo = (props) => {
         sssNO={DUMMY_DATA.sssNO}
         tinNO={DUMMY_DATA.tinNO}
         citizenship={DUMMY_DATA.citizenship}
-        houseNo={DUMMY_DATA.residentAddress.houseNo}
-        street={DUMMY_DATA.residentAddress.street}
-        locationType={DUMMY_DATA.residentAddress.locationType}
-        barangay={DUMMY_DATA.residentAddress.barangay}
-        province={DUMMY_DATA.residentAddress.province}
-        zip={DUMMY_DATA.residentAddress.zip}
-        telephoneNum={DUMMY_DATA.telephoneNum}
-        cellphoneNum={DUMMY_DATA.cellphoneNum}
-        alternateEmail={DUMMY_DATA.alternateEmail}
       />
     );
   }

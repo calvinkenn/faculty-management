@@ -47,15 +47,17 @@ const TopActionBar = (props) => {
         <p>Do you want to cancel editing? Changes will not be saved.</p>
       </Modal>
       <div className="top-action">
-          <ul>
-            {props.inOverview && <li>Print</li>}
-            {!isEditMode && !props.inOverview && (
-              <li onClick={props.onClick}>
-                {props.inBasicInformation ? "Edit" : "Add"}
-              </li>
-            )}
-            {isEditMode && <li onClick={showCancelEditHandler}>Cancel</li>}
-          </ul>
+        <ul>
+          {props.inOverview && <li>Print</li>}
+          {!isEditMode && !props.inOverview && (
+            <li onClick={props.onClick}>
+              {props.inBasicInformation || props.inContactInformation
+                ? "Edit"
+                : "Add"}
+            </li>
+          )}
+          {isEditMode && <li onClick={showCancelEditHandler}>Cancel</li>}
+        </ul>
       </div>
     </React.Fragment>
   );

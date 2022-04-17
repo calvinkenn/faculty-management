@@ -27,6 +27,7 @@
   font: inherit;
   height: 100%;
   width: 3rem;
+  text-align: center;
 }
 
 .top-action li:hover,

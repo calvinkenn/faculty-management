@@ -1,4 +1,5 @@
 import React from "react";
+import WorkExperienceEdit from "./WorkExperienceEdit";
 
 import WorkExperienceList from "./WorkExperienceList";
 
@@ -27,8 +28,8 @@ const DUMMY_DATA = [
 ];
 
 const WorkExperience = (props) => {
-  if (props.isEditMode) {
-    return <h1>Edit form</h1>;
+  if (props.isAddMode) {
+    return <WorkExperienceEdit />;
   } else {
     return <WorkExperienceList items={DUMMY_DATA} />;
   }

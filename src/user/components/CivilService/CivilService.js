@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
+import CivilServiceEdit from "./CivilServiceEdit";
 import CivilServiceList from "./CivilServiceList";
 
 const DUMMY_DATA = [
@@ -10,7 +11,7 @@ const DUMMY_DATA = [
     date: "2020 1",
     examPlace: "TEST",
     licenseNumber: "232",
-    licenseValidity: "232"
+    licenseValidity: "232",
   },
   {
     career: "TEST TITLE 2",
@@ -18,13 +19,15 @@ const DUMMY_DATA = [
     date: "2020 2",
     examPlace: "TEST",
     licenseNumber: "232",
-    licenseValidity: "232"
+    licenseValidity: "232",
   },
 ];
 
 const CivilService = (props) => {
-  if (props.isEditMode) {
-    return <h1>Edit form</h1>;
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  if (props.isAddMode) {
+    return <CivilServiceEdit isEditMode={isEditMode} />;
   } else {
     return <CivilServiceList items={DUMMY_DATA} />;
   }

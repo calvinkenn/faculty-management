@@ -5,7 +5,7 @@
 .form-control label,
 .form-control input,
 .form-control textarea {
-  display: block;
+  display: flexbox;
 }
 
 .form-control label {
@@ -15,7 +15,6 @@
 
 .form-control input,
 .form-control textarea {
-  width: 100%;
   font: inherit;
   border: 1px solid #ccc;
   background: #f8f8f8;

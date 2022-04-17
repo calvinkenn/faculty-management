@@ -11,10 +11,12 @@ import WorkExperience from "../components/WorkExperience/WorkExperience";
 import Training from "../components/Training/Training";
 import "./Profile.css";
 import TopActionBar from "../components/TopActionBar";
+import ContactInfo from "../components/ContactInformation/ContactInfo";
 
 const menu = {
   overview: true,
   basicInformation: false,
+  contactInformation: false,
   education: false,
   civilService: false,
   workExperience: false,
@@ -59,6 +61,12 @@ const Profile = (props) => {
               Basic Information
             </li>
             <li
+              className={isMenuActive.contactInformation ? "active" : ""}
+              onClick={() => menuChangeHandler("contactInformation")}
+            >
+              Contact Information
+            </li>
+            <li
               className={isMenuActive.education ? "active" : ""}
               onClick={() => menuChangeHandler("education")}
             >
@@ -88,6 +96,7 @@ const Profile = (props) => {
           <TopActionBar
             inOverview={isMenuActive.overview}
             inBasicInformation={isMenuActive.basicInformation}
+            inContactInformation={isMenuActive.contactInformation}
             updateEditModeState={editModeHandler}
             isEditMode={isEditMode}
             onClick={editModeHandler}
@@ -96,16 +105,19 @@ const Profile = (props) => {
           {isMenuActive.basicInformation && (
             <BasicInfo isEditMode={isEditMode} />
           )}
+          {isMenuActive.contactInformation && (
+            <ContactInfo isEditMode={isEditMode} />
+          )}
           {isMenuActive.education && (
-            <EducationalBackground isEditMode={isEditMode} />
+            <EducationalBackground isAddMode={isEditMode} />
           )}
           {isMenuActive.civilService && (
-            <CivilService isEditMode={isEditMode} />
+            <CivilService isAddMode={isEditMode} />
           )}
           {isMenuActive.workExperience && (
-            <WorkExperience isEditMode={isEditMode} />
+            <WorkExperience isAddMode={isEditMode} />
           )}
-          {isMenuActive.training && <Training isEditMode={isEditMode} />}
+          {isMenuActive.training && <Training isAddMode={isEditMode} />}
         </div>
       </div>
     </React.Fragment>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .button{
   width: 100%;
   max-width: 100%;
@@ -13,6 +14,9 @@
 }
 
 /* .button {
+=======
+.button {
+>>>>>>> 08189b55e18eaf07b75c82c6a52f304d465da798
   font: inherit;
   padding: 0.5rem 1.5rem;
   border: 1px solid #161616;
@@ -72,4 +76,8 @@
 
 .button--big {
   font-size: 1.5rem;
+<<<<<<< HEAD
 } */
+=======
+}
+>>>>>>> 08189b55e18eaf07b75c82c6a52f304d465da798

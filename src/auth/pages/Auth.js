@@ -14,6 +14,7 @@ import "./Auth.css";
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -53,17 +54,60 @@ const Auth = () => {
     setIsLoginMode((prevMode) => !prevMode);
   };
 
-  const authSubmitHandler = (event) => {
+  // const authSubmitHandler = (event) => {
+  //   event.preventDefault();
+  //   console.log(formState.inputs);
+  //   auth.login();
+  // };
+  const testLoginAdmin = (event) => {
     event.preventDefault();
     console.log(formState.inputs);
-    auth.login();
+    auth.loginAsAdmin();
+  };
+  const testLoginUser = (event) => {
+    event.preventDefault();
+    console.log(formState.inputs);
+    auth.loginAsUser();
   };
 
   return (
     <Card className="authentication">
       <h2>{isLoginMode ? "Log in" : "Register"}</h2>
       <hr />
-      <form onSubmit={authSubmitHandler}>
+      <form>
+        {!isLoginMode && (
+          <Input
+            element="input"
+            id="employeeNum"
+            type="text"
+            label="Employee Number"
+            validators={[VALIDATOR_EMAIL()]}
+            errorText="Invalid Email"
+            onInput={inputHandler}
+          />
+        )}
+        {!isLoginMode && (
+          <Input
+            element="input"
+            id="fName"
+            type="text"
+            label="First Name"
+            validators={[VALIDATOR_EMAIL()]}
+            errorText="Invalid Email"
+            onInput={inputHandler}
+          />
+        )}
+        {!isLoginMode && (
+          <Input
+            element="input"
+            id="lName"
+            type="text"
+            label="Last Name"
+            validators={[VALIDATOR_EMAIL()]}
+            errorText="Invalid Email"
+            onInput={inputHandler}
+          />
+        )}
         <Input
           element="input"
           id="email"
@@ -82,9 +126,15 @@ const Auth = () => {
           errorText="Minimum of 6 characters"
           onInput={inputHandler}
         />
-        <Button type="submit" >
-          {isLoginMode ? "Log in" : "Register"}
+        {/* <Button type="submit">
+          {isLoginMode ? "Test Log in User" : "Register"}
+        </Button> */}
+        <Button onClick={testLoginUser}>
+          {isLoginMode ? "Test Log in User" : "Register"}
         </Button>
+        {isLoginMode && (
+          <Button onClick={testLoginAdmin}>Test Log in Admin</Button>
+        )}
       </form>
       <Button inverse onClick={switchModeHandler}>
         {isLoginMode ? "Sign Up" : "Log in"}

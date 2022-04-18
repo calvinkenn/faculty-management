@@ -10,12 +10,24 @@ import { AuthContext } from "./shared/context/auth-context";
 import Profile from "./user/pages/Profile";
 import Auth from "./auth/pages/Auth";
 import "./App.css";
+import Admin from "./admin/pages/Admin";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const login = useCallback(() => {
+  // const login = useCallback(() => {
+  //   setIsLoggedIn(true);
+  //   setIsAdmin(true);
+  // }, []);
+
+  const loginAsAdmin = useCallback(() => {
     setIsLoggedIn(true);
+    setIsAdmin(true);
+  }, []);
+  const loginAsUser = useCallback(() => {
+    setIsLoggedIn(true);
+    setIsAdmin(false);
   }, []);
 
   const logout = useCallback(() => {
@@ -25,12 +37,25 @@ const App = () => {
   let routes;
 
   if (isLoggedIn) {
-    routes = (
-      <Routes>
-        <Route path="/:userID/profile" element={<Profile />} />
-        <Route path="/" element={<Navigate to="/:userID/profile" replace />} />
-      </Routes>
-    );
+    if (!isAdmin) {
+      routes = (
+        <Routes>
+          <Route path="/:userID/profile" element={<Profile />} />
+          <Route
+            path="/"
+            element={<Navigate to="/:userID/profile" replace />}
+          />
+        </Routes>
+      );
+    } else {
+      routes = (
+        <Routes>
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/:userID/profile" element={<Profile />} />
+          <Route path="/" element={<Navigate to="/admin" replace />} />
+        </Routes>
+      );
+    }
   } else {
     routes = (
       <Routes>
@@ -42,7 +67,13 @@ const App = () => {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
+      value={{
+        isLoggedIn: isLoggedIn,
+        isAdmin: isAdmin,
+        loginAsUser: loginAsUser,
+        loginAsAdmin: loginAsAdmin,
+        logout: logout,
+      }}
     >
       <Router>{routes}</Router>
     </AuthContext.Provider>

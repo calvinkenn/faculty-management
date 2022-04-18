@@ -1,0 +1,12 @@
+.application-container {
+  text-align: center;
+}
+
+.application-container__image {
+  text-align: center;
+}
+
+.application-container__image img {
+  width: 100px;
+  height: 100px;
+}

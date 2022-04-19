@@ -96,6 +96,10 @@ const Auth = () => {
     auth.loginAsUser();
   };
 
+  const authSubmitHandler = event =>{
+    event.preventDefault();
+  }
+
   return (
     <Card className="authentication">
       <div className="main-container">

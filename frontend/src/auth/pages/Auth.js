@@ -122,7 +122,11 @@ const Auth = () => {
       const responseData = await response.json();
       //if error show error modal but if success show success modal
       if(responseData.error){
-        console.log('there is an error');
+        if(responseData.error.message){
+          console.log(responseData.error.message);
+        }else{
+          console.log(responseData.error);
+        }
       }else if (responseData.success){
         console.log('sign up success');
       }

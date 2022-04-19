@@ -10,7 +10,7 @@ const signup = async (req, res, next) => {
     if(!errors.isEmpty()){
         errorsList = errors.array();
         const newList = errorsList.map(error => error.msg);
-        return res.json({error : newList});
+        return res.json({error : newList[0]});
     }
     //gather all the data from request
     const {employeeNum, firstName, lastName, email, password} = req.body;

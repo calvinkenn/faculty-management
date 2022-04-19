@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/faculty-management/static/css/main.8ee1cd08.css",
-    "main.js": "/faculty-management/static/js/main.229a8dcd.js",
+    "main.css": "/faculty-management/static/css/main.20cefd9b.css",
+    "main.js": "/faculty-management/static/js/main.3a7c3b24.js",
     "static/media/pimentel.png": "/faculty-management/static/media/pimentel.eb14134ff382fcd59ecd.png",
     "static/media/cict.png": "/faculty-management/static/media/cict.590f6dd7cadc8a504e78.png",
     "static/media/bulsu.png": "/faculty-management/static/media/bulsu.e3621839e3f98c751dcd.png",
     "static/media/Qw.png": "/faculty-management/static/media/Qw.452c5155aa2b298b2461.png",
     "index.html": "/faculty-management/index.html",
-    "main.8ee1cd08.css.map": "/faculty-management/static/css/main.8ee1cd08.css.map",
-    "main.229a8dcd.js.map": "/faculty-management/static/js/main.229a8dcd.js.map"
+    "main.20cefd9b.css.map": "/faculty-management/static/css/main.20cefd9b.css.map",
+    "main.3a7c3b24.js.map": "/faculty-management/static/js/main.3a7c3b24.js.map"
   },
   "entrypoints": [
-    "static/css/main.8ee1cd08.css",
-    "static/js/main.229a8dcd.js"
+    "static/css/main.20cefd9b.css",
+    "static/js/main.3a7c3b24.js"
   ]
 }

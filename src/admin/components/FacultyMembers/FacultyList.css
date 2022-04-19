@@ -1,0 +1,10 @@
+.faculty-list {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.faculty-list:hover {
+  cursor: pointer;
+}

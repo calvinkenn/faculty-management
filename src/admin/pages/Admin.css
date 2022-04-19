@@ -1,0 +1,14 @@
+.admin-container {
+  margin-top: 5rem;
+  border: 1px solid black;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.admin-container ul {
+    padding: 0;
+    text-align: left;
+  }

@@ -1,0 +1,81 @@
+/* .form-control {
+  margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input,
+.form-control textarea {
+  display: flexbox;
+}
+
+.form-control label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.form-control input,
+.form-control textarea {
+  font: inherit;
+  border: 1px solid #ccc;
+  background: #f8f8f8;
+  padding: 0.15rem 0.25rem;
+}
+
+.form-control input:focus,
+.form-control textarea:focus {
+  outline: none;
+  background: #ebebeb;
+  border-color: #510077;
+}
+
+.form-control--invalid label,
+.form-control--invalid p {
+  color: red;
+}
+
+.form-control--invalid input,
+.form-control--invalid textarea {
+  border-color: red;
+  background: #ffd1d1;
+} */
+
+.login-mode-title{
+  margin-bottom: 2em;
+  color: #404040;
+}
+
+.form-control{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+#email,
+#employeeNum,
+#fName,
+#lName,
+#password{
+  /* padding: 4% 2%;
+  border: 1px solid #c0c0c0; */
+  border-radius: 5px;
+}
+
+#email::placeholder,
+#password::placeholder{
+  color: #404040;
+  font-size: 0.9vw;
+  opacity: 50%;
+}
+
+.form-control label{
+  color: #404040;
+  font-size: 1vw;
+  display: none;
+}
+
+.form-control p{
+  color: #f44336;
+  font-size: 0.75em;
+  margin-top: 0.2em;
+  text-align: left;
+}

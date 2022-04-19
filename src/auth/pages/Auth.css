@@ -1,0 +1,128 @@
+/* .authentication__header {
+  color: white;
+  text-align: center;
+}
+
+.authentication {
+  width: 90%;
+  max-width: 25rem;
+  margin: 7rem auto;
+  text-align: center;
+}
+
+.authentication form {
+  margin-bottom: 1rem;
+} */
+
+.authentication{
+  text-align: center;
+}
+
+.main-container{
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.main-img-cont{
+  width: 100%;
+  max-width: 70%;
+  background-color: #ffc000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100vh;
+}
+.main-form-cont{
+  width: 100%;
+  max-width: 25%;
+  padding: 0 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.img-container{
+  width: 100%;
+  max-width: 100%;
+}
+
+.img-container img{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+.cict-text-container{
+  width: 100%;
+  max-width: fit-content;
+  padding: 0 5%;
+  margin-bottom: 4em;
+}
+.txt-container h3{
+  font-size: 3em;
+  color: #1d1d1d;
+}
+.txt-container h5{
+  font-size: 1.5em;
+  color: #1d1d1d;
+}
+
+.logo-container{
+  width: 100%;
+  max-width: 100%;
+}
+
+.logo-container img{
+  width: 100%;
+  max-width: 6em;
+  margin-right: 1.2%;
+}
+
+.email-pass-container{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.email-container,
+.password-container,
+.employeeNo-container{
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 4%;
+  display: grid;
+}
+
+.fullName-container{
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 4%;
+  display: flex;
+}
+
+.firstName-container,
+.lastName-container{
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+}
+.firstName-container{
+  margin-right: 2%;
+}
+
+.authentication h6{
+  color: #404040;
+  font-size: 0.85vw;
+  margin-top: 0.8em;
+  font-weight: 500;
+}
+
+.authentication a{
+  color: #ffc000;
+  font-weight: 600;
+  cursor: pointer;
+}

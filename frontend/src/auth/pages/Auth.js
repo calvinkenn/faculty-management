@@ -107,8 +107,9 @@ const Auth = () => {
     }else{
 
       //code for signup
+      let response
       try{
-        const response = await fetch('http://localhost:5000/api/users/signup',{
+        response = await fetch('http://localhost:5000/api/users/signup',{
           method : 'POST',
           headers : {
             'Content-Type' : 'application/json'
@@ -122,7 +123,7 @@ const Auth = () => {
           })
         });
       }catch(err){
-        console.log(err);
+        console.log(error);
       }
       const responseData = await response.json();
       //if error show error modal but if success show success modal

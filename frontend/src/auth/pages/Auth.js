@@ -103,22 +103,27 @@ const Auth = () => {
     //checks if the state is in login mode
     if(isLoginMode){
       //code for login
+      auth.loginAsUser();
     }else{
 
       //code for signup
-      const response = await fetch('http://localhost:5000/api/users/signup',{
-        method : 'POST',
-        headers : {
-          'Content-Type' : 'application/json'
-        },
-        body : JSON.stringify({
-          employeeNum : formState.inputs.employeeNum.value,
-          firstName : formState.inputs.firstName.value,
-          lastName : formState.inputs.lastName.value,
-          email : formState.inputs.email.value,
-          password : formState.inputs.password.value
-        })
-      });
+      try{
+        const response = await fetch('http://localhost:5000/api/users/signup',{
+          method : 'POST',
+          headers : {
+            'Content-Type' : 'application/json'
+          },
+          body : JSON.stringify({
+            employeeNum : formState.inputs.employeeNum.value,
+            firstName : formState.inputs.firstName.value,
+            lastName : formState.inputs.lastName.value,
+            email : formState.inputs.email.value,
+            password : formState.inputs.password.value
+          })
+        });
+      }catch(err){
+        console.log(err);
+      }
       const responseData = await response.json();
       //if error show error modal but if success show success modal
       if(responseData.error){

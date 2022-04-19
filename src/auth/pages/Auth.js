@@ -14,7 +14,6 @@ import "./Auth.css";
 import bulsuLogo from "../../assets/Image/bulsu.png";
 import cictLogo from "../../assets/Image/cict.png";
 import cictBuilding from "../../assets/Image/pimentel.png";
-import { TextField } from "@mui/material";
 
 const Auth = () => {
   const auth = useContext(AuthContext);
@@ -31,6 +30,18 @@ const Auth = () => {
         value: "",
         isValid: false,
       },
+      employeeNum: {
+        value: "",
+        isValid: false,
+      },
+      firstName: {
+        value: "",
+        isValid: false,
+      },
+      lastName: {
+        value: "",
+        isValid: false,
+      },
     },
     false
   );
@@ -40,7 +51,9 @@ const Auth = () => {
       setFormData(
         {
           ...formState.inputs,
-          name: undefined,
+          employeeNum: undefined,
+          firstName: undefined,
+          lastName: undefined,
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
@@ -48,7 +61,15 @@ const Auth = () => {
       setFormData(
         {
           ...formState.inputs,
-          name: {
+          employeeNum: {
+            value: "",
+            isValid: false,
+          },
+          firstName: {
+            value: "",
+            isValid: false,
+          },
+          lastName: {
             value: "",
             isValid: false,
           },
@@ -95,30 +116,20 @@ const Auth = () => {
         </div>
         <div className="main-form-cont">
           {/* <Router>{routes}</Router> */}
-          <h2 className="login-mode-title">{isLoginMode ? "LOGIN TO YOUR ACCOUNT" : "CREATE YOUR ACCOUNT"}</h2>
+          <h2 className="login-mode-title">
+            {isLoginMode ? "LOGIN TO YOUR ACCOUNT" : "CREATE YOUR ACCOUNT"}
+          </h2>
           <form>
             <div className="employeeNo-container">
               {!isLoginMode && (
-                // <Input
-                //   element="input"
-                //   id="employeeNum"
-                //   type="text"
-                //   // label="Employee Number"
-                //   placeholder="Employee Number"
-                //   validators={[VALIDATOR_EMAIL()]}
-                //   errorText="Invalid Email"
-                //   onInput={inputHandler}
-                // />
-                <TextField 
+                <Input
                   element="input"
                   id="employeeNum"
                   type="text"
-                  // label="Employee Number"
-                  // placeholder="Employee Number"
-                  validators={[VALIDATOR_EMAIL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_MINLENGTH(2)]}
+                  helperText="Minimum of 2 characters."
                   onInput={inputHandler}
-                  label="Employee Number" 
+                  label="Employee Number"
                   variant="outlined"
                 />
               )}
@@ -126,52 +137,28 @@ const Auth = () => {
             <div className="fullName-container">
               <div className="firstName-container">
                 {!isLoginMode && (
-                  // <Input
-                  //   element="input"
-                  //   id="fName"
-                  //   type="text"
-                  //   // label="First Name"
-                  //   placeholder="First Name"
-                  //   validators={[VALIDATOR_EMAIL()]}
-                  //   errorText="Invalid Email"
-                  //   onInput={inputHandler}
-                  // />
-                  <TextField 
+                  <Input
                     element="input"
-                    id="fName"
+                    id="firstName"
                     type="text"
-                    // label="First Name"
-                    // placeholder="First Name"
-                    validators={[VALIDATOR_EMAIL()]}
-                    errorText="Invalid Email"
+                    validators={[VALIDATOR_MINLENGTH(2)]}
+                    helperText="Minimum of 2 characters."
                     onInput={inputHandler}
-                    label="First Name" 
+                    label="First Name"
                     variant="outlined"
                   />
                 )}
               </div>
               <div className="lastName-container">
                 {!isLoginMode && (
-                  // <Input
-                  //   element="input"
-                  //   id="lName"
-                  //   type="text"
-                  //   // label="Last Name"
-                  //   placeholder="Last Name"
-                  //   validators={[VALIDATOR_EMAIL()]}
-                  //   errorText="Invalid Email"
-                  //   onInput={inputHandler}
-                  // />
-                  <TextField 
+                  <Input
                     element="input"
-                    id="lName"
+                    id="lastName"
                     type="text"
-                    // label="Last Name"
-                    // placeholder="Last Name"
-                    validators={[VALIDATOR_EMAIL()]}
-                    errorText="Invalid Email"
+                    validators={[VALIDATOR_MINLENGTH(2)]}
+                    helperText="Minimum of 2 characters."
                     onInput={inputHandler}
-                    label="Last Name" 
+                    label="Last Name"
                     variant="outlined"
                   />
                 )}
@@ -179,54 +166,30 @@ const Auth = () => {
             </div>
             <div className="email-pass-container">
               <div className="email-container">
-                <TextField 
+                <Input
                   element="input"
                   id="email"
                   type="text"
-                  // label="Email"
-                  // placeholder="Email"
                   validators={[VALIDATOR_EMAIL()]}
-                  errorText="Invalid Email"
+                  helperText="Invalid Email."
                   onInput={inputHandler}
-                  label="Email" 
+                  label="Email"
                   variant="outlined"
                 />
               </div>
               <div className="password-container">
-                <TextField 
+                <Input
                   element="input"
                   id="password"
                   type="password"
-                  // label="Password"
-                  // placeholder="Password"
                   validators={[VALIDATOR_MINLENGTH(6)]}
-                  errorText="Minimum of 6 characters"
+                  helperText="Minimum of 6 characters."
                   onInput={inputHandler}
-                  label="Password" 
+                  label="Password"
                   variant="outlined"
                 />
               </div>
             </div>
-            {/* <Input
-              element="input"
-              id="email"
-              type="text"
-              // label="Email"
-              placeholder="Email"
-              validators={[VALIDATOR_EMAIL()]}
-              errorText="Invalid Email"
-              onInput={inputHandler}
-            /> */}
-            {/* <Input
-              element="input"
-              id="password"
-              type="password"
-              // label="Password"
-              placeholder="Password"
-              validators={[VALIDATOR_MINLENGTH(6)]}
-              errorText="Minimum of 6 characters"
-              onInput={inputHandler}
-            /> */}
             {/* <Button type="submit">
               {isLoginMode ? "Test Log in User" : "Register"}
             </Button> */}
@@ -237,19 +200,28 @@ const Auth = () => {
               <Button onClick={testLoginAdmin}>Test Log in Admin</Button>
             )}
           </form>
-          
-          {isLoginMode ? 
-            <h6>Don't have an account? <a onClick={switchModeHandler}>Create an account here</a>
-            <h6>Forgot your password? <a onClick={switchModeHandler}>Reset your password here</a></h6></h6> : 
-            <h6>Already have an account? <a onClick={switchModeHandler}>Login here</a></h6>
-          }
+
+          {isLoginMode ? (
+            <h6>
+              Don't have an account?{" "}
+              <a onClick={switchModeHandler}>Create an account here</a>
+              <h6>
+                Forgot your password?{" "}
+                <a onClick={switchModeHandler}>Reset your password here</a>
+              </h6>
+            </h6>
+          ) : (
+            <h6>
+              Already have an account?{" "}
+              <a onClick={switchModeHandler}>Login here</a>
+            </h6>
+          )}
 
           {/* <Button inverse onClick={switchModeHandler}>
             {isLoginMode ? "Sign Up" : "Log in"}
           </Button> */}
         </div>
       </div>
-      
     </Card>
   );
 };

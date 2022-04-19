@@ -1,3 +1,4 @@
+import { TextField } from "@mui/material";
 import React, { useReducer, useEffect } from "react";
 
 import { validate } from "../../utils/validators";
@@ -41,6 +42,7 @@ const Input = (props) => {
       type: "CHANGE",
       val: event.target.value,
       validators: props.validators,
+      error: props.validators,
     });
   };
 
@@ -50,36 +52,54 @@ const Input = (props) => {
     });
   };
 
-  const element =
-    props.element === "input" ? (
-      <input
-        id={props.id}
-        type={props.type}
-        placeholder={props.placeholder}
-        onChange={changeHandler}
-        onBlur={blurHandler}
-        value={inputState.value}
-      />
-    ) : (
-      <input //Checkbox TEST
-        id={props.id}
-        type={props.type}
-        onChange={changeHandler}
-        onBlur={blurHandler}
-        value={props.value}
-      />
-    );
+  // const element =
+  //   props.element === "input" ? (
+  //     <input
+  //       id={props.id}
+  //       type={props.type}
+  //       placeholder={props.placeholder}
+  //       onChange={changeHandler}
+  //       onBlur={blurHandler}
+  //       value={inputState.value}
+  //       // helperText={props.error}
+  //       // onChange={changeHandler}
+  //       // onBlur={blurHandler}
+  //       // type={props.type}
+  //       // label={props.label}
+  //       // variant={props.variant}
+  //     />
+  //   ) : (
+  //     <input //Checkbox TEST
+  //       id={props.id}
+  //       type={props.type}
+  //       onChange={changeHandler}
+  //       onBlur={blurHandler}
+  //       value={props.value}
+  //     />
+  //   );
 
   return (
-    <div
-      className={`form-control ${
-        !inputState.isValid && inputState.isTouched && "form-control--invalid"
-      }`}
-    >
-      <label htmlFor={props.id}>{props.label}</label>
-      {element}
-      {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
-    </div>
+    // <div
+    //   className={`form-control ${
+    //     !inputState.isValid && inputState.isTouched && "form-control--invalid"
+    //   }`}
+    // >
+    //   <label htmlFor={props.id}>{props.label}</label>
+    //   {element}
+    //   {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
+    // </div>
+    <TextField
+      id={props.id}
+      helperText={
+        !inputState.isValid && inputState.isTouched ? props.helperText : ""
+      }
+      onChange={changeHandler}
+      onBlur={blurHandler}
+      type={props.type}
+      label={props.label}
+      variant={props.variant}
+      error={!inputState.isValid && inputState.isTouched}
+    />
   );
 };
 

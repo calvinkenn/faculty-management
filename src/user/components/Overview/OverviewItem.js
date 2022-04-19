@@ -16,16 +16,17 @@ const OverviewItem = (props) => {
         <div>Email: {props.email}</div>
         <div>Extension Name:{props.extensionName}</div>
         <div>
-          Resident Address
           <hr />
+          Resident Address
           <div>House no.:{props.houseNo}</div>
           <div>Street:{props.street}</div>
           <div>
-            Type:{props.locationType == "1" ? "Subdivision" : "Village"}
+            Type:{props.locationType === "1" ? "Subdivision" : "Village"}
           </div>
           <div>Barangay: {props.barangay}</div>
           <div>Province:{props.province}</div>
           <div>Zip Code:{props.zip}</div>
+          <hr />
         </div>
         <div>Telephone no.:{props.telephoneNum}</div>
         <div>Cellphone no.:{props.cellphoneNum}</div>

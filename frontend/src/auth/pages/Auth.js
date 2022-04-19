@@ -96,8 +96,37 @@ const Auth = () => {
     auth.loginAsUser();
   };
 
-  const authSubmitHandler = event =>{
+  //added by ralph
+  const authSubmitHandler = async event =>{
     event.preventDefault();
+
+    //checks if the state is in login mode
+    if(isLoginMode){
+      //code for login
+    }else{
+
+      //code for signup
+      const response = await fetch('http://localhost:5000/api/users/signup',{
+        method : 'POST',
+        headers : {
+          'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify({
+          employeeNum : formState.inputs.employeeNum.value,
+          firstName : formState.inputs.firstName.value,
+          lastName : formState.inputs.lastName.value,
+          email : formState.inputs.email.value,
+          password : formState.inputs.password.value
+        })
+      });
+      const responseData = await response.json();
+      //if error show error modal but if success show success modal
+      if(responseData.error){
+        console.log('there is an error');
+      }else if (responseData.success){
+        console.log('sign up success');
+      }
+    }
   }
 
   return (
@@ -123,7 +152,7 @@ const Auth = () => {
           <h2 className="login-mode-title">
             {isLoginMode ? "LOGIN TO YOUR ACCOUNT" : "CREATE YOUR ACCOUNT"}
           </h2>
-          <form>
+          <form onSubmit={authSubmitHandler}>
             <div className="employeeNo-container">
               {!isLoginMode && (
                 <Input
@@ -197,7 +226,7 @@ const Auth = () => {
             {/* <Button type="submit">
               {isLoginMode ? "Test Log in User" : "Register"}
             </Button> */}
-            <Button onClick={testLoginUser}>
+            <Button type = "submit">
               {isLoginMode ? "Test Log in User" : "Register"}
             </Button>
             {isLoginMode && (

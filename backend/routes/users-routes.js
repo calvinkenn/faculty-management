@@ -13,7 +13,8 @@ router.post(
     ],
     userControllers.signup
 );
-router.post('/login');
+
+router.post('/login', userControllers.login);
 
 
 

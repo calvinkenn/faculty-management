@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 
-
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 
 const signup = async (req, res, next) => {
@@ -26,13 +26,23 @@ const signup = async (req, res, next) => {
     if(existingUser){
         return res.json({error: "User Already Exist!"});
     }
+    //hash user password for added website security
+    let hashedPassword;
+    try{
+        hashedPassword = await bcrypt.hash(password, 12);
+    }catch(err){
+        return res.json({error: "Signing up Failed please try again"});
+    }
+        
+    
+    
     //if not create a new user
     const createdUser = new User({
         employeeNum,
         firstName,
         lastName,
         email,
-        password,
+        password: hashedPassword,
     });
     
     try {
@@ -43,4 +53,21 @@ const signup = async (req, res, next) => {
     res.status(201).json({success :"Sign Up sucess!"});
 };
 
+const login =  async (req, res ,next) =>{
+    const {email,password} = req.body;
+
+
+    let existingUser = await User.findOne({email : email});
+    let isValidPassword = false;
+
+    isValidPassword = await bcrypt.compare(password, existingUser.password);
+
+    if(!existingUser || !isValidPassword){
+        return res.json({error: 'Invalid User Credentials'});
+    }else{
+        return res.json({sucess: 'Email and password is correct'});
+    }
+};
+
 exports.signup = signup;
+exports.login = login;

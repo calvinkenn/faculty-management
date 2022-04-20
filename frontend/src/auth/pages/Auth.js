@@ -115,6 +115,10 @@ const Auth = () => {
         })
       });
       const responseData = await response.json();
+
+      if(responseData.userId){
+        auth.loginAsUser(responseData.userId, responseData.token);
+      }
       console.log(responseData);
     }else{
 

@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 const signup = async (req, res, next) => {
     const errors = validationResult(req);
@@ -60,13 +61,28 @@ const login =  async (req, res ,next) =>{
     let existingUser = await User.findOne({email : email});
     let isValidPassword = false;
 
-    isValidPassword = await bcrypt.compare(password, existingUser.password);
-
-    if(!existingUser || !isValidPassword){
+    //check if user is existing
+    if(!existingUser){
         return res.json({error: 'Invalid User Credentials'});
-    }else{
-        return res.json({sucess: 'Email and password is correct'});
     }
+
+    //check if hash is correct
+    isValidPassword = await bcrypt.compare(password, existingUser.password);
+    if(!isValidPassword){
+        return res.json({error: 'Invalid User Credentials'});
+    }
+
+    //sign user with token for authentication
+    let token = jwt.sign(
+        {userId : existingUser.id, email : email},
+        'superidol',
+        {expiresIn : '1h'}
+    );
+    res.json({
+        userId : existingUser.id,
+        email : existingUser.email,
+        token : token
+    });
 };
 
 exports.signup = signup;

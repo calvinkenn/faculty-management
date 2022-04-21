@@ -4,6 +4,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
 import Input from "../../shared/components/FormElements/Input";
 import Card from "../../shared/components/UIElements/Card";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -19,6 +20,7 @@ const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [error, setError] = useState();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -116,10 +118,9 @@ const Auth = () => {
       });
       const responseData = await response.json();
 
-      if(responseData.userId){
-        auth.loginAsUser(responseData.userId, responseData.token);
+      if(!response.ok){
+        setError(responseData.error);
       }
-      console.log(responseData);
     }else{
 
       //code for signup
@@ -155,7 +156,12 @@ const Auth = () => {
     }
   }
 
+  const errorHandler = () => {
+    setError(null)
+  }
   return (
+    <React.Fragment>
+      <ErrorModal error = {error} onClear = {errorHandler}/>
     <Card className="authentication">
       <div className="main-container">
         <div className="main-img-cont">
@@ -282,6 +288,7 @@ const Auth = () => {
         </div>
       </div>
     </Card>
+    </React.Fragment>
   );
 };
 

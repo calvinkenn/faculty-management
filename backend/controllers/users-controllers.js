@@ -63,13 +63,13 @@ const login =  async (req, res ,next) =>{
 
     //check if user is existing
     if(!existingUser){
-        return res.json({error: 'Invalid User Credentials'});
+        return res.status(422).json({error: 'Invalid User Credentials'});
     }
 
     //check if hash is correct
     isValidPassword = await bcrypt.compare(password, existingUser.password);
     if(!isValidPassword){
-        return res.json({error: 'Invalid User Credentials'});
+        return res.status(422).json({error: 'Invalid User Credentials'});
     }
 
     //sign user with token for authentication

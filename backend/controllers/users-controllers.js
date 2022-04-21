@@ -11,11 +11,8 @@ const signup = async (req, res, next) => {
   //checking for validation errors
   if (!errors.isEmpty()) {
     errorsList = errors.array();
-    const newList = errorsList.map(error => error.param + " : " + error.msg);
-    const error = new HttpError(
-      newList[0],
-      500
-    );
+    const newList = errorsList.map((error) => error.param + " : " + error.msg);
+    const error = new HttpError(newList[0], 500);
     return next(error);
   }
   //gather all the data from request
@@ -71,7 +68,9 @@ const signup = async (req, res, next) => {
     );
     return next(error);
   }
-  res.status(201).json({ message : "SignUp Sucess, Please wait for the admin to accept your request" });
+  res.status(201).json({
+    message: "SignUp Sucess, Please wait for the admin to accept your request",
+  });
 };
 
 const login = async (req, res, next) => {
@@ -113,46 +112,72 @@ const login = async (req, res, next) => {
   let token = jwt.sign({ userId: existingUser.id, email: email }, "superidol", {
     expiresIn: "1h",
   });
-     res.json({
-       message: "Logged in!",
-       userId: existingUser.id,
-       email: existingUser.email,
-       token: token,
-    });
+  res.json({
+    message: "Logged in!",
+    userId: existingUser.id,
+    email: existingUser.email,
+    token: token,
+  });
 };
 const getuserData = async (req, res, next) => {
-    const { userId } = req.body;
-    const user = await User.findById(userId, "-password");
-    res.json({ userData: user });
+  const { userId } = req.body;
+  const user = await User.findById(userId, "-password");
+  res.json({ userData: user });
 };
 
-const editBasicInfo = async(req,res,next) => {
+const editBasicInfo = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
-      new HttpError('Invalid inputs passed, please check your data.', 422)
+      new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const {userId, firstName,lastName,email} = req.body;
+  const { userId, firstName, lastName } = req.body;
+  const infoId = userId;
+  console.log(infoId);
 
-  let user = await User.findById(userId);
-  if(user){
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.email = email;
-    
-    try{
-      await user.save();
-    }catch(err){
-      return next(
-        new HttpError('Invalid inputs passed, please check your data.', 422)
-      );
-    }
+  let user;
+  try {
+    user = await User.findById(infoId);
+  } catch (err) {
+    const error = new HttpError(
+      "Can't find ID.",
+      500
+    );
+    return next(error);
+  }
+  
+  // user.userId = userId;
+  user.firstName = firstName;
+  user.lastName = lastName;
+  // user.email = email;
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user.",
+      500
+    );
+    return next(error);
   }
 
+  res.status(200).json({ user: user.toObject({ getters: true }) });
 
+  // if(user){
+  //   user.firstName = firstName;
+  //   user.lastName = lastName;
+  //   user.email = email;
 
-}
+  //   try{
+  //     await user.save();
+  //   }catch(err){
+  //     return next(
+  //       new HttpError('Invalid inputs passed, please check your data.', 422)
+  //     );
+  //   }
+  // }
+};
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;

@@ -16,7 +16,7 @@ router.post(
 );
 
 router.post('/login', userControllers.login);
-router.patch('/basicInfoEdit', checkAuth, userControllers.editBasicInfo);
+router.patch('/edit', userControllers.editBasicInfo);
 router.post('/userData',checkAuth, userControllers.getuserData);
 
 

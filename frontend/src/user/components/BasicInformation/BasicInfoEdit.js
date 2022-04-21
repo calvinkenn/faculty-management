@@ -1,8 +1,9 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import Button from "../../../shared/components/FormElements/Button";
 
 import Input from "../../../shared/components/FormElements/Input";
 import { useForm } from "../../../shared/hooks/form-hook";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -37,6 +38,7 @@ const DUMMY_DATA = {
 };
 
 const BasicInfoEdit = (props) => {
+  const { error, sendRequest } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       firstName: {
@@ -126,39 +128,42 @@ const BasicInfoEdit = (props) => {
       {
         firstName: {
           value: props.userEdit.firstName,
-          isValid: true
+          isValid: true,
         },
         lastName: {
           value: props.userEdit.lastName,
-          isValid: true
-        }
+          isValid: true,
+        },
       },
       true
     );
   }, [setFormData, users]);
 
-  const basicInfoEditHandler = async (event) => {
+  const submitHandler = async (event) => {
     console.log(formState.inputs.firstName.value);
     console.log(formState.inputs.lastName.value);
     event.preventDefault();
-    const storedData = JSON.parse(sessionStorage.getItem('userData'));
-    const response = await fetch('http://localhost:5000/api/users/edit',{
-        method : 'PATCH',
-        headers : {'Content-Type' : 'application/json'},
-        body  : JSON.stringify({
-          userId : storedData.userId,
-          token : storedData.token,
-          firstName : formState.inputs.firstName.value,
-          lastName : formState.inputs.lastName.value,
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    try {
+      await sendRequest(
+        "http://localhost:5000/api/users/edit",
+        "PATCH",
+        JSON.stringify({
+          userId: storedData.userId,
+          token: storedData.token,
+          firstName: formState.inputs.firstName.value,
+          lastName: formState.inputs.lastName.value,
           // email : formState.inputs.email.value
-        })
-      });
-      const responseData = await response.json();
-      console.log(responseData);
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+    } catch (err) {}
   };
   return (
     <React.Fragment>
-      <form onSubmit={basicInfoEditHandler}>
+      <form onSubmit={submitHandler}>
         <Input
           element="input"
           id="firstName"

@@ -10,7 +10,7 @@ router.post(
     [
         check('employeeNum').not().isAlpha().withMessage('Please input numbers only'),
         check('email').normalizeEmail().isEmail().withMessage('please input a valid email!'),
-        check('password').isLength({min:8}).withMessage('please input password greater than 8 characters')
+        check('password').isLength({min:6}).withMessage('please input password greater than 6 characters')
     ],
     userControllers.signup
 );

@@ -15,6 +15,7 @@ import Admin from "./admin/pages/Admin";
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [userId, setUserId] = useState(false);
 
   // const login = useCallback(() => {
   //   setIsLoggedIn(true);
@@ -30,6 +31,11 @@ const App = () => {
     setIsAdmin(false);
   }, []);
 
+  const login = useCallback(uid => {
+    setIsLoggedIn(true);
+    setUserId(uid);
+  }, []);
+
   const logout = useCallback(() => {
     setIsLoggedIn(false);
   }, []);
@@ -40,10 +46,10 @@ const App = () => {
     if (!isAdmin) {
       routes = (
         <Routes>
-          <Route path="/:userID/profile" element={<Profile />} />
+          <Route path="/profile/:userID" element={<Profile />} />
           <Route
             path="/"
-            element={<Navigate to="/:userID/profile" replace />}
+            element={<Navigate to="/profile/:userID" replace />}
           />
         </Routes>
       );
@@ -72,6 +78,7 @@ const App = () => {
         isAdmin: isAdmin,
         loginAsUser: loginAsUser,
         loginAsAdmin: loginAsAdmin,
+        login: login,
         logout: logout,
       }}
     >

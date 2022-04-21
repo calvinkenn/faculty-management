@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 import profile from "../../assets/Image/Qw.png";
 import Overview from "../components/Overview/Overview";
@@ -12,6 +12,7 @@ import Training from "../components/Training/Training";
 import "./Profile.css";
 import TopActionBar from "../components/TopActionBar";
 import ContactInfo from "../components/ContactInformation/ContactInfo";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const menu = {
   overview: true,
@@ -24,9 +25,10 @@ const menu = {
 };
 
 const Profile = (props) => {
+  const auth = useContext(AuthContext);
   const [isMenuActive, setIsMenuActive] = useState(menu);
   const [isEditMode, setIsEditMode] = useState(false);
-
+  const [userData, setUserData] = useState({});
   const editModeHandler = () => {
     setIsEditMode((prevState) => !prevState);
   };
@@ -38,10 +40,26 @@ const Profile = (props) => {
     setIsEditMode(false);
     setIsMenuActive(stateCopy);
   };
+  useEffect(()=>{
+    const storedData = JSON.parse(sessionStorage.getItem('userData'));
+    const sendRequest = async () =>{
+      const response = await fetch('http://localhost:5000/api/users/userData',{
+        method : 'POST',
+        headers : {'Content-Type' : 'application/json'},
+        body  : JSON.stringify({
+          userId : storedData.userId
+        })
+      });
+      const responseData = await response.json();
+      setUserData(responseData.userData);
+    }
+    sendRequest();
+  }, []);
+
 
   return (
     <React.Fragment>
-      <MainNavigation />
+      <MainNavigation/>
       <div className="profile-container">
         <SideBox className="side-container">
           <div className="side-container__image">
@@ -101,7 +119,7 @@ const Profile = (props) => {
             isEditMode={isEditMode}
             onClick={editModeHandler}
           />
-          {isMenuActive.overview && <Overview />}
+          {isMenuActive.overview && <Overview userData = {userData}/>}
           {isMenuActive.basicInformation && (
             <BasicInfo isEditMode={isEditMode} />
           )}

@@ -107,6 +107,14 @@ const login = async (req, res, next) => {
     token: token,
   });
 };
-
+const getuserData = async (req, res, next) =>{
+    const {userId} = req.body;
+    const user = await User.findOne({id : userId}, '-password')
+    res.json({userData: user});
+}
 exports.signup = signup;
 exports.login = login;
+<<<<<<< HEAD
+=======
+exports.getuserData = getuserData;
+>>>>>>> 243e73758155eecf028e8fec9238934f271793e2

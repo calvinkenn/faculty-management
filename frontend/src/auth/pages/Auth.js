@@ -100,6 +100,7 @@ const Auth = () => {
     //checks if the state is in login mode
     if (isLoginMode) {
       //code for login
+<<<<<<< HEAD
       try {
         const responseData = await sendRequest(
           "http://localhost:5000/api/users/login",
@@ -115,6 +116,28 @@ const Auth = () => {
         auth.login(responseData.userId.id);
       } catch (err) {}
     } else {
+=======
+      let response;
+      response = await fetch('http://localhost:5000/api/users/login',{
+        method  : 'POST',
+        headers : {
+          'Content-Type'  : 'application/json'
+        },
+        body  : JSON.stringify({
+          email     : formState.inputs.email.value,
+          password  : formState.inputs.password.value
+        })
+      });
+      const responseData = await response.json();
+
+      if(!response.ok){
+        setError(responseData.error);
+      }else{
+        auth.loginAsUser(responseData.userId, responseData.token);
+      }
+    }else{
+
+>>>>>>> 243e73758155eecf028e8fec9238934f271793e2
       //code for signup
       try {
         const responseData = await sendRequest(

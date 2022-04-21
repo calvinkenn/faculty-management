@@ -15,11 +15,7 @@ import Admin from "./admin/pages/Admin";
 const App = () => {
   const [token, setToken] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-<<<<<<< HEAD
   const [userId, setUserId] = useState(false);
-=======
-  const [userID, setUserId] = useState();
->>>>>>> 243e73758155eecf028e8fec9238934f271793e2
 
   // const login = useCallback(() => {
   //   setIsLoggedIn(true);
@@ -36,10 +32,10 @@ const App = () => {
     setUserId(uid);
   }, []);
 
-  const login = useCallback(uid => {
-    setIsLoggedIn(true);
-    setUserId(uid);
-  }, []);
+  // const login = useCallback(uid => {
+  //   setIsLoggedIn(true);
+  //   setUserId(uid);
+  // }, []);
 
   const logout = useCallback(() => {
     setToken(null);
@@ -90,10 +86,10 @@ const App = () => {
         isLoggedIn: !!token,
         token: token,
         isAdmin: isAdmin,
-        userID: userID,
+        userId: userId,
         loginAsUser: loginAsUser,
         loginAsAdmin: loginAsAdmin,
-        login: login,
+        // login: login,
         logout: logout,
       }}
     >

@@ -114,7 +114,5 @@ const getuserData = async (req, res, next) =>{
 }
 exports.signup = signup;
 exports.login = login;
-<<<<<<< HEAD
-=======
 exports.getuserData = getuserData;
->>>>>>> 243e73758155eecf028e8fec9238934f271793e2
+

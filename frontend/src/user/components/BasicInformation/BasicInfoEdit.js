@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "../../../shared/components/FormElements/Button";
 
 import Input from "../../../shared/components/FormElements/Input";
@@ -40,90 +40,109 @@ const BasicInfoEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       firstName: {
-        value: props.userEdit.firstName,
-        isValid: true,
+        value: "",
+        isValid: false,
       },
-      middleName: {
-        value: DUMMY_DATA.middleName,
-        isValid: true,
-      },
+      // middleName: {
+      //   value: props.userEdit.middleName,
+      //   isValid: true,
+      // },
       lastName: {
-        value: props.userEdit.lastName,
-        isValid: true,
+        value: "",
+        isValid: false,
       },
-      contact: {
-        value: DUMMY_DATA.contact,
-        isValid: true,
-      },
-      email: {
-        value: props.userEdit.email,
-        isValid: true,
-      },
-      extensionName: {
-        value: DUMMY_DATA.extensionName,
-        isValid: true,
-      },
-      bday: {
-        value: DUMMY_DATA.bday,
-        isValid: true,
-      },
-      placeOfBirth: {
-        value: DUMMY_DATA.placeOfBirth,
-        isValid: true,
-      },
-      gender: {
-        value: DUMMY_DATA.gender,
-        isValid: true,
-      },
-      civilStatus: {
-        value: DUMMY_DATA.civilStatus,
-        isValid: true,
-      },
-      height: {
-        value: DUMMY_DATA.height,
-        isValid: true,
-      },
-      weight: {
-        value: DUMMY_DATA.weight,
-        isValid: true,
-      },
-      bloodType: {
-        value: DUMMY_DATA.bloodType,
-        isValid: true,
-      },
-      gssID: {
-        value: DUMMY_DATA.gssID,
-        isValid: true,
-      },
-      pagibigID: {
-        value: DUMMY_DATA.pagibigID,
-        isValid: true,
-      },
-      philhealth: {
-        value: DUMMY_DATA.philhealth,
-        isValid: true,
-      },
-      sssNO: {
-        value: DUMMY_DATA.sssNO,
-        isValid: true,
-      },
-      tinNO: {
-        value: DUMMY_DATA.tinNO,
-        isValid: true,
-      },
-      citizenship: {
-        value: DUMMY_DATA.citizenship,
-        isValid: true,
-      },
-
+      // contact: {
+      //   value: DUMMY_DATA.contact,
+      //   isValid: true,
+      // },
+      // email: {
+      //   value: props.userEdit.email,
+      //   isValid: true,
+      // },
+      // extensionName: {
+      //   value: DUMMY_DATA.extensionName,
+      //   isValid: true,
+      // },
+      // bday: {
+      //   value: DUMMY_DATA.bday,
+      //   isValid: true,
+      // },
+      // placeOfBirth: {
+      //   value: DUMMY_DATA.placeOfBirth,
+      //   isValid: true,
+      // },
+      // gender: {
+      //   value: DUMMY_DATA.gender,
+      //   isValid: true,
+      // },
+      // civilStatus: {
+      //   value: DUMMY_DATA.civilStatus,
+      //   isValid: true,
+      // },
+      // height: {
+      //   value: DUMMY_DATA.height,
+      //   isValid: true,
+      // },
+      // weight: {
+      //   value: DUMMY_DATA.weight,
+      //   isValid: true,
+      // },
+      // bloodType: {
+      //   value: DUMMY_DATA.bloodType,
+      //   isValid: true,
+      // },
+      // gssID: {
+      //   value: DUMMY_DATA.gssID,
+      //   isValid: true,
+      // },
+      // pagibigID: {
+      //   value: DUMMY_DATA.pagibigID,
+      //   isValid: true,
+      // },
+      // philhealth: {
+      //   value: DUMMY_DATA.philhealth,
+      //   isValid: true,
+      // },
+      // sssNO: {
+      //   value: DUMMY_DATA.sssNO,
+      //   isValid: true,
+      // },
+      // tinNO: {
+      //   value: DUMMY_DATA.tinNO,
+      //   isValid: true,
+      // },
+      // citizenship: {
+      //   value: DUMMY_DATA.citizenship,
+      //   isValid: true,
+      // },
     },
     false
   );
 
-  const basicInfoEditHandler = async (event) =>{
+  const users = DUMMY_DATA;
+
+  useEffect(() => {
+    setFormData(
+      {
+        firstName: {
+          value: props.userEdit.firstName,
+          isValid: true
+        },
+        lastName: {
+          value: props.userEdit.lastName,
+          isValid: true
+        }
+      },
+      true
+    );
+  }, [setFormData, users]);
+
+  const basicInfoEditHandler = async (event) => {
+    console.log(formState.inputs.firstName.value);
+    console.log(formState.inputs.lastName.value);
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem('userData'));
-    const response = await fetch('http://localhost:5000/api/users/basicInfoEdit',{
+    const response = await fetch('http://localhost:5000/api/users/edit',{
         method : 'PATCH',
         headers : {'Content-Type' : 'application/json'},
         body  : JSON.stringify({
@@ -131,27 +150,27 @@ const BasicInfoEdit = (props) => {
           token : storedData.token,
           firstName : formState.inputs.firstName.value,
           lastName : formState.inputs.lastName.value,
-          email : formState.inputs.email.value
+          // email : formState.inputs.email.value
         })
       });
       const responseData = await response.json();
       console.log(responseData);
-  }
+  };
   return (
     <React.Fragment>
-      <form onSubmit ={basicInfoEditHandler}>
+      <form onSubmit={basicInfoEditHandler}>
         <Input
           element="input"
-          id="fName"
+          id="firstName"
           type="text"
           label="First Name"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.firstName.value}
-          initialValid={formState.inputs.firstName.isValid}
+          initialValue={props.userEdit.firstName}
+          initialValid={true}
         />
-        <Input
+        {/* <Input
           element="input"
           id="mName"
           type="text"
@@ -161,19 +180,19 @@ const BasicInfoEdit = (props) => {
           onInput={inputHandler}
           initialValue={formState.inputs.middleName.value}
           initialValid={formState.inputs.middleName.isValid}
-        />
+        /> */}
         <Input
           element="input"
-          id="lName"
+          id="lastName"
           type="text"
           label="Last Name"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.lastName.value}
-          initialValid={formState.inputs.lastName.isValid}
+          initialValue={props.userEdit.lastName}
+          initialValid={true}
         />
-        <Input
+        {/* <Input
           element="input"
           id="contact"
           type="text"
@@ -348,10 +367,11 @@ const BasicInfoEdit = (props) => {
           onInput={inputHandler}
           initialValue={formState.inputs.citizenship.value}
           initialValid={formState.inputs.citizenship.isValid}
-        />
-        <Button inverse type = "submit">Save Info</Button>
+        /> */}
+        <Button inverse type="submit">
+          Save Info
+        </Button>
       </form>
-      
     </React.Fragment>
   );
 };

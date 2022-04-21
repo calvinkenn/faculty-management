@@ -120,9 +120,22 @@ const BasicInfoEdit = (props) => {
     false
   );
 
-  const basicInfoEditHandler = (event) =>{
+  const basicInfoEditHandler = async (event) =>{
     event.preventDefault();
-
+    const storedData = JSON.parse(sessionStorage.getItem('userData'));
+    const response = await fetch('http://localhost:5000/api/users/basicInfoEdit',{
+        method : 'PATCH',
+        headers : {'Content-Type' : 'application/json'},
+        body  : JSON.stringify({
+          userId : storedData.userId,
+          token : storedData.token,
+          firstName : formState.inputs.firstName.value,
+          lastName : formState.inputs.lastName.value,
+          email : formState.inputs.email.value
+        })
+      });
+      const responseData = await response.json();
+      console.log(responseData);
   }
   return (
     <React.Fragment>

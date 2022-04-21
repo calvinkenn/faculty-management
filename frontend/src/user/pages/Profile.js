@@ -47,7 +47,8 @@ const Profile = (props) => {
         method : 'POST',
         headers : {'Content-Type' : 'application/json'},
         body  : JSON.stringify({
-          userId : storedData.userId
+          userId : storedData.userId,
+          token : storedData.token
         })
       });
       const responseData = await response.json();

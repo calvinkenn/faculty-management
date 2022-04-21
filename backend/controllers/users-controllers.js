@@ -127,6 +127,30 @@ const getuserData = async (req, res, next) => {
 };
 
 const editBasicInfo = async(req,res,next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError('Invalid inputs passed, please check your data.', 422)
+    );
+  }
+  const {userId, firstName,lastName,email} = req.body;
+
+  let user = await User.findById(userId);
+  if(user){
+    user.firstName = firstName;
+    user.lastName = lastName;
+    user.email = email;
+    
+    try{
+      await user.save();
+    }catch(err){
+      return next(
+        new HttpError('Invalid inputs passed, please check your data.', 422)
+      );
+    }
+  }
+
+
 
 }
 exports.signup = signup;

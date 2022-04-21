@@ -16,8 +16,10 @@ router.post(
 );
 
 router.post('/login', userControllers.login);
-
+router.post('/userData', userControllers.getuserData);
 router.use(checkAuth);
+
+
 
 
 

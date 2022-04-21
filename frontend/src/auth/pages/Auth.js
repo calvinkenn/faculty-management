@@ -120,6 +120,8 @@ const Auth = () => {
 
       if(!response.ok){
         setError(responseData.error);
+      }else{
+        auth.loginAsUser(responseData.userId, responseData.token);
       }
     }else{
 

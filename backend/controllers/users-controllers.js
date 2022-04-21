@@ -68,51 +68,69 @@ const signup = async (req, res, next) => {
     );
     return next(error);
   }
-  res.status(201).json({ userId: createdUser.toObject({ getters: true }) });
+  res.status(201).json({ user: createdUser.toObject({ getters: true }) });
 };
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
-  let existingUser = await User.findOne({ email: email });
+  if (email === null || password === null) {
+    const error = new HttpError("Input password.", 500);
+    return next(error);
+  }
+
+  let existingUser;
   let isValidPassword = false;
 
   //check if user is existing
+  try {
+    existingUser = await User.findOne({ email: email });
+  } catch (err) {
+    const error = new HttpError(
+      "Loggin in failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+
   if (!existingUser) {
     const error = new HttpError(
-        'Invalid credentials, could not log you in.',
-        401
-      );
-      return next(error);
+      "Invalid credentials, could not log you in.",
+      401
+    );
+    return next(error);
   }
 
   //check if hash is correct
   isValidPassword = await bcrypt.compare(password, existingUser.password);
   if (!isValidPassword) {
     const error = new HttpError(
-        'Invalid credentials, could not log you in.',
-        401
-      );
-      return next(error);
+      "Invalid credentials, could not log you in.",
+      401
+    );
+    return next(error);
   }
 
   //sign user with token for authentication
   let token = jwt.sign({ userId: existingUser.id, email: email }, "superidol", {
     expiresIn: "1h",
   });
+  //   res.json({
+  //     message: "Logged in!",
+  //     userId: existingUser.id,
+  //     email: existingUser.email,
+  //     token: token,
+  //   });
   res.json({
     message: "Logged in!",
-    userId: existingUser.toObject({ getters: true }),
-    email: existingUser.email,
-    token: token,
+    user: existingUser.toObject({ getters: true }),
   });
 };
-const getuserData = async (req, res, next) =>{
-    const {userId} = req.body;
-    const user = await User.findOne({id : userId}, '-password')
-    res.json({userData: user});
-}
+const getuserData = async (req, res, next) => {
+    const { userId } = req.body;
+    const user = await User.findOne({ id: userId }, "-password");
+    res.json({ userData: user });
+};
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
-

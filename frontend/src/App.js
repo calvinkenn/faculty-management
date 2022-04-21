@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,6 +13,7 @@ import "./App.css";
 import Admin from "./admin/pages/Admin";
 
 const App = () => {
+  const auth = useContext(AuthContext);
   const [token, setToken] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userId, setUserId] = useState(false);
@@ -32,10 +33,12 @@ const App = () => {
     setUserId(uid);
   }, []);
 
-  // const login = useCallback(uid => {
-  //   setIsLoggedIn(true);
-  //   setUserId(uid);
-  // }, []);
+  const login = useCallback((uid, token) => {
+    setIsAdmin(false);
+    setToken(true);
+    sessionStorage.setItem('userData', JSON.stringify({userId: uid, token:token}));
+    setUserId(uid);
+  }, []);
 
   const logout = useCallback(() => {
     setToken(null);
@@ -55,10 +58,10 @@ const App = () => {
     if (!isAdmin) {
       routes = (
         <Routes>
-          <Route path="/profile/:userID" element={<Profile />} />
+          <Route path={`/profile/${userId}`} element={<Profile />} />
           <Route
             path="/"
-            element={<Navigate to="/profile/:userID" replace />}
+            element={<Navigate to={`/profile/${userId}`} replace />}
           />
         </Routes>
       );
@@ -89,7 +92,7 @@ const App = () => {
         userId: userId,
         loginAsUser: loginAsUser,
         loginAsAdmin: loginAsAdmin,
-        // login: login,
+        login: login,
         logout: logout,
       }}
     >

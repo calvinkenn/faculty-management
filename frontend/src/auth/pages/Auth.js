@@ -4,6 +4,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
 import Input from "../../shared/components/FormElements/Input";
 import Card from "../../shared/components/UIElements/Card";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import {
   VALIDATOR_EMAIL,
@@ -112,7 +113,7 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
-        auth.login(responseData.userId.id);
+        auth.login(responseData.user.id);
       } catch (err) {}
     } else {
       //code for signup
@@ -131,6 +132,7 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
+        switchModeHandler();
       } catch (err) {}
     }
   };
@@ -139,6 +141,7 @@ const Auth = () => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">
+        {isLoading && <LoadingSpinner asOverlay />}
         <div className="main-container">
           <div className="main-img-cont">
             <div className="cict-text-container">
@@ -155,113 +158,110 @@ const Auth = () => {
               <img src={cictBuilding} />
             </div>
           </div>
-          <div className="main-form-cont">
-            {/* <Router>{routes}</Router> */}
-            <h2 className="login-mode-title">
-              {isLoginMode ? "LOGIN TO YOUR ACCOUNT" : "CREATE YOUR ACCOUNT"}
-            </h2>
-            <form onSubmit={authSubmitHandler}>
-              <div className="employeeNo-container">
-                {!isLoginMode && (
-                  <Input
-                    element="input"
-                    id="employeeNum"
-                    type="text"
-                    validators={[VALIDATOR_MINLENGTH(2)]}
-                    helperText="Minimum of 2 characters."
-                    onInput={inputHandler}
-                    label="Employee Number"
-                    variant="outlined"
-                  />
+          {!isLoading && (
+            <div className="main-form-cont">
+              {/* <Router>{routes}</Router> */}
+              <h2 className="login-mode-title">
+                {isLoginMode ? "LOGIN TO YOUR ACCOUNT" : "CREATE YOUR ACCOUNT"}
+              </h2>
+              <form onSubmit={authSubmitHandler}>
+                <div className="employeeNo-container">
+                  {!isLoginMode && (
+                    <Input
+                      element="input"
+                      id="employeeNum"
+                      type="text"
+                      validators={[VALIDATOR_MINLENGTH(2)]}
+                      helperText="Minimum of 2 characters."
+                      onInput={inputHandler}
+                      label="Employee Number"
+                      variant="outlined"
+                    />
+                  )}
+                </div>
+                <div className="fullName-container">
+                  <div className="firstName-container">
+                    {!isLoginMode && (
+                      <Input
+                        element="input"
+                        id="firstName"
+                        type="text"
+                        validators={[VALIDATOR_MINLENGTH(2)]}
+                        helperText="Minimum of 2 characters."
+                        onInput={inputHandler}
+                        label="First Name"
+                        variant="outlined"
+                      />
+                    )}
+                  </div>
+                  <div className="lastName-container">
+                    {!isLoginMode && (
+                      <Input
+                        element="input"
+                        id="lastName"
+                        type="text"
+                        validators={[VALIDATOR_MINLENGTH(2)]}
+                        helperText="Minimum of 2 characters."
+                        onInput={inputHandler}
+                        label="Last Name"
+                        variant="outlined"
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="email-pass-container">
+                  <div className="email-container">
+                    <Input
+                      element="input"
+                      id="email"
+                      type="text"
+                      validators={[VALIDATOR_EMAIL()]}
+                      helperText="Invalid Email."
+                      onInput={inputHandler}
+                      label="Email"
+                      variant="outlined"
+                    />
+                  </div>
+                  <div className="password-container">
+                    <Input
+                      element="input"
+                      id="password"
+                      type="password"
+                      validators={[VALIDATOR_MINLENGTH(6)]}
+                      helperText="Minimum of 6 characters."
+                      onInput={inputHandler}
+                      label="Password"
+                      variant="outlined"
+                    />
+                  </div>
+                </div>
+
+                <Button type="submit">
+                  {isLoginMode ? "Test Log in User" : "Register"}
+                </Button>
+                {isLoginMode && (
+                  <Button onClick={testLoginAdmin}>Test Log in Admin</Button>
                 )}
-              </div>
-              <div className="fullName-container">
-                <div className="firstName-container">
-                  {!isLoginMode && (
-                    <Input
-                      element="input"
-                      id="firstName"
-                      type="text"
-                      validators={[VALIDATOR_MINLENGTH(2)]}
-                      helperText="Minimum of 2 characters."
-                      onInput={inputHandler}
-                      label="First Name"
-                      variant="outlined"
-                    />
-                  )}
-                </div>
-                <div className="lastName-container">
-                  {!isLoginMode && (
-                    <Input
-                      element="input"
-                      id="lastName"
-                      type="text"
-                      validators={[VALIDATOR_MINLENGTH(2)]}
-                      helperText="Minimum of 2 characters."
-                      onInput={inputHandler}
-                      label="Last Name"
-                      variant="outlined"
-                    />
-                  )}
-                </div>
-              </div>
-              <div className="email-pass-container">
-                <div className="email-container">
-                  <Input
-                    element="input"
-                    id="email"
-                    type="text"
-                    validators={[VALIDATOR_EMAIL()]}
-                    helperText="Invalid Email."
-                    onInput={inputHandler}
-                    label="Email"
-                    variant="outlined"
-                  />
-                </div>
-                <div className="password-container">
-                  <Input
-                    element="input"
-                    id="password"
-                    type="password"
-                    validators={[VALIDATOR_MINLENGTH(6)]}
-                    helperText="Minimum of 6 characters."
-                    onInput={inputHandler}
-                    label="Password"
-                    variant="outlined"
-                  />
-                </div>
-              </div>
-              {/* <Button type="submit">
-              {isLoginMode ? "Test Log in User" : "Register"}
-            </Button> */}
-              <Button type="submit">
-                {isLoginMode ? "Test Log in User" : "Register"}
-              </Button>
-              {isLoginMode && (
-                <Button onClick={testLoginAdmin}>Test Log in Admin</Button>
-              )}
-            </form>
+              </form>
 
-            {isLoginMode ? (
-              <h6>
-                Don't have an account?{" "}
-                <a onClick={switchModeHandler}>Create an account here</a>
+              {isLoginMode ? (
                 <h6>
-                  Forgot your password?{" "}
-                  <a onClick={switchModeHandler}>Reset your password here</a>
+                  Don't have an account?{" "}
+                  <a onClick={switchModeHandler}>Create an account here</a>
+                  <h6>
+                    Forgot your password?{" "}
+                    <a onClick={switchModeHandler}>Reset your password here</a>
+                  </h6>
                 </h6>
-              </h6>
-            ) : (
-              <h6>
-                Already have an account?{" "}
-                <a onClick={switchModeHandler}>Login here</a>
-              </h6>
-            )}
-
-            {/* <Button inverse onClick={switchModeHandler}>
-            {isLoginMode ? "Sign Up" : "Log in"}
-          </Button> */}
-          </div>
+              ) : (
+                <h6>
+                  Already have an account?{" "}
+                  <a onClick={switchModeHandler}>Login here</a>
+                </h6>
+              )}
+            </div>
+          )}
         </div>
       </Card>
     </React.Fragment>

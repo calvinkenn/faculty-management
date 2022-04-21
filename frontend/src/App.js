@@ -23,7 +23,7 @@ const App = () => {
   //   setIsAdmin(true);
   // }, []);
   const loginAsAdmin = useCallback((token) => {
-    setToken(token);
+    setToken(true);
     setIsAdmin(true);
   }, []);
   const loginAsUser = useCallback((uid, token) => {

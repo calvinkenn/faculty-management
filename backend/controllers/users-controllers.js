@@ -68,16 +68,11 @@ const signup = async (req, res, next) => {
     );
     return next(error);
   }
-  res.status(201).json({ user: createdUser.toObject({ getters: true }) });
+  res.status(201).json({ userId: createdUser.toObject({ getters: true }) });
 };
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
-
-  if (email === null || password === null) {
-    const error = new HttpError("Input password.", 500);
-    return next(error);
-  }
 
   let existingUser;
   let isValidPassword = false;

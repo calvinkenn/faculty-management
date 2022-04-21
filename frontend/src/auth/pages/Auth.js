@@ -88,11 +88,6 @@ const Auth = () => {
     console.log(formState.inputs);
     auth.loginAsAdmin();
   };
-  const testLoginUser = (event) => {
-    event.preventDefault();
-    console.log(formState.inputs);
-    auth.loginAsUser();
-  };
 
   //added by ralph
   const authSubmitHandler = async (event) => {

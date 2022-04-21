@@ -3,17 +3,17 @@ import React from 'react';
 import Modal from './Modal';
 import Button from '../FormElements/Button';
 
-const ErrorModal = props => {
+const SuccessModal = props => {
   return (
     <Modal
       onCancel={props.onClear}
-      header="An Error Occurred!"
-      show={!!props.error}
+      header="Success!"
+      show={!!props.success}
       footer={<Button onClick={props.onClear}>Close</Button>}
     >
-      <p style={{color: 'firebrick'}}>{props.error}</p>
+      <p style={{color: 'green'}}>{props.success}</p>
     </Modal>
   );
 };
 
-export default ErrorModal;
+export default SuccessModal;

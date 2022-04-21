@@ -121,7 +121,7 @@ const Profile = (props) => {
           />
           {isMenuActive.overview && <Overview userData = {userData}/>}
           {isMenuActive.basicInformation && (
-            <BasicInfo isEditMode={isEditMode} />
+            <BasicInfo isEditMode={isEditMode} userData = {userData} />
           )}
           {isMenuActive.contactInformation && (
             <ContactInfo isEditMode={isEditMode} />

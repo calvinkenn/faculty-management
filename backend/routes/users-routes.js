@@ -17,6 +17,7 @@ router.post(
 
 router.post('/login', userControllers.login);
 router.post('/userData', userControllers.getuserData);
+router.patch('/basicInfoEdit', userControllers.editBasicInfo);
 router.use(checkAuth);
 
 

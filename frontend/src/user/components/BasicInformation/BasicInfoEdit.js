@@ -40,7 +40,7 @@ const BasicInfoEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       firstName: {
-        value: DUMMY_DATA.firstName,
+        value: props.userEdit.firstName,
         isValid: true,
       },
       middleName: {
@@ -48,7 +48,7 @@ const BasicInfoEdit = (props) => {
         isValid: true,
       },
       lastName: {
-        value: DUMMY_DATA.lastName,
+        value: props.userEdit.lastName,
         isValid: true,
       },
       contact: {
@@ -56,7 +56,7 @@ const BasicInfoEdit = (props) => {
         isValid: true,
       },
       email: {
-        value: DUMMY_DATA.email,
+        value: props.userEdit.email,
         isValid: true,
       },
       extensionName: {
@@ -119,9 +119,14 @@ const BasicInfoEdit = (props) => {
     },
     false
   );
+
+  const basicInfoEditHandler = (event) =>{
+    event.preventDefault();
+
+  }
   return (
     <React.Fragment>
-      <form>
+      <form onSubmit ={basicInfoEditHandler}>
         <Input
           element="input"
           id="fName"
@@ -331,8 +336,9 @@ const BasicInfoEdit = (props) => {
           initialValue={formState.inputs.citizenship.value}
           initialValid={formState.inputs.citizenship.isValid}
         />
+        <Button inverse type = "submit">Save Info</Button>
       </form>
-      <Button inverse>Save</Button>
+      
     </React.Fragment>
   );
 };

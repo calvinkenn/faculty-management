@@ -30,18 +30,19 @@ const DUMMY_DATA = {
 
 const BasicInfo = (props) => {
   if (props.isEditMode) {
-    return <BasicInfoEdit />;
+    return (<BasicInfoEdit
+      userEdit =  {props.userData} />);
   } else {
     return (
       <BasicInfoItem
         isEditMode={props.isEditMode}
         inOverview={props.inOverview}
-        employeeNumber={DUMMY_DATA.employeeNumber}
-        firstName={DUMMY_DATA.firstName}
+        employeeNumber={props.userData.employeeNum}
+        firstName={props.userData.firstName}
         middleName={DUMMY_DATA.middleName}
-        lastName={DUMMY_DATA.lastName}
+        lastName={props.userData.lastName}
         contact={DUMMY_DATA.contact}
-        email={DUMMY_DATA.email}
+        email={props.userData.email}
         extensionName={DUMMY_DATA.extensionName}
         bday={DUMMY_DATA.bday}
         age={DUMMY_DATA.age}

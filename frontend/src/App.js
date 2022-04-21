@@ -35,7 +35,7 @@ const App = () => {
 
   const login = useCallback((uid, token) => {
     setIsAdmin(false);
-    setToken(true);
+    setToken(token);
     sessionStorage.setItem('userData', JSON.stringify({userId: uid, token:token}));
     setUserId(uid);
   }, []);

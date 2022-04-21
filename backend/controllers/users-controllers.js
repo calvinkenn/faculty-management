@@ -8,13 +8,15 @@ const jwt = require("jsonwebtoken");
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
-
   //checking for validation errors
   if (!errors.isEmpty()) {
-    // errorsList = errors.array();
-    // const newList = errorsList.map(error => error.msg);
-    // return res.json({error : newList[0]});
-    return next(new HttpError("Please fill all the required fields", 422));
+    errorsList = errors.array();
+    const newList = errorsList.map(error => error.param + " : " + error.msg);
+    const error = new HttpError(
+      newList[0],
+      500
+    );
+    return next(error);
   }
   //gather all the data from request
   const { employeeNum, firstName, lastName, email, password } = req.body;
@@ -62,13 +64,14 @@ const signup = async (req, res, next) => {
   try {
     await createdUser.save();
   } catch (err) {
+    console.log(err.message);
     const error = new HttpError(
-      "Signing up failed, please try again later.",
+      err.message || "Signing up failed, please try again later.",
       500
     );
     return next(error);
   }
-  res.status(201).json({ userId: createdUser.toObject({ getters: true }) });
+  res.status(201).json({ message : "SignUp Sucess, Please wait for the admin to accept your request" });
 };
 
 const login = async (req, res, next) => {
@@ -110,22 +113,23 @@ const login = async (req, res, next) => {
   let token = jwt.sign({ userId: existingUser.id, email: email }, "superidol", {
     expiresIn: "1h",
   });
-  //   res.json({
-  //     message: "Logged in!",
-  //     userId: existingUser.id,
-  //     email: existingUser.email,
-  //     token: token,
-  //   });
-  res.json({
-    message: "Logged in!",
-    user: existingUser.toObject({ getters: true }),
-  });
+     res.json({
+       message: "Logged in!",
+       userId: existingUser.id,
+       email: existingUser.email,
+       token: token,
+    });
 };
 const getuserData = async (req, res, next) => {
     const { userId } = req.body;
-    const user = await User.findOne({ id: userId }, "-password");
+    const user = await User.findById(userId, "-password");
     res.json({ userData: user });
 };
+
+const editBasicInfo = async(req,res,next) => {
+
+}
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
+exports.editBasicInfo = editBasicInfo;

@@ -99,6 +99,7 @@ const Input = (props) => {
       label={props.label}
       variant={props.variant}
       error={!inputState.isValid && inputState.isTouched}
+      value={inputState.value}
     />
   );
 };

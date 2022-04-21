@@ -6,6 +6,7 @@ import Input from "../../shared/components/FormElements/Input";
 import Card from "../../shared/components/UIElements/Card";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -18,10 +19,11 @@ import bulsuLogo from "../../assets/Image/bulsu.png";
 import cictLogo from "../../assets/Image/cict.png";
 import cictBuilding from "../../assets/Image/pimentel.png";
 
+
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -108,7 +110,7 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
-        auth.login(responseData.user.id);
+        auth.login(responseData.userId, responseData.token);
       } catch (err) {}
     } else {
       //code for signup
@@ -134,6 +136,7 @@ const Auth = () => {
 
   return (
     <React.Fragment>
+      <SuccessModal success = {success} onClear = {clearSuccess}/>
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">
         {isLoading && <LoadingSpinner asOverlay />}

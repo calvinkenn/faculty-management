@@ -31,7 +31,8 @@ const DUMMY_DATA = {
 const BasicInfo = (props) => {
   if (props.isEditMode) {
     return (<BasicInfoEdit
-      userEdit =  {props.userData} />);
+      userEdit =  {props.userData}
+      setEditMode = {props.setEditMode}/>);
   } else {
     return (
       <BasicInfoItem

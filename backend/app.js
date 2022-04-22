@@ -38,8 +38,7 @@ app.use((error, req, res, next) => {
 //connection to mongoose
 mongoose
   .connect(
-    // `mongodb+srv://admin:QB3LxtSqYQN4U0Zv@cluster0.ldb3t.mongodb.net/mis_test?retryWrites=true&w=majority`
-    "mongodb+srv://admin:admin321@cluster0.9scuy.mongodb.net/faculty_test?retryWrites=true&w=majority"
+    'mongodb+srv://admin:QB3LxtSqYQN4U0Zv@cluster0.ldb3t.mongodb.net/mis_test?retryWrites=true&w=majority'
   )
   .then(() => {
     app.listen(5000);

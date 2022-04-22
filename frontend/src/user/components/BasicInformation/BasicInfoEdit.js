@@ -140,12 +140,10 @@ const BasicInfoEdit = (props) => {
   }, [setFormData, users]);
 
   const submitHandler = async (event) => {
-    console.log(formState.inputs.firstName.value);
-    console.log(formState.inputs.lastName.value);
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
-      await sendRequest(
+      const responseData = await sendRequest(
         "http://localhost:5000/api/users/edit",
         "PATCH",
         JSON.stringify({
@@ -159,6 +157,8 @@ const BasicInfoEdit = (props) => {
           "Content-Type": "application/json",
         }
       );
+      props.setEditMode(responseData.updatedUser, responseData.message);
+      
     } catch (err) {}
   };
   return (

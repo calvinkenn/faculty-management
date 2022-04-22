@@ -133,50 +133,16 @@ const editBasicInfo = async (req, res, next) => {
     );
   }
   const { userId, firstName, lastName } = req.body;
-  const infoId = userId;
-  console.log(infoId);
 
-  let user;
-  try {
-    user = await User.findById(infoId);
-  } catch (err) {
-    const error = new HttpError(
-      "Can't find ID.",
-      500
-    );
-    return next(error);
+  const user = await User.findByIdAndUpdate(userId,{
+    firstName,
+    lastName
+  });
+  let updatedUser;
+  if(user){
+    updatedUser = await User.findById(userId);
   }
-  
-  // user.userId = userId;
-  user.firstName = firstName;
-  user.lastName = lastName;
-  // user.email = email;
-
-  try {
-    await user.save();
-  } catch (err) {
-    const error = new HttpError(
-      "Something went wrong, could not update user.",
-      500
-    );
-    return next(error);
-  }
-
-  res.status(200).json({ user: user.toObject({ getters: true }) });
-
-  // if(user){
-  //   user.firstName = firstName;
-  //   user.lastName = lastName;
-  //   user.email = email;
-
-  //   try{
-  //     await user.save();
-  //   }catch(err){
-  //     return next(
-  //       new HttpError('Invalid inputs passed, please check your data.', 422)
-  //     );
-  //   }
-  // }
+  res.status(200).json({message: 'Update Success', updatedUser : updatedUser})
 };
 exports.signup = signup;
 exports.login = login;

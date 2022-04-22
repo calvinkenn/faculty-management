@@ -13,6 +13,7 @@ import "./Profile.css";
 import TopActionBar from "../components/TopActionBar";
 import ContactInfo from "../components/ContactInformation/ContactInfo";
 import { AuthContext } from "../../shared/context/auth-context";
+import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 
 const menu = {
   overview: true,
@@ -29,6 +30,7 @@ const Profile = (props) => {
   const [isMenuActive, setIsMenuActive] = useState(menu);
   const [isEditMode, setIsEditMode] = useState(false);
   const [userData, setUserData] = useState({});
+  const [success, setSuccess] = useState();
   const editModeHandler = () => {
     setIsEditMode((prevState) => !prevState);
   };
@@ -57,9 +59,19 @@ const Profile = (props) => {
     sendRequest();
   }, []);
 
-
+  //function to update state
+  const updateState = (data, message) =>{
+    setIsEditMode(false);
+    setUserData(data);
+    setSuccess(message);
+  }
+  //function for clearing if there is no error
+  const clearSuccess = () => {
+    setSuccess(null);
+  }
   return (
     <React.Fragment>
+      <SuccessModal success = {success} onClear = {clearSuccess}/>
       <MainNavigation/>
       <div className="profile-container">
         <SideBox className="side-container">
@@ -122,7 +134,7 @@ const Profile = (props) => {
           />
           {isMenuActive.overview && <Overview userData = {userData}/>}
           {isMenuActive.basicInformation && (
-            <BasicInfo isEditMode={isEditMode} userData = {userData} />
+            <BasicInfo isEditMode={isEditMode} setEditMode = {updateState} userData = {userData} />
           )}
           {isMenuActive.contactInformation && (
             <ContactInfo isEditMode={isEditMode} />

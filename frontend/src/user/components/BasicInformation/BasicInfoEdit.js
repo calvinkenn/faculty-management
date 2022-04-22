@@ -62,28 +62,28 @@ const BasicInfoEdit = (props) => {
         isValid: true,
       },
       bday: {
-         value: DUMMY_DATA.bday,
-         isValid: true,
-       },
-       placeofBirth: {
-         value: props.userEdit.placeofBirth,
-         isValid: true,
-       },
-       gender: {
-         value: props.userEdit.gender,
-         isValid: true,
-       },
-       civilStatus: {
-         value: props.userEdit.civilStatus,
-         isValid: true,
-       },
+        value: props.userEdit.birthday.substring(0, 10),
+        isValid: true,
+      },
+      placeofBirth: {
+        value: DUMMY_DATA.placeofBirth,
+        isValid: true,
+      },
+      gender: {
+        value: props.userEdit.gender,
+        isValid: true,
+      },
+      civilStatus: {
+        value: props.userEdit.civilStatus,
+        isValid: true,
+      },
       height: {
-         value: props.userEdit.height,
-         isValid: true,
+        value: props.userEdit.height,
+        isValid: true,
       },
       weight: {
-         value: props.userEdit.weight,
-         isValid: true,
+        value: props.userEdit.weight,
+        isValid: true,
       },
       bloodType: {
         value: props.userEdit.bloodType,
@@ -117,10 +117,8 @@ const BasicInfoEdit = (props) => {
     false
   );
 
-  const users = DUMMY_DATA;
-
   const submitHandler = async (event) => {
-    console.log('clicked')
+    console.log("clicked");
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
@@ -132,19 +130,20 @@ const BasicInfoEdit = (props) => {
           token: storedData.token,
           firstName: formState.inputs.firstName.value,
           lastName: formState.inputs.lastName.value,
-          middleName : formState.inputs.middleName.value,
-          placeofBirth : formState.inputs.placeofBirth.value,
-          gender : formState.inputs.gender.value,
-          civilStatus : formState.inputs.civilStatus.value,
-          height : formState.inputs.height.value,
-          weight : formState.inputs.weight.value,
-          bloodType : formState.inputs.bloodType.value,
-          gssId : formState.inputs.gssId.value,
-          pagibigId : formState.inputs.pagibigId.value,
-          philHealthId :formState.inputs.philHealthId.value,
-          sssNo : formState.inputs.sssNo.value,
-          tinNo : formState.inputs.tinNo.value,
-          citizenship : formState.inputs.citizenship.value
+          middleName: formState.inputs.middleName.value,
+          birthday: formState.inputs.bday.value,
+          placeofBirth: formState.inputs.placeofBirth.value,
+          gender: formState.inputs.gender.value,
+          civilStatus: formState.inputs.civilStatus.value,
+          height: formState.inputs.height.value,
+          weight: formState.inputs.weight.value,
+          bloodType: formState.inputs.bloodType.value,
+          gssId: formState.inputs.gssId.value,
+          pagibigId: formState.inputs.pagibigId.value,
+          philHealthId: formState.inputs.philHealthId.value,
+          sssNo: formState.inputs.sssNo.value,
+          tinNo: formState.inputs.tinNo.value,
+          citizenship: formState.inputs.citizenship.value,
           // email : formState.inputs.email.value
         }),
         {
@@ -152,7 +151,6 @@ const BasicInfoEdit = (props) => {
         }
       );
       props.setEditMode(responseData.updatedUser, responseData.message);
-      
     } catch (err) {}
   };
   return (
@@ -212,6 +210,17 @@ const BasicInfoEdit = (props) => {
           onInput={inputHandler}
           initialValue={formState.inputs.extensionName.value}
           initialValid={formState.inputs.extensionName.isValid}
+        />
+        <Input
+          element="input"
+          id="bday"
+          type="date"
+          label="Birthday"
+          validators={[VALIDATOR_OPTIONAL()]}
+          errorText="Invalid Email"
+          onInput={inputHandler}
+          initialValue={formState.inputs.bday.value}
+          initialValid={formState.inputs.bday.isValid}
         />
         <Input
           element="input"
@@ -344,7 +353,7 @@ const BasicInfoEdit = (props) => {
           onInput={inputHandler}
           initialValue={formState.inputs.citizenship.value}
           initialValid={formState.inputs.citizenship.isValid}
-          />
+        />
         <Button inverse type="submit">
           Save Info
         </Button>

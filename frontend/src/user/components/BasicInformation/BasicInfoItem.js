@@ -14,7 +14,7 @@ const BasicInfoItem = (props) => {
         <div>Email: {props.email}</div>
         <div>Extension Name:{props.extensionName}</div>
         <div>Birthday:{props.bday}</div>
-        <div>Age:{props.age}</div>
+        <div>Age:{props.age} years old</div>
         <div>Place of Birth:{props.placeofBirth}</div>
         <div>Gender:{props.gender}</div>
         <div>Civil Status:{props.civilStatus}</div>

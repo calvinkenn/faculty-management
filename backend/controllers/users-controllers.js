@@ -132,15 +132,33 @@ const editBasicInfo = async (req, res, next) => {
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const { userId, firstName, lastName, middleName, placeofBirth,gender
-  ,civilStatus, height, weight, bloodType, gssId, pagibigId, philHealthId, sssNo, tinNo, citizenship} = req.body;
-
-  const user = await User.findByIdAndUpdate(userId,{
+  const {
+    userId,
     firstName,
     lastName,
     middleName,
     placeofBirth,
     gender,
+    birthday,
+    civilStatus,
+    height,
+    weight,
+    bloodType,
+    gssId,
+    pagibigId,
+    philHealthId,
+    sssNo,
+    tinNo,
+    citizenship,
+  } = req.body;
+
+  const user = await User.findByIdAndUpdate(userId, {
+    firstName,
+    lastName,
+    middleName,
+    placeofBirth,
+    gender,
+    birthday,
     civilStatus,
     height,
     weight,
@@ -153,10 +171,10 @@ const editBasicInfo = async (req, res, next) => {
     citizenship,
   });
   let updatedUser;
-  if(user){
+  if (user) {
     updatedUser = await User.findById(userId);
   }
-  res.status(200).json({message: 'Update Success', updatedUser : updatedUser})
+  res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
 };
 exports.signup = signup;
 exports.login = login;

@@ -28,6 +28,25 @@ const DUMMY_DATA = {
   citizenship: "TEST",
 };
 
+const formatDate = (input) => {
+  var datePart = input.match(/\d+/g),
+  year = datePart[0].substring(0, 4),
+  month = datePart[1], day = datePart[2];
+
+  return day+'/'+month+'/'+year;
+}
+
+function getAge(dateString) {
+  var today = new Date();
+  var birthDate = new Date(dateString);
+  var age = today.getFullYear() - birthDate.getFullYear();
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+  }
+  return age;
+}
+
 const BasicInfo = (props) => {
   if (props.isEditMode) {
     return (<BasicInfoEdit
@@ -45,8 +64,8 @@ const BasicInfo = (props) => {
         contact={DUMMY_DATA.contact}
         email={props.userData.email}
         extensionName={DUMMY_DATA.extensionName}
-        bday={DUMMY_DATA.bday}
-        age={DUMMY_DATA.age}
+        bday={formatDate(props.userData.birthday.substring(0, 10))}
+        age={getAge(props.userData.birthday.substring(0, 10))}
         placeofBirth={props.userData.placeofBirth}
         gender={props.userData.gender}
         civilStatus={props.userData.civilStatus}

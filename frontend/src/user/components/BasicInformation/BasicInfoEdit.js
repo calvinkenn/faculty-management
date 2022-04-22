@@ -58,7 +58,7 @@ const BasicInfoEdit = (props) => {
         isValid: true,
       },
       extensionName: {
-        value: DUMMY_DATA.extensionName,
+        value: props.userEdit.extensionName,
         isValid: true,
       },
       bday: {
@@ -66,7 +66,7 @@ const BasicInfoEdit = (props) => {
         isValid: true,
       },
       placeofBirth: {
-        value: DUMMY_DATA.placeofBirth,
+        value: props.userEdit.placeofBirth,
         isValid: true,
       },
       gender: {
@@ -131,6 +131,7 @@ const BasicInfoEdit = (props) => {
           firstName: formState.inputs.firstName.value,
           lastName: formState.inputs.lastName.value,
           middleName: formState.inputs.middleName.value,
+          extensionName: formState.inputs.extensionName.value,
           birthday: formState.inputs.bday.value,
           placeofBirth: formState.inputs.placeofBirth.value,
           gender: formState.inputs.gender.value,
@@ -202,7 +203,7 @@ const BasicInfoEdit = (props) => {
         />
         <Input
           element="input"
-          id="eName"
+          id="extensionName"
           type="text"
           label="Extension Name"
           validators={[VALIDATOR_OPTIONAL()]}
@@ -234,23 +235,26 @@ const BasicInfoEdit = (props) => {
           initialValid={formState.inputs.placeofBirth.isValid}
         />
         <Input
-          element="input"
+          element="select"
           id="gender"
           type="text"
           label="Gender"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
+          items={["Male", "Female", "Other"]}
           onInput={inputHandler}
           initialValue={formState.inputs.gender.value}
           initialValid={formState.inputs.gender.isValid}
         />
+
         <Input
-          element="input"
+          element="select"
           id="civilStatus"
           type="text"
           label="Civil Status"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
+          items={["Single", "Married", "Widowed", "Divorced", "Separated"]}
           onInput={inputHandler}
           initialValue={formState.inputs.civilStatus.value}
           initialValid={formState.inputs.civilStatus.isValid}
@@ -278,12 +282,22 @@ const BasicInfoEdit = (props) => {
           initialValid={formState.inputs.weight.isValid}
         />
         <Input
-          element="input"
+          element="select"
           id="bloodType"
           type="text"
           label="Blood Type"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
+          items={[
+            "Type AB+",
+            "Type AB-",
+            "Type A+",
+            "Type A-",
+            "Type B+",
+            "Type B-",
+            "Type O+",
+            "Type O-",
+          ]}
           onInput={inputHandler}
           initialValue={formState.inputs.bloodType.value}
           initialValid={formState.inputs.bloodType.isValid}
@@ -344,12 +358,14 @@ const BasicInfoEdit = (props) => {
           initialValid={formState.inputs.tinNo.isValid}
         />
         <Input
-          element="input"
+          element="select"
           id="citizenship"
           type="text"
           label="Citizenship"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
+          items={["Filipino", "Other"]}
+          defaultValue="Filipino"
           onInput={inputHandler}
           initialValue={formState.inputs.citizenship.value}
           initialValid={formState.inputs.citizenship.isValid}

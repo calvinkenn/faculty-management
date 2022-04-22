@@ -3,6 +3,11 @@ import React from "react";
 import Button from "../../../shared/components/FormElements/Button";
 import "./BasicInfoItem.css";
 
+const formatHeight = (height) => {
+  let formattedHeight = height.replace(/\./g, "ft ");
+  return formattedHeight;
+};
+
 const BasicInfoItem = (props) => {
   return (
     <div className="basic-container">
@@ -10,7 +15,6 @@ const BasicInfoItem = (props) => {
         <div>First Name: {props.firstName}</div>
         <div>Middle Name: {props.middleName}</div>
         <div>Last Name: {props.lastName}</div>
-        <div>Contact: {props.contact}</div>
         <div>Email: {props.email}</div>
         <div>Extension Name:{props.extensionName}</div>
         <div>Birthday:{props.bday}</div>
@@ -18,8 +22,11 @@ const BasicInfoItem = (props) => {
         <div>Place of Birth:{props.placeofBirth}</div>
         <div>Gender:{props.gender}</div>
         <div>Civil Status:{props.civilStatus}</div>
-        <div>Height:{props.height}</div>
-        <div>Weight:{props.weight}</div>
+        <div>
+          Height:{formatHeight(props.height)}{" "}
+          {props.height.indexOf(".") !== -1 ? "in" : "ft"}
+        </div>
+        <div>Weight:{props.weight} kg</div>
         <div>Bloodtype:{props.bloodType}</div>
         <div>GSS ID:{props.gssId}</div>
         <div>PAGIBIG ID:{props.pagibigId}</div>

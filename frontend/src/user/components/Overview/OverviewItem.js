@@ -11,8 +11,6 @@ const OverviewItem = (props) => {
         <div>First Name: {props.firstName}</div>
         <div>Middle Name: {props.middleName}</div>
         <div>Last Name: {props.lastName}</div>
-        <div>Address: {props.address}</div>
-        <div>Contact: {props.contact}</div>
         <div>Email: {props.email}</div>
         <div>Extension Name:{props.extensionName}</div>
         <div>

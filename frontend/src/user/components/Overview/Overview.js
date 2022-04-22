@@ -32,11 +32,10 @@ const BasicInfo = (props) => {
       inOverview={props.inOverview}
       employeeNumber={props.userData.employeeNum}
       firstName={props.userData.firstName}
-      middleName={DUMMY_DATA.middleName}
+      middleName={props.userData.middleName}
       lastName={props.userData.lastName}
-      contact={DUMMY_DATA.contact}
       email={props.userData.email}
-      extensionName={DUMMY_DATA.extensionName}
+      extensionName={props.userData.extensionName}
       houseNo={DUMMY_DATA.residentAddress.houseNo}
       street={DUMMY_DATA.residentAddress.street}
       locationType={DUMMY_DATA.residentAddress.locationType}

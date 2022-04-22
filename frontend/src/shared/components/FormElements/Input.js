@@ -1,4 +1,10 @@
-import { TextField } from "@mui/material";
+import {
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import React, { useReducer, useEffect } from "react";
 
 import { validate } from "../../utils/validators";
@@ -77,6 +83,48 @@ const Input = (props) => {
   //       value={props.value}
   //     />
   //   );
+  let element;
+
+  if (props.element === "input") {
+    element = (
+      <TextField
+        id={props.id}
+        helperText={
+          !inputState.isValid && inputState.isTouched ? props.helperText : ""
+        }
+        onChange={changeHandler}
+        onBlur={blurHandler}
+        type={props.type}
+        label={props.label}
+        variant={props.variant}
+        error={!inputState.isValid && inputState.isTouched}
+        value={inputState.value}
+      />
+    );
+  } else if (props.element === "select") {
+    element = (
+      <FormControl sx={{ minWidth: 150 }}>
+        <InputLabel id="select">{props.label}</InputLabel>
+        <Select
+          defaultValue={props.defaultValue}
+          // labelId={props.label}
+          id={props.id}
+          value={inputState.value}
+          label={props.label}
+          onChange={changeHandler}
+          selectValue={[props.selectValue]}
+          items={props.items}
+        >
+          <MenuItem disabled value="">
+            <em>Please Select</em>
+          </MenuItem>
+          {props.items.map((item) => (
+            <MenuItem value={item}>{item}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    );
+  }
 
   return (
     // <div
@@ -88,19 +136,7 @@ const Input = (props) => {
     //   {element}
     //   {!inputState.isValid && inputState.isTouched && <p>{props.errorText}</p>}
     // </div>
-    <TextField
-      id={props.id}
-      helperText={
-        !inputState.isValid && inputState.isTouched ? props.helperText : ""
-      }
-      onChange={changeHandler}
-      onBlur={blurHandler}
-      type={props.type}
-      label={props.label}
-      variant={props.variant}
-      error={!inputState.isValid && inputState.isTouched}
-      value={inputState.value}
-    />
+    element
   );
 };
 

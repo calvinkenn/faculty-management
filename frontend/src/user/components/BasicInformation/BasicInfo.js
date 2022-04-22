@@ -40,25 +40,25 @@ const BasicInfo = (props) => {
         inOverview={props.inOverview}
         employeeNumber={props.userData.employeeNum}
         firstName={props.userData.firstName}
-        middleName={DUMMY_DATA.middleName}
+        middleName={props.userData.middleName}
         lastName={props.userData.lastName}
         contact={DUMMY_DATA.contact}
         email={props.userData.email}
         extensionName={DUMMY_DATA.extensionName}
         bday={DUMMY_DATA.bday}
         age={DUMMY_DATA.age}
-        placeOfBirth={DUMMY_DATA.placeOfBirth}
-        gender={DUMMY_DATA.gender}
-        civilStatus={DUMMY_DATA.civilStatus}
-        height={DUMMY_DATA.height}
-        weight={DUMMY_DATA.weight}
-        bloodType={DUMMY_DATA.bloodType}
-        gssID={DUMMY_DATA.gssID}
-        pagibigID={DUMMY_DATA.pagibigID}
-        philhealth={DUMMY_DATA.philhealth}
-        sssNO={DUMMY_DATA.sssNO}
-        tinNO={DUMMY_DATA.tinNO}
-        citizenship={DUMMY_DATA.citizenship}
+        placeofBirth={props.userData.placeofBirth}
+        gender={props.userData.gender}
+        civilStatus={props.userData.civilStatus}
+        height={props.userData.height}
+        weight={props.userData.weight}
+        bloodType={props.userData.bloodType}
+        gssId={props.userData.gssId}
+        pagibigId={props.userData.pagibigId}
+        philHealthId={props.userData.philHealthId}
+        sssNo={props.userData.sssNo}
+        tinNo={props.userData.tinNo}
+        citizenship={props.userData.citizenship}
       />
     );
   }

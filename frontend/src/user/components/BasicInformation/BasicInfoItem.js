@@ -15,17 +15,17 @@ const BasicInfoItem = (props) => {
         <div>Extension Name:{props.extensionName}</div>
         <div>Birthday:{props.bday}</div>
         <div>Age:{props.age}</div>
-        <div>Place of Birth:{props.placeOfBirth}</div>
+        <div>Place of Birth:{props.placeofBirth}</div>
         <div>Gender:{props.gender}</div>
         <div>Civil Status:{props.civilStatus}</div>
         <div>Height:{props.height}</div>
         <div>Weight:{props.weight}</div>
         <div>Bloodtype:{props.bloodType}</div>
-        <div>GSS ID:{props.gssID}</div>
-        <div>PAGIBIG ID:{props.pagibigID}</div>
-        <div>PHILHEALTH:{props.philhealth}</div>
-        <div>SSS NO:{props.sssNO}</div>
-        <div>TIN NO:{props.tinNO}</div>
+        <div>GSS ID:{props.gssId}</div>
+        <div>PAGIBIG ID:{props.pagibigId}</div>
+        <div>PHILHEALTH:{props.philHealthId}</div>
+        <div>SSS NO:{props.sssNo}</div>
+        <div>TIN NO:{props.tinNo}</div>
         <div>Citizenship:{props.citizenship}</div>
       </div>
     </div>

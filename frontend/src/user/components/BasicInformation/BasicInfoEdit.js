@@ -29,11 +29,11 @@ const DUMMY_DATA = {
   height: "4.5",
   weight: "25",
   bloodType: "AB",
-  gssID: "TEST",
-  pagibigID: "TEST",
-  philhealth: "TEST",
-  sssNO: "TEST",
-  tinNO: "TEST",
+  gssId: "TEST",
+  pagibigId: "TEST",
+  philHealthId: "TEST",
+  sssNo: "TEST",
+  tinNo: "TEST",
   citizenship: "TEST",
 };
 
@@ -42,104 +42,85 @@ const BasicInfoEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       firstName: {
-        value: "",
-        isValid: false,
+        value: props.userEdit.firstName,
+        isValid: true,
       },
-      // middleName: {
-      //   value: props.userEdit.middleName,
-      //   isValid: true,
-      // },
+      middleName: {
+        value: props.userEdit.middleName,
+        isValid: true,
+      },
       lastName: {
-        value: "",
-        isValid: false,
+        value: props.userEdit.lastName,
+        isValid: true,
       },
-      // contact: {
-      //   value: DUMMY_DATA.contact,
-      //   isValid: true,
-      // },
-      // email: {
-      //   value: props.userEdit.email,
-      //   isValid: true,
-      // },
-      // extensionName: {
-      //   value: DUMMY_DATA.extensionName,
-      //   isValid: true,
-      // },
-      // bday: {
-      //   value: DUMMY_DATA.bday,
-      //   isValid: true,
-      // },
-      // placeOfBirth: {
-      //   value: DUMMY_DATA.placeOfBirth,
-      //   isValid: true,
-      // },
-      // gender: {
-      //   value: DUMMY_DATA.gender,
-      //   isValid: true,
-      // },
-      // civilStatus: {
-      //   value: DUMMY_DATA.civilStatus,
-      //   isValid: true,
-      // },
-      // height: {
-      //   value: DUMMY_DATA.height,
-      //   isValid: true,
-      // },
-      // weight: {
-      //   value: DUMMY_DATA.weight,
-      //   isValid: true,
-      // },
-      // bloodType: {
-      //   value: DUMMY_DATA.bloodType,
-      //   isValid: true,
-      // },
-      // gssID: {
-      //   value: DUMMY_DATA.gssID,
-      //   isValid: true,
-      // },
-      // pagibigID: {
-      //   value: DUMMY_DATA.pagibigID,
-      //   isValid: true,
-      // },
-      // philhealth: {
-      //   value: DUMMY_DATA.philhealth,
-      //   isValid: true,
-      // },
-      // sssNO: {
-      //   value: DUMMY_DATA.sssNO,
-      //   isValid: true,
-      // },
-      // tinNO: {
-      //   value: DUMMY_DATA.tinNO,
-      //   isValid: true,
-      // },
-      // citizenship: {
-      //   value: DUMMY_DATA.citizenship,
-      //   isValid: true,
-      // },
+      email: {
+        value: props.userEdit.email,
+        isValid: true,
+      },
+      extensionName: {
+        value: DUMMY_DATA.extensionName,
+        isValid: true,
+      },
+      bday: {
+         value: DUMMY_DATA.bday,
+         isValid: true,
+       },
+       placeofBirth: {
+         value: props.userEdit.placeofBirth,
+         isValid: true,
+       },
+       gender: {
+         value: props.userEdit.gender,
+         isValid: true,
+       },
+       civilStatus: {
+         value: props.userEdit.civilStatus,
+         isValid: true,
+       },
+      height: {
+         value: props.userEdit.height,
+         isValid: true,
+      },
+      weight: {
+         value: props.userEdit.weight,
+         isValid: true,
+      },
+      bloodType: {
+        value: props.userEdit.bloodType,
+        isValid: true,
+      },
+      gssId: {
+        value: props.userEdit.gssId,
+        isValid: true,
+      },
+      pagibigId: {
+        value: props.userEdit.pagibigId,
+        isValid: true,
+      },
+      philHealthId: {
+        value: props.userEdit.philHealthId,
+        isValid: true,
+      },
+      sssNo: {
+        value: props.userEdit.sssNo,
+        isValid: true,
+      },
+      tinNo: {
+        value: props.userEdit.tinNo,
+        isValid: true,
+      },
+      citizenship: {
+        value: props.userEdit.citizenship,
+        isValid: true,
+      },
     },
     false
   );
 
   const users = DUMMY_DATA;
 
-  useEffect(() => {
-    setFormData(
-      {
-        firstName: {
-          value: props.userEdit.firstName,
-          isValid: true,
-        },
-        lastName: {
-          value: props.userEdit.lastName,
-          isValid: true,
-        },
-      },
-      true
-    );
-  }, [setFormData, users]);
-
   const submitHandler = async (event) => {
+    console.log('clicked')
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
@@ -151,6 +132,19 @@ const BasicInfoEdit = (props) => {
           token: storedData.token,
           firstName: formState.inputs.firstName.value,
           lastName: formState.inputs.lastName.value,
+          middleName : formState.inputs.middleName.value,
+          placeofBirth : formState.inputs.placeofBirth.value,
+          gender : formState.inputs.gender.value,
+          civilStatus : formState.inputs.civilStatus.value,
+          height : formState.inputs.height.value,
+          weight : formState.inputs.weight.value,
+          bloodType : formState.inputs.bloodType.value,
+          gssId : formState.inputs.gssId.value,
+          pagibigId : formState.inputs.pagibigId.value,
+          philHealthId :formState.inputs.philHealthId.value,
+          sssNo : formState.inputs.sssNo.value,
+          tinNo : formState.inputs.tinNo.value,
+          citizenship : formState.inputs.citizenship.value
           // email : formState.inputs.email.value
         }),
         {
@@ -172,12 +166,12 @@ const BasicInfoEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={props.userEdit.firstName}
-          initialValid={true}
+          initialValue={formState.inputs.firstName.value}
+          initialValid={formState.inputs.firstName.isValid}
         />
-        {/* <Input
+        <Input
           element="input"
-          id="mName"
+          id="middleName"
           type="text"
           label="Middle Name"
           validators={[VALIDATOR_OPTIONAL()]}
@@ -185,7 +179,7 @@ const BasicInfoEdit = (props) => {
           onInput={inputHandler}
           initialValue={formState.inputs.middleName.value}
           initialValid={formState.inputs.middleName.isValid}
-        /> */}
+        />
         <Input
           element="input"
           id="lastName"
@@ -194,19 +188,8 @@ const BasicInfoEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={props.userEdit.lastName}
-          initialValid={true}
-        />
-        {/* <Input
-          element="input"
-          id="contact"
-          type="text"
-          label="Contact"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.contact.value}
-          initialValid={formState.inputs.contact.isValid}
+          initialValue={formState.inputs.lastName.value}
+          initialValid={formState.inputs.lastName.isValid}
         />
         <Input
           element="input"
@@ -232,25 +215,14 @@ const BasicInfoEdit = (props) => {
         />
         <Input
           element="input"
-          id="bday"
-          type="text"
-          label="Birthday"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.bday.value}
-          initialValid={formState.inputs.bday.isValid}
-        />
-        <Input
-          element="input"
-          id="placeOfBirth"
+          id="placeofBirth"
           type="text"
           label="Place of Birth"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.placeOfBirth.value}
-          initialValid={formState.inputs.placeOfBirth.isValid}
+          initialValue={formState.inputs.placeofBirth.value}
+          initialValid={formState.inputs.placeofBirth.isValid}
         />
         <Input
           element="input"
@@ -309,36 +281,36 @@ const BasicInfoEdit = (props) => {
         />
         <Input
           element="input"
-          id="gssID"
+          id="gssId"
           type="text"
           label="GSS ID"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.gssID.value}
-          initialValid={formState.inputs.gssID.isValid}
+          initialValue={formState.inputs.gssId.value}
+          initialValid={formState.inputs.gssId.isValid}
         />
         <Input
           element="input"
-          id="pagibigID"
+          id="pagibigId"
           type="text"
           label="Pagibig ID"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.pagibigID.value}
-          initialValid={formState.inputs.pagibigID.isValid}
+          initialValue={formState.inputs.pagibigId.value}
+          initialValid={formState.inputs.pagibigId.isValid}
         />
         <Input
           element="input"
-          id="philhealth"
+          id="philHealthId"
           type="text"
           label="Philhealth"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.philhealth.value}
-          initialValid={formState.inputs.philhealth.isValid}
+          initialValue={formState.inputs.philHealthId.value}
+          initialValid={formState.inputs.philHealthId.isValid}
         />
         <Input
           element="input"
@@ -348,8 +320,8 @@ const BasicInfoEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.sssNO.value}
-          initialValid={formState.inputs.sssNO.isValid}
+          initialValue={formState.inputs.sssNo.value}
+          initialValid={formState.inputs.sssNo.isValid}
         />
         <Input
           element="input"
@@ -359,8 +331,8 @@ const BasicInfoEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.tinNO.value}
-          initialValid={formState.inputs.tinNO.isValid}
+          initialValue={formState.inputs.tinNo.value}
+          initialValid={formState.inputs.tinNo.isValid}
         />
         <Input
           element="input"
@@ -372,7 +344,7 @@ const BasicInfoEdit = (props) => {
           onInput={inputHandler}
           initialValue={formState.inputs.citizenship.value}
           initialValid={formState.inputs.citizenship.isValid}
-        /> */}
+          />
         <Button inverse type="submit">
           Save Info
         </Button>

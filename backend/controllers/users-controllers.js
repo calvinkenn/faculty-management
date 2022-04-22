@@ -132,11 +132,25 @@ const editBasicInfo = async (req, res, next) => {
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const { userId, firstName, lastName } = req.body;
+  const { userId, firstName, lastName, middleName, placeofBirth,gender
+  ,civilStatus, height, weight, bloodType, gssId, pagibigId, philHealthId, sssNo, tinNo, citizenship} = req.body;
 
   const user = await User.findByIdAndUpdate(userId,{
     firstName,
-    lastName
+    lastName,
+    middleName,
+    placeofBirth,
+    gender,
+    civilStatus,
+    height,
+    weight,
+    bloodType,
+    gssId,
+    pagibigId,
+    philHealthId,
+    sssNo,
+    tinNo,
+    citizenship,
   });
   let updatedUser;
   if(user){

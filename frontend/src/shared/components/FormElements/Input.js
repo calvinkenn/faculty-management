@@ -99,6 +99,7 @@ const Input = (props) => {
         variant={props.variant}
         error={!inputState.isValid && inputState.isTouched}
         value={inputState.value}
+        disabled={props.disabled ? props.disabled : false}
       />
     );
   } else if (props.element === "select") {

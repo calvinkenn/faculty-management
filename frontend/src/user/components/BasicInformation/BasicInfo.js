@@ -3,38 +3,14 @@ import BasicInfoEdit from "./BasicInfoEdit";
 
 import BasicInfoItem from "./BasicInfoItem";
 
-const DUMMY_DATA = {
-  //REPLACE WITH DATABASE
-  employeeNumber: "223111",
-  firstName: "TEST TITLE 1",
-  middleName: "TEST TYPE 1",
-  lastName: "2020 1",
-  contact: "23213111",
-  email: "TEST EMAIL",
-  extensionName: "TEST EXTENSION",
-  bday: "2022",
-  age: "12",
-  placeOfBirth: "TEST PLACE",
-  gender: "Male",
-  civilStatus: "Single",
-  height: "4.5",
-  weight: "25",
-  bloodType: "AB",
-  gssID: "TEST",
-  pagibigID: "TEST",
-  philhealth: "TEST",
-  sssNO: "TEST",
-  tinNO: "TEST",
-  citizenship: "TEST",
-};
-
 const formatDate = (input) => {
   var datePart = input.match(/\d+/g),
-  year = datePart[0].substring(0, 4),
-  month = datePart[1], day = datePart[2];
+    year = datePart[0].substring(0, 4),
+    month = datePart[1],
+    day = datePart[2];
 
-  return day+'/'+month+'/'+year;
-}
+  return day + "/" + month + "/" + year;
+};
 
 function getAge(dateString) {
   var today = new Date();
@@ -42,21 +18,23 @@ function getAge(dateString) {
   var age = today.getFullYear() - birthDate.getFullYear();
   var m = today.getMonth() - birthDate.getMonth();
   if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
+    age--;
   }
   return age;
 }
 
 const BasicInfo = (props) => {
   if (props.isEditMode) {
-    return (<BasicInfoEdit
-      userEdit =  {props.userData}
-      setEditMode = {props.setEditMode}/>);
+    return (
+      <BasicInfoEdit
+        userEdit={props.userData}
+        setEditMode={props.setEditMode}
+      />
+    );
   } else {
     return (
       <BasicInfoItem
         isEditMode={props.isEditMode}
-        inOverview={props.inOverview}
         employeeNumber={props.userData.employeeNum}
         firstName={props.userData.firstName}
         middleName={props.userData.middleName}

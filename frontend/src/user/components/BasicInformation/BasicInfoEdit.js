@@ -11,32 +11,6 @@ import {
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 
-const DUMMY_DATA = {
-  //REPLACE WITH DATABASE
-  userId: "333",
-  employeeNumber: "223111",
-  firstName: "TEST TITLE 1",
-  middleName: "TEST TYPE 1",
-  lastName: "2020 1",
-  contact: "23213111",
-  email: "TEST EMAIL",
-  extensionName: "TEST EXTENSION",
-  bday: "2022",
-  age: "12",
-  placeOfBirth: "TEST PLACE",
-  gender: "Male",
-  civilStatus: "Single",
-  height: "4.5",
-  weight: "25",
-  bloodType: "AB",
-  gssId: "TEST",
-  pagibigId: "TEST",
-  philHealthId: "TEST",
-  sssNo: "TEST",
-  tinNo: "TEST",
-  citizenship: "TEST",
-};
-
 const BasicInfoEdit = (props) => {
   const { error, sendRequest } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
@@ -123,7 +97,7 @@ const BasicInfoEdit = (props) => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
       const responseData = await sendRequest(
-        "http://localhost:5000/api/users/edit",
+        "http://localhost:5000/api/users/editBasicInfo",
         "PATCH",
         JSON.stringify({
           userId: storedData.userId,
@@ -154,6 +128,7 @@ const BasicInfoEdit = (props) => {
       props.setEditMode(responseData.updatedUser, responseData.message);
     } catch (err) {}
   };
+  
   return (
     <React.Fragment>
       <form onSubmit={submitHandler}>

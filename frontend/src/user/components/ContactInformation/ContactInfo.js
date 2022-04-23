@@ -30,25 +30,30 @@ const DUMMY_DATA = {
 
 const ContactInfo = (props) => {
   if (props.isEditMode) {
-    return <ContactInfoEdit />;
+    return (
+      <ContactInfoEdit
+        userEdit={props.userData}
+        setEditMode={props.setEditMode}
+      />
+    );
   } else {
     return (
       <ContactInfoItem
-        residentHouseNo={DUMMY_DATA.residentAddress.houseNo}
-        residentStreet={DUMMY_DATA.residentAddress.street}
-        residentLocationType={DUMMY_DATA.residentAddress.locationType}
-        residentBarangay={DUMMY_DATA.residentAddress.barangay}
-        residentProvince={DUMMY_DATA.residentAddress.province}
-        residentZip={DUMMY_DATA.residentAddress.zip}
-        permanentHouseNo={DUMMY_DATA.permanentAddress.houseNo}
-        permanentStreet={DUMMY_DATA.permanentAddress.street}
-        permanentLocationType={DUMMY_DATA.permanentAddress.locationType}
-        permanentBarangay={DUMMY_DATA.permanentAddress.barangay}
-        permanentProvince={DUMMY_DATA.permanentAddress.province}
-        permanentZip={DUMMY_DATA.permanentAddress.zip}
-        telephoneNum={DUMMY_DATA.telephoneNum}
-        cellphoneNum={DUMMY_DATA.cellphoneNum}
-        alternateEmail={DUMMY_DATA.alternateEmail}
+        residentHouseNo={props.userData.houseNoR}
+        residentStreet={props.userData.streetR}
+        residentLocationType={props.userData.locationTypeR}
+        residentBarangay={props.userData.barangayR}
+        residentProvince={props.userData.provinceR}
+        residentZip={props.userData.zipR}
+        permanentHouseNo={props.userData.houseNoP}
+        permanentStreet={props.userData.streetP}
+        permanentLocationType={props.userData.locationTypeP}
+        permanentBarangay={props.userData.barangayP}
+        permanentProvince={props.userData.provinceP}
+        permanentZip={props.userData.zipP}
+        telephoneNum={props.userData.telephoneNum}
+        cellphoneNum={props.userData.cellphoneNum}
+        alternateEmail={props.userData.alternateEmail}
       />
     );
   }

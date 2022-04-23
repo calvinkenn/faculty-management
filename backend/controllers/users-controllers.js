@@ -178,7 +178,59 @@ const editBasicInfo = async (req, res, next) => {
   }
   res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
 };
+
+const editContactInfo = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+  const {
+    userId,
+    houseNoP,
+    streetP,
+    locationTypeP,
+    barangayP,
+    provinceP,
+    zipP,
+    houseNoR,
+    streetR,
+    locationTypeR,
+    barangayR,
+    provinceR,
+    zipR,
+    telephoneNum,
+    cellphoneNum,
+    alternateEmail,
+  } = req.body;
+
+  const user = await User.findByIdAndUpdate(userId, {
+    houseNoP,
+    streetP,
+    locationTypeP,
+    barangayP,
+    provinceP,
+    zipP,
+    houseNoR,
+    streetR,
+    locationTypeR,
+    barangayR,
+    provinceR,
+    zipR,
+    telephoneNum,
+    cellphoneNum,
+    alternateEmail,
+  });
+  let updatedUser;
+  if (user) {
+    updatedUser = await User.findById(userId);
+  }
+  res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
+};
+
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
 exports.editBasicInfo = editBasicInfo;
+exports.editContactInfo = editContactInfo;

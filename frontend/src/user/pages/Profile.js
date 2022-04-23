@@ -42,37 +42,37 @@ const Profile = (props) => {
     setIsEditMode(false);
     setIsMenuActive(stateCopy);
   };
-  useEffect(()=>{
-    const storedData = JSON.parse(sessionStorage.getItem('userData'));
-    const sendRequest = async () =>{
-      const response = await fetch('http://localhost:5000/api/users/userData',{
-        method : 'POST',
-        headers : {'Content-Type' : 'application/json'},
-        body  : JSON.stringify({
-          userId : storedData.userId,
-          token : storedData.token
-        })
+  useEffect(() => {
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const sendRequest = async () => {
+      const response = await fetch("http://localhost:5000/api/users/userData", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: storedData.userId,
+          token: storedData.token,
+        }),
       });
       const responseData = await response.json();
       setUserData(responseData.userData);
-    }
+    };
     sendRequest();
   }, []);
 
   //function to update state
-  const updateState = (data, message) =>{
+  const updateState = (data, message) => {
     setIsEditMode(false);
     setUserData(data);
     setSuccess(message);
-  }
+  };
   //function for clearing if there is no error
   const clearSuccess = () => {
     setSuccess(null);
-  }
+  };
   return (
     <React.Fragment>
-      <SuccessModal success = {success} onClear = {clearSuccess}/>
-      <MainNavigation/>
+      <SuccessModal success={success} onClear={clearSuccess} />
+      <MainNavigation />
       <div className="profile-container">
         <SideBox className="side-container">
           <div className="side-container__image">
@@ -132,19 +132,25 @@ const Profile = (props) => {
             isEditMode={isEditMode}
             onClick={editModeHandler}
           />
-          {isMenuActive.overview && <Overview userData = {userData}/>}
+          {isMenuActive.overview && <Overview userData={userData} />}
           {isMenuActive.basicInformation && (
-            <BasicInfo isEditMode={isEditMode} setEditMode = {updateState} userData = {userData} />
+            <BasicInfo
+              isEditMode={isEditMode}
+              setEditMode={updateState}
+              userData={userData}
+            />
           )}
           {isMenuActive.contactInformation && (
-            <ContactInfo isEditMode={isEditMode} />
+            <ContactInfo
+              isEditMode={isEditMode}
+              setEditMode={updateState}
+              userData={userData}
+            />
           )}
           {isMenuActive.education && (
             <EducationalBackground isAddMode={isEditMode} />
           )}
-          {isMenuActive.civilService && (
-            <CivilService isAddMode={isEditMode} />
-          )}
+          {isMenuActive.civilService && <CivilService isAddMode={isEditMode} />}
           {isMenuActive.workExperience && (
             <WorkExperience isAddMode={isEditMode} />
           )}

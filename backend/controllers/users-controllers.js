@@ -4,6 +4,7 @@ const HttpError = require("../models/http-error");
 
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
+const Admin = require('../models/admin');
 const jwt = require("jsonwebtoken");
 
 const signup = async (req, res, next) => {
@@ -22,6 +23,9 @@ const signup = async (req, res, next) => {
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email });
+    if(!existingUser){
+      existingUser = await Admin.findOne({username: email})
+    }
   } catch (err) {
     const error = new HttpError(
       "Signing up failed, please try again later.",
@@ -79,6 +83,24 @@ const login = async (req, res, next) => {
   let existingUser;
   let isValidPassword = false;
 
+  //for admin
+  try {
+    existingUser = await Admin.findOne({username : email});
+
+    if(existingUser || password === existingUser.password){
+      
+      let token = jwt.sign({ adminId: existingUser.id}, "superidol", {
+        expiresIn: "1h",
+      });
+      return res.json({
+        admin: "Logged in!",
+        adminId: existingUser.id,
+        token: token,
+      });
+    }
+  }catch(err){
+
+  }
   //check if user is existing
   try {
     existingUser = await User.findOne({ email: email });
@@ -97,12 +119,26 @@ const login = async (req, res, next) => {
     );
     return next(error);
   }
-
   //check if hash is correct
   isValidPassword = await bcrypt.compare(password, existingUser.password);
   if (!isValidPassword) {
     const error = new HttpError(
       "Invalid credentials, could not log you in.",
+      401
+    );
+    return next(error);
+  }
+
+
+  if(existingUser.permission === 'pending'){
+    const error = new HttpError(
+      "Account not verified yet, please wait for admin to verify your account.",
+      401
+    );
+    return next(error);
+  }else if (existingUser.permission === 'rejected'){
+    const error = new HttpError(
+      "Account access rejected. if you think this was a mistake, please contact admin immediately.",
       401
     );
     return next(error);

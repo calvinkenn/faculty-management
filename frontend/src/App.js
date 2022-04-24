@@ -22,9 +22,10 @@ const App = () => {
   //   setIsLoggedIn(true);
   //   setIsAdmin(true);
   // }, []);
-  const loginAsAdmin = useCallback((token) => {
+  const loginAsAdmin = useCallback((aid,token) => {
     setToken(true);
     setIsAdmin(true);
+    sessionStorage.setItem('userData', JSON.stringify({adminId: aid, token:token}));
   }, []);
   const loginAsUser = useCallback((uid, token) => {
     setIsAdmin(false);
@@ -49,7 +50,12 @@ const App = () => {
     const storedData = JSON.parse(sessionStorage.getItem('userData'));
 
     if(storedData && storedData.token){
-      loginAsUser(storedData.userId, storedData.token);
+      if(storedData.adminId){
+        loginAsAdmin(storedData.adminId, storedData.token);
+      }else{
+        loginAsUser(storedData.userId, storedData.token);
+      }
+      
     }
   }, [loginAsUser]);
   let routes;

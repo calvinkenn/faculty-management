@@ -25,7 +25,8 @@ const DUMMY_DATA = [
 ];
 
 const Application = (props) => {
-  return <ApplicationList list={DUMMY_DATA} />;
+
+  return <ApplicationList list={props.pendingUserData} updatePendingUsers  = {props.updatePendingUsers}/>;
 };
 
 export default Application;

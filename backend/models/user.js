@@ -38,6 +38,9 @@ const userSchema = mongoose.Schema({
   telephoneNum: { type: String, default: "" },
   cellphoneNum: { type: String, default: "" },
   alternateEmail: { type: String, default: "" },
+
+  //for account access
+  permission : { type: String, default : 'pending'},
 });
 
 userSchema.plugin(uniqueValidator);

@@ -8,6 +8,7 @@ const EducationalList = (props) => {
     <div className="educational-list">
       {props.items.map((item) => (
         <EducationalItem
+          setIsEditModeHandler={props.setIsEditModeHandler}
           level={item.level}
           schoolName={item.schoolName}
           degree={item.degree}

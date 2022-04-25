@@ -7,18 +7,24 @@ import "./TopActionBar.css";
 const TopActionBar = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isEditMode, setIsEditMode] = useState(props.isEditMode);
+  const [isAddMode, setIsAddMode] = useState(props.isAddMode);
 
   useEffect(() => {
     setIsEditMode(props.isEditMode);
-  }, [props.isEditMode]);
+    setIsAddMode(props.isAddMode);
+  }, [props.isEditMode, props.isAddMode]);
 
   const showCancelEditHandler = () => {
     setShowConfirmModal(true);
   };
 
-  const cancelDeleteHandler = () => {
+  const cancelEditHandler = () => {
     setShowConfirmModal(false);
     props.updateEditModeState(false);
+  };
+  const cancelAddHandler = () => {
+    setShowConfirmModal(false);
+    props.updateAddModeState(false);
   };
 
   const confirmDeleteHandler = () => {
@@ -30,14 +36,20 @@ const TopActionBar = (props) => {
     <React.Fragment>
       <Modal
         show={showConfirmModal}
-        onCancel={cancelDeleteHandler}
         header="Cancel editing?"
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
-            <Button inverse onClick={cancelDeleteHandler}>
-              YES
-            </Button>
+            {isEditMode && (
+              <Button inverse onClick={cancelEditHandler}>
+                YES
+              </Button>
+            )}
+            {isAddMode && (
+              <Button inverse onClick={cancelAddHandler}>
+                YES
+              </Button>
+            )}
             <Button danger onClick={confirmDeleteHandler}>
               NO
             </Button>
@@ -49,14 +61,21 @@ const TopActionBar = (props) => {
       <div className="top-action">
         <ul>
           {props.inOverview && <li>Print</li>}
-          {!isEditMode && !props.inOverview && (
-            <li onClick={props.onClick}>
-              {props.inBasicInformation || props.inContactInformation
-                ? "Edit"
-                : "Add"}
-            </li>
+          {!isEditMode && props.inBasicInformation && (
+            <li onClick={props.updateEditModeState}>Edit</li>
           )}
-          {isEditMode && <li onClick={showCancelEditHandler}>Cancel</li>}
+          {!isEditMode && props.inContactInformation && (
+            <li onClick={props.updateEditModeState}>Edit</li>
+          )}
+          {!isAddMode && !isEditMode && props.inEducation && (
+            <li onClick={props.updateAddModeState}>Add</li>
+          )}
+          {isEditMode && !isAddMode && (
+            <li onClick={showCancelEditHandler}>Cancel</li>
+          )}
+          {isAddMode && !isEditMode && (
+            <li onClick={showCancelEditHandler}>Cancel</li>
+          )}
         </ul>
       </div>
     </React.Fragment>

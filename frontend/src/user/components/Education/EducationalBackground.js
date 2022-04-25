@@ -1,6 +1,6 @@
-import React from "react";
-import EducationalEdit from "./EducationalEdit";
+import React, { useState, useEffect } from "react";
 
+import EducationalEdit from "./EducationalEdit";
 import EducationalList from "./EducationalList";
 
 const DUMMY_DATA = [
@@ -35,10 +35,21 @@ const DUMMY_DATA = [
 ];
 
 const EducationalBackground = (props) => {
+  const editModeHandler = () => {
+    props.updateEditModeState(true);
+  };
+
   if (props.isAddMode) {
-    return <EducationalEdit />;
+    return <EducationalEdit addingItem={true} />;
+  } else if (props.isEditMode) {
+    return <EducationalEdit addingItem={false} />;
   } else {
-    return <EducationalList items={DUMMY_DATA} />;
+    return (
+      <EducationalList
+        items={DUMMY_DATA}
+        setIsEditModeHandler={editModeHandler}
+      />
+    );
   }
 };
 

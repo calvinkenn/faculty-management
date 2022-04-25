@@ -69,7 +69,15 @@ const EducationalEdit = (props) => {
     setInputList([...inputList, { awards: "" }]);
   };
 
-  const submitHandler = (event) => {
+  const submitAddHandler = (event) => {
+    //For Adding Data
+    console.log(inputList);
+    console.log("clicked");
+    event.preventDefault();
+  };
+
+  const submitEditHandler = (event) => {
+    //For Editing Data
     console.log(inputList);
     console.log("clicked");
     event.preventDefault();
@@ -89,7 +97,7 @@ const EducationalEdit = (props) => {
 
   return (
     <React.Fragment>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <Input
           element="select"
           id="level"
@@ -192,7 +200,7 @@ const EducationalEdit = (props) => {
           );
         })}
         <Button inverse type="submit">
-          {props.isEditMode ? "Save" : "Add"}
+          {props.addingItem ? "Add" : "Save"}
         </Button>
       </form>
     </React.Fragment>

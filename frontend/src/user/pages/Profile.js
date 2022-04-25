@@ -29,10 +29,16 @@ const Profile = (props) => {
   const auth = useContext(AuthContext);
   const [isMenuActive, setIsMenuActive] = useState(menu);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isAddMode, setIsAddMode] = useState(false);
   const [userData, setUserData] = useState({});
   const [success, setSuccess] = useState();
+
   const editModeHandler = () => {
     setIsEditMode((prevState) => !prevState);
+  };
+
+  const addModeHandler = () => {
+    setIsAddMode((prevState) => !prevState);
   };
 
   const menuChangeHandler = (menuName) => {
@@ -40,6 +46,7 @@ const Profile = (props) => {
     Object.keys(stateCopy).forEach((key) => (stateCopy[key] = false)); //Set All Button False
     stateCopy[menuName] = true; //Set Button True
     setIsEditMode(false);
+    setIsAddMode(false);
     setIsMenuActive(stateCopy);
   };
   useEffect(() => {
@@ -62,6 +69,7 @@ const Profile = (props) => {
   //function to update state
   const updateState = (data, message) => {
     setIsEditMode(false);
+    setIsAddMode(false);
     setUserData(data);
     setSuccess(message);
   };
@@ -128,9 +136,11 @@ const Profile = (props) => {
             inOverview={isMenuActive.overview}
             inBasicInformation={isMenuActive.basicInformation}
             inContactInformation={isMenuActive.contactInformation}
+            inEducation={isMenuActive.education}
             updateEditModeState={editModeHandler}
+            updateAddModeState={addModeHandler}
             isEditMode={isEditMode}
-            onClick={editModeHandler}
+            isAddMode={isAddMode}
           />
           {isMenuActive.overview && <Overview userData={userData} />}
           {isMenuActive.basicInformation && (
@@ -148,7 +158,12 @@ const Profile = (props) => {
             />
           )}
           {isMenuActive.education && (
-            <EducationalBackground isAddMode={isEditMode} />
+            <EducationalBackground
+              isAddMode={isAddMode}
+              isEditMode={isEditMode}
+              updateEditModeState={editModeHandler}
+              updateAddModeState={addModeHandler}
+            />
           )}
           {isMenuActive.civilService && <CivilService isAddMode={isEditMode} />}
           {isMenuActive.workExperience && (

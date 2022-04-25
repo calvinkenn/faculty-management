@@ -4,6 +4,7 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  Button,
 } from "@mui/material";
 import React, { useReducer, useEffect } from "react";
 
@@ -58,31 +59,6 @@ const Input = (props) => {
     });
   };
 
-  // const element =
-  //   props.element === "input" ? (
-  //     <input
-  //       id={props.id}
-  //       type={props.type}
-  //       placeholder={props.placeholder}
-  //       onChange={changeHandler}
-  //       onBlur={blurHandler}
-  //       value={inputState.value}
-  //       // helperText={props.error}
-  //       // onChange={changeHandler}
-  //       // onBlur={blurHandler}
-  //       // type={props.type}
-  //       // label={props.label}
-  //       // variant={props.variant}
-  //     />
-  //   ) : (
-  //     <input //Checkbox TEST
-  //       id={props.id}
-  //       type={props.type}
-  //       onChange={changeHandler}
-  //       onBlur={blurHandler}
-  //       value={props.value}
-  //     />
-  //   );
   let element;
 
   if (props.element === "input") {

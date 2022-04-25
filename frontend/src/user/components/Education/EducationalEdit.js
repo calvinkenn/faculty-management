@@ -107,17 +107,19 @@ const EducationalEdit = (props) => {
           initialValue={formState.inputs.school.value}
           initialValid={formState.inputs.school.isValid}
         />
-        <Input
-          element="input"
-          id="degree"
-          type="text"
-          label="Degree"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.degree.value}
-          initialValid={formState.inputs.degree.isValid}
-        />
+        {formState.inputs.level.value === "College" && (
+          <Input
+            element="input"
+            id="degree"
+            type="text"
+            label="Degree"
+            validators={[VALIDATOR_OPTIONAL()]}
+            errorText="Invalid Email"
+            onInput={inputHandler}
+            initialValue={formState.inputs.degree.value}
+            initialValid={formState.inputs.degree.isValid}
+          />
+        )}
         <Input
           element="input"
           id="fromDate"

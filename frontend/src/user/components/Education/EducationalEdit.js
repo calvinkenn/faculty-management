@@ -88,7 +88,8 @@ const EducationalEdit = (props) => {
             "Junior Highschool",
             "Senior HighSchool",
             "College",
-            "Vocational",
+            "Vocational/Trade Course",
+            "Graduate Study",
           ]}
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
@@ -159,8 +160,9 @@ const EducationalEdit = (props) => {
             <div className="box">
               <TextField
                 name="awards"
+                id="awards"
                 type="text"
-                placeholder="Awards"
+                label="Academic Honors"
                 value={x.awards}
                 onChange={(e) => handleInputChange(e, i)}
               />

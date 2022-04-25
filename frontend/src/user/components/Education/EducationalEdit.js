@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../../shared/components/FormElements/Button";
 
 import Input from "../../../shared/components/FormElements/Input";
@@ -75,6 +75,18 @@ const EducationalEdit = (props) => {
     event.preventDefault();
   };
 
+  let degree;
+
+  if (
+    formState.inputs.level.value === "College" ||
+    formState.inputs.level.value === "Vocational/Trade Course" ||
+    formState.inputs.level.value === "Graduate Study"
+  ) {
+    degree = true;
+  } else {
+    degree = false;
+  }
+
   return (
     <React.Fragment>
       <form onSubmit={submitHandler}>
@@ -108,7 +120,7 @@ const EducationalEdit = (props) => {
           initialValue={formState.inputs.school.value}
           initialValid={formState.inputs.school.isValid}
         />
-        {formState.inputs.level.value === "College" && (
+        {degree && (
           <Input
             element="input"
             id="degree"

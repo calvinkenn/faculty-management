@@ -5,6 +5,8 @@ import Button from "../../../shared/components/FormElements/Button";
 import "./EducationalItem.css";
 
 const EducationalItem = (props) => {
+
+  console.log(props.awards);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const showDeleteWarningHandler = () => {
@@ -46,15 +48,15 @@ const EducationalItem = (props) => {
       <div className="educational-container">
         <div className="educational-container__data">
           <div>Level: {props.level}</div>
-          <div>School: {props.schoolName}</div>
-          <div>Degree: {props.degree}</div>
-          <div>From: {props.from}</div>
-          <div>To: {props.to}</div>
-          <div>Year Graduated: {props.yearGraduated}</div>
+          <div>School: {props.school}</div>
+          {(props.degree ? <div>Degree: {props.degree}</div> : '')}
+          <div>Year Attended: {props.from}</div>
+          <div>Year Graduated: {props.to}</div>
+          <div>School Address: {props.address}</div>
           <div>
             Awards:
             {props.awards.map((award) => (
-              <div>{award}</div>
+              <div>{award.awards}</div>
             ))}
           </div>
         </div>

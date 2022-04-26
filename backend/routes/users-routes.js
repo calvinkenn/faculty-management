@@ -16,9 +16,12 @@ router.post(
 );
 
 router.post('/login', userControllers.login);
-router.patch('/editBasicInfo', userControllers.editBasicInfo);
-router.patch('/editContactInfo', userControllers.editContactInfo);
+
+router.patch('/editBasicInfo', checkAuth, userControllers.editBasicInfo);
+router.patch('/editContactInfo', checkAuth, userControllers.editContactInfo);
 router.post('/userData',checkAuth, userControllers.getuserData);
+router.post('/addEducation', userControllers.addEducation);
+router.post('/getUserEducation', userControllers.getUserEducation);
 
 
 

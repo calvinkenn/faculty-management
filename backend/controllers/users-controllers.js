@@ -5,7 +5,10 @@ const HttpError = require("../models/http-error");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const Admin = require('../models/admin');
+const Education = require("../models/education");
 const jwt = require("jsonwebtoken");
+const { default: mongoose } = require("mongoose");
+
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -265,8 +268,46 @@ const editContactInfo = async (req, res, next) => {
   res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
 };
 
+const addEducation = async (req, res ,next) =>{
+  const {level, school, degree, fromDate, toDate, awards, userId,address} =  req.body;
+  
+
+  let user = await User.findById(userId);
+
+  const newEducation = new Education({
+    level,
+    school,
+    degree,
+    fromDate,
+    toDate,
+    awards :awards,
+    address,
+    user : userId
+  });
+  const sess = await  mongoose.startSession();
+  sess.startTransaction();
+  await newEducation.save({session : sess});
+  user.education.push(newEducation);
+  await user.save({session: sess});
+  sess.commitTransaction();
+
+  const userEducation = await Education.find({userId : userId});
+
+  res.json({userEducation :userEducation})
+
+};
+const getUserEducation = async (req, res, next) =>{
+  const {userId} = req.body;
+
+  const userEducation = await Education.find({userId : userId});
+
+  res.json({userEducation: userEducation})
+};
+
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
 exports.editBasicInfo = editBasicInfo;
 exports.editContactInfo = editContactInfo;
+exports.addEducation = addEducation;
+exports.getUserEducation = getUserEducation;

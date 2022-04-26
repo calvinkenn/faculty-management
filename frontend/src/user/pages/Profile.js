@@ -160,6 +160,7 @@ const Profile = (props) => {
           {isMenuActive.education && (
             <EducationalBackground
               isAddMode={isAddMode}
+              setIsAddMode = {setIsAddMode}
               isEditMode={isEditMode}
               updateEditModeState={editModeHandler}
               updateAddModeState={addModeHandler}

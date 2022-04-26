@@ -41,8 +41,7 @@ const userSchema = mongoose.Schema({
 
   //for account access
   permission : { type: String, default : 'pending'},
+  education : [{type: mongoose.Types.ObjectId, required : true, ref : 'Education'}],
 });
-
-userSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model("User", userSchema);

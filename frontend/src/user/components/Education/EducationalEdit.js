@@ -12,7 +12,7 @@ import {
 import "../../components/EditForm.css";
 
 const EducationalEdit = (props) => {
-  const [inputList, setInputList] = useState([{ awards: "" }]);
+  const [inputList, setInputList] = useState([{ awards: " " }]);
   const [formState, inputHandler, setFormData] = useForm(
     {
       level: {
@@ -35,7 +35,7 @@ const EducationalEdit = (props) => {
         value: "",
         isValid: false,
       },
-      yearGraduated: {
+      address: {
         value: "",
         isValid: false,
       },
@@ -69,11 +69,32 @@ const EducationalEdit = (props) => {
     setInputList([...inputList, { awards: "" }]);
   };
 
-  const submitAddHandler = (event) => {
+  const submitAddHandler =  async (event) => {
     //For Adding Data
-    console.log(inputList);
-    console.log("clicked");
+    console.log(typeof inputList);
+
+    let arrayList = inputList.map((list) =>list.awards);
+    console.log(arrayList);
+
+    const storedData = JSON.parse( sessionStorage.getItem('userData'));
     event.preventDefault();
+    const response = await fetch('http://localhost:5000/api/users/addEducation',{
+      method : "POST",
+      headers : {"Content-Type" : "application/json"},
+      body : JSON.stringify({
+        level: formState.inputs.level.value,
+        school : formState.inputs.school.value,
+        degree : formState.inputs.degree.value,
+        fromDate : formState.inputs.fromDate.value,
+        toDate : formState.inputs.toDate.value,
+        awards : inputList,
+        address : formState.inputs.address.value,
+        userId : storedData.userId
+      }),
+    });
+    const responseData = await response.json();
+    props.setUserData(responseData.userEducation);
+    props.updateAddModeState();
   };
 
   const submitEditHandler = (event) => {
@@ -165,14 +186,14 @@ const EducationalEdit = (props) => {
         />
         <Input
           element="input"
-          id="yearGraduated"
+          id="address"
           type="text"
-          label="Year Graduated"
+          label="School Address"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.yearGraduated.value}
-          initialValid={formState.inputs.yearGraduated.isValid}
+          initialValue={formState.inputs.address.value}
+          initialValid={formState.inputs.address.isValid}
         />
         <br />
         {inputList.map((x, i) => {

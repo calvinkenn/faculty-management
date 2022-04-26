@@ -304,6 +304,14 @@ const getUserEducation = async (req, res, next) =>{
   res.json({userEducation: userEducation})
 };
 
+const getEditEducation = async (req, res, next) =>{
+
+  const {educId} = req.body;
+
+  const getEditEducation = await Education.findById(educId)
+  res.json({editData: getEditEducation});
+}
+
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
@@ -311,3 +319,4 @@ exports.editBasicInfo = editBasicInfo;
 exports.editContactInfo = editContactInfo;
 exports.addEducation = addEducation;
 exports.getUserEducation = getUserEducation;
+exports.getEditEducation = getEditEducation;

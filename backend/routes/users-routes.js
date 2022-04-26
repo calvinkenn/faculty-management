@@ -22,7 +22,7 @@ router.patch('/editContactInfo', checkAuth, userControllers.editContactInfo);
 router.post('/userData',checkAuth, userControllers.getuserData);
 router.post('/addEducation', userControllers.addEducation);
 router.post('/getUserEducation', userControllers.getUserEducation);
-
+router.post('/getEditEducation', userControllers.getEditEducation);
 
 
 

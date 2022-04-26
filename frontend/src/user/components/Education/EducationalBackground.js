@@ -36,8 +36,15 @@ const DUMMY_DATA = [
 
 const EducationalBackground = (props) => {
   const [userData, setUserData] = useState([]);
-  const editModeHandler = () => {
+  const [editData, setEditData] = useState();
+
+  const setId = (editData) => {
+    setEditData(editData)
+  }
+
+  const editModeHandler = (editData) => {
     props.updateEditModeState(true);
+    setId(editData);
   };
 
   //to get education
@@ -55,12 +62,12 @@ const EducationalBackground = (props) => {
       setUserData(responseData.userEducation);
     };
     sendRequest();
-  }, []);
+  }, [props.isAddMode, props.isEditMode]);
 
   if (props.isAddMode) {
     return <EducationalEdit addingItem={true} updateAddModeState = {props.updateAddModeState} setUserData = {setUserData} />;
   } else if (props.isEditMode) {
-    return <EducationalEdit addingItem={false} />;
+    return <EducationalEdit addingItem={false} editData = {editData} />;
   } else {
     return (
       <EducationalList

@@ -12,31 +12,34 @@ import {
 import "../../components/EditForm.css";
 
 const EducationalEdit = (props) => {
+
+
+
   const [inputList, setInputList] = useState([{ awards: " " }]);
   const [formState, inputHandler, setFormData] = useForm(
     {
       level: {
-        value: "",
+        value: props.editData? props.editData.level : "",
         isValid: false,
       },
       school: {
-        value: "",
+        value: props.editData? props.editData.school : "",
         isValid: false,
       },
       degree: {
-        value: "",
+        value: props.editData? props.editData.degree : "",
         isValid: false,
       },
       fromDate: {
-        value: "",
+        value: props.editData? props.editData.fromDate : "",
         isValid: false,
       },
       toDate: {
-        value: "",
+        value: props.editData? props.editData.toDate : "",
         isValid: false,
       },
       address: {
-        value: "",
+        value: props.editData? props.editData.address : "",
         isValid: false,
       },
       awards: {

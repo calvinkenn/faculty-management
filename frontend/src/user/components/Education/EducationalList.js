@@ -20,6 +20,7 @@ const EducationalList = (props) => {
           address = {item.address}
           to={item.toDate}
           awards = {item.awards}
+          educId = {item._id}
         />
       ))}
     </div>

@@ -6,7 +6,6 @@ import "./EducationalItem.css";
 
 const EducationalItem = (props) => {
 
-  console.log(props.awards);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const showDeleteWarningHandler = () => {

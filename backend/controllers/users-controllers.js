@@ -291,7 +291,7 @@ const addEducation = async (req, res ,next) =>{
   await user.save({session: sess});
   sess.commitTransaction();
 
-  const userEducation = await Education.find({userId : userId});
+  const userEducation = await Education.find({user : userId});
 
   res.json({userEducation :userEducation})
 
@@ -299,7 +299,7 @@ const addEducation = async (req, res ,next) =>{
 const getUserEducation = async (req, res, next) =>{
   const {userId} = req.body;
 
-  const userEducation = await Education.find({userId : userId});
+  const userEducation = await Education.find({user : userId});
 
   res.json({userEducation: userEducation})
 };

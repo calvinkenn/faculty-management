@@ -6,6 +6,8 @@ import NavLinks from './NavLinks';
 // import SideDrawer from './SideDrawer';
 // import Backdrop from '../UIElements/Backdrop';
 import './MainNavigation.css';
+import bulsuLogo from "../../../assets/Image/bulsu.png";
+import cictLogo from "../../../assets/Image/cict.png";
 
 const MainNavigation = props => {
   // const [drawerIsOpen, setDrawerIsOpen] = useState(false);
@@ -37,7 +39,15 @@ const MainNavigation = props => {
           <span />
         </button> */}
         <h1 className="main-navigation__title">
-          <Link to="/profile">LOGO</Link>
+          <Link to="/profile">
+            <div className='nav-logo-main-cont'>
+              <img src={bulsuLogo} />
+              <img src={cictLogo} />
+            </div>
+            <div className='nav-title-cont'>
+              <h4>College of Information and Communications Technology</h4>
+            </div>
+          </Link>
         </h1>
         <nav className="main-navigation__header-nav">
           <NavLinks />

@@ -18,12 +18,16 @@
 }
 
 .main-navigation__title {
-  color: white;
+  width: 100%;
+  max-width: 90%;
+  color: #121212;
 }
 
 .main-navigation__title a {
   text-decoration: none;
-  color: white;
+  color: #121212;
+  display: flex;
+  align-items: center;
 }
 
 .main-navigation__header-nav {
@@ -32,6 +36,23 @@
 
 .main-navigation__drawer-nav {
   height: 100%;
+}
+
+.nav-logo-main-cont{
+  width: 100%;
+  max-width: 3em;
+  display: flex;
+  align-items: center;
+  margin-right: 1%;
+}
+
+.nav-logo-main-cont img{
+  width: 100%;
+  max-width: 50%;
+}
+
+.nav-title-cont h4{
+  font-size: 1.5vw;
 }
 
 @media (min-width: 768px) {

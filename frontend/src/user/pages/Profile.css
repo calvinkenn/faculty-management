@@ -1,11 +1,50 @@
+.user-main{
+  display: flex;
+}
+
+.user-main-container{
+  height: 100vh;
+  width: calc(100% - 60px);
+}
+
+.user-side-nav{
+  height: 100vh;
+  width: 60px;
+  background-color: #121212;
+  z-index: 6;
+}
+
 .profile-container {
-  margin-top: 5rem;
+  /* margin-top: 5rem;
   border: 1px solid black;
   width: 100%;
   padding: 0;
   text-align: left;
   display: flex;
+  box-sizing: border-box; */
+  
+  /* margin-top: 2%; */
+  /* border: 1px solid black; */
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  display: flex;
   box-sizing: border-box;
+  margin: 50px 0;
+  background-color: #fbfbfb;
+  height: calc(100vh - 50px);
+}
+
+.content-container{
+  width: 75%;
+  height: 85vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: #99999938 0 0 15px 2px;
 }
 
 .profile-container ul {

@@ -67,11 +67,15 @@ const TopActionBar = (props) => {
           {!isEditMode && props.inContactInformation && (
             <li onClick={props.updateEditModeState}>Edit</li>
           )}
+          {!isEditMode && props.inAccountInformation && (
+            <li onClick={props.updateEditModeState}>Edit</li>
+          )}
           {!isAddMode &&
             !isEditMode &&
             !props.inOverview &&
             !props.inBasicInformation &&
-            !props.inContactInformation && (
+            !props.inContactInformation &&
+            !props.inAccountInformation && (
               <li onClick={props.updateAddModeState}>Add</li>
             )}
           {isEditMode && !isAddMode && (

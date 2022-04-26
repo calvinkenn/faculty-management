@@ -14,9 +14,11 @@ import TopActionBar from "../components/TopActionBar";
 import ContactInfo from "../components/ContactInformation/ContactInfo";
 import { AuthContext } from "../../shared/context/auth-context";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
+import AccountInfo from "../components/AccountInformation/AccountInfo";
 
 const menu = {
   overview: true,
+  accountInformation: false,
   basicInformation: false,
   contactInformation: false,
   education: false,
@@ -99,6 +101,12 @@ const Profile = (props) => {
                   Overview
                 </li>
                 <li
+                  className={isMenuActive.accountInformation ? "active" : ""}
+                  onClick={() => menuChangeHandler("accountInformation")}
+                >
+                  Account Information
+                </li>
+                <li
                   className={isMenuActive.basicInformation ? "active" : ""}
                   onClick={() => menuChangeHandler("basicInformation")}
                 >
@@ -139,6 +147,7 @@ const Profile = (props) => {
             <div className="content-container">
               <TopActionBar
                 inOverview={isMenuActive.overview}
+                inAccountInformation={isMenuActive.accountInformation}
                 inBasicInformation={isMenuActive.basicInformation}
                 inContactInformation={isMenuActive.contactInformation}
                 inEducation={isMenuActive.education}
@@ -148,6 +157,13 @@ const Profile = (props) => {
                 isAddMode={isAddMode}
               />
               {isMenuActive.overview && <Overview userData={userData} />}
+              {isMenuActive.accountInformation && (
+                <AccountInfo
+                  isEditMode={isEditMode}
+                  setEditMode={updateState}
+                  userData={userData}
+                />
+              )}
               {isMenuActive.basicInformation && (
                 <BasicInfo
                   isEditMode={isEditMode}

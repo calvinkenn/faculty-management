@@ -12,34 +12,40 @@ import {
 import "../../components/EditForm.css";
 
 const EducationalEdit = (props) => {
+  const [inputList, setInputList] = useState([{ awards: "" }]);
 
+  useEffect(() => {
+    if (props.editData) {
+      setInputList(props.editData.awards); //Set inputList to awards data
+    }
+  }, []);
 
+  console.log(inputList);
 
-  const [inputList, setInputList] = useState([{ awards: " " }]);
   const [formState, inputHandler, setFormData] = useForm(
     {
       level: {
-        value: props.editData? props.editData.level : "",
+        value: props.editData ? props.editData.level : "",
         isValid: false,
       },
       school: {
-        value: props.editData? props.editData.school : "",
+        value: props.editData ? props.editData.school : "",
         isValid: false,
       },
       degree: {
-        value: props.editData? props.editData.degree : "",
+        value: props.editData ? props.editData.degree : "",
         isValid: false,
       },
       fromDate: {
-        value: props.editData? props.editData.fromDate : "",
+        value: props.editData ? props.editData.fromDate : "",
         isValid: false,
       },
       toDate: {
-        value: props.editData? props.editData.toDate : "",
+        value: props.editData ? props.editData.toDate : "",
         isValid: false,
       },
       address: {
-        value: props.editData? props.editData.address : "",
+        value: props.editData ? props.editData.address : "",
         isValid: false,
       },
       awards: {
@@ -56,7 +62,6 @@ const EducationalEdit = (props) => {
     const list = [...inputList];
     list[index][name] = value;
     setInputList(list);
-    console.log(formState.inputs.awards.value);
   };
 
   // handle click event of the Remove button
@@ -72,29 +77,32 @@ const EducationalEdit = (props) => {
     setInputList([...inputList, { awards: "" }]);
   };
 
-  const submitAddHandler =  async (event) => {
+  const submitAddHandler = async (event) => {
     //For Adding Data
     console.log(typeof inputList);
 
-    let arrayList = inputList.map((list) =>list.awards);
+    let arrayList = inputList.map((list) => list.awards);
     console.log(arrayList);
 
-    const storedData = JSON.parse( sessionStorage.getItem('userData'));
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
     event.preventDefault();
-    const response = await fetch('http://localhost:5000/api/users/addEducation',{
-      method : "POST",
-      headers : {"Content-Type" : "application/json"},
-      body : JSON.stringify({
-        level: formState.inputs.level.value,
-        school : formState.inputs.school.value,
-        degree : formState.inputs.degree.value,
-        fromDate : formState.inputs.fromDate.value,
-        toDate : formState.inputs.toDate.value,
-        awards : inputList,
-        address : formState.inputs.address.value,
-        userId : storedData.userId
-      }),
-    });
+    const response = await fetch(
+      "http://localhost:5000/api/users/addEducation",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          level: formState.inputs.level.value,
+          school: formState.inputs.school.value,
+          degree: formState.inputs.degree.value,
+          fromDate: formState.inputs.fromDate.value,
+          toDate: formState.inputs.toDate.value,
+          awards: inputList,
+          address: formState.inputs.address.value,
+          userId: storedData.userId,
+        }),
+      }
+    );
     const responseData = await response.json();
     props.setUserData(responseData.userEducation);
     props.updateAddModeState();
@@ -199,6 +207,7 @@ const EducationalEdit = (props) => {
           initialValid={formState.inputs.address.isValid}
         />
         <br />
+
         {inputList.map((x, i) => {
           return (
             <div className="box">

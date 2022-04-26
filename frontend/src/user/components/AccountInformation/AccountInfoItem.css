@@ -1,0 +1,10 @@
+.account-container {
+    width: 100%;
+    display: flex;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.account-container__data {
+    width: 30%;
+}

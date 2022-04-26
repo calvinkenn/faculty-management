@@ -8,6 +8,7 @@ const TrainingList = (props) => {
     <div className="training-list">
       {props.list.map((training) => (
         <TrainingItem
+          setIsEditModeHandler={props.setIsEditModeHandler}
           title={training.title}
           type={training.type}
           from={training.from}

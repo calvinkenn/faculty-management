@@ -28,10 +28,26 @@ const DUMMY_DATA = [
 ];
 
 const WorkExperience = (props) => {
+  const editModeHandler = () => {
+    props.updateEditModeState(true);
+  };
+
   if (props.isAddMode) {
-    return <WorkExperienceEdit />;
+    return (
+      <WorkExperienceEdit
+        addingItem={true}
+        updateAddModeState={props.updateAddModeState}
+      />
+    );
+  } else if (props.isEditMode) {
+    return <WorkExperienceEdit addingItem={false} />;
   } else {
-    return <WorkExperienceList items={DUMMY_DATA} />;
+    return (
+      <WorkExperienceList
+        setIsEditModeHandler={editModeHandler}
+        items={DUMMY_DATA}
+      />
+    );
   }
 };
 

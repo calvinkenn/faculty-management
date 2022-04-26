@@ -15,6 +15,10 @@ const TrainingItem = (props) => {
     setShowConfirmModal(false);
   };
 
+  const editModeHandler = () => {
+    props.setIsEditModeHandler(true);
+  };
+
   const confirmDeleteHandler = () => {
     setShowConfirmModal(false);
     console.log("DELETING...");
@@ -54,7 +58,7 @@ const TrainingItem = (props) => {
           <img src={props.certificate} alt={props.title} />
         </div>
         <div className="training-container__actions">
-          <Button>Edit</Button>
+          <Button onClick={editModeHandler}>Edit</Button>
           <Button danger onClick={showDeleteWarningHandler}>
             Delete
           </Button>

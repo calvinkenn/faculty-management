@@ -24,12 +24,26 @@ const DUMMY_DATA = [
 ];
 
 const CivilService = (props) => {
-  const [isEditMode, setIsEditMode] = useState(false);
+  const editModeHandler = () => {
+    props.updateEditModeState(true);
+  };
 
   if (props.isAddMode) {
-    return <CivilServiceEdit isEditMode={isEditMode} />;
+    return (
+      <CivilServiceEdit
+        addingItem={true}
+        updateAddModeState={props.updateAddModeState}
+      />
+    );
+  } else if (props.isEditMode) {
+    return <CivilServiceEdit addingItem={false} />;
   } else {
-    return <CivilServiceList items={DUMMY_DATA} />;
+    return (
+      <CivilServiceList
+        setIsEditModeHandler={editModeHandler}
+        items={DUMMY_DATA}
+      />
+    );
   }
 };
 

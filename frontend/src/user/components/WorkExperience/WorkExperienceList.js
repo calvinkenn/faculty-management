@@ -8,6 +8,7 @@ const WorkExperienceList = (props) => {
     <div className="work-list">
       {props.items.map((item) => (
         <WorkExperienceItem
+          setIsEditModeHandler={props.setIsEditModeHandler}
           company={item.company}
           position={item.position}
           department={item.department}

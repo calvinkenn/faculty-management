@@ -15,6 +15,10 @@ const CivilServiceItem = (props) => {
     setShowConfirmModal(false);
   };
 
+  const editModeHandler = () => {
+    props.setIsEditModeHandler(true);
+  };
+
   const confirmDeleteHandler = () => {
     setShowConfirmModal(false);
     console.log("DELETING...");
@@ -50,7 +54,7 @@ const CivilServiceItem = (props) => {
           <div>License Validity: {props.licenseValidity}</div>
         </div>
         <div className="civil-container__actions">
-          <Button>Edit</Button>
+          <Button onClick={editModeHandler}>Edit</Button>
           <Button danger onClick={showDeleteWarningHandler}>
             Delete
           </Button>

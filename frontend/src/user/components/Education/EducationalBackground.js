@@ -40,7 +40,6 @@ const EducationalBackground = (props) => {
     props.updateEditModeState(true);
   };
 
-
   //to get education
   useEffect(() => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
@@ -57,6 +56,7 @@ const EducationalBackground = (props) => {
     };
     sendRequest();
   }, []);
+
   if (props.isAddMode) {
     return <EducationalEdit addingItem={true} updateAddModeState = {props.updateAddModeState} setUserData = {setUserData} />;
   } else if (props.isEditMode) {

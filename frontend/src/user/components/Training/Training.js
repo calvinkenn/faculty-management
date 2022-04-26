@@ -30,10 +30,23 @@ const DUMMY_DATA = [
 ];
 
 const Training = (props) => {
+  const editModeHandler = () => {
+    props.updateEditModeState(true);
+  };
+
   if (props.isAddMode) {
-    return <TrainingEdit />;
+    return (
+      <TrainingEdit
+        addingItem={true}
+        updateAddModeState={props.updateAddModeState}
+      />
+    );
+  } else if (props.isEditMode) {
+    return <TrainingEdit addingItem={false} />;
   } else {
-    return <TrainingList list={DUMMY_DATA} />;
+    return (
+      <TrainingList setIsEditModeHandler={editModeHandler} list={DUMMY_DATA} />
+    );
   }
 };
 

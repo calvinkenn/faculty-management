@@ -15,7 +15,6 @@ import ContactInfo from "../components/ContactInformation/ContactInfo";
 import { AuthContext } from "../../shared/context/auth-context";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 
-
 const menu = {
   overview: true,
   basicInformation: false,
@@ -82,9 +81,7 @@ const Profile = (props) => {
     <React.Fragment>
       <div className="user-main">
         <div className="user-side-nav">
-          <div className="side-nav-menu">
-            {/* <MenuIcon /> */}
-          </div>
+          <div className="side-nav-menu">{/* <MenuIcon /> */}</div>
         </div>
         <div className="user-main-container">
           <SuccessModal success={success} onClear={clearSuccess} />
@@ -168,23 +165,43 @@ const Profile = (props) => {
               {isMenuActive.education && (
                 <EducationalBackground
                   isAddMode={isAddMode}
-                  setIsAddMode = {setIsAddMode}
+                  setIsAddMode={setIsAddMode}
                   isEditMode={isEditMode}
                   updateEditModeState={editModeHandler}
                   updateAddModeState={addModeHandler}
                 />
               )}
-              {isMenuActive.civilService && <CivilService isAddMode={isEditMode} />}
-              {isMenuActive.workExperience && (
-                <WorkExperience isAddMode={isEditMode} />
+              {isMenuActive.civilService && (
+                <CivilService
+                  isAddMode={isAddMode}
+                  setIsAddMode={setIsAddMode}
+                  isEditMode={isEditMode}
+                  updateEditModeState={editModeHandler}
+                  updateAddModeState={addModeHandler}
+                />
               )}
-              {isMenuActive.training && <Training isAddMode={isEditMode} />}
+              {isMenuActive.workExperience && (
+                <WorkExperience
+                  isAddMode={isAddMode}
+                  setIsAddMode={setIsAddMode}
+                  isEditMode={isEditMode}
+                  updateEditModeState={editModeHandler}
+                  updateAddModeState={addModeHandler}
+                />
+              )}
+              {isMenuActive.training && (
+                <Training
+                  isAddMode={isAddMode}
+                  setIsAddMode={setIsAddMode}
+                  isEditMode={isEditMode}
+                  updateEditModeState={editModeHandler}
+                  updateAddModeState={addModeHandler}
+                />
+              )}
             </div>
           </div>
         </div>
       </div>
-      
-
     </React.Fragment>
   );
 };

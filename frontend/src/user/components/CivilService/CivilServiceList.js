@@ -8,6 +8,7 @@ const CivilServiceList = (props) => {
     <div className="training-list">
       {props.items.map((item) => (
         <CivilServiceItem
+          setIsEditModeHandler={props.setIsEditModeHandler}
           career={item.career}
           rating={item.rating}
           date={item.date}

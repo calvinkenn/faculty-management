@@ -13,20 +13,57 @@ import "../../components/EditForm.css";
 const WorkExperienceEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm(
     {
-      email: {
+      company: {
         value: "",
         isValid: false,
       },
-      password: {
+      position: {
+        value: "",
+        isValid: false,
+      },
+      department: {
+        value: "",
+        isValid: false,
+      },
+      fromDate: {
+        value: "",
+        isValid: false,
+      },
+      toDate: {
+        value: "",
+        isValid: false,
+      },
+      salary: {
+        value: "",
+        isValid: false,
+      },
+      status: {
+        value: "",
+        isValid: false,
+      },
+      government: {
         value: "",
         isValid: false,
       },
     },
     false
   );
+
+  const submitAddHandler = (event) => {
+    //For Adding Data
+    console.log("clicked");
+    event.preventDefault();
+  };
+
+  const submitEditHandler = (event) => {
+    //For Editing Data
+    console.log("clicked");
+    event.preventDefault();
+  };
+
   return (
     <React.Fragment>
-      <form>
+      <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <Input
           element="input"
           id="company"
@@ -35,6 +72,8 @@ const WorkExperienceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.company.value}
+          initialValid={formState.inputs.company.isValid}
         />
         <Input
           element="input"
@@ -44,6 +83,8 @@ const WorkExperienceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.position.value}
+          initialValid={formState.inputs.position.isValid}
         />
         <Input
           element="input"
@@ -53,6 +94,8 @@ const WorkExperienceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.department.value}
+          initialValid={formState.inputs.department.isValid}
         />
         <Input
           element="input"
@@ -62,6 +105,8 @@ const WorkExperienceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.fromDate.value}
+          initialValid={formState.inputs.fromDate.isValid}
         />
         <Input
           element="input"
@@ -71,6 +116,8 @@ const WorkExperienceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.toDate.value}
+          initialValid={formState.inputs.toDate.isValid}
         />
         <Input
           element="input"
@@ -80,6 +127,8 @@ const WorkExperienceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.salary.value}
+          initialValid={formState.inputs.salary.isValid}
         />
         <Input
           element="input"
@@ -89,6 +138,8 @@ const WorkExperienceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.status.value}
+          initialValid={formState.inputs.status.isValid}
         />
         <Input
           element="input"
@@ -98,9 +149,13 @@ const WorkExperienceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.government.value}
+          initialValid={formState.inputs.government.isValid}
         />
+        <Button inverse type="submit">
+          {props.addingItem ? "Add" : "Save"}
+        </Button>
       </form>
-      <Button inverse>{props.isEditMode ? "Save" : "Add"}</Button>
     </React.Fragment>
   );
 };

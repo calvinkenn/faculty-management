@@ -13,20 +13,49 @@ import "../../components/EditForm.css";
 const CivilServiceEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm(
     {
-      email: {
+      career: {
         value: "",
         isValid: false,
       },
-      password: {
+      rating: {
+        value: "",
+        isValid: false,
+      },
+      date: {
+        value: "",
+        isValid: false,
+      },
+      placeOfExam: {
+        value: "",
+        isValid: false,
+      },
+      licenseNumber: {
+        value: "",
+        isValid: false,
+      },
+      licenseValidity: {
         value: "",
         isValid: false,
       },
     },
     false
   );
+
+  const submitAddHandler = (event) => {
+    //For Adding Data
+    console.log("clicked");
+    event.preventDefault();
+  };
+
+  const submitEditHandler = (event) => {
+    //For Editing Data
+    console.log("clicked");
+    event.preventDefault();
+  };
+
   return (
     <React.Fragment>
-      <form>
+      <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <Input
           element="input"
           id="career"
@@ -35,6 +64,8 @@ const CivilServiceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.career.value}
+          initialValid={formState.inputs.career.isValid}
         />
         <Input
           element="input"
@@ -44,6 +75,8 @@ const CivilServiceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.rating.value}
+          initialValid={formState.inputs.rating.isValid}
         />
         <Input
           element="input"
@@ -53,6 +86,8 @@ const CivilServiceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.date.value}
+          initialValid={formState.inputs.date.isValid}
         />
         <Input
           element="input"
@@ -62,6 +97,8 @@ const CivilServiceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.placeOfExam.value}
+          initialValid={formState.inputs.placeOfExam.isValid}
         />
         <Input
           element="input"
@@ -71,6 +108,8 @@ const CivilServiceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.licenseNumber.value}
+          initialValid={formState.inputs.licenseNumber.isValid}
         />
         <Input
           element="input"
@@ -80,9 +119,13 @@ const CivilServiceEdit = (props) => {
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
+          initialValue={formState.inputs.licenseValidity.value}
+          initialValid={formState.inputs.licenseValidity.isValid}
         />
+        <Button inverse type="submit">
+          {props.addingItem ? "Add" : "Save"}
+        </Button>
       </form>
-      <Button inverse>{props.isEditMode ? "Save" : "Add"}</Button>
     </React.Fragment>
   );
 };

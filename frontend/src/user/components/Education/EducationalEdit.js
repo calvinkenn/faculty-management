@@ -10,17 +10,19 @@ import {
   VALIDATOR_OPTIONAL,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 const EducationalEdit = (props) => {
   const [inputList, setInputList] = useState([{ awards: "" }]);
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  
 
   useEffect(() => {
     if (props.editData) {
       setInputList(props.editData.awards); //Set inputList to awards data
     }
   }, []);
-
-  console.log(inputList);
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -86,12 +88,12 @@ const EducationalEdit = (props) => {
 
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     event.preventDefault();
-    const response = await fetch(
+
+    const responseData = await sendRequest(
       "http://localhost:5000/api/users/addEducation",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+        "POST",
+        
+        JSON.stringify({
           level: formState.inputs.level.value,
           school: formState.inputs.school.value,
           degree: formState.inputs.degree.value,
@@ -101,18 +103,40 @@ const EducationalEdit = (props) => {
           address: formState.inputs.address.value,
           userId: storedData.userId,
         }),
-      }
+        { "Content-Type": "application/json" },
     );
-    const responseData = await response.json();
-    props.setUserData(responseData.userEducation);
+    props.setUserData(responseData.userEducation, responseData.message);
     props.updateAddModeState();
   };
 
-  const submitEditHandler = (event) => {
+  const submitEditHandler = async (event) => {
     //For Editing Data
-    console.log(inputList);
-    console.log("clicked");
     event.preventDefault();
+
+    let arrayList = inputList.map((list) => list.awards);
+
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    event.preventDefault();
+
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/updateEducation",
+        "PATCH",
+        
+        JSON.stringify({
+          level: formState.inputs.level.value,
+          school: formState.inputs.school.value,
+          degree: formState.inputs.degree.value,
+          fromDate: formState.inputs.fromDate.value,
+          toDate: formState.inputs.toDate.value,
+          awards: inputList,
+          address: formState.inputs.address.value,
+          educId: props.editData._id,
+          userId: storedData.userId,
+        }),
+        { "Content-Type": "application/json" },
+    );
+    props.setUserData(responseData.userEducation, responseData.message);
+    props.updateAddModeState();
   };
 
   let degree;
@@ -129,6 +153,7 @@ const EducationalEdit = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <Input
           element="select"

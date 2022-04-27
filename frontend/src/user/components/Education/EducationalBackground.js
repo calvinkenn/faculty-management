@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import SuccessModal from "../../../shared/components/UIElements/SuccessModal";
 
 import EducationalEdit from "./EducationalEdit";
 import EducationalList from "./EducationalList";
-
 const DUMMY_DATA = [
   //REPLACE WITH DATABASE
   {
@@ -37,6 +37,11 @@ const DUMMY_DATA = [
 const EducationalBackground = (props) => {
   const [userData, setUserData] = useState([]);
   const [editData, setEditData] = useState();
+  const [success, setSuccess] = useState();
+
+  const clearSuccess = () => {
+    setSuccess(null);
+  }
 
   const setId = (editData) => {
     setEditData(editData)
@@ -46,6 +51,11 @@ const EducationalBackground = (props) => {
     props.updateEditModeState(true);
     setId(editData);
   };
+
+  const setAddedData = (userData, success) =>{
+    setUserData(userData);
+    setSuccess(success);
+  }
 
   //to get education
   useEffect(() => {
@@ -65,17 +75,20 @@ const EducationalBackground = (props) => {
   }, [props.isAddMode, props.isEditMode]);
 
   if (props.isAddMode) {
-    return <EducationalEdit addingItem={true} updateAddModeState = {props.updateAddModeState} setUserData = {setUserData} />;
+    return <EducationalEdit addingItem={true} updateAddModeState = {props.updateAddModeState} setUserData = {setAddedData} />;
   } else if (props.isEditMode) {
-    return <EducationalEdit addingItem={false} editData = {editData} />;
+    return <EducationalEdit addingItem={false} editData = {editData} updateAddModeState = {props.updateEditModeState} setUserData = {setAddedData} />;
   } else {
     return (
+      <React.Fragment>
+      <SuccessModal success = {success} onClear = {clearSuccess}/>
       <EducationalList
         items={DUMMY_DATA}
         setIsEditModeHandler={editModeHandler}
         userData = {userData}
-        setUserData = {setUserData}
+        setUserData = {setAddedData}
       />
+      </React.Fragment>
     );
   }
 };

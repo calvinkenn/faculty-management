@@ -6,6 +6,16 @@ const User = require("../models/user");
 const Admin = require('../models/admin');
 const { findByIdAndUpdate } = require("../models/user");
 
+const getActiveUsers = async (req, res, next) =>{
+
+    const activeUsers = await User.find({permission : 'accepted'}, '-password');
+
+    if(!activeUsers){
+        return res.json({nousers : 'no users found'});
+    }
+    res.json({activeUsers :activeUsers});
+};
+
 
 const getPendingUsers = async (req, res, next) =>{
 
@@ -42,6 +52,7 @@ const acceptPendingUser = async(req,res,next) =>{
     }
 }
 
+exports.getActiveUsers = getActiveUsers;
 exports.getPendingUsers = getPendingUsers;
 exports.rejectPendingUser = rejectPendingUser;
 exports.acceptPendingUser = acceptPendingUser;

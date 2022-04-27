@@ -269,24 +269,19 @@ const editContactInfo = async (req, res, next) => {
   res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
 };
 
-<<<<<<< HEAD
-const addEducation = async (req, res, next) => {
-  const { level, school, degree, fromDate, toDate, awards, userId, address } =
-    req.body;
-=======
-const editAccountInfo = async (req, res, next) =>{
+const editAccountInfo = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const {userId, employeeNum, faculty, employmentType, email} = req.body;
+  const { userId, employeeNum, faculty, employmentType, email } = req.body;
   const user = await User.findByIdAndUpdate(userId, {
     employeeNum,
     faculty,
     employmentType,
-    email
+    email,
   });
   if (user) {
     updatedUser = await User.findById(userId);
@@ -294,24 +289,18 @@ const editAccountInfo = async (req, res, next) =>{
   res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
 };
 
-const accountChangePassword = async (req, res, next) =>{
-  const { userId, oldPassword, newPassword, confirmNewPassword} = req.body;
+const accountChangePassword = async (req, res, next) => {
+  const { userId, oldPassword, newPassword, confirmNewPassword } = req.body;
 
   const userPass = await User.findById(userId);
-    //hash user password for added website security
+  //hash user password for added website security
   isValidPassword = await bcrypt.compare(oldPassword, userPass.password);
   if (!isValidPassword) {
-    const error = new HttpError(
-      "Old password does not match!",
-      401
-    );
+    const error = new HttpError("Old password does not match!", 401);
     return next(error);
   }
-  if(newPassword !== confirmNewPassword){
-    const error = new HttpError(
-      "New passwords does not match!",
-      401
-    );
+  if (newPassword !== confirmNewPassword) {
+    const error = new HttpError("New passwords does not match!", 401);
     return next(error);
   }
   let hashedPassword;
@@ -325,14 +314,16 @@ const accountChangePassword = async (req, res, next) =>{
     return next(error);
   }
   const user = await User.findByIdAndUpdate(userId, {
-    password : hashedPassword
+    password: hashedPassword,
   });
-  res.status(200).json({ message: 'Password Changed Successfully', updatedUser: user });
-}
+  res
+    .status(200)
+    .json({ message: "Password Changed Successfully", updatedUser: user });
+};
 
-const addEducation = async (req, res ,next) =>{
-  const {level, school, degree, fromDate, toDate, awards, userId,address} =  req.body;
->>>>>>> ec3d5490e3ebb6d864d58a812d51327af8c98b06
+const addEducation = async (req, res, next) => {
+  const { level, school, degree, fromDate, toDate, awards, userId, address } =
+    req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(

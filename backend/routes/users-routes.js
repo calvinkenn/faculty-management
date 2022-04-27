@@ -19,6 +19,8 @@ router.post('/login', userControllers.login);
 
 router.patch('/editBasicInfo', checkAuth, userControllers.editBasicInfo);
 router.patch('/editContactInfo', checkAuth, userControllers.editContactInfo);
+router.patch('/editAccountInfo',userControllers.editAccountInfo);
+router.patch('/userChangePassword', userControllers.accountChangePassword);
 router.post('/userData',checkAuth, userControllers.getuserData);
 router.post('/addEducation', userControllers.addEducation);
 router.patch('/updateEducation', userControllers.updateEducation);

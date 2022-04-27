@@ -16,7 +16,7 @@ const AccountInfoEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       employeeNumber: {
-        value: props.userEdit.employeeNumber,
+        value: props.userEdit.employeeNum,
         isValid: true,
       },
       faculty: {
@@ -53,18 +53,15 @@ const AccountInfoEdit = (props) => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
       const responseData = await sendRequest(
-        "http://localhost:5000/api/users/editBasicInfo", //Change to account
+        "http://localhost:5000/api/users/editAccountInfo", //Change to account
         "PATCH",
         JSON.stringify({
           userId: storedData.userId,
           token: storedData.token,
-          employeeNumber: formState.inputs.employeeNumber.value,
+          employeeNum: formState.inputs.employeeNumber.value,
           faculty: formState.inputs.faculty.value,
           employmentType: formState.inputs.employmentType.value,
           email: formState.inputs.email.value,
-          // oldPassword: formState.inputs.oldPassword.value,
-          // newPassword: formState.inputs.newPassword.value,
-          // confirmNewPassword: formState.inputs.confirmNewPassword.value,
         }),
         {
           "Content-Type": "application/json",

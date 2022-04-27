@@ -42,6 +42,11 @@ const userSchema = mongoose.Schema({
   //for account access
   permission : { type: String, default : 'pending'},
   education : [{type: mongoose.Types.ObjectId, required : true, ref : 'Education'}],
+
+  //for employee type and faculty
+
+  faculty : { type: String, default: ""},
+  employmentType : {type : String, default: ""}
 });
 
 module.exports = mongoose.model("User", userSchema);

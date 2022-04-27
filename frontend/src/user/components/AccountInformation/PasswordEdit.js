@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 import { useForm } from "../../../shared/hooks/form-hook";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import {
@@ -12,7 +13,7 @@ import {
 import "../../components/EditForm.css";
 
 const PasswordEdit = (props) => {
-  const { error, sendRequest } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       oldPassword: {
@@ -32,16 +33,14 @@ const PasswordEdit = (props) => {
   );
 
   const submitHandler = async (event) => {
-    console.log("clicked");
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
       const responseData = await sendRequest(
-        "http://localhost:5000/api/users/editBasicInfo", //Change to account
+        "http://localhost:5000/api/users/userChangePassword", //Change to account
         "PATCH",
         JSON.stringify({
           userId: storedData.userId,
-          token: storedData.token,
           oldPassword: formState.inputs.oldPassword.value,
           newPassword: formState.inputs.newPassword.value,
           confirmNewPassword: formState.inputs.confirmNewPassword.value,
@@ -56,11 +55,12 @@ const PasswordEdit = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={submitHandler}>
         <Input
           element="input"
           id="oldPassword"
-          type="text"
+          type="password"
           label="Old Password"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
@@ -71,7 +71,7 @@ const PasswordEdit = (props) => {
         <Input
           element="input"
           id="newPassword"
-          type="text"
+          type="password"
           label="New Password"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
@@ -82,7 +82,7 @@ const PasswordEdit = (props) => {
         <Input
           element="input"
           id="confirmNewPassword"
-          type="text"
+          type="password"
           label="Confirm New Password"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"

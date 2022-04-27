@@ -17,7 +17,7 @@ const AccountInfo = (props) => {
       />
     );
   } else if (props.changePassMode) {
-    return <PasswordEdit />;
+    return <PasswordEdit setEditMode={props.setEditMode} />;
   } else {
     return (
       <AccountInfoItem
@@ -27,6 +27,7 @@ const AccountInfo = (props) => {
         faculty={props.userData.faculty}
         employmentType={props.userData.employmentType}
         email={props.userData.email}
+        
       />
     );
   }

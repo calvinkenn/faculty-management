@@ -2,9 +2,35 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./FacultyItem.css";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Card from "../../../shared/components/UIElements/Card";
+import Button from "../../../shared/components/FormElements/Button";
 
 const FacultyItem = (props) => {
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
+    useHttpClient();
+
+  const userDeactivateHandler = async (event) => {
+    event.preventDefault();
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:5000/api/admin/actionHandler",
+        "PATCH",
+        JSON.stringify({
+          userId: props.id,
+          permissionUpdate: "deactivated",
+        }),
+        { "Content-Type": "application/json" }
+      );
+      props.updatePendingUsers(
+        responseData.pendingUsers,
+        responseData.permission
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Card>
       <Link to={`/admin/profile/${props.userId}`}>
@@ -15,6 +41,7 @@ const FacultyItem = (props) => {
         <div>First Name: {props.firstName}</div>
         <div>Last Name: {props.lastName}</div>
       </Link>
+      <Button onClick={userDeactivateHandler}>Deactive Account</Button>
     </Card>
   );
 };

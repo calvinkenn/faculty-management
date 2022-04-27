@@ -1,0 +1,13 @@
+.container {
+    text-align: center;
+  }
+  
+  .container__image {
+    text-align: center;
+  }
+  
+  .container__image img {
+    width: 100px;
+    height: 100px;
+  }
+  

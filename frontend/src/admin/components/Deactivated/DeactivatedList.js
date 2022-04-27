@@ -1,26 +1,26 @@
 import React from "react";
 
-import ApplicationItem from "./ApplicationItem";
+import DeactivatedItem from "./DeactivatedItem";
 import "../list.css";
 
-const ApplicationList = (props) => {
+const DeactivatedList = (props) => {
   if(props.list.length === 0){
-    return <div>No pending users found</div>
+    return <div>No deactivated users found</div>
   }
   return (
     <div className="list">
       {props.list.map((application) => (
-        <ApplicationItem
+        <DeactivatedItem
           employeeNum={application.employeeNum}
           firstName={application.firstName}
           lastName={application.lastName}
-          date={application.date}
+          email={application.email}
           id = {application._id}
-          updatePendingUsers = {props.updatePendingUsers}
+          updateDeactivatedUsers  = {props.updateDeactivatedUsers }
         />
       ))}
     </div>
   );
 };
 
-export default ApplicationList;
+export default DeactivatedList;

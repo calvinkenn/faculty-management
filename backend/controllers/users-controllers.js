@@ -4,11 +4,10 @@ const HttpError = require("../models/http-error");
 
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
-const Admin = require('../models/admin');
+const Admin = require("../models/admin");
 const Education = require("../models/education");
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
-
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -26,8 +25,8 @@ const signup = async (req, res, next) => {
   let existingUser;
   try {
     existingUser = await User.findOne({ email: email });
-    if(!existingUser){
-      existingUser = await Admin.findOne({username: email})
+    if (!existingUser) {
+      existingUser = await Admin.findOne({ username: email });
     }
   } catch (err) {
     const error = new HttpError(
@@ -88,11 +87,10 @@ const login = async (req, res, next) => {
 
   //for admin
   try {
-    existingUser = await Admin.findOne({username : email});
+    existingUser = await Admin.findOne({ username: email });
 
-    if(existingUser || password === existingUser.password){
-      
-      let token = jwt.sign({ adminId: existingUser.id}, "superidol", {
+    if (existingUser || password === existingUser.password) {
+      let token = jwt.sign({ adminId: existingUser.id }, "superidol", {
         expiresIn: "1h",
       });
       return res.json({
@@ -101,9 +99,7 @@ const login = async (req, res, next) => {
         token: token,
       });
     }
-  }catch(err){
-
-  }
+  } catch (err) {}
   //check if user is existing
   try {
     existingUser = await User.findOne({ email: email });
@@ -132,14 +128,19 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-
-  if(existingUser.permission === 'pending'){
+  if (existingUser.permission === "pending") {
     const error = new HttpError(
       "Account not verified yet, please wait for admin to verify your account.",
       401
     );
     return next(error);
-  }else if (existingUser.permission === 'rejected'){
+  } else if (existingUser.permission === "deactivated") {
+    const error = new HttpError(
+      "Account access deactivated. if you think this was a mistake, please contact admin immediately.",
+      401
+    );
+    return next(error);
+  } else if (existingUser.permission === "rejected") {
     const error = new HttpError(
       "Account access rejected. if you think this was a mistake, please contact admin immediately.",
       401
@@ -268,8 +269,9 @@ const editContactInfo = async (req, res, next) => {
   res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
 };
 
-const addEducation = async (req, res ,next) =>{
-  const {level, school, degree, fromDate, toDate, awards, userId,address} =  req.body;
+const addEducation = async (req, res, next) => {
+  const { level, school, degree, fromDate, toDate, awards, userId, address } =
+    req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -277,46 +279,59 @@ const addEducation = async (req, res ,next) =>{
     );
   }
   let user = await User.findById(userId);
-  
+
   const newEducation = new Education({
     level,
     school,
     degree,
     fromDate,
     toDate,
-    awards :awards,
+    awards: awards,
     address,
-    user : userId
+    user: userId,
   });
-  const sess = await  mongoose.startSession();
+  const sess = await mongoose.startSession();
   sess.startTransaction();
-  await newEducation.save({session : sess});
+  await newEducation.save({ session: sess });
   user.education.push(newEducation);
-  await user.save({session: sess});
+  await user.save({ session: sess });
   sess.commitTransaction();
 
-  const userEducation = await Education.find({user : userId}).sort({toDate: 1});
-
-  res.status(200).json({ message: "Education Added", userEducation: userEducation });
-
-};
-const getUserEducation = async (req, res, next) =>{
-  const {userId} = req.body;
-
-  const userEducation = await Education.find({user : userId}).sort({
-    toDate : 1
+  const userEducation = await Education.find({ user: userId }).sort({
+    toDate: 1,
   });
-  res.json({userEducation: userEducation});
+
+  res
+    .status(200)
+    .json({ message: "Education Added", userEducation: userEducation });
+};
+const getUserEducation = async (req, res, next) => {
+  const { userId } = req.body;
+
+  const userEducation = await Education.find({ user: userId }).sort({
+    toDate: 1,
+  });
+  res.json({ userEducation: userEducation });
 };
 
-const getEditEducation = async (req, res, next) =>{
-  const {educId} = req.body;
+const getEditEducation = async (req, res, next) => {
+  const { educId } = req.body;
 
-  const getEditEducation = await Education.findById(educId)
-  res.json({editData: getEditEducation});
-}
-const updateEducation = async (req, res ,next) => {
-  const {level, school, degree, fromDate, toDate, awards, educId,address, userId} =  req.body;
+  const getEditEducation = await Education.findById(educId);
+  res.json({ editData: getEditEducation });
+};
+const updateEducation = async (req, res, next) => {
+  const {
+    level,
+    school,
+    degree,
+    fromDate,
+    toDate,
+    awards,
+    educId,
+    address,
+    userId,
+  } = req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -324,41 +339,44 @@ const updateEducation = async (req, res ,next) => {
     );
   }
 
-  let updateEducation = await Education.findByIdAndUpdate(educId,{
+  let updateEducation = await Education.findByIdAndUpdate(educId, {
     level,
     school,
     degree,
     fromDate,
     toDate,
-    awards : awards,
-    address
-  })
-
-  const newUpdate = await Education.find({user : userId}).sort({
-    toDate : 1
+    awards: awards,
+    address,
   });
-  if(updateEducation){
-    res.status(201).json({userEducation : newUpdate, message : 'Education Updated'});
+
+  const newUpdate = await Education.find({ user: userId }).sort({
+    toDate: 1,
+  });
+  if (updateEducation) {
+    res
+      .status(201)
+      .json({ userEducation: newUpdate, message: "Education Updated" });
   }
-  
-}
-const deleteEducation = async (req, res ,next) => {
-  const {educId, userId} = req.body
+};
+const deleteEducation = async (req, res, next) => {
+  const { educId, userId } = req.body;
 
   const education = await Education.findById(educId);
   const user = await User.findById(userId);
-  const sess = await  mongoose.startSession();
+  const sess = await mongoose.startSession();
   sess.startTransaction();
-  await education.remove({session : sess});
+  await education.remove({ session: sess });
   user.education.pull(education);
-  await user.save({session: sess});
+  await user.save({ session: sess });
   sess.commitTransaction();
 
-  const newUpdate = await Education.find({user : userId}).sort({
-    toDate : 1
+  const newUpdate = await Education.find({ user: userId }).sort({
+    toDate: 1,
   });
-  res.status(201).json({userEducation : newUpdate, message : 'Education Deleted'});
-}
+  res
+    .status(201)
+    .json({ userEducation: newUpdate, message: "Education Deleted" });
+};
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;

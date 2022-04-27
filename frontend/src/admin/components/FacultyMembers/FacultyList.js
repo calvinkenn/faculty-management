@@ -16,6 +16,7 @@ const FacultyList = (props) => {
           firstName={faculty.firstName}
           lastName={faculty.lastName}
           profilePic={"https://robohash.org/" + faculty.employeeNum}
+          id = {faculty._id}
         />
       ))}
     </div>

@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import profile from "../../assets/Image/Qw.png";
 import Overview from "../components/Overview/Overview";
@@ -34,6 +35,7 @@ const Profile = (props) => {
   const [isAddMode, setIsAddMode] = useState(false);
   const [userData, setUserData] = useState({});
   const [success, setSuccess] = useState();
+  const userIdByParams = useParams().userId;
 
   const editModeHandler = () => {
     setIsEditMode((prevState) => !prevState);
@@ -58,7 +60,7 @@ const Profile = (props) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId: storedData.userId,
+          userId: userIdByParams ? userIdByParams : storedData.userId,
           token: storedData.token,
         }),
       });
@@ -161,6 +163,8 @@ const Profile = (props) => {
                 <AccountInfo
                   isEditMode={isEditMode}
                   setEditMode={updateState}
+                  changePassMode={isAddMode}
+                  changePasswordHandler={addModeHandler}
                   userData={userData}
                 />
               )}

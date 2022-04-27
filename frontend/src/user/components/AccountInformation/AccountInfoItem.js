@@ -4,6 +4,10 @@ import Button from "../../../shared/components/FormElements/Button";
 import "./AccountInfoItem.css";
 
 const AccountInfoItem = (props) => {
+  const changePassHandler = () => {
+    props.changePasswordHandler();
+  };
+
   return (
     <div className="account-container">
       <div className="account-container__data">
@@ -11,7 +15,10 @@ const AccountInfoItem = (props) => {
         <div>Faculty: {props.faculty}</div>
         <div>Employment Type: {props.employmentType}</div>
         <div>Email: {props.email}</div>
-        <div>Password: ************</div>
+        <div>
+          Password: ************
+          <Button onClick={changePassHandler}>Change Pass</Button>
+        </div>
       </div>
     </div>
   );

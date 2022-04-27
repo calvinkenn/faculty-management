@@ -20,6 +20,8 @@ const Admin = (props) => {
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
 
+  const storedData = JSON.parse(sessionStorage.getItem("userData"));
+
   const menuChangeHandler = (menuName) => {
     const stateCopy = { ...menu };
     Object.keys(stateCopy).forEach((key) => (stateCopy[key] = false)); //Set All Button False

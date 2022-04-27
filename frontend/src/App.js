@@ -18,44 +18,48 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [userId, setUserId] = useState(false);
 
-  // const login = useCallback(() => {
-  //   setIsLoggedIn(true);
-  //   setIsAdmin(true);
-  // }, []);
-  const loginAsAdmin = useCallback((aid,token) => {
-    setToken(true);
+  const loginAsAdmin = useCallback((aid, token) => {
+    setToken(token);
     setIsAdmin(true);
-    sessionStorage.setItem('userData', JSON.stringify({adminId: aid, token:token}));
+    sessionStorage.setItem(
+      "userData",
+      JSON.stringify({ adminId: aid, token: token })
+    );
   }, []);
   const loginAsUser = useCallback((uid, token) => {
     setIsAdmin(false);
     setToken(token);
-    sessionStorage.setItem('userData', JSON.stringify({userId: uid, token:token}));
+    sessionStorage.setItem(
+      "userData",
+      JSON.stringify({ userId: uid, token: token })
+    );
     setUserId(uid);
   }, []);
 
   const login = useCallback((uid, token) => {
     setIsAdmin(false);
     setToken(token);
-    sessionStorage.setItem('userData', JSON.stringify({userId: uid, token:token}));
+    sessionStorage.setItem(
+      "userData",
+      JSON.stringify({ userId: uid, token: token })
+    );
     setUserId(uid);
   }, []);
 
   const logout = useCallback(() => {
     setToken(null);
-    sessionStorage.removeItem('userData');
+    sessionStorage.removeItem("userData");
   }, []);
 
-  useEffect(()=>{
-    const storedData = JSON.parse(sessionStorage.getItem('userData'));
+  useEffect(() => {
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
-    if(storedData && storedData.token){
-      if(storedData.adminId){
+    if (storedData && storedData.token) {
+      if (storedData.adminId) {
         loginAsAdmin(storedData.adminId, storedData.token);
-      }else{
+      } else {
         loginAsUser(storedData.userId, storedData.token);
       }
-      
     }
   }, [loginAsUser]);
   let routes;
@@ -75,7 +79,7 @@ const App = () => {
       routes = (
         <Routes>
           <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/:userID/profile" element={<Profile />} />
+          <Route path="/admin/profile/:userId" element={<Profile />} />
           <Route path="/" element={<Navigate to="/admin" replace />} />
         </Routes>
       );

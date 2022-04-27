@@ -11,38 +11,22 @@ import {
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 
-const AccountInfoEdit = (props) => {
+const PasswordEdit = (props) => {
   const { error, sendRequest } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
-      employeeNumber: {
-        value: props.userEdit.employeeNumber,
+      oldPassword: {
+        value: "",
         isValid: true,
       },
-      faculty: {
-        value: props.userEdit.faculty,
+      newPassword: {
+        value: "",
         isValid: true,
       },
-      employmentType: {
-        value: props.userEdit.employmentType,
+      confirmNewPassword: {
+        value: "",
         isValid: true,
       },
-      email: {
-        value: props.userEdit.email,
-        isValid: true,
-      },
-      // oldPassword: {
-      //   value: "",
-      //   isValid: true,
-      // },
-      // newPassword: {
-      //   value: "",
-      //   isValid: true,
-      // },
-      // confirmNewPassword: {
-      //   value: "",
-      //   isValid: true,
-      // },
     },
     false
   );
@@ -58,13 +42,9 @@ const AccountInfoEdit = (props) => {
         JSON.stringify({
           userId: storedData.userId,
           token: storedData.token,
-          employeeNumber: formState.inputs.employeeNumber.value,
-          faculty: formState.inputs.faculty.value,
-          employmentType: formState.inputs.employmentType.value,
-          email: formState.inputs.email.value,
-          // oldPassword: formState.inputs.oldPassword.value,
-          // newPassword: formState.inputs.newPassword.value,
-          // confirmNewPassword: formState.inputs.confirmNewPassword.value,
+          oldPassword: formState.inputs.oldPassword.value,
+          newPassword: formState.inputs.newPassword.value,
+          confirmNewPassword: formState.inputs.confirmNewPassword.value,
         }),
         {
           "Content-Type": "application/json",
@@ -78,52 +58,6 @@ const AccountInfoEdit = (props) => {
     <React.Fragment>
       <form onSubmit={submitHandler}>
         <Input
-          element="input"
-          id="employeeNumber"
-          type="text"
-          label="Employee Number"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.employeeNumber.value}
-          initialValid={formState.inputs.employeeNumber.isValid}
-        />
-        <Input
-          element="select"
-          id="faculty"
-          type="text"
-          label="Faculty"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={["BSIT", "BLIS", "ALLIED"]}
-          onInput={inputHandler}
-          initialValue={formState.inputs.faculty.value}
-          initialValid={formState.inputs.faculty.isValid}
-        />
-        <Input
-          element="select"
-          id="employmentType"
-          type="text"
-          label="Employment Type"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={["Full Time", "Part Time"]}
-          onInput={inputHandler}
-          initialValue={formState.inputs.employmentType.value}
-          initialValid={formState.inputs.employmentType.isValid}
-        />
-        <Input
-          element="input"
-          id="email"
-          type="text"
-          label="Email"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.email.value}
-          initialValid={formState.inputs.email.isValid}
-        />
-        {/* <Input
           element="input"
           id="oldPassword"
           type="text"
@@ -155,7 +89,7 @@ const AccountInfoEdit = (props) => {
           onInput={inputHandler}
           initialValue={formState.inputs.confirmNewPassword.value}
           initialValid={formState.inputs.confirmNewPassword.isValid}
-        /> */}
+        />
         <Button inverse type="submit">
           Save Info
         </Button>
@@ -164,4 +98,4 @@ const AccountInfoEdit = (props) => {
   );
 };
 
-export default AccountInfoEdit;
+export default PasswordEdit;

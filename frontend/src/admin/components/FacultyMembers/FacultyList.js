@@ -11,6 +11,7 @@ const FacultyList = (props) => {
     <div className="faculty-list">
       {props.list.map((faculty) => (
         <FacultyItem
+          userId={faculty._id}
           employeeNum={faculty.employeeNum}
           firstName={faculty.firstName}
           lastName={faculty.lastName}

@@ -270,10 +270,14 @@ const editContactInfo = async (req, res, next) => {
 
 const addEducation = async (req, res ,next) =>{
   const {level, school, degree, fromDate, toDate, awards, userId,address} =  req.body;
-  
-
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
   let user = await User.findById(userId);
-
+  
   const newEducation = new Education({
     level,
     school,
@@ -291,27 +295,70 @@ const addEducation = async (req, res ,next) =>{
   await user.save({session: sess});
   sess.commitTransaction();
 
-  const userEducation = await Education.find({user : userId});
+  const userEducation = await Education.find({user : userId}).sort({toDate: 1});
 
-  res.json({userEducation :userEducation})
+  res.status(200).json({ message: "Education Added", userEducation: userEducation });
 
 };
 const getUserEducation = async (req, res, next) =>{
   const {userId} = req.body;
 
-  const userEducation = await Education.find({user : userId});
-
-  res.json({userEducation: userEducation})
+  const userEducation = await Education.find({user : userId}).sort({
+    toDate : 1
+  });
+  res.json({userEducation: userEducation});
 };
 
 const getEditEducation = async (req, res, next) =>{
-
   const {educId} = req.body;
 
   const getEditEducation = await Education.findById(educId)
   res.json({editData: getEditEducation});
 }
+const updateEducation = async (req, res ,next) => {
+  const {level, school, degree, fromDate, toDate, awards, educId,address, userId} =  req.body;
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
 
+  let updateEducation = await Education.findByIdAndUpdate(educId,{
+    level,
+    school,
+    degree,
+    fromDate,
+    toDate,
+    awards : awards,
+    address
+  })
+
+  const newUpdate = await Education.find({user : userId}).sort({
+    toDate : 1
+  });
+  if(updateEducation){
+    res.status(201).json({userEducation : newUpdate, message : 'Education Updated'});
+  }
+  
+}
+const deleteEducation = async (req, res ,next) => {
+  const {educId, userId} = req.body
+
+  const education = await Education.findById(educId);
+  const user = await User.findById(userId);
+  const sess = await  mongoose.startSession();
+  sess.startTransaction();
+  await education.remove({session : sess});
+  user.education.pull(education);
+  await user.save({session: sess});
+  sess.commitTransaction();
+
+  const newUpdate = await Education.find({user : userId}).sort({
+    toDate : 1
+  });
+  res.status(201).json({userEducation : newUpdate, message : 'Education Deleted'});
+}
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
@@ -320,3 +367,5 @@ exports.editContactInfo = editContactInfo;
 exports.addEducation = addEducation;
 exports.getUserEducation = getUserEducation;
 exports.getEditEducation = getEditEducation;
+exports.updateEducation = updateEducation;
+exports.deleteEducation = deleteEducation;

@@ -21,6 +21,8 @@ router.patch('/editBasicInfo', checkAuth, userControllers.editBasicInfo);
 router.patch('/editContactInfo', checkAuth, userControllers.editContactInfo);
 router.post('/userData',checkAuth, userControllers.getuserData);
 router.post('/addEducation', userControllers.addEducation);
+router.patch('/updateEducation', userControllers.updateEducation);
+router.delete('/deleteEducation', userControllers.deleteEducation);
 router.post('/getUserEducation', userControllers.getUserEducation);
 router.post('/getEditEducation', userControllers.getEditEducation);
 

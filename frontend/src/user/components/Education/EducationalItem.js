@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./EducationalItem.css";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 const EducationalItem = (props) => {
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -17,8 +19,6 @@ const EducationalItem = (props) => {
   };
 
 const editModeHandler = async() => {
-  
-
     const response = await fetch('http://localhost:5000/api/users/getEditEducation',{
       method: "POST",
       headers : {"Content-Type" : "application/json"},
@@ -30,9 +30,18 @@ const editModeHandler = async() => {
     props.setIsEditModeHandler(responseData.editData);
 }
 
-  const confirmDeleteHandler = () => {
+  const confirmDeleteHandler =  async () => {
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
     setShowConfirmModal(false);
-    console.log("DELETING...");
+    const responseData = await sendRequest('http://localhost:5000/api/users/deleteEducation',
+    "DELETE",
+    JSON.stringify({
+      educId : props.educId,
+      userId :  storedData.userId
+    }),
+    { "Content-Type": "application/json" }
+    );
+    props.setUserData(responseData.userEducation, responseData.message);
   };
   return (
     <React.Fragment>

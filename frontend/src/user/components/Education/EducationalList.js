@@ -12,6 +12,7 @@ const EducationalList = (props) => {
     <div className="educational-list">
       {props.userData.map((item) => (
         <EducationalItem
+          setUserData = {props.setUserData}
           setIsEditModeHandler={props.setIsEditModeHandler}
           level={item.level}
           school={item.school}

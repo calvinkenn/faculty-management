@@ -39,8 +39,17 @@ router.patch('/editContactInfo',[
     check('cellphoneNum').not().isEmpty().withMessage('Cellphone Number must not be empty!'),
 
 ], checkAuth, userControllers.editContactInfo);
-router.patch('/editAccountInfo',userControllers.editAccountInfo);
-router.patch('/userChangePassword', userControllers.accountChangePassword);
+router.patch('/editAccountInfo',[
+    check('employeeNum').not().isEmpty().withMessage('Employee Number must not be empty!'),
+    check('email').not().isEmpty().withMessage('Email must not be empty!'),
+    check('faculty').not().isEmpty().withMessage('Please choose your faculty'),
+    check('employmentType').not().isEmpty().withMessage('Please choose your employment type!'),
+],userControllers.editAccountInfo);
+router.patch('/userChangePassword',[
+    check('oldPassword').not().isEmpty().withMessage('Old password must not be empty!'),
+    check('newPassword').not().isEmpty().withMessage('New password must not be empty!'),
+    check('confirmNewPassword').not().isEmpty().withMessage('Confirm new password must not be empty!'),
+], userControllers.accountChangePassword);
 router.post('/userData',checkAuth, userControllers.getuserData);
 router.post('/addEducation', checkAuth, userControllers.addEducation);
 router.patch('/updateEducation', userControllers.updateEducation);

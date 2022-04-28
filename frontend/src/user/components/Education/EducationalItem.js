@@ -68,9 +68,10 @@ const editModeHandler = async() => {
           <div>Level: {props.level}</div>
           <div>School: {props.school}</div>
           {(props.degree ? <div>Degree: {props.degree}</div> : '')}
-          <div>Year Attended: {props.from}</div>
-          <div>Year Graduated: {props.to}</div>
-          <div>School Address: {props.address}</div>
+          <div>From: {props.from}</div>
+          <div>To: {props.to}</div>
+          <div>Year Graduated: {props.address}</div>
+          <div>Highest Level/ Units Earned: {props.highestLevel}</div>
           <div>
             Awards:
             {props.awards.map((award) => (

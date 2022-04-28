@@ -9,7 +9,8 @@ const educationSchema = mongoose.Schema({
     toDate : {type : String, required : true},
     awards: [{type : Object}],
     user : {type : mongoose.Types.ObjectId, required: true, ref : 'User'},
-    address : {type : String, required : true},
+    yearGraduated : {type : String, default : ""},
+    highestLevel : {type : String, required : true},
 });
 
 module.exports = mongoose.model("Education", educationSchema);

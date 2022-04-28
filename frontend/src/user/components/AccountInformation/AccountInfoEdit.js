@@ -10,9 +10,9 @@ import {
   VALIDATOR_OPTIONAL,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
-
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const AccountInfoEdit = (props) => {
-  const { error, sendRequest } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       employeeNumber: {
@@ -73,6 +73,7 @@ const AccountInfoEdit = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={submitHandler}>
         <Input
           element="input"

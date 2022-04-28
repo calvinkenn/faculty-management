@@ -46,8 +46,12 @@ const EducationalEdit = (props) => {
         value: props.editData ? props.editData.toDate : "",
         isValid: false,
       },
-      address: {
-        value: props.editData ? props.editData.address : "",
+      highestLevel: {
+        value: props.editData ? props.editData.highestLevel : "",
+        isValid: false,
+      },
+      yearGraduated: {
+        value: props.editData ? props.editData.yearGraduated : "",
         isValid: false,
       },
       awards: {
@@ -100,7 +104,8 @@ const EducationalEdit = (props) => {
           fromDate: formState.inputs.fromDate.value,
           toDate: formState.inputs.toDate.value,
           awards: inputList,
-          address: formState.inputs.address.value,
+          yearGraduated: formState.inputs.yearGraduated.value,
+          highestLevel : formState.inputs.highestLevel.value,
           userId: storedData.userId,
           token: storedData.token
         }),
@@ -130,7 +135,8 @@ const EducationalEdit = (props) => {
           fromDate: formState.inputs.fromDate.value,
           toDate: formState.inputs.toDate.value,
           awards: inputList,
-          address: formState.inputs.address.value,
+          yearGraduated: formState.inputs.yearGraduated.value,
+          highestLevel : formState.inputs.highestLevel.value,
           educId: props.editData._id,
           userId: storedData.userId,
           token: storedData.token,
@@ -224,14 +230,25 @@ const EducationalEdit = (props) => {
         />
         <Input
           element="input"
-          id="address"
+          id="highestLevel"
           type="text"
-          label="School Address"
+          label="Highest Level/Unit Earned"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.address.value}
-          initialValid={formState.inputs.address.isValid}
+          initialValue={formState.inputs.highestLevel.value}
+          initialValid={formState.inputs.highestLevel.isValid}
+        />
+        <Input
+          element="input"
+          id="yearGraduated"
+          type="text"
+          label="Year Graduated"
+          validators={[VALIDATOR_OPTIONAL()]}
+          errorText="Invalid Email"
+          onInput={inputHandler}
+          initialValue={formState.inputs.yearGraduated.value}
+          initialValid={formState.inputs.yearGraduated.isValid}
         />
         <br />
 

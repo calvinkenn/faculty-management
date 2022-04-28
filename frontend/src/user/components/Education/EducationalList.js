@@ -18,7 +18,8 @@ const EducationalList = (props) => {
           school={item.school}
           degree={item.degree}
           from={item.fromDate}
-          address = {item.address}
+          yearGraduated = {item.yearGraduated}
+          highestLevel = {item.highestLevel}
           to={item.toDate}
           awards = {item.awards}
           educId = {item._id}

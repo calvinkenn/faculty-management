@@ -274,24 +274,43 @@ const editContactInfo = async (req, res, next) => {
 const editAccountInfo = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
   }
   const { userId, employeeNum, faculty, employmentType, email } = req.body;
-  const user = await User.findByIdAndUpdate(userId, {
-    employeeNum,
-    faculty,
-    employmentType,
-    email,
-  });
-  if (user) {
-    updatedUser = await User.findById(userId);
+  const emailValidate = await User.findOne({email : email})
+  if(emailValidate.id === userId){
+    
+    const user = await User.findByIdAndUpdate(userId, {
+      employeeNum,
+      faculty,
+      employmentType,
+      email,
+    });
+    if (user) {
+      updatedUser = await User.findById(userId);
+    }
+    res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
+  }else{
+    const error = new HttpError(
+      "Email is already registered to another account!",
+      401
+    );
+    return next(error);
   }
-  res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
+
 };
 
 const accountChangePassword = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
   const { userId, oldPassword, newPassword, confirmNewPassword } = req.body;
 
   const userPass = await User.findById(userId);
@@ -324,7 +343,7 @@ const accountChangePassword = async (req, res, next) => {
 };
 
 const addEducation = async (req, res, next) => {
-  const { level, school, degree, fromDate, toDate, awards, userId, address } =
+  const { level, school, degree, fromDate, toDate, awards, userId, yearGraduated, highestLevel } =
     req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -341,7 +360,8 @@ const addEducation = async (req, res, next) => {
     fromDate,
     toDate,
     awards: awards,
-    address,
+    yearGraduated,
+    highestLevel,
     user: userId,
   });
   const sess = await mongoose.startSession();
@@ -383,7 +403,8 @@ const updateEducation = async (req, res, next) => {
     toDate,
     awards,
     educId,
-    address,
+    yearGraduated,
+    highestLevel,
     userId,
   } = req.body;
   const errors = validationResult(req);
@@ -400,7 +421,8 @@ const updateEducation = async (req, res, next) => {
     fromDate,
     toDate,
     awards: awards,
-    address,
+    yearGraduated,
+    highestLevel,
   });
 
   const newUpdate = await Education.find({ user: userId }).sort({

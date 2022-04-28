@@ -17,12 +17,32 @@ router.post(
 
 router.post('/login', userControllers.login);
 
-router.patch('/editBasicInfo', checkAuth, userControllers.editBasicInfo);
-router.patch('/editContactInfo', checkAuth, userControllers.editContactInfo);
+router.patch('/editBasicInfo',[
+    check('firstName').not().isEmpty().withMessage('First name must not be empty!'),
+    check('lastName').not().isEmpty().withMessage('Last name must not be empty!'),
+    check('placeofBirth').not().isEmpty().withMessage('Place of Birth must not be empty!'),
+    check('gender').not().isEmpty().withMessage('Please choose your gender!'),
+    check('civilStatus').not().isEmpty().withMessage('Please choose your Civil Status!'),
+    
+], checkAuth, userControllers.editBasicInfo);
+router.patch('/editContactInfo',[
+    check('houseNoR').not().isEmpty().withMessage('Resident House number must not be empty'),
+    check('streetR').not().isEmpty().withMessage('Resident Street must not be empty'),
+    check('barangayR').not().isEmpty().withMessage('Please choose your Resident Barangay'),
+    check('provinceR').not().isEmpty().withMessage('Please choose your Resident Province'),
+    check('zipR').not().isEmpty().withMessage('Please type your Resident Zip Code'),
+    check('houseNoP').not().isEmpty().withMessage('Permanent House number must not be empty'),
+    check('streetP').not().isEmpty().withMessage('Permanent Street must not be empty'),
+    check('barangayP').not().isEmpty().withMessage('Please choose your Permanent Barangay'),
+    check('provinceP').not().isEmpty().withMessage('Please choose your Permanent Province'),
+    check('zipP').not().isEmpty().withMessage('Please type your Permanent Zip Code'),
+    check('cellphoneNum').not().isEmpty().withMessage('Cellphone Number must not be empty!'),
+
+], checkAuth, userControllers.editContactInfo);
 router.patch('/editAccountInfo',userControllers.editAccountInfo);
 router.patch('/userChangePassword', userControllers.accountChangePassword);
 router.post('/userData',checkAuth, userControllers.getuserData);
-router.post('/addEducation', userControllers.addEducation);
+router.post('/addEducation', checkAuth, userControllers.addEducation);
 router.patch('/updateEducation', userControllers.updateEducation);
 router.delete('/deleteEducation', userControllers.deleteEducation);
 router.post('/getUserEducation', userControllers.getUserEducation);

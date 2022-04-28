@@ -102,6 +102,7 @@ const EducationalEdit = (props) => {
           awards: inputList,
           address: formState.inputs.address.value,
           userId: storedData.userId,
+          token: storedData.token
         }),
         { "Content-Type": "application/json" },
     );
@@ -132,6 +133,7 @@ const EducationalEdit = (props) => {
           address: formState.inputs.address.value,
           educId: props.editData._id,
           userId: storedData.userId,
+          token: storedData.token,
         }),
         { "Content-Type": "application/json" },
     );

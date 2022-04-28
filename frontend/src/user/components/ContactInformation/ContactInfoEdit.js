@@ -11,9 +11,10 @@ import {
   VALIDATOR_OPTIONAL,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 const ContactInfoEdit = (props) => {
-  const { error, sendRequest } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
   const [isSameAddress, setIsSameAddress] = useState(false);
 
   const [formState, inputHandler, setFormData] = useForm(
@@ -146,6 +147,7 @@ const ContactInfoEdit = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={submitHandler}>
         Resident Address
         <Input
@@ -174,7 +176,7 @@ const ContactInfoEdit = (props) => {
           element="input"
           id="locationTypeR"
           type="text"
-          label="Type"
+          label="Subdivision/Village"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
@@ -255,7 +257,7 @@ const ContactInfoEdit = (props) => {
           element="input"
           id="locationTypeP"
           type="text"
-          label="Type"
+          label="Subdivision/Village"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}

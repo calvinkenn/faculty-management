@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Button from "../../../shared/components/FormElements/Button";
 
 import Input from "../../../shared/components/FormElements/Input";
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 import { useForm } from "../../../shared/hooks/form-hook";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import {
@@ -12,7 +13,7 @@ import {
 import "../../components/EditForm.css";
 
 const BasicInfoEdit = (props) => {
-  const { error, sendRequest } = useHttpClient();
+  const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       firstName: {
@@ -131,6 +132,7 @@ const BasicInfoEdit = (props) => {
   
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={submitHandler}>
         <Input
           element="input"

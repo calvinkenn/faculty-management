@@ -13,7 +13,7 @@ const ContactInfoItem = (props) => {
           <div>House no.:{props.residentHouseNo}</div>
           <div>Street:{props.residentStreet}</div>
           <div>
-            Type:{props.residentLocationType == "1" ? "Subdivision" : "Village"}
+           Subdivision:{props.residentLocationType}
           </div>
           <div>Barangay: {props.residentBarangay}</div>
           <div>Province:{props.residentProvince}</div>
@@ -26,7 +26,7 @@ const ContactInfoItem = (props) => {
           <div>House no.:{props.permanentHouseNo}</div>
           <div>Street:{props.permanentStreet}</div>
           <div>
-            Type:{props.permanentLocationType == "1" ? "Subdivision" : "Village"}
+            Subdivision:{props.permanentLocationType}
           </div>
           <div>Barangay: {props.permanentBarangay}</div>
           <div>Province:{props.permanentProvince}</div>

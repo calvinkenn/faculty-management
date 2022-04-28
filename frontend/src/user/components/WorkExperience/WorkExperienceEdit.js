@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../../shared/components/FormElements/Button";
 
 import Input from "../../../shared/components/FormElements/Input";
@@ -11,6 +11,8 @@ import {
 import "../../components/EditForm.css";
 
 const WorkExperienceEdit = (props) => {
+  const [salaryGradeList, setSalaryGradeList] = useState([]);
+  const [salaryStepList, setSalaryStepList] = useState([]);
   const [formState, inputHandler, setFormData] = useForm(
     {
       company: {
@@ -33,7 +35,15 @@ const WorkExperienceEdit = (props) => {
         value: "",
         isValid: false,
       },
-      salary: {
+      monthlySalary: {
+        value: "",
+        isValid: false,
+      },
+      salaryGrade: {
+        value: "",
+        isValid: false,
+      },
+      salaryStep: {
         value: "",
         isValid: false,
       },
@@ -48,6 +58,30 @@ const WorkExperienceEdit = (props) => {
     },
     false
   );
+
+  let sGrade = [];
+  let sStep = [];
+  useEffect(() => {
+    for (let i = 1; i < 34; i++) {
+      if (i < 10) {
+        sGrade.push("0" + i);
+      } else {
+        sGrade.push(i);
+      }
+    }
+    setSalaryGradeList(sGrade);
+  }, []);
+
+  useEffect(() => {
+    for (let i = 1; i < 9; i++) {
+      if (i < 10) {
+        sStep.push(i);
+      } else {
+        sStep.push(i);
+      }
+    }
+    setSalaryStepList(sStep);
+  }, []);
 
   const submitAddHandler = (event) => {
     //For Adding Data
@@ -121,25 +155,38 @@ const WorkExperienceEdit = (props) => {
         />
         <Input
           element="input"
-          id="salary"
+          id="monthlySalary"
           type="text"
-          label="Salary"
+          label="Monthly Salary"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.salary.value}
-          initialValid={formState.inputs.salary.isValid}
+          initialValue={formState.inputs.monthlySalary.value}
+          initialValid={formState.inputs.monthlySalary.isValid}
         />
         <Input
-          element="input"
-          id="status"
+          element="select"
+          id="salaryGrade"
           type="text"
-          label="Status"
+          label="Salary Grade"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
+          items={salaryGradeList}
           onInput={inputHandler}
-          initialValue={formState.inputs.status.value}
-          initialValid={formState.inputs.status.isValid}
+          initialValue={formState.inputs.salaryGrade.value}
+          initialValid={formState.inputs.salaryGrade.isValid}
+        />
+        <Input
+          element="select"
+          id="salaryStep"
+          type="text"
+          label="Salary Step"
+          validators={[VALIDATOR_OPTIONAL()]}
+          errorText="Invalid Email"
+          items={salaryStepList}
+          onInput={inputHandler}
+          initialValue={formState.inputs.salaryStep.value}
+          initialValid={formState.inputs.salaryStep.isValid}
         />
         <Input
           element="input"

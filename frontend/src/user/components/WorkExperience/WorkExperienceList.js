@@ -14,7 +14,9 @@ const WorkExperienceList = (props) => {
           department={item.department}
           from={item.from}
           to={item.to}
-          salary={item.salary}
+          monthlySalary={item.monthlySalary}
+          salaryGrade={item.salaryGrade}
+          salaryStep={item.salaryStep}
           status={item.status}
           governmentService={item.governmentService}
         />

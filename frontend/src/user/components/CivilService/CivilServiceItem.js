@@ -27,9 +27,7 @@ const CivilServiceItem = (props) => {
       }),
     });
     const responseData = await response.json();
-    console.log('clicked')
     props.setIsEditModeHandler(responseData.editData);
-    
   };
 
   const confirmDeleteHandler = async () => {

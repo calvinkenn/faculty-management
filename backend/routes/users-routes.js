@@ -68,11 +68,19 @@ router.patch('/updateEducation',[
 router.delete('/deleteEducation', userControllers.deleteEducation);
 router.post('/getUserEducation', userControllers.getUserEducation);
 router.post('/getEditEducation', userControllers.getEditEducation);
+//routes for civil service
 router.post('/addUserCivil', userControllers.addUserCivil);
 router.post('/getUserCivil', userControllers.getUserCivil);
 router.post('/getEditCivil', userControllers.getEditCivil);
 router.patch('/editCivil', userControllers.editCivil);
 router.delete('/deleteCivil', userControllers.deleteCivil);
+
+//routes for work experience
+router.post('/addWorkExperience', userControllers.addWorkExperience);
+router.post('/getWorkExperience', userControllers.getWorkExperience);
+router.post('/getEditWorkExperience', userControllers.getEditWorkExperience);
+router.patch('/editWorkExperience', userControllers.EditWorkExperience);
+router.delete('/deleteWorkExperience', userControllers.deleteWorkExperience);
 
 
 

@@ -43,6 +43,7 @@ const userSchema = mongoose.Schema({
   permission : { type: String, default : 'pending'},
   education : [{type: mongoose.Types.ObjectId, required : true, ref : 'Education'}],
   civil : [{type: mongoose.Types.ObjectId, required : true, ref : 'Civil'}],
+  work : [{type: mongoose.Types.ObjectId, required : true, ref : 'WorkExperience'}],
 
   //for employee type and faculty
 

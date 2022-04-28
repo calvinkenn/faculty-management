@@ -16,10 +16,10 @@ const OverviewItem = (props) => {
 
   const totalAccounts = {
     labels: [
-      //   "Active Accounts",
-      //   "Deactivated Accounts",
-      //   "Pending Accounts",
-      //   "Rejected Accounts",
+      "Active",
+      "Deactivated",
+      "Pending",
+      "Rejected",
     ],
     datasets: [
       {
@@ -48,12 +48,7 @@ const OverviewItem = (props) => {
   };
 
   const totalFaculty = {
-    labels: [
-      //   "Active Accounts",
-      //   "Deactivated Accounts",
-      //   "Pending Accounts",
-      //   "Rejected Accounts",
-    ],
+    labels: ["BSIT", "BLIS", "ALLIED"],
     datasets: [
       {
         label: "Total Accounts",

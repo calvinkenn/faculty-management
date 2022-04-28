@@ -31,6 +31,11 @@ const Admin = (props) => {
   const [searchField, setSearchField] = useState("");
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
+  const [isPrintMode, setIsPrintMode] = useState(props.isPrintMode);
+
+  const printModeHandler = () => {
+    setIsPrintMode((prevState) => !prevState);
+  };
 
   const menuChangeHandler = (menuName) => {
     const stateCopy = { ...menu };
@@ -136,18 +141,28 @@ const Admin = (props) => {
     );
   });
 
-  const filteredDeactivatedUsers = deactivatedUserData?.filter((deactivatedUser) => {
-    return (
-      deactivatedUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
-      deactivatedUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
-      deactivatedUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
-      deactivatedUser.employeeNum?.toString().includes(searchField)
-    );
-  });
+  const filteredDeactivatedUsers = deactivatedUserData?.filter(
+    (deactivatedUser) => {
+      return (
+        deactivatedUser.firstName
+          ?.toLowerCase()
+          .includes(searchField.toLowerCase()) ||
+        deactivatedUser.lastName
+          ?.toLowerCase()
+          .includes(searchField.toLowerCase()) ||
+        deactivatedUser.email
+          ?.toLowerCase()
+          .includes(searchField.toLowerCase()) ||
+        deactivatedUser.employeeNum?.toString().includes(searchField)
+      );
+    }
+  );
 
   const filteredPendingUsers = pendingUserData?.filter((pendingUser) => {
     return (
-      pendingUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      pendingUser.firstName
+        ?.toLowerCase()
+        .includes(searchField.toLowerCase()) ||
       pendingUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
       pendingUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
       pendingUser.employeeNum?.toString().includes(searchField)
@@ -156,8 +171,12 @@ const Admin = (props) => {
 
   const filteredRejectedUsers = rejectedUserData?.filter((rejectedUser) => {
     return (
-      rejectedUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
-      rejectedUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      rejectedUser.firstName
+        ?.toLowerCase()
+        .includes(searchField.toLowerCase()) ||
+      rejectedUser.lastName
+        ?.toLowerCase()
+        .includes(searchField.toLowerCase()) ||
       rejectedUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
       rejectedUser.employeeNum?.toString().includes(searchField)
     );
@@ -213,6 +232,8 @@ const Admin = (props) => {
                 inOverview={isMenuActive.overview}
                 onSearchChange={onSearchChange}
                 searchValue={searchField}
+                printMode={printModeHandler}
+                isPrintMode={isPrintMode}
               />
               {isMenuActive.overview && (
                 <Overview
@@ -220,6 +241,7 @@ const Admin = (props) => {
                   pendingUserData={pendingUserData}
                   deactivatedUserData={deactivatedUserData}
                   rejectedUserData={rejectedUserData}
+                  isPrintMode={isPrintMode}
                 />
               )}
               {isMenuActive.facultyMembers && (

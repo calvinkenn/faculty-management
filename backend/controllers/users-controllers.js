@@ -6,8 +6,10 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const Admin = require("../models/admin");
 const Education = require("../models/education");
+const Civil = require('../models/civil');
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
+const { findById } = require("../models/user");
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -437,7 +439,7 @@ const updateEducation = async (req, res, next) => {
 };
 const deleteEducation = async (req, res, next) => {
   const { educId, userId } = req.body;
-
+  
   const education = await Education.findById(educId);
   const user = await User.findById(userId);
   const sess = await mongoose.startSession();
@@ -454,6 +456,111 @@ const deleteEducation = async (req, res, next) => {
     .status(201)
     .json({ userEducation: newUpdate, message: "Education Deleted" });
 };
+
+const getUserCivil = async (req, res ,next) =>{
+  const {userId} = req.body;
+  const userCivil = await Civil.find({user : userId})
+  res.json({ userCivil: userCivil });
+}
+const addUserCivil = async (req, res, next) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+  const {career,
+    rating,
+    date,
+    placeOfExam,
+    licenseNumber,
+    licenseValidity,
+    userId} = req.body;
+
+
+    let user = await User.findById(userId);
+  
+    const newCivil = new Civil({
+      career,
+      rating,
+      date,
+      placeOfExam,
+      licenseNumber,
+      licenseValidity,
+      user: userId
+    });
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await newCivil.save({ session: sess });
+    user.civil.push(newCivil);
+    await user.save({ session: sess });
+    sess.commitTransaction();
+  
+    const userCivil = await Civil.find({ user: userId });
+  
+    res
+      .status(200)
+      .json({ message: "Civil Service Added", userCivil: userCivil });
+}
+const getEditCivil = async (req, res, next) =>{
+  const { civilId } = req.body;
+
+  const getEditCivil = await Civil.findById(civilId);
+  res.json({ editData: getEditCivil });
+}
+const editCivil = async(req, res, next)=>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+  const {
+    career,
+    rating,
+    date,
+    placeOfExam,
+    licenseNumber,
+    licenseValidity,
+    userId,
+    civilId,
+  } = req.body;
+
+
+  let editCivil = await Civil.findByIdAndUpdate(civilId, {
+    career,
+    rating,
+    date,
+    placeOfExam,
+    licenseNumber,
+    licenseValidity,
+  });
+
+  const newUpdate = await Civil.find({ user: userId });
+  if (editCivil) {
+    res
+      .status(201)
+      .json({ userCivil: newUpdate, message: "Education Updated" });
+  }
+}
+const deleteCivil =  async(req, res, next) =>{
+  const { civilId, userId } = req.body;
+  
+  const civil = await Civil.findById(civilId);
+  const user = await User.findById(userId);
+  const sess = await mongoose.startSession();
+  sess.startTransaction();
+  await civil.remove({ session: sess });
+  user.civil.pull(civil);
+  await user.save({ session: sess });
+  sess.commitTransaction();
+
+  const newUpdate = await Civil.find({ user: userId });
+  res
+    .status(201)
+    .json({ userCivil: newUpdate, message: "Civil Service Deleted" });
+}
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
@@ -466,3 +573,8 @@ exports.updateEducation = updateEducation;
 exports.deleteEducation = deleteEducation;
 exports.editAccountInfo = editAccountInfo;
 exports.accountChangePassword = accountChangePassword;
+exports.getUserCivil = getUserCivil;
+exports.addUserCivil = addUserCivil;
+exports.deleteCivil = deleteCivil;
+exports.editCivil = editCivil;
+exports.getEditCivil = getEditCivil;

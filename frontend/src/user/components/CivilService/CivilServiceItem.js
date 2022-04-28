@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./CivilServiceItem.css";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 const CivilServiceItem = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -15,13 +17,43 @@ const CivilServiceItem = (props) => {
     setShowConfirmModal(false);
   };
 
-  const editModeHandler = () => {
-    props.setIsEditModeHandler(true);
+  const editModeHandler = async () => {
+
+    const response = await fetch('http://localhost:5000/api/users/getEditCivil',{
+      method: "POST",
+      headers : {"Content-Type" : "application/json"},
+      body : JSON.stringify({
+        civilId : props.civilId,
+      }),
+    });
+    const responseData = await response.json();
+    console.log('clicked')
+    props.setIsEditModeHandler(responseData.editData);
+    
   };
 
-  const confirmDeleteHandler = () => {
+  const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
-    console.log("DELETING...");
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    setShowConfirmModal(false);
+    const responseData = await sendRequest('http://localhost:5000/api/users/deleteCivil',
+    "DELETE",
+    JSON.stringify({
+      civilId : props.civilId,
+      userId :  storedData.userId
+    }),
+    { "Content-Type": "application/json" }
+    );
+
+    const getUserCivil = await fetch("http://localhost:5000/api/users/getUserCivil", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: storedData.userId,
+      }),
+    });
+    const getUserCivilData = await getUserCivil.json();
+    props.setUserData(getUserCivilData.userCivil, responseData.message);
   };
 
   return (

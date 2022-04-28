@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import SuccessModal from "../../../shared/components/UIElements/SuccessModal";
 
 import CivilServiceEdit from "./CivilServiceEdit";
 import CivilServiceList from "./CivilServiceList";
-
 const DUMMY_DATA = [
   //REPLACE WITH DATABASE
   {
@@ -24,25 +24,62 @@ const DUMMY_DATA = [
 ];
 
 const CivilService = (props) => {
-  const editModeHandler = () => {
-    props.updateEditModeState(true);
-  };
+  const [userData, setUserData] = useState([]);
+  const [success, setSuccess] = useState();
+  const [editData, setEditData] = useState();
 
+  const clearSuccess = () => {
+    setSuccess(null);
+  }
+  const setAddedData = (userData, success) =>{
+    setUserData(userData);
+    setSuccess(success);
+  }
+  const setId = (editData) => {
+    setEditData(editData)
+  }
+
+  const editModeHandler = (editData) => {
+    props.updateEditModeState(true);
+    setId(editData);
+  };
+  //to get list of civil services
+
+  useEffect(() => {
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const sendRequest = async () => {
+      const response = await fetch("http://localhost:5000/api/users/getUserCivil", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: storedData.userId,
+        }),
+      });
+      const responseData = await response.json();
+      setUserData(responseData.userCivil);
+    };
+    sendRequest();
+  }, [props.isAddMode, props.isEditMode]);
   if (props.isAddMode) {
     return (
       <CivilServiceEdit
         addingItem={true}
         updateAddModeState={props.updateAddModeState}
+        setUserData = {setAddedData}
       />
     );
   } else if (props.isEditMode) {
-    return <CivilServiceEdit addingItem={false} />;
+    return <CivilServiceEdit addingItem={false} editData ={editData} updateAddModeState = {props.updateEditModeState} setUserData = {setAddedData} />;
   } else {
     return (
+      <React.Fragment>
+      <SuccessModal success = {success} onClear = {clearSuccess}/>
       <CivilServiceList
         setIsEditModeHandler={editModeHandler}
-        items={DUMMY_DATA}
+        items={userData}
+        setUserData = {setAddedData}
       />
+      </React.Fragment>
     );
   }
 };

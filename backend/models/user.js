@@ -42,6 +42,7 @@ const userSchema = mongoose.Schema({
   //for account access
   permission : { type: String, default : 'pending'},
   education : [{type: mongoose.Types.ObjectId, required : true, ref : 'Education'}],
+  civil : [{type: mongoose.Types.ObjectId, required : true, ref : 'Civil'}],
 
   //for employee type and faculty
 

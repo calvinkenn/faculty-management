@@ -9,48 +9,113 @@ import {
   VALIDATOR_OPTIONAL,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 const CivilServiceEdit = (props) => {
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  const today = new Date()
+  const raw_month = today.getMonth() + 1;
+  const year = today.getFullYear();
+  const raw_day = today.getDate();
+  let day ,month;
+  if (raw_month < 10){
+    month = "0"+raw_month.toString();
+  }else{
+    month =raw_month.toString();
+  }
+  if(raw_day < 10){
+    day = "0" +raw_day.toString();
+  }else{
+    day = raw_day.toString();
+  }
+  const formatDate = (input) => {
+    var datePart = input.match(/\d+/g),
+      year = datePart[0].substring(0, 4),
+      month = datePart[1],
+      day = datePart[2];
+  
+    return year + "-" + month + "-" + day;
+  };
+  const now = year + "-" + month + "-" + day;
   const [formState, inputHandler, setFormData] = useForm(
     {
       career: {
-        value: "",
+        value: props.editData ? props.editData.career : "",
         isValid: false,
       },
       rating: {
-        value: "",
+        value: props.editData ? props.editData.rating : "",
         isValid: false,
       },
       date: {
-        value: "",
+        value: props.editData ? formatDate(props.editData.date.substring(0, 10)) : now,
         isValid: false,
       },
       placeOfExam: {
-        value: "",
+        value: props.editData ? props.editData.placeOfExam : "",
         isValid: false,
       },
       licenseNumber: {
-        value: "",
+        value: props.editData ? props.editData.licenseNumber : "",
         isValid: false,
       },
       licenseValidity: {
-        value: "",
+        value: props.editData ? formatDate(props.editData.licenseValidity.substring(0, 10)) : now,
         isValid: false,
       },
     },
     false
   );
 
-  const submitAddHandler = (event) => {
-    //For Adding Data
-    console.log("clicked");
+  const submitAddHandler = async (event) => {
     event.preventDefault();
+
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/addUserCivil",
+        "POST",
+        
+        JSON.stringify({
+          career : formState.inputs.career.value,
+          rating : formState.inputs.rating.value,
+          date  : formState.inputs.date.value,
+          placeOfExam : formState.inputs.placeOfExam.value,
+          licenseNumber : formState.inputs.licenseNumber.value,
+          licenseValidity : formState.inputs.licenseValidity.value,
+          userId: storedData.userId,
+          token: storedData.token
+        }),
+        { "Content-Type": "application/json" },
+    );
+    props.setUserData(responseData.userCivil, responseData.message);
+    props.updateAddModeState();
   };
 
-  const submitEditHandler = (event) => {
+  const submitEditHandler = async (event) => {
     //For Editing Data
-    console.log("clicked");
     event.preventDefault();
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/editCivil",
+        "PATCH",
+        
+        JSON.stringify({
+          career : formState.inputs.career.value,
+          rating : formState.inputs.rating.value,
+          date  : formState.inputs.date.value,
+          placeOfExam : formState.inputs.placeOfExam.value,
+          licenseNumber : formState.inputs.licenseNumber.value,
+          licenseValidity : formState.inputs.licenseValidity.value,
+          userId: storedData.userId,
+          civilId : props.editData._id,
+          token: storedData.token
+        }),
+        { "Content-Type": "application/json" },
+    );
+    props.setUserData(responseData.userCivil, responseData.message);
+    props.updateAddModeState();
   };
 
   return (
@@ -81,8 +146,8 @@ const CivilServiceEdit = (props) => {
         <Input
           element="input"
           id="date"
-          type="text"
-          label="Date"
+          type="date"
+          label = "Date of Examination"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
@@ -114,7 +179,7 @@ const CivilServiceEdit = (props) => {
         <Input
           element="input"
           id="licenseValidity"
-          type="text"
+          type="date"
           label="License Validity"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"

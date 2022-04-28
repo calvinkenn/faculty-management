@@ -74,14 +74,12 @@ const WorkExperienceEdit = (props) => {
 
   useEffect(() => {
     for (let i = 1; i < 9; i++) {
-      if (i < 10) {
-        sStep.push(i);
-      } else {
-        sStep.push(i);
-      }
+      sStep.push(i);
     }
     setSalaryStepList(sStep);
   }, []);
+
+  console.log(salaryStepList);
 
   const submitAddHandler = (event) => {
     //For Adding Data

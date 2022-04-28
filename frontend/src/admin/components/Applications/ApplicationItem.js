@@ -19,7 +19,7 @@ const ApplicationItem = (props) => {
           userId: event.target.userId.value,
           permissionUpdate: "accepted",
         }),
-        { "Content-Type": "application/json" },
+        { "Content-Type": "application/json" }
       );
       props.updatePendingUsers(
         responseData.pendingUsers,
@@ -53,7 +53,7 @@ const ApplicationItem = (props) => {
       <div>Employee Number: {props.employeeNum}</div>
       <div>First Name: {props.firstName}</div>
       <div>Last Name: {props.lastName}</div>
-      <div>Registered Date: {props.date}</div>
+      <div>Email: {props.email}</div>
       <div className="container__actions">
         <form onSubmit={userApproveHandler}>
           <input type="hidden" value={props.id} name="userId"></input>

@@ -79,8 +79,6 @@ const WorkExperienceEdit = (props) => {
     setSalaryStepList(sStep);
   }, []);
 
-  console.log(salaryStepList);
-
   const submitAddHandler = (event) => {
     //For Adding Data
     console.log("clicked");

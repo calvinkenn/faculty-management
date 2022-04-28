@@ -5,10 +5,17 @@ import "./TopActionBarAdmin.css";
 const TopActionBarAdmin = (props) => {
   return (
     <div className="top-action">
-      <form>
-        <input type="text" placeholder="Search..."/>
-        {/* <input type="submit" value="Search" /> */}
-      </form>
+      {!props.inOverview && (
+        <form>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={props.searchValue}
+            onChange={props.onSearchChange}
+          />
+        </form>
+      )}
+      {props.inOverview && <ul>{props.inOverview && <li>Print</li>}</ul>}
     </div>
   );
 };

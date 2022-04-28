@@ -1,7 +1,6 @@
 .list {
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
-    text-align: left;
-  }
-  
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  text-align: left;
+}

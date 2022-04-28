@@ -39,7 +39,7 @@ const MainNavigation = props => {
           <span />
         </button> */}
         <h1 className="main-navigation__title">
-          <Link to="/profile">
+          <Link to="/">
             <div className='nav-logo-main-cont'>
               <img src={bulsuLogo} />
               <img src={cictLogo} />

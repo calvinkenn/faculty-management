@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./FacultyItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Card from "../../../shared/components/UIElements/Card";
 import Button from "../../../shared/components/FormElements/Button";
+import "../item.css";
 
 const FacultyItem = (props) => {
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
@@ -22,8 +22,8 @@ const FacultyItem = (props) => {
         }),
         { "Content-Type": "application/json" }
       );
-      props.updatePendingUsers(
-        responseData.pendingUsers,
+      props.updateActiveUsers(
+        responseData.activeUsers,
         responseData.permission
       );
     } catch (err) {
@@ -34,12 +34,15 @@ const FacultyItem = (props) => {
   return (
     <Card>
       <Link to={`/admin/profile/${props.userId}`}>
-        <div className="faculty-container__image">
+        <div className="container__image">
           <img src={props.profilePic} alt={props.firstName} />
         </div>
         <div>Employee Number: {props.employeeNum}</div>
         <div>First Name: {props.firstName}</div>
         <div>Last Name: {props.lastName}</div>
+        <div>Email: {props.email}</div>
+        <div>Faculty: {props.faculty}</div>
+        <div>Employment Type: {props.employmentType}</div>
       </Link>
       <Button onClick={userDeactivateHandler}>Deactive Account</Button>
     </Card>

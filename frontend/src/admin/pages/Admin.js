@@ -7,8 +7,10 @@ import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import Application from "../components/Applications/Application";
 import Deactivated from "../components/Deactivated/Deactivated";
 import Faculty from "../components/FacultyMembers/Faculty";
+import Overview from "../components/Overview/Overview";
 import Rejected from "../components/Rejected/Rejected";
 import TopActionBarAdmin from "../TopActionBarAdmin";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./Admin.css";
 const menu = {
   overview: true,
@@ -19,11 +21,14 @@ const menu = {
 };
 
 const Admin = (props) => {
+  const { isLoading, sendRequest, clearError } = useHttpClient();
   const [isMenuActive, setIsMenuActive] = useState(menu);
   const [pendingUserData, setPendingUserData] = useState();
   const [activeUserData, setActiveUserData] = useState();
   const [rejectedUserData, setRejectedUserData] = useState();
   const [deactivatedUserData, setDeactivatedUserData] = useState();
+  const [updatedStatus, setUpdatedStatus] = useState("");
+  const [searchField, setSearchField] = useState("");
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
 
@@ -32,77 +37,12 @@ const Admin = (props) => {
     Object.keys(stateCopy).forEach((key) => (stateCopy[key] = false)); //Set All Button False
     stateCopy[menuName] = true; //Set Button True
     setIsMenuActive(stateCopy);
+    setSearchField("");
   };
 
-  useEffect(() => {
-    //Get active users
-    const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    const sendRequest = async () => {
-      const response = await fetch(
-        "http://localhost:5000/api/admin/getAllActiveUsers",
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const responseData = await response.json();
-      setActiveUserData(responseData.activeUsers);
-    };
-    sendRequest();
-  }, [activeUserData]);
-
-  useEffect(() => {
-    //Get pending users
-    const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    const sendRequest = async () => {
-      const response = await fetch(
-        "http://localhost:5000/api/admin/getAllPendingUsers",
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const responseData = await response.json();
-      setPendingUserData(responseData.pendingUsers);
-    };
-    sendRequest();
-  }, [pendingUserData]);
-
-  useEffect(() => {
-    //Get rejected users
-    const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    const sendRequest = async () => {
-      const response = await fetch(
-        "http://localhost:5000/api/admin/getAllRejectedUsers",
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const responseData = await response.json();
-      setRejectedUserData(responseData.rejectedUsers);
-    };
-    sendRequest();
-  }, [rejectedUserData]);
-
-  useEffect(() => {
-    //Get deactivated users
-    const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    const sendRequest = async () => {
-      const response = await fetch(
-        "http://localhost:5000/api/admin/getAllDeactivatedUsers",
-        {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      const responseData = await response.json();
-      setDeactivatedUserData(responseData.deactivatedUsers);
-    };
-    sendRequest();
-  }, [deactivatedUserData]);
-
   const updateUsers = (userData, status) => {
+    setUpdatedStatus(status);
+    // setActiveUserData(userData);
     // setPendingUserData(userData);
     // setRejectedUserData(userData);
     // setDeactivatedUserData(userData);
@@ -112,10 +52,116 @@ const Admin = (props) => {
       setError("Account Rejected");
     }
   };
+
+  useEffect(() => {
+    //Get active users
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getActiveUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/admin/getAllActiveUsers"
+        );
+        // const responseData = await response.json();
+        setActiveUserData(responseData.activeUsers);
+      } catch (err) {}
+    };
+    getActiveUsers();
+    setUpdatedStatus("");
+  }, [sendRequest, updatedStatus]);
+
+  useEffect(() => {
+    //Get pending users
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getPendingUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/admin/getAllPendingUsers"
+        );
+        // const responseData = await response.json();
+        setPendingUserData(responseData.pendingUsers);
+      } catch (err) {}
+    };
+    getPendingUsers();
+    setUpdatedStatus("");
+  }, [sendRequest, updatedStatus]);
+
+  useEffect(() => {
+    //Get rejected users
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getRejectedUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/admin/getAllRejectedUsers"
+        );
+        // const responseData = await response.json();
+        setRejectedUserData(responseData.rejectedUsers);
+      } catch (err) {}
+    };
+    getRejectedUsers();
+    setUpdatedStatus("");
+  }, [sendRequest, updatedStatus]);
+
+  useEffect(() => {
+    //Get deactivated users
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getDeactivatedUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/admin/getAllDeactivatedUsers"
+        );
+        // const responseData = await response.json();
+        setDeactivatedUserData(responseData.deactivatedUsers);
+      } catch (err) {}
+    };
+    getDeactivatedUsers();
+    setUpdatedStatus("");
+  }, [sendRequest, updatedStatus]);
+
   const clearModals = () => {
     setError(null);
     setSuccess(null);
   };
+
+  //SEARCH-----------------------------------------------------------------------
+  const onSearchChange = (event) => {
+    setSearchField(event.target.value);
+  };
+
+  const filteredActiveUsers = activeUserData?.filter((activeUser) => {
+    return (
+      activeUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      activeUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      activeUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
+      activeUser.employeeNum?.toString().includes(searchField)
+    );
+  });
+
+  const filteredDeactivatedUsers = deactivatedUserData?.filter((deactivatedUser) => {
+    return (
+      deactivatedUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      deactivatedUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      deactivatedUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
+      deactivatedUser.employeeNum?.toString().includes(searchField)
+    );
+  });
+
+  const filteredPendingUsers = pendingUserData?.filter((pendingUser) => {
+    return (
+      pendingUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      pendingUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      pendingUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
+      pendingUser.employeeNum?.toString().includes(searchField)
+    );
+  });
+
+  const filteredRejectedUsers = rejectedUserData?.filter((rejectedUser) => {
+    return (
+      rejectedUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      rejectedUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      rejectedUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
+      rejectedUser.employeeNum?.toString().includes(searchField)
+    );
+  });
 
   return (
     <React.Fragment>
@@ -146,7 +192,7 @@ const Admin = (props) => {
                   className={isMenuActive.inactive ? "active" : ""}
                   onClick={() => menuChangeHandler("inactive")}
                 >
-                  Inactive Accounts
+                  Deactivated Accounts
                 </li>
                 <li
                   className={isMenuActive.applications ? "active" : ""}
@@ -163,25 +209,40 @@ const Admin = (props) => {
               </ul>
             </SideBox>
             <div className="content-container">
-              <TopActionBarAdmin />
+              <TopActionBarAdmin
+                inOverview={isMenuActive.overview}
+                onSearchChange={onSearchChange}
+                searchValue={searchField}
+              />
+              {isMenuActive.overview && (
+                <Overview
+                  activeUserData={activeUserData}
+                  pendingUserData={pendingUserData}
+                  deactivatedUserData={deactivatedUserData}
+                  rejectedUserData={rejectedUserData}
+                />
+              )}
               {isMenuActive.facultyMembers && (
-                <Faculty activeUserData={activeUserData} />
+                <Faculty
+                  activeUserData={filteredActiveUsers}
+                  updateActiveUsers={updateUsers}
+                />
               )}
               {isMenuActive.applications && (
                 <Application
-                  pendingUserData={pendingUserData}
+                  pendingUserData={filteredPendingUsers}
                   updatePendingUsers={updateUsers}
                 />
               )}
               {isMenuActive.inactive && (
                 <Deactivated
-                  deactivatedUserData={deactivatedUserData}
+                  deactivatedUserData={filteredDeactivatedUsers}
                   updateDeactivatedUsers={updateUsers}
                 />
               )}
               {isMenuActive.rejected && (
                 <Rejected
-                  rejectedUserData={rejectedUserData}
+                  rejectedUserData={filteredRejectedUsers}
                   updateRejectedUsers={updateUsers}
                 />
               )}

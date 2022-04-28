@@ -17,7 +17,7 @@ const RejectedItem = (props) => {
         "PATCH",
         JSON.stringify({
           userId: event.target.userId.value,
-          permissionUpdate: "accepted",
+          permissionUpdate: "pending",
         }),
         { "Content-Type": "application/json" }
       );
@@ -39,7 +39,7 @@ const RejectedItem = (props) => {
       <div className="container__actions">
         <form onSubmit={userApproveHandler}>
           <input type="hidden" value={props.id} name="userId"></input>
-          <Button type="submit">Approve</Button>
+          <Button type="submit">Back to Pending</Button>
         </form>
       </div>
     </Card>

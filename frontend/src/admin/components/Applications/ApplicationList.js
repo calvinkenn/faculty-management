@@ -14,7 +14,7 @@ const ApplicationList = (props) => {
           employeeNum={application.employeeNum}
           firstName={application.firstName}
           lastName={application.lastName}
-          date={application.date}
+          email={application.email}
           id = {application._id}
           updatePendingUsers = {props.updatePendingUsers}
         />

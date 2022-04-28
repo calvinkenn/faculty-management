@@ -16,6 +16,7 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const EducationalEdit = (props) => {
   const [inputList, setInputList] = useState([{ awards: "" }]);
   const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  let degree;
   
 
   useEffect(() => {
@@ -93,6 +94,12 @@ const EducationalEdit = (props) => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     event.preventDefault();
 
+    let degreeValue;
+    if(!degree){
+      degreeValue = "N/A";
+    }else{
+      degreeValue = formState.inputs.degree.value;
+    }
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/addEducation",
         "POST",
@@ -100,7 +107,7 @@ const EducationalEdit = (props) => {
         JSON.stringify({
           level: formState.inputs.level.value,
           school: formState.inputs.school.value,
-          degree: formState.inputs.degree.value,
+          degree: degreeValue,
           fromDate: formState.inputs.fromDate.value,
           toDate: formState.inputs.toDate.value,
           awards: inputList,
@@ -147,7 +154,6 @@ const EducationalEdit = (props) => {
     props.updateAddModeState();
   };
 
-  let degree;
 
   if (
     formState.inputs.level.value === "College" ||

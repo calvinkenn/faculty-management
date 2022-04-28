@@ -347,9 +347,10 @@ const addEducation = async (req, res, next) => {
     req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
   }
   let user = await User.findById(userId);
 

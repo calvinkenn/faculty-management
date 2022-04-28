@@ -48,11 +48,23 @@ router.patch('/editAccountInfo',[
 router.patch('/userChangePassword',[
     check('oldPassword').not().isEmpty().withMessage('Old password must not be empty!'),
     check('newPassword').not().isEmpty().withMessage('New password must not be empty!'),
-    check('confirmNewPassword').not().isEmpty().withMessage('Confirm new password must not be empty!'),
+    check('confirmNewPassword').not().isEmpty().withMessage('Confirm New password must not be empty!'),
 ], userControllers.accountChangePassword);
 router.post('/userData',checkAuth, userControllers.getuserData);
-router.post('/addEducation', checkAuth, userControllers.addEducation);
-router.patch('/updateEducation', userControllers.updateEducation);
+router.post('/addEducation',[
+    check('level').not().isEmpty().withMessage('Please specify your education level!'),
+    check('school').not().isEmpty().withMessage('Please specify the school you attended!'),
+    check('fromDate').not().isEmpty().withMessage('Please specify your starting date of attendance!'),
+    check('toDate').not().isEmpty().withMessage('Please specify your last date of attendance!'),
+    check('highestLevel').not().isEmpty().withMessage('Please specify your highest level attained or units earned!'),
+], checkAuth, userControllers.addEducation);
+router.patch('/updateEducation',[
+    check('level').not().isEmpty().withMessage('Please specify your education level!'),
+    check('school').not().isEmpty().withMessage('Please specify the school you attended!'),
+    check('fromDate').not().isEmpty().withMessage('Please specify your starting date of attendance!'),
+    check('toDate').not().isEmpty().withMessage('Please specify your last date of attendance!'),
+    check('highestLevel').not().isEmpty().withMessage('Please specify your highest level attained or units earned!'),
+],checkAuth, userControllers.updateEducation);
 router.delete('/deleteEducation', userControllers.deleteEducation);
 router.post('/getUserEducation', userControllers.getUserEducation);
 router.post('/getEditEducation', userControllers.getEditEducation);

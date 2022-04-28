@@ -41,7 +41,16 @@ const editModeHandler = async() => {
     }),
     { "Content-Type": "application/json" }
     );
-    props.setUserData(responseData.userEducation, responseData.message);
+
+    const getUserEducation = await fetch("http://localhost:5000/api/users/getUserEducation", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: storedData.userId,
+      }),
+    });
+    const getUserEducationData = await getUserEducation.json();
+    props.setUserData(getUserEducationData.userEducation, responseData.message);
   };
   return (
     <React.Fragment>
@@ -67,10 +76,10 @@ const editModeHandler = async() => {
         <div className="educational-container__data">
           <div>Level: {props.level}</div>
           <div>School: {props.school}</div>
-          {(props.degree ? <div>Degree: {props.degree}</div> : '')}
+          {(props.degree !== "N/A" ? <div>Degree: {props.degree}</div> : '')}
           <div>From: {props.from}</div>
           <div>To: {props.to}</div>
-          <div>Year Graduated: {props.address}</div>
+          {(props.yearGraduated ? <div>yearGraduated: {props.yearGraduated}</div> : '')}
           <div>Highest Level/ Units Earned: {props.highestLevel}</div>
           <div>
             Awards:

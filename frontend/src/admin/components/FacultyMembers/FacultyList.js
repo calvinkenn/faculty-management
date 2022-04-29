@@ -19,7 +19,7 @@ const FacultyList = (props) => {
           faculty={faculty.faculty}
           employmentType={faculty.employmentType}
           updateActiveUsers={props.updateActiveUsers}
-          profilePic={"https://robohash.org/" + faculty.employeeNum}
+          profilePic={faculty.profilePic}
           id={faculty._id}
         />
       ))}

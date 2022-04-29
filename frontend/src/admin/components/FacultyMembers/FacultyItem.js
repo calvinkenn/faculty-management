@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Card from "../../../shared/components/UIElements/Card";
 import Button from "../../../shared/components/FormElements/Button";
+import profilePic from "../../../assets/Image/Qw.png";
 import "../item.css";
 
 const FacultyItem = (props) => {
@@ -35,7 +36,14 @@ const FacultyItem = (props) => {
     <Card>
       <Link to={`/admin/profile/${props.userId}`}>
         <div className="container__image">
-          <img src={props.profilePic} alt={props.firstName} />
+          <img
+            src={
+              props.profilePic !== ""
+                ? `http://localhost:5000/${props.profilePic}`
+                : profilePic
+            }
+            alt={props.firstName}
+          />
         </div>
         <div>Employee Number: {props.employeeNum}</div>
         <div>First Name: {props.firstName}</div>

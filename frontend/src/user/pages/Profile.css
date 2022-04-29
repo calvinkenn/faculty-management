@@ -4,7 +4,7 @@
 
 .user-main-container{
   height: 100vh;
-  width: calc(100% - 60px);
+  width: 100%;
 }
 
 .user-side-nav{
@@ -37,7 +37,7 @@
 
 .content-container{
   width: 75%;
-  height: 85vh;
+  height: 80vh;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;

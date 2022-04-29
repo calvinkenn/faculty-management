@@ -186,9 +186,6 @@ const Admin = (props) => {
   return (
     <React.Fragment>
       <div className="admin-main">
-        <div className="admin-side-nav">
-          <div className="side-nav-menu">{/* <MenuIcon /> */}</div>
-        </div>
         <div className="user-main-container">
           <SuccessModal success={success} onClear={clearModals} />
           <ErrorModal error={error} onClear={clearModals} />

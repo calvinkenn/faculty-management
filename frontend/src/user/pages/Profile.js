@@ -17,6 +17,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import AccountInfo from "../components/AccountInformation/AccountInfo";
+import AccountCircleRounded from '@mui/icons-material/AccountCircleRounded';
 
 const menu = {
   overview: true,
@@ -89,9 +90,6 @@ const Profile = (props) => {
   return (
     <React.Fragment>
       <div className="user-main">
-        <div className="user-side-nav">
-          <div className="side-nav-menu">{/* <MenuIcon /> */}</div>
-        </div>
         <div className="user-main-container">
           <SuccessModal success={success} onClear={clearSuccess} />
           <MainNavigation />
@@ -112,49 +110,49 @@ const Profile = (props) => {
                   className={isMenuActive.overview ? "active" : ""}
                   onClick={() => menuChangeHandler("overview")}
                 >
-                  Overview
+                  <span>Overview</span>
                 </li>
                 <li
                   className={isMenuActive.accountInformation ? "active" : ""}
                   onClick={() => menuChangeHandler("accountInformation")}
                 >
-                  Account Information
+                 <span>Account Information</span>
                 </li>
                 <li
                   className={isMenuActive.basicInformation ? "active" : ""}
                   onClick={() => menuChangeHandler("basicInformation")}
                 >
-                  Basic Information
+                  <span>Basic Information</span>
                 </li>
                 <li
                   className={isMenuActive.contactInformation ? "active" : ""}
                   onClick={() => menuChangeHandler("contactInformation")}
                 >
-                  Contact Information
+                  <span>Contact Information</span>
                 </li>
                 <li
                   className={isMenuActive.education ? "active" : ""}
                   onClick={() => menuChangeHandler("education")}
                 >
-                  Educational Background
+                  <span>Educational Background</span>
                 </li>
                 <li
                   className={isMenuActive.civilService ? "active" : ""}
                   onClick={() => menuChangeHandler("civilService")}
                 >
-                  Civil Service
+                  <span>Civil Service</span>
                 </li>
                 <li
                   className={isMenuActive.workExperience ? "active" : ""}
                   onClick={() => menuChangeHandler("workExperience")}
                 >
-                  Work Experience
+                  <span>Work Experience</span>
                 </li>
                 <li
                   className={isMenuActive.training ? "active" : ""}
                   onClick={() => menuChangeHandler("training")}
                 >
-                  Trainings and Seminars
+                  <span>Trainings and Seminars</span>
                 </li>
               </ul>
             </SideBox>

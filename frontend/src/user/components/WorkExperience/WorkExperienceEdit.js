@@ -9,42 +9,44 @@ import {
   VALIDATOR_OPTIONAL,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 const WorkExperienceEdit = (props) => {
   const [salaryGradeList, setSalaryGradeList] = useState([]);
   const [salaryStepList, setSalaryStepList] = useState([]);
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       company: {
-        value: "",
+        value: props.editData ? props.editData.company : "",
         isValid: false,
       },
       position: {
-        value: "",
+        value: props.editData ? props.editData.position : "",
         isValid: false,
       },
       department: {
-        value: "",
+        value: props.editData ? props.editData.department : "",
         isValid: false,
       },
       fromDate: {
-        value: "",
+        value: props.editData ? props.editData.fromDate : "",
         isValid: false,
       },
       toDate: {
-        value: "",
+        value: props.editData ? props.editData.toDate : "",
         isValid: false,
       },
       monthlySalary: {
-        value: "",
+        value: props.editData ? props.editData.monthlySalary : "",
         isValid: false,
       },
       salaryGrade: {
-        value: "",
+        value: props.editData ? props.editData.salaryGrade : "",
         isValid: false,
       },
       salaryStep: {
-        value: "",
+        value: props.editData ? props.editData.salaryStep : "",
         isValid: false,
       },
       status: {
@@ -52,7 +54,7 @@ const WorkExperienceEdit = (props) => {
         isValid: false,
       },
       government: {
-        value: "",
+        value: props.editData ? props.editData.government : "",
         isValid: false,
       },
     },
@@ -79,16 +81,59 @@ const WorkExperienceEdit = (props) => {
     setSalaryStepList(sStep);
   }, []);
 
-  const submitAddHandler = (event) => {
-    //For Adding Data
-    console.log("clicked");
+  const submitAddHandler = async (event) => {
     event.preventDefault();
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/addWorkExperience",
+        "POST",
+        JSON.stringify({
+          company : formState.inputs.company.value,
+          position : formState.inputs.position.value,
+          department  : formState.inputs.department.value,
+          fromDate : formState.inputs.fromDate.value,
+          toDate : formState.inputs.toDate.value,
+          monthlySalary : formState.inputs.monthlySalary.value,
+          salaryGrade : formState.inputs.salaryGrade.value,
+          salaryStep : formState.inputs.salaryStep.value,
+          government : formState.inputs.government.value,
+          userId: storedData.userId,
+          token: storedData.token
+        }),
+        { "Content-Type": "application/json" },
+    );
+    props.setUserData(responseData.userWork, responseData.message);
+    props.updateAddModeState();
   };
 
-  const submitEditHandler = (event) => {
+  const submitEditHandler = async (event) => {
     //For Editing Data
-    console.log("clicked");
     event.preventDefault();
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/EditWorkExperience",
+        "PATCH",
+        
+        JSON.stringify({
+          company : formState.inputs.company.value,
+          position : formState.inputs.position.value,
+          department  : formState.inputs.department.value,
+          fromDate : formState.inputs.fromDate.value,
+          toDate : formState.inputs.toDate.value,
+          monthlySalary : formState.inputs.monthlySalary.value,
+          salaryGrade : formState.inputs.salaryGrade.value,
+          salaryStep : formState.inputs.salaryStep.value,
+          government : formState.inputs.government.value,
+          userId: storedData.userId,
+          token: storedData.token,
+          workId : props.editData._id
+        }),
+        { "Content-Type": "application/json" },
+    );
+    props.setUserData(responseData.userWork, responseData.message);
+    props.updateAddModeState();
   };
 
   return (
@@ -185,10 +230,11 @@ const WorkExperienceEdit = (props) => {
           initialValid={formState.inputs.salaryStep.isValid}
         />
         <Input
-          element="input"
+          element="select"
           id="government"
           type="text"
           label="Government"
+          items={['YES', 'NO']}
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}

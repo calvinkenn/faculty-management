@@ -52,7 +52,7 @@ const userSchema = mongoose.Schema({
   employmentType: { type: String, default: "" },
 
   //for profile
-  profilePic: { type: String, default: ""},
+  profilePic: { type: String, default: "" },
 });
 
 module.exports = mongoose.model("User", userSchema);

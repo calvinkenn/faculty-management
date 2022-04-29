@@ -1,34 +1,66 @@
 import React, { useState } from "react";
-import PrintModal from "../../../shared/components/UIElements/PrintModal";
 import PrintData, { ComponentToPrint } from "../PrintData/PrintData";
+import { Box, InputLabel, FormControl, Select, MenuItem } from "@mui/material";
 
 import OverviewList from "./OverviewList";
 
 const Overview = (props) => {
-  // const [errorM, setErrorM] = useState(null);
-  // const clearError = () => {
-  //   setErrorM(null);
-  // };
+  const [selectedFilter, setSelectedFilter] = React.useState(1);
+
+  const handleChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
+
+  const filteredDataToPrint = props.activeUserData?.filter((pendingUser) => {
+    if (selectedFilter === 2) {
+      return pendingUser.faculty.includes("BSIT");
+    } else if (selectedFilter === 3) {
+      return pendingUser.faculty.includes("BLIS");
+    } else if (selectedFilter === 4) {
+      return pendingUser.faculty.includes("ALLIED");
+    } else {
+      return pendingUser;
+    }
+  });
 
   if (props.isPrintMode) {
     return (
       <div>
-        <PrintData activeUserData={props.activeUserData} />
+        <form>
+          <Box sx={{ minWidth: 60 }}>
+            <FormControl sx={{ m: 2, minWidth: 220 }}>
+              <InputLabel id="inputData">Select Data to Print</InputLabel>
+              <Select
+                labelId="filter"
+                id="filter"
+                value={selectedFilter}
+                label="Select Data to Print"
+                onChange={handleChange}
+              >
+                <MenuItem value={1}>All Faculty Members</MenuItem>
+                <MenuItem value={2}>BSIT Faculty Members</MenuItem>
+                <MenuItem value={3}>BLIS Faculty Members</MenuItem>
+                <MenuItem value={4}>ALLIED Faculty Members</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </form>
+
+        {filteredDataToPrint?.length > 0 ? (
+          <PrintData activeUserData={filteredDataToPrint} />
+        ) : (
+          <h2>No data to print</h2>
+        )}
       </div>
     );
   } else {
     return (
-      <React.Fragment>
-        {/* {props.isPrintMode && (
-        <PrintModal activeUserData={props.activeUserData} onClear={props.printModeHandler} />
-      )} */}
-        <OverviewList
-          activeUserData={props.activeUserData}
-          pendingUserData={props.pendingUserData}
-          deactivatedUserData={props.deactivatedUserData}
-          rejectedUserData={props.rejectedUserData}
-        />
-      </React.Fragment>
+      <OverviewList
+        activeUserData={props.activeUserData}
+        pendingUserData={props.pendingUserData}
+        deactivatedUserData={props.deactivatedUserData}
+        rejectedUserData={props.rejectedUserData}
+      />
     );
   }
 };

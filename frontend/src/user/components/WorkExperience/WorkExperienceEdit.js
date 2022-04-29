@@ -10,6 +10,7 @@ import {
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 const WorkExperienceEdit = (props) => {
   const [salaryGradeList, setSalaryGradeList] = useState([]);
@@ -103,7 +104,7 @@ const WorkExperienceEdit = (props) => {
         }),
         { "Content-Type": "application/json" },
     );
-    props.setUserData(responseData.userWork, responseData.message);
+    props.setUserData(responseData.WorkExperience, responseData.message);
     props.updateAddModeState();
   };
 
@@ -113,7 +114,7 @@ const WorkExperienceEdit = (props) => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
     const responseData = await sendRequest(
-      "http://localhost:5000/api/users/EditWorkExperience",
+      "http://localhost:5000/api/users/editWorkExperience",
         "PATCH",
         
         JSON.stringify({
@@ -138,6 +139,7 @@ const WorkExperienceEdit = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <Input
           element="input"

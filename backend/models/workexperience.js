@@ -9,8 +9,8 @@ const workSchema = mongoose.Schema({
     fromDate : {type : String , required :true},
     toDate : {type : String , required :true},
     monthlySalary : {type : String , required :true},
-    salaryGrade : {type : String , required :true},
-    salaryStep : {type : String , required :true},
+    salaryGrade : {type : String},
+    salaryStep : {type : String},
     government : {type : String , required :true},
     user : {type : mongoose.Types.ObjectId, required: true, ref : 'User'},
 

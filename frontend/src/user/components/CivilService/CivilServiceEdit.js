@@ -10,7 +10,7 @@ import {
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
-
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const CivilServiceEdit = (props) => {
   const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
   const today = new Date()
@@ -120,6 +120,7 @@ const CivilServiceEdit = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <Input
           element="input"

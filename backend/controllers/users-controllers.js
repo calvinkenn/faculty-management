@@ -7,6 +7,7 @@ const User = require("../models/user");
 const Admin = require("../models/admin");
 const Education = require("../models/education");
 const Civil = require("../models/civil");
+const Work = require("../models/workexperience");
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 const { findById } = require("../models/user");
@@ -590,6 +591,124 @@ const deleteCivil = async (req, res, next) => {
     .status(201)
     .json({ userCivil: newUpdate, message: "Civil Service Deleted" });
 };
+
+const getWorkExperience = async (req, res, next) =>{
+  const { userId } = req.body;
+  const userWork = await Work.find({ user: userId });
+  res.json({ WorkExperience: userWork });
+}
+const getEditWorkExperience = async (req, res ,next) =>{
+  const { workId } = req.body;
+
+  const getEditWork = await Work.findById(workId);
+  res.json({ editData: getEditWork });
+}
+const EditWorkExperience = async (req, res, next) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+  const {
+    company,
+    position,
+    department,
+    fromDate,
+    toDate,
+    monthlySalary,
+    salaryGrade,
+    salaryStep,
+    government,
+    userId,
+    workId,
+  } = req.body;
+
+  let editWork = await Work.findByIdAndUpdate(workId, {
+    company,
+    position,
+    department,
+    fromDate,
+    toDate,
+    monthlySalary,
+    salaryGrade,
+    salaryStep,
+    government,
+  });
+
+  const newUpdate = await Work.find({ user: userId });
+  if (editWork) {
+    res
+      .status(201)
+      .json({ userWork: newUpdate, message: "Work Experience Updated" });
+  }
+}
+const addWorkExperience = async (req, res ,next) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+  const {
+    company,
+    position,
+    department,
+    fromDate,
+    toDate,
+    monthlySalary,
+    salaryGrade,
+    salaryStep,
+    government,
+    userId,
+  } = req.body;
+  let user = await User.findById(userId);
+
+  const newWork = new Work({
+    company,
+    position,
+    department,
+    fromDate,
+    toDate,
+    monthlySalary,
+    salaryGrade,
+    salaryStep,
+    government,
+    user : userId,
+  });
+  const sess = await mongoose.startSession();
+  sess.startTransaction();
+  await newWork.save({ session: sess });
+  user.work.push(newWork);
+  await user.save({ session: sess });
+  sess.commitTransaction();
+
+  const WorkExperience = await Work.find({ user: userId }).sort({
+    toDate: 1,
+  });
+
+  res
+    .status(200)
+    .json({ message: "Work Added", WorkExperience: WorkExperience });
+}
+const deleteWorkExperience = async (req, res ,next) =>{
+  const { workId, userId } = req.body;
+
+  const work = await Work.findById(workId);
+  const user = await User.findById(userId);
+  const sess = await mongoose.startSession();
+  sess.startTransaction();
+  await work.remove({ session: sess });
+  user.work.pull(work);
+  await user.save({ session: sess });
+  sess.commitTransaction();
+
+  const newUpdate = await Work.find({ user: userId });
+  res
+    .status(201)
+    .json({ WorkExperience: newUpdate, message: "Work Experience Deleted" });
+}
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
@@ -607,3 +726,10 @@ exports.addUserCivil = addUserCivil;
 exports.deleteCivil = deleteCivil;
 exports.editCivil = editCivil;
 exports.getEditCivil = getEditCivil;
+
+//for work experience 
+exports.getWorkExperience = getWorkExperience;
+exports.addWorkExperience = addWorkExperience;
+exports.deleteWorkExperience = deleteWorkExperience;
+exports.getEditWorkExperience = getEditWorkExperience;
+exports.EditWorkExperience = EditWorkExperience;

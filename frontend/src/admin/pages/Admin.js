@@ -42,6 +42,7 @@ const Admin = (props) => {
     Object.keys(stateCopy).forEach((key) => (stateCopy[key] = false)); //Set All Button False
     stateCopy[menuName] = true; //Set Button True
     setIsMenuActive(stateCopy);
+    setIsPrintMode(false);
     setSearchField("");
   };
 

@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -8,6 +11,8 @@ const HttpError = require("./models/http-error");
 const app = express();
 //code for body parser
 app.use(bodyParser.json());
+
+app.use("/uploads/images", express.static(path.join("uploads", "images"))); //middleware for file path
 
 //code to allow communication between 2 local host
 
@@ -30,6 +35,12 @@ app.use((req, res, next) => {
 });
 
 app.use((error, req, res, next) => {
+  if (req.file) {
+    fs.unlink(req.file.path, (err) => {
+      console.log(err);
+    });
+  }
+
   if (res.headerSent) {
     return next(error);
   }
@@ -40,7 +51,7 @@ app.use((error, req, res, next) => {
 //connection to mongoose
 mongoose
   .connect(
-    'mongodb+srv://admin:QB3LxtSqYQN4U0Zv@cluster0.ldb3t.mongodb.net/mis_test?retryWrites=true&w=majority'
+    "mongodb+srv://admin:QB3LxtSqYQN4U0Zv@cluster0.ldb3t.mongodb.net/mis_test?retryWrites=true&w=majority"
   )
   .then(() => {
     app.listen(5000);

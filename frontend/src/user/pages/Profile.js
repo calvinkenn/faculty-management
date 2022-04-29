@@ -14,6 +14,7 @@ import "./Profile.css";
 import TopActionBar from "../components/TopActionBar";
 import ContactInfo from "../components/ContactInformation/ContactInfo";
 import { AuthContext } from "../../shared/context/auth-context";
+import { useHttpClient } from "../../shared/hooks/http-hook";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import AccountInfo from "../components/AccountInformation/AccountInfo";
 
@@ -29,7 +30,7 @@ const menu = {
 };
 
 const Profile = (props) => {
-  const auth = useContext(AuthContext);
+  const { error, sendRequest, clearError } = useHttpClient();
   const [isMenuActive, setIsMenuActive] = useState(menu);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAddMode, setIsAddMode] = useState(false);
@@ -55,26 +56,30 @@ const Profile = (props) => {
   };
   useEffect(() => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    const sendRequest = async () => {
-      const response = await fetch("http://localhost:5000/api/users/userData", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: userIdByParams ? userIdByParams : storedData.userId,
-          token: storedData.token,
-        }),
-      });
-      const responseData = await response.json();
-      setUserData(responseData.userData);
+    const getCurrentUser = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/userData",
+          "POST",
+          JSON.stringify({
+            userId: userIdByParams ? userIdByParams : storedData.userId,
+            token: storedData.token,
+          }),
+          { "Content-Type": "application/json" }
+        );
+        setUserData(responseData.userData);
+      } catch (err) {}
     };
-    sendRequest();
-  }, []);
+    getCurrentUser();
+    setSuccess("");
+  }, [sendRequest, success]);
 
+  console.log(userData);
   //function to update state
   const updateState = (data, message) => {
     setIsEditMode(false);
     setIsAddMode(false);
-    setUserData(data);
+    // setUserData(data);
     setSuccess(message);
   };
   //function for clearing if there is no error
@@ -93,7 +98,14 @@ const Profile = (props) => {
           <div className="profile-container">
             <SideBox className="side-container">
               <div className="side-container__image">
-                <img src={profile} alt="profile-pic" />
+                <img
+                  src={
+                    userData.profilePic !== ""
+                      ? `http://localhost:5000/${userData.profilePic}`
+                      : profile
+                  }
+                  alt="profile-pic"
+                />
               </div>
               <ul>
                 <li

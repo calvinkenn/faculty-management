@@ -40,14 +40,19 @@ const userSchema = mongoose.Schema({
   alternateEmail: { type: String, default: "" },
 
   //for account access
-  permission : { type: String, default : 'pending'},
-  education : [{type: mongoose.Types.ObjectId, required : true, ref : 'Education'}],
-  civil : [{type: mongoose.Types.ObjectId, required : true, ref : 'Civil'}],
+  permission: { type: String, default: "pending" },
+  education: [
+    { type: mongoose.Types.ObjectId, required: true, ref: "Education" },
+  ],
+  civil: [{ type: mongoose.Types.ObjectId, required: true, ref: "Civil" }],
 
   //for employee type and faculty
 
-  faculty : { type: String, default: ""},
-  employmentType : {type : String, default: ""}
+  faculty: { type: String, default: "" },
+  employmentType: { type: String, default: "" },
+
+  //for profile
+  profilePic: { type: String, default: ""},
 });
 
 module.exports = mongoose.model("User", userSchema);

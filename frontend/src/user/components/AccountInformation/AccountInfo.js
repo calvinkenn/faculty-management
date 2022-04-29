@@ -23,11 +23,11 @@ const AccountInfo = (props) => {
       <AccountInfoItem
         changePasswordHandler={changePasswordHandler}
         isEditMode={props.isEditMode}
+        profilePic={props.userData.profilePic}
         employeeNum={props.userData.employeeNum}
         faculty={props.userData.faculty}
         employmentType={props.userData.employmentType}
         email={props.userData.email}
-        
       />
     );
   }

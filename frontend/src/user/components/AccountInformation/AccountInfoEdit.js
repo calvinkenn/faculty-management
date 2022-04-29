@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
+import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 import { useForm } from "../../../shared/hooks/form-hook";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import {
@@ -15,7 +16,11 @@ const AccountInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
-      employeeNumber: {
+      profilePic: {
+        value: null,
+        isValid: true,
+      },
+      employeeNum: {
         value: props.userEdit.employeeNum,
         isValid: true,
       },
@@ -52,39 +57,53 @@ const AccountInfoEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
+      const formData = new FormData();
+      formData.append("userId", storedData.userId);
+      formData.append("token", storedData.token);
+      formData.append("employeeNum", formState.inputs.employeeNum.value);
+      formData.append("faculty", formState.inputs.faculty.value);
+      formData.append("employmentType", formState.inputs.employmentType.value);
+      formData.append("email", formState.inputs.email.value);
+      formData.append("profilePic", formState.inputs.profilePic.value);
+      console.log(formData.get("employeeNum"));
       const responseData = await sendRequest(
         "http://localhost:5000/api/users/editAccountInfo", //Change to account
         "PATCH",
-        JSON.stringify({
-          userId: storedData.userId,
-          token: storedData.token,
-          employeeNum: formState.inputs.employeeNumber.value,
-          faculty: formState.inputs.faculty.value,
-          employmentType: formState.inputs.employmentType.value,
-          email: formState.inputs.email.value,
-        }),
-        {
-          "Content-Type": "application/json",
-        }
+        formData
+        // JSON.stringify({
+        //   userId: storedData.userId,
+        //   token: storedData.token,
+        //   employeeNum: formState.inputs.employeeNum.value,
+        //   faculty: formState.inputs.faculty.value,
+        //   employmentType: formState.inputs.employmentType.value,
+        // }),
       );
       props.setEditMode(responseData.updatedUser, responseData.message);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={submitHandler}>
+        <ImageUpload
+          center
+          id="profilePic"
+          onInput={inputHandler}
+          previewUrl={props.userEdit.profilePic}
+        />
         <Input
           element="input"
-          id="employeeNumber"
+          id="employeeNum"
           type="text"
           label="Employee Number"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
           onInput={inputHandler}
-          initialValue={formState.inputs.employeeNumber.value}
-          initialValid={formState.inputs.employeeNumber.isValid}
+          initialValue={formState.inputs.employeeNum.value}
+          initialValid={formState.inputs.employeeNum.isValid}
         />
         <Input
           element="select"

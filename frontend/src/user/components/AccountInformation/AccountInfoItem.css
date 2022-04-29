@@ -8,3 +8,7 @@
 .account-container__data {
     width: 30%;
 }
+
+.account-container__image img {
+    width: 150px;
+}

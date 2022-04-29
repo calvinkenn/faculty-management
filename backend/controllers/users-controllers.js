@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const Admin = require("../models/admin");
 const Education = require("../models/education");
-const Civil = require('../models/civil');
+const Civil = require("../models/civil");
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 const { findById } = require("../models/user");
@@ -281,28 +281,48 @@ const editAccountInfo = async (req, res, next) => {
     const error = new HttpError(newList[0], 422);
     return next(error);
   }
+  // const { userId, employeeNum, faculty, employmentType, email } = req.body;
+  // console.log(employeeNum);
+  // const user = await User.findByIdAndUpdate(userId, {
+  //   employeeNum,
+  //   faculty,
+  //   employmentType,
+  //   email,
+  //   profilePic: req.file.path,
+  // });
+  // let updatedUser;
+  // if (user) {
+  //   updatedUser = await User.findById(userId);
+  // }
+
+  // res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
+
   const { userId, employeeNum, faculty, employmentType, email } = req.body;
-  const emailValidate = await User.findOne({email : email})
-  if(emailValidate.id === userId){
-    
+
+  const emailValidate = await User.findOne({ email: email });
+  console.log(emailValidate);
+  if (emailValidate.id === userId) {
     const user = await User.findByIdAndUpdate(userId, {
       employeeNum,
       faculty,
       employmentType,
       email,
+      profilePic: req.file.path,
     });
+    let updatedUser;
     if (user) {
       updatedUser = await User.findById(userId);
     }
-    res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
-  }else{
+    res
+      .status(200)
+      .json({ message: "Update Success", updatedUser: updatedUser });
+  } else {
     const error = new HttpError(
       "Email is already registered to another account!",
       401
     );
     return next(error);
   }
-
 };
 
 const accountChangePassword = async (req, res, next) => {
@@ -345,8 +365,17 @@ const accountChangePassword = async (req, res, next) => {
 };
 
 const addEducation = async (req, res, next) => {
-  const { level, school, degree, fromDate, toDate, awards, userId, yearGraduated, highestLevel } =
-    req.body;
+  const {
+    level,
+    school,
+    degree,
+    fromDate,
+    toDate,
+    awards,
+    userId,
+    yearGraduated,
+    highestLevel,
+  } = req.body;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     errorsList = errors.array();
@@ -439,7 +468,7 @@ const updateEducation = async (req, res, next) => {
 };
 const deleteEducation = async (req, res, next) => {
   const { educId, userId } = req.body;
-  
+
   const education = await Education.findById(educId);
   const user = await User.findById(userId);
   const sess = await mongoose.startSession();
@@ -457,12 +486,12 @@ const deleteEducation = async (req, res, next) => {
     .json({ userEducation: newUpdate, message: "Education Deleted" });
 };
 
-const getUserCivil = async (req, res ,next) =>{
-  const {userId} = req.body;
-  const userCivil = await Civil.find({user : userId})
+const getUserCivil = async (req, res, next) => {
+  const { userId } = req.body;
+  const userCivil = await Civil.find({ user: userId });
   res.json({ userCivil: userCivil });
-}
-const addUserCivil = async (req, res, next) =>{
+};
+const addUserCivil = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     errorsList = errors.array();
@@ -470,46 +499,47 @@ const addUserCivil = async (req, res, next) =>{
     const error = new HttpError(newList[0], 422);
     return next(error);
   }
-  const {career,
+  const {
+    career,
     rating,
     date,
     placeOfExam,
     licenseNumber,
     licenseValidity,
-    userId} = req.body;
+    userId,
+  } = req.body;
 
+  let user = await User.findById(userId);
 
-    let user = await User.findById(userId);
-  
-    const newCivil = new Civil({
-      career,
-      rating,
-      date,
-      placeOfExam,
-      licenseNumber,
-      licenseValidity,
-      user: userId
-    });
-    const sess = await mongoose.startSession();
-    sess.startTransaction();
-    await newCivil.save({ session: sess });
-    user.civil.push(newCivil);
-    await user.save({ session: sess });
-    sess.commitTransaction();
-  
-    const userCivil = await Civil.find({ user: userId });
-  
-    res
-      .status(200)
-      .json({ message: "Civil Service Added", userCivil: userCivil });
-}
-const getEditCivil = async (req, res, next) =>{
+  const newCivil = new Civil({
+    career,
+    rating,
+    date,
+    placeOfExam,
+    licenseNumber,
+    licenseValidity,
+    user: userId,
+  });
+  const sess = await mongoose.startSession();
+  sess.startTransaction();
+  await newCivil.save({ session: sess });
+  user.civil.push(newCivil);
+  await user.save({ session: sess });
+  sess.commitTransaction();
+
+  const userCivil = await Civil.find({ user: userId });
+
+  res
+    .status(200)
+    .json({ message: "Civil Service Added", userCivil: userCivil });
+};
+const getEditCivil = async (req, res, next) => {
   const { civilId } = req.body;
 
   const getEditCivil = await Civil.findById(civilId);
   res.json({ editData: getEditCivil });
-}
-const editCivil = async(req, res, next)=>{
+};
+const editCivil = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -527,7 +557,6 @@ const editCivil = async(req, res, next)=>{
     civilId,
   } = req.body;
 
-
   let editCivil = await Civil.findByIdAndUpdate(civilId, {
     career,
     rating,
@@ -543,10 +572,10 @@ const editCivil = async(req, res, next)=>{
       .status(201)
       .json({ userCivil: newUpdate, message: "Education Updated" });
   }
-}
-const deleteCivil =  async(req, res, next) =>{
+};
+const deleteCivil = async (req, res, next) => {
   const { civilId, userId } = req.body;
-  
+
   const civil = await Civil.findById(civilId);
   const user = await User.findById(userId);
   const sess = await mongoose.startSession();
@@ -560,7 +589,7 @@ const deleteCivil =  async(req, res, next) =>{
   res
     .status(201)
     .json({ userCivil: newUpdate, message: "Civil Service Deleted" });
-}
+};
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;

@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../../../shared/components/FormElements/Button";
 
 import Input from "../../../shared/components/FormElements/Input";
+import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 import { useForm } from "../../../shared/hooks/form-hook";
 import {
   VALIDATOR_EMAIL,
@@ -41,6 +42,10 @@ const TrainingEdit = (props) => {
         value: "",
         isValid: false,
       },
+      certificatePic: {
+        value: null,
+        isValid: false,
+      },
     },
     false
   );
@@ -60,6 +65,12 @@ const TrainingEdit = (props) => {
   return (
     <React.Fragment>
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
+        <ImageUpload
+          center
+          id="certificatePic"
+          // onInput={inputHandler}
+          // previewUrl={props.userEdit.certificatePic}
+        />
         <Input
           element="input"
           id="title"

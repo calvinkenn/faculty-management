@@ -282,26 +282,11 @@ const editAccountInfo = async (req, res, next) => {
     const error = new HttpError(newList[0], 422);
     return next(error);
   }
-  // const { userId, employeeNum, faculty, employmentType, email } = req.body;
-  // console.log(employeeNum);
-  // const user = await User.findByIdAndUpdate(userId, {
-  //   employeeNum,
-  //   faculty,
-  //   employmentType,
-  //   email,
-  //   profilePic: req.file.path,
-  // });
-  // let updatedUser;
-  // if (user) {
-  //   updatedUser = await User.findById(userId);
-  // }
 
-  // res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
-
-  const { userId, employeeNum, faculty, employmentType, email } = req.body;
+  const { userId, employeeNum, faculty, employmentType, email, profilePic } = req.body;
 
   const emailValidate = await User.findOne({ email: email });
-  console.log(emailValidate);
+
   if (emailValidate.id === userId) {
     const user = await User.findByIdAndUpdate(userId, {
       employeeNum,
@@ -592,18 +577,18 @@ const deleteCivil = async (req, res, next) => {
     .json({ userCivil: newUpdate, message: "Civil Service Deleted" });
 };
 
-const getWorkExperience = async (req, res, next) =>{
+const getWorkExperience = async (req, res, next) => {
   const { userId } = req.body;
   const userWork = await Work.find({ user: userId });
   res.json({ WorkExperience: userWork });
-}
-const getEditWorkExperience = async (req, res ,next) =>{
+};
+const getEditWorkExperience = async (req, res, next) => {
   const { workId } = req.body;
 
   const getEditWork = await Work.findById(workId);
   res.json({ editData: getEditWork });
-}
-const EditWorkExperience = async (req, res, next) =>{
+};
+const EditWorkExperience = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -642,8 +627,8 @@ const EditWorkExperience = async (req, res, next) =>{
       .status(201)
       .json({ userWork: newUpdate, message: "Work Experience Updated" });
   }
-}
-const addWorkExperience = async (req, res ,next) =>{
+};
+const addWorkExperience = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     errorsList = errors.array();
@@ -675,7 +660,7 @@ const addWorkExperience = async (req, res ,next) =>{
     salaryGrade,
     salaryStep,
     government,
-    user : userId,
+    user: userId,
   });
   const sess = await mongoose.startSession();
   sess.startTransaction();
@@ -691,8 +676,8 @@ const addWorkExperience = async (req, res ,next) =>{
   res
     .status(200)
     .json({ message: "Work Added", WorkExperience: WorkExperience });
-}
-const deleteWorkExperience = async (req, res ,next) =>{
+};
+const deleteWorkExperience = async (req, res, next) => {
   const { workId, userId } = req.body;
 
   const work = await Work.findById(workId);
@@ -708,7 +693,7 @@ const deleteWorkExperience = async (req, res ,next) =>{
   res
     .status(201)
     .json({ WorkExperience: newUpdate, message: "Work Experience Deleted" });
-}
+};
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
@@ -727,7 +712,7 @@ exports.deleteCivil = deleteCivil;
 exports.editCivil = editCivil;
 exports.getEditCivil = getEditCivil;
 
-//for work experience 
+//for work experience
 exports.getWorkExperience = getWorkExperience;
 exports.addWorkExperience = addWorkExperience;
 exports.deleteWorkExperience = deleteWorkExperience;

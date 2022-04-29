@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -9,16 +9,18 @@ import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
+  VALIDATOR_REQUIRE,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const AccountInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
+  const [imageError, setImageError] = useState();
   const [formState, inputHandler, setFormData] = useForm(
     {
       profilePic: {
         value: null,
-        isValid: true,
+        isValid: false,
       },
       employeeNum: {
         value: props.userEdit.employeeNum,
@@ -65,18 +67,16 @@ const AccountInfoEdit = (props) => {
       formData.append("employmentType", formState.inputs.employmentType.value);
       formData.append("email", formState.inputs.email.value);
       formData.append("profilePic", formState.inputs.profilePic.value);
-      console.log(formData.get("employeeNum"));
+
+      if (!formState.inputs.profilePic.value) {
+        setImageError("Please upload photo");
+        return;
+      }
+
       const responseData = await sendRequest(
         "http://localhost:5000/api/users/editAccountInfo", //Change to account
         "PATCH",
         formData
-        // JSON.stringify({
-        //   userId: storedData.userId,
-        //   token: storedData.token,
-        //   employeeNum: formState.inputs.employeeNum.value,
-        //   faculty: formState.inputs.faculty.value,
-        //   employmentType: formState.inputs.employmentType.value,
-        // }),
       );
       props.setEditMode(responseData.updatedUser, responseData.message);
     } catch (err) {
@@ -84,9 +84,16 @@ const AccountInfoEdit = (props) => {
     }
   };
 
+  const clearImageError = () => {
+    setImageError("");
+  };
+
   return (
     <React.Fragment>
-      <ErrorModal error={error} onClear={clearError} />
+      <ErrorModal
+        error={imageError ? imageError : error}
+        onClear={imageError ? clearImageError : clearError}
+      />
       <form onSubmit={submitHandler}>
         <ImageUpload
           center

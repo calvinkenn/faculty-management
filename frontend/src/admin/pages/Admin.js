@@ -240,6 +240,7 @@ const Admin = (props) => {
                   deactivatedUserData={deactivatedUserData}
                   rejectedUserData={rejectedUserData}
                   isPrintMode={isPrintMode}
+                  printModeHandler={printModeHandler}
                 />
               )}
               {isMenuActive.facultyMembers && (

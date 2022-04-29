@@ -8,6 +8,7 @@ const Admin = require("../models/admin");
 const Education = require("../models/education");
 const Civil = require("../models/civil");
 const Work = require("../models/workexperience");
+const Training = require("../models/training");
 const jwt = require("jsonwebtoken");
 const { default: mongoose } = require("mongoose");
 const { findById } = require("../models/user");
@@ -694,6 +695,80 @@ const deleteWorkExperience = async (req, res, next) => {
     .status(201)
     .json({ WorkExperience: newUpdate, message: "Work Experience Deleted" });
 };
+
+const getUserTraining = async(req,res,next) =>{
+  const { userId } = req.body;
+  const userWork = await Training.find({ user: userId });
+  res.json({ userTraining: userWork });
+}
+const addUserTraining = async(req,res,next) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+  const {
+    title,
+    type,
+    fromDate,
+    toDate,
+    hours,
+    typeOfLearning,
+    conducted,
+    userId,
+  } = req.body;
+  let user = await User.findById(userId);
+
+  const newTraining = new Training({
+    title,
+    type,
+    fromDate,
+    toDate,
+    hours,
+    typeOfLearning,
+    conducted,
+    user : userId,
+  });
+  const sess = await mongoose.startSession();
+  sess.startTransaction();
+  await newTraining.save({ session: sess });
+  user.training.push(newTraining);
+  await user.save({ session: sess });
+  sess.commitTransaction();
+
+  const userTraining = await Training.find({ user: userId }).sort({
+    toDate: 1,
+  });
+
+  res
+    .status(200)
+    .json({ message: "Training/Seminar Added!", userTraining: userTraining });
+}
+const getEditTraining = async(req,res,next) =>{
+
+}
+const editUserTraining = async(req,res,next) =>{
+
+}
+const deleteUserTraining = async (req,res,next) =>{
+  const { trainingId, userId } = req.body;
+
+  const training = await Training.findById(trainingId);
+  const user = await User.findById(userId);
+  const sess = await mongoose.startSession();
+  sess.startTransaction();
+  await training.remove({ session: sess });
+  user.training.pull(training);
+  await user.save({ session: sess });
+  sess.commitTransaction();
+
+  const newUpdate = await Training.find({ user: userId });
+  res
+    .status(201)
+    .json({ userTraining: newUpdate, message: "Work Experience Deleted" });
+}
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;
@@ -718,3 +793,8 @@ exports.addWorkExperience = addWorkExperience;
 exports.deleteWorkExperience = deleteWorkExperience;
 exports.getEditWorkExperience = getEditWorkExperience;
 exports.EditWorkExperience = EditWorkExperience;
+
+//for training
+exports.getUserTraining = getUserTraining;
+exports.addUserTraining = addUserTraining;
+exports.deleteUserTraining = deleteUserTraining;

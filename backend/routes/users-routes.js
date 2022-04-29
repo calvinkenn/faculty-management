@@ -314,45 +314,51 @@ router.post(
 );
 router.delete("/deleteWorkExperience", userControllers.deleteWorkExperience);
 router.post(
-  "/getEditWorkExperience",
-  [
-    check("company")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your work company!"),
-    check("position")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your work positon!"),
-    check("department")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your work department!"),
-    check("fromDate")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your starting work date!"),
-    check("fromDate")
-      .isNumeric()
-      .withMessage("please input numbers only in 'From' Date"),
-    check("toDate")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your last work date!"),
-    check("toDate")
-      .isNumeric()
-      .withMessage("please input numbers only in 'To' Date"),
-    check("monthlySalary")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your monthly salary!"),
-    check("government")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify if your previous work is government or not"),
-  ],
-  userControllers.getEditWorkExperience
-);
-router.patch("/editWorkExperience", userControllers.EditWorkExperience);
+  "/getEditWorkExperience",userControllers.getEditWorkExperience);
+router.patch("/editWorkExperience",  [
+  check("company")
+    .not()
+    .isEmpty()
+    .withMessage("Please specify your work company!"),
+  check("position")
+    .not()
+    .isEmpty()
+    .withMessage("Please specify your work positon!"),
+  check("department")
+    .not()
+    .isEmpty()
+    .withMessage("Please specify your work department!"),
+  check("fromDate")
+    .not()
+    .isEmpty()
+    .withMessage("Please specify your starting work date!"),
+  check("fromDate")
+    .isNumeric()
+    .withMessage("please input numbers only in 'From' Date"),
+  check("toDate")
+    .not()
+    .isEmpty()
+    .withMessage("Please specify your last work date!"),
+  check("toDate")
+    .isNumeric()
+    .withMessage("please input numbers only in 'To' Date"),
+  check("monthlySalary")
+    .not()
+    .isEmpty()
+    .withMessage("Please specify your monthly salary!"),
+  check("government")
+    .not()
+    .isEmpty()
+    .withMessage("Please specify if your previous work is government or not"),
+], userControllers.EditWorkExperience);
+
+//for training and seminar
+
+router.post('/getUserTraining', userControllers.getUserTraining);
+router.post('/addUserTraining', userControllers.addUserTraining);
+router.post('/getEditTraining',);
+router.patch('/editUserTraining');
+router.delete('/deleteUserTraining', userControllers.deleteUserTraining);
+
 
 module.exports = router;

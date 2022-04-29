@@ -10,8 +10,10 @@ import {
   VALIDATOR_OPTIONAL,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
-
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const TrainingEdit = (props) => {
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
@@ -50,10 +52,29 @@ const TrainingEdit = (props) => {
     false
   );
 
-  const submitAddHandler = (event) => {
+  const submitAddHandler = async (event) => {
     //For Adding Data
-    console.log("clicked");
     event.preventDefault();
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/addUserTraining",
+        "POST",
+        JSON.stringify({
+          title : formState.inputs.title.value,
+          type : formState.inputs.type.value,
+          fromDate: formState.inputs.fromDate.value,
+          toDate: formState.inputs.toDate.value,
+          hours: formState.inputs.hours.value,
+          typeOfLearning : formState.inputs.typeOfLearning.value,
+          conducted : formState.inputs.conducted.value,
+          userId: storedData.userId,
+          token: storedData.token
+        }),
+        { "Content-Type": "application/json" },
+    );
+    props.setUserData(responseData.userTraining, responseData.message);
+    props.updateAddModeState();
   };
 
   const submitEditHandler = (event) => {
@@ -64,6 +85,7 @@ const TrainingEdit = (props) => {
 
   return (
     <React.Fragment>
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <ImageUpload
           center

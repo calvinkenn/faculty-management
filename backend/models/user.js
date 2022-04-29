@@ -46,6 +46,7 @@ const userSchema = mongoose.Schema({
   ],
   civil: [{ type: mongoose.Types.ObjectId, required: true, ref: "Civil" }],
   work: [{ type: mongoose.Types.ObjectId, required: true, ref: "WorkExperience" }],
+  training: [{ type: mongoose.Types.ObjectId, required: true, ref: "Training" }],
 
   //for employee type and faculty
 

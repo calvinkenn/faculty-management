@@ -3,9 +3,10 @@ import React, { useState } from "react";
 import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./TrainingItem.css";
-
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 const TrainingItem = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -19,9 +20,27 @@ const TrainingItem = (props) => {
     props.setIsEditModeHandler(true);
   };
 
-  const confirmDeleteHandler = () => {
+  const confirmDeleteHandler =  async () => {
     setShowConfirmModal(false);
-    console.log("DELETING...");
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const responseData = await sendRequest('http://localhost:5000/api/users/deleteUserTraining',
+    "DELETE",
+    JSON.stringify({
+      trainingId : props.trainingId,
+      userId :  storedData.userId
+    }),
+    { "Content-Type": "application/json" }
+    );
+
+    const getUserTraining = await fetch("http://localhost:5000/api/users/getUserTraining", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: storedData.userId,
+      }),
+    });
+    const getUserTrainingData = await getUserTraining.json();
+    props.setUserData(getUserTrainingData.userTraining, responseData.message);
   };
 
   return (

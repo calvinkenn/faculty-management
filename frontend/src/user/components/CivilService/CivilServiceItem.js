@@ -33,7 +33,6 @@ const CivilServiceItem = (props) => {
   const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    setShowConfirmModal(false);
     const responseData = await sendRequest('http://localhost:5000/api/users/deleteCivil',
     "DELETE",
     JSON.stringify({

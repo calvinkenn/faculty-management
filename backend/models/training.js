@@ -9,6 +9,7 @@ const trainingSchema = mongoose.Schema({
     hours: { type: String, required: true },
     typeOfLearning: { type: String, required: true },
     conducted: { type: String, required: true },
+    certificatePic: { type: String, default: "" },
     user : {type : mongoose.Types.ObjectId, required: true, ref : 'User'},
 });
 

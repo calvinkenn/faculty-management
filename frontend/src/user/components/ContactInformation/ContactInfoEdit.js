@@ -1,6 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Checkbox, FormControlLabel } from "@mui/material";
-
+import {
+  Checkbox,
+  FormControlLabel,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
+import {
+  regions,
+  provinces,
+  cities,
+  barangays,
+} from "select-philippines-address";
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import { useForm } from "../../../shared/hooks/form-hook";
@@ -17,6 +29,26 @@ const ContactInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [isSameAddress, setIsSameAddress] = useState(false);
 
+  const [regionDataR, setRegionR] = useState([]);
+  const [provinceDataR, setProvinceR] = useState([]);
+  const [cityDataR, setCityR] = useState([]);
+  const [barangayDataR, setBarangayR] = useState([]);
+
+  const [regionDataP, setRegionP] = useState([]);
+  const [provinceDataP, setProvinceP] = useState([]);
+  const [cityDataP, setCityP] = useState([]);
+  const [barangayDataP, setBarangayP] = useState([]);
+
+  const [regionAddrR, setRegionAddrR] = useState("");
+  const [provinceAddrR, setProvinceAddrR] = useState("");
+  const [cityAddrR, setCityAddrR] = useState("");
+  const [barangayAddrR, setBarangayAddrR] = useState("");
+
+  const [regionAddrP, setRegionAddrP] = useState("");
+  const [provinceAddrP, setProvinceAddrP] = useState("");
+  const [cityAddrP, setCityAddrP] = useState("");
+  const [barangayAddrP, setBarangayAddrP] = useState("");
+
   const [formState, inputHandler, setFormData] = useForm(
     {
       houseNoR: {
@@ -29,18 +61,6 @@ const ContactInfoEdit = (props) => {
       },
       locationTypeR: {
         value: props.userEdit.locationTypeR,
-        isValid: false,
-      },
-      barangayR: {
-        value: props.userEdit.barangayR,
-        isValid: false,
-      },
-      cityR: {
-        value: props.userEdit.cityR,
-        isValid: false,
-      },
-      provinceR: {
-        value: props.userEdit.provinceR,
         isValid: false,
       },
       zipR: {
@@ -58,18 +78,6 @@ const ContactInfoEdit = (props) => {
       },
       locationTypeP: {
         value: props.userEdit.locationTypeP,
-        isValid: false,
-      },
-      barangayP: {
-        value: props.userEdit.barangayP,
-        isValid: false,
-      },
-      cityP: {
-        value: props.userEdit.cityP,
-        isValid: false,
-      },
-      provinceP: {
-        value: props.userEdit.provinceP,
         isValid: false,
       },
       zipP: {
@@ -97,6 +105,120 @@ const ContactInfoEdit = (props) => {
     setIsSameAddress(event.target.checked);
   };
 
+  useEffect(() => {
+    //Set default Value
+    setRegionAddrR(props.userEdit.regionR);
+    setProvinceAddrR(props.userEdit.provinceR);
+    setCityAddrR(props.userEdit.cityR);
+    setBarangayAddrR(props.userEdit.barangayR);
+    setRegionAddrP(props.userEdit.regionP);
+    setProvinceAddrP(props.userEdit.provinceP);
+    setCityAddrP(props.userEdit.cityP);
+    setBarangayAddrP(props.userEdit.barangayP);
+    //For resident address default
+    provinces(props.userEdit.regionR).then((response) => {
+      setProvinceR(response);
+      setCityR([]);
+      setBarangayR([]);
+    });
+
+    cities(props.userEdit.provinceR).then((response) => {
+      setCityR(response);
+    });
+
+    barangays(props.userEdit.cityR).then((response) => {
+      setBarangayR(response);
+    });
+
+    //For permanent address default
+    provinces(props.userEdit.regionP).then((response) => {
+      setProvinceP(response);
+      setCityP([]);
+      setBarangayP([]);
+    });
+
+    cities(props.userEdit.provinceP).then((response) => {
+      setCityP(response);
+    });
+
+    barangays(props.userEdit.cityP).then((response) => {
+      setBarangayP(response);
+    });
+  }, []);
+
+  const regionR = () => {
+    regions().then((response) => {
+      setRegionR(response);
+    });
+  };
+
+  const regionP = () => {
+    regions().then((response) => {
+      setRegionP(response);
+    });
+  };
+
+  const provinceR = (e) => {
+    setRegionAddrR(e.target.value);
+    console.log(e.target.value);
+    provinces(e.target.value).then((response) => {
+      setProvinceR(response);
+      setCityR([]);
+      setBarangayR([]);
+    });
+  };
+
+  const cityR = (e) => {
+    setProvinceAddrR(e.target.value);
+    cities(e.target.value).then((response) => {
+      setCityR(response);
+    });
+  };
+
+  const barangayR = (e) => {
+    setCityAddrR(e.target.value);
+    barangays(e.target.value).then((response) => {
+      setBarangayR(response);
+    });
+  };
+
+  const brgyR = (e) => {
+    setBarangayAddrR(e.target.value);
+  };
+
+  const provinceP = (e) => {
+    setRegionAddrP(e.target.value);
+    console.log(e.target.value);
+    provinces(e.target.value).then((response) => {
+      setProvinceP(response);
+      setCityP([]);
+      setBarangayP([]);
+    });
+  };
+
+  const cityP = (e) => {
+    setProvinceAddrP(e.target.value);
+    cities(e.target.value).then((response) => {
+      setCityP(response);
+    });
+  };
+
+  const barangayP = (e) => {
+    setCityAddrP(e.target.value);
+    barangays(e.target.value).then((response) => {
+      setBarangayP(response);
+    });
+  };
+
+  const brgyP = (e) => {
+    setBarangayAddrP(e.target.value);
+  };
+
+  useEffect(() => {
+    regionR();
+    regionP();
+  }, []);
+
   const submitHandler = async (event) => {
     console.log("clicked");
     console.log(formState.inputs.houseNoR.value);
@@ -112,8 +234,10 @@ const ContactInfoEdit = (props) => {
           houseNoR: formState.inputs.houseNoR.value,
           streetR: formState.inputs.streetR.value,
           locationTypeR: formState.inputs.locationTypeR.value,
-          barangayR: formState.inputs.barangayR.value,
-          provinceR: formState.inputs.provinceR.value,
+          regionR: regionAddrR,
+          provinceR: provinceAddrR,
+          cityR: cityAddrR,
+          barangayR: barangayAddrR,
           zipR: formState.inputs.zipR.value,
           houseNoP: !isSameAddress //Copy value from Resident address if checked
             ? formState.inputs.houseNoP.value
@@ -124,12 +248,10 @@ const ContactInfoEdit = (props) => {
           locationTypeP: !isSameAddress
             ? formState.inputs.locationTypeP.value
             : formState.inputs.locationTypeR.value,
-          barangayP: !isSameAddress
-            ? formState.inputs.barangayP.value
-            : formState.inputs.barangayR.value,
-          provinceP: !isSameAddress
-            ? formState.inputs.provinceP.value
-            : formState.inputs.provinceR.value,
+          regionP: !isSameAddress ? regionAddrP : regionAddrR,
+          provinceP: !isSameAddress ? provinceAddrP : provinceAddrR,
+          cityP: !isSameAddress ? cityAddrP : cityAddrR,
+          barangayP: !isSameAddress ? barangayAddrP : barangayAddrR,
           zipP: !isSameAddress
             ? formState.inputs.zipP.value
             : formState.inputs.zipR.value,
@@ -183,29 +305,60 @@ const ContactInfoEdit = (props) => {
           initialValue={formState.inputs.locationTypeR.value}
           initialValid={formState.inputs.locationTypeR.isValid}
         />
-        <Input
-          element="select"
-          id="barangayR"
-          type="text"
-          label="Barangay"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={["Test1", "Test2"]}
-          onInput={inputHandler}
-          initialValue={formState.inputs.barangayR.value}
-          initialValid={formState.inputs.barangayR.isValid}
-        />
-        <Input
-          element="input"
-          id="provinceR"
-          type="text"
-          label="Province"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.provinceR.value}
-          initialValid={formState.inputs.provinceR.isValid}
-        />
+        {/* RESIDENT ADDRESS  -------------------------------*/}
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="select">Select Region</InputLabel>
+          <Select onChange={provinceR} onSelect={regionR} value={regionAddrR}>
+            <MenuItem disabled>Select Region</MenuItem>
+            {regionDataR &&
+              regionDataR.length > 0 &&
+              regionDataR.map((item) => (
+                <MenuItem key={item.region_code} value={item.region_code}>
+                  {item.region_name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="select">Select Province</InputLabel>
+          <Select onChange={cityR} value={provinceAddrR}>
+            <MenuItem disabled>Select Province</MenuItem>
+            {provinceDataR &&
+              provinceDataR.length > 0 &&
+              provinceDataR.map((item) => (
+                <MenuItem key={item.province_code} value={item.province_code}>
+                  {item.province_name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="select">Select City</InputLabel>
+          <Select onChange={barangayR} value={cityAddrR}>
+            <MenuItem disabled>Select City</MenuItem>
+            {cityDataR &&
+              cityDataR.length > 0 &&
+              cityDataR.map((item) => (
+                <MenuItem key={item.city_code} value={item.city_code}>
+                  {item.city_name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="select">Select Barangay</InputLabel>
+          <Select onChange={brgyR} value={barangayAddrR}>
+            <MenuItem disabled>Select Barangay</MenuItem>
+            {barangayDataR &&
+              barangayDataR.length > 0 &&
+              barangayDataR.map((item) => (
+                <MenuItem key={item.brgy_code} value={item.brgy_code}>
+                  {item.brgy_name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        {/* END OF RESIDENT ADDRESS  -------------------------------*/}
         <Input
           element="input"
           id="zipR"
@@ -265,30 +418,60 @@ const ContactInfoEdit = (props) => {
           initialValid={formState.inputs.locationTypeP.isValid}
           disabled={isSameAddress}
         />
-        <Input
-          element="input"
-          id="barangayP"
-          type="text"
-          label="Barangay"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.barangayP.value}
-          initialValid={formState.inputs.barangayP.isValid}
-          disabled={isSameAddress}
-        />
-        <Input
-          element="input"
-          id="provinceP"
-          type="text"
-          label="Province"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.provinceP.value}
-          initialValid={formState.inputs.provinceP.isValid}
-          disabled={isSameAddress}
-        />
+        {/* PERMANENT ADDRESS  -------------------------------*/}
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="select">Select Region</InputLabel>
+          <Select onChange={provinceP} onSelect={regionP} value={regionAddrP}>
+            <MenuItem disabled>Select Region</MenuItem>
+            {regionDataP &&
+              regionDataP.length > 0 &&
+              regionDataP.map((item) => (
+                <MenuItem key={item.region_code} value={item.region_code}>
+                  {item.region_name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="select">Select Province</InputLabel>
+          <Select onChange={cityP} value={provinceAddrP}>
+            <MenuItem disabled>Select Province</MenuItem>
+            {provinceDataP &&
+              provinceDataP.length > 0 &&
+              provinceDataP.map((item) => (
+                <MenuItem key={item.province_code} value={item.province_code}>
+                  {item.province_name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="select">Select City</InputLabel>
+          <Select onChange={barangayP} value={cityAddrP}>
+            <MenuItem disabled>Select City</MenuItem>
+            {cityDataP &&
+              cityDataP.length > 0 &&
+              cityDataP.map((item) => (
+                <MenuItem key={item.city_code} value={item.city_code}>
+                  {item.city_name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        <FormControl sx={{ minWidth: 180 }}>
+          <InputLabel id="select">Select Barangay</InputLabel>
+          <Select onChange={brgyP} value={barangayAddrP}>
+            <MenuItem disabled>Select Barangay</MenuItem>
+            {barangayDataP &&
+              barangayDataP.length > 0 &&
+              barangayDataP.map((item) => (
+                <MenuItem key={item.brgy_code} value={item.brgy_code}>
+                  {item.brgy_name}
+                </MenuItem>
+              ))}
+          </Select>
+        </FormControl>
+        {/* END OF PERMANENT ADDRESS  -------------------------------*/}
         <Input
           element="input"
           id="zipP"

@@ -3,31 +3,6 @@ import React from "react";
 import ContactInfoEdit from "./ContactInfoEdit";
 import ContactInfoItem from "./ContactInfoItem";
 
-const DUMMY_DATA = {
-  //REPLACE WITH DATABASE
-  residentAddress: {
-    houseNo: "TEST",
-    street: "TEST",
-    locationType: "1",
-    barangay: "TEST",
-    city: "TEST",
-    province: "TEST",
-    zip: "TEST",
-  },
-  permanentAddress: {
-    houseNo: "TEST2",
-    street: "TEST2",
-    locationType: "2",
-    barangay: "TEST2",
-    city: "TEST2",
-    province: "TEST2",
-    zip: "TEST2",
-  },
-  telephoneNum: "TEST",
-  cellphoneNum: "TEST",
-  alternateEmail: "TEST",
-};
-
 const ContactInfo = (props) => {
   if (props.isEditMode) {
     return (
@@ -42,14 +17,18 @@ const ContactInfo = (props) => {
         residentHouseNo={props.userData.houseNoR}
         residentStreet={props.userData.streetR}
         residentLocationType={props.userData.locationTypeR}
-        residentBarangay={props.userData.barangayR}
+        residentRegion={props.userData.regionR}
         residentProvince={props.userData.provinceR}
+        residentCity={props.userData.cityR}
+        residentBarangay={props.userData.barangayR}
         residentZip={props.userData.zipR}
         permanentHouseNo={props.userData.houseNoP}
         permanentStreet={props.userData.streetP}
         permanentLocationType={props.userData.locationTypeP}
-        permanentBarangay={props.userData.barangayP}
+        permanentRegion={props.userData.regionP}
         permanentProvince={props.userData.provinceP}
+        permanentCity={props.userData.cityP}
+        permanentBarangay={props.userData.barangayP}
         permanentZip={props.userData.zipP}
         telephoneNum={props.userData.telephoneNum}
         cellphoneNum={props.userData.cellphoneNum}

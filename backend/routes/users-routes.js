@@ -2,6 +2,7 @@ const express = require("express");
 const { check } = require("express-validator");
 const userControllers = require("../controllers/users-controllers");
 const fileUpload = require("../middleware/file-upload");
+const certificateUpload = require("../middleware/file-upload");
 const checkAuth = require("../middleware/check-auth");
 const router = express.Router();
 
@@ -331,122 +332,134 @@ router.post(
   userControllers.addWorkExperience
 );
 router.delete("/deleteWorkExperience", userControllers.deleteWorkExperience);
-router.post(
-  "/getEditWorkExperience",userControllers.getEditWorkExperience);
-router.patch("/editWorkExperience",  [
-  check("company")
-    .not()
-    .isEmpty()
-    .withMessage("Please specify your work company!"),
-  check("position")
-    .not()
-    .isEmpty()
-    .withMessage("Please specify your work positon!"),
-  check("department")
-    .not()
-    .isEmpty()
-    .withMessage("Please specify your work department!"),
-  check("fromDate")
-    .not()
-    .isEmpty()
-    .withMessage("Please specify your starting work date!"),
-  check("fromDate")
-    .isNumeric()
-    .withMessage("please input numbers only in 'From' Date"),
-  check("toDate")
-    .not()
-    .isEmpty()
-    .withMessage("Please specify your last work date!"),
-  check("toDate")
-    .isNumeric()
-    .withMessage("please input numbers only in 'To' Date"),
-  check("monthlySalary")
-    .not()
-    .isEmpty()
-    .withMessage("Please specify your monthly salary!"),
-  check("government")
-    .not()
-    .isEmpty()
-    .withMessage("Please specify if your previous work is government or not"),
-], userControllers.EditWorkExperience);
+router.post("/getEditWorkExperience", userControllers.getEditWorkExperience);
+router.patch(
+  "/editWorkExperience",
+  [
+    check("company")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your work company!"),
+    check("position")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your work positon!"),
+    check("department")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your work department!"),
+    check("fromDate")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your starting work date!"),
+    check("fromDate")
+      .isNumeric()
+      .withMessage("please input numbers only in 'From' Date"),
+    check("toDate")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your last work date!"),
+    check("toDate")
+      .isNumeric()
+      .withMessage("please input numbers only in 'To' Date"),
+    check("monthlySalary")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your monthly salary!"),
+    check("government")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify if your previous work is government or not"),
+  ],
+  userControllers.EditWorkExperience
+);
 
 //for training and seminar
 
-router.post('/getUserTraining', userControllers.getUserTraining);
-router.post('/addUserTraining',[
-  check('title')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar title!'),
-  check('type')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify if it is training or seminar!'),
-  check('fromDate')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar starting date!'),
-  check('fromDate')
-  .isNumeric()
-  .withMessage('Please input numbers only in "From" date!'),
-  check('toDate')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar ending date!'),
-  check('toDate')
-  .isNumeric()
-  .withMessage('Please input numbers only in "toDate" date!'),
-  check('hours')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar hours!'),
-  check('typeOfLearning')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar type of learning!'),
-  check('conducted')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify who conducted the training!'),
-], userControllers.addUserTraining);
-router.post('/getEditTraining', userControllers.getEditTraining);
-router.patch('/editUserTraining',[
-  check('title')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar title!'),
-  check('type')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify if it is training or seminar!'),
-  check('fromDate')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar starting date!'),
-  check('fromDate')
-  .isNumeric()
-  .withMessage('Please input numbers only in "From" date!'),
-  check('toDate')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar ending date!'),
-  check('toDate')
-  .isNumeric()
-  .withMessage('Please input numbers only in "toDate" date!'),
-  check('hours')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar hours!'),
-  check('typeOfLearning')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify your training/seminar type of learning!'),
-  check('conducted')
-  .not()
-  .isEmpty()
-  .withMessage('Please specify who conducted the training!'),
-], userControllers.editUserTraining);
-router.delete('/deleteUserTraining', userControllers.deleteUserTraining);
-
+router.post("/getUserTraining", userControllers.getUserTraining);
+router.post(
+  "/addUserTraining",
+  certificateUpload.single("certificatePic"), //img upload
+  [
+    check("title")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar title!"),
+    check("type")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify if it is training or seminar!"),
+    check("fromDate")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar starting date!"),
+    check("fromDate")
+      .isNumeric()
+      .withMessage('Please input numbers only in "From" date!'),
+    check("toDate")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar ending date!"),
+    check("toDate")
+      .isNumeric()
+      .withMessage('Please input numbers only in "toDate" date!'),
+    check("hours")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar hours!"),
+    check("typeOfLearning")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar type of learning!"),
+    check("conducted")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify who conducted the training!"),
+  ],
+  userControllers.addUserTraining
+);
+router.post("/getEditTraining", userControllers.getEditTraining);
+router.patch(
+  "/editUserTraining",
+  certificateUpload.single("certificatePic"), //img upload
+  [
+    check("title")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar title!"),
+    check("type")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify if it is training or seminar!"),
+    check("fromDate")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar starting date!"),
+    check("fromDate")
+      .isNumeric()
+      .withMessage('Please input numbers only in "From" date!'),
+    check("toDate")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar ending date!"),
+    check("toDate")
+      .isNumeric()
+      .withMessage('Please input numbers only in "toDate" date!'),
+    check("hours")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar hours!"),
+    check("typeOfLearning")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify your training/seminar type of learning!"),
+    check("conducted")
+      .not()
+      .isEmpty()
+      .withMessage("Please specify who conducted the training!"),
+  ],
+  userControllers.editUserTraining
+);
+router.delete("/deleteUserTraining", userControllers.deleteUserTraining);
 
 module.exports = router;

@@ -237,14 +237,18 @@ const editContactInfo = async (req, res, next) => {
     houseNoP,
     streetP,
     locationTypeP,
-    barangayP,
+    regionP,
     provinceP,
+    cityP,
+    barangayP,
     zipP,
     houseNoR,
     streetR,
     locationTypeR,
-    barangayR,
+    regionR,
     provinceR,
+    cityR,
+    barangayR,
     zipR,
     telephoneNum,
     cellphoneNum,
@@ -255,14 +259,18 @@ const editContactInfo = async (req, res, next) => {
     houseNoP,
     streetP,
     locationTypeP,
-    barangayP,
+    regionP,
     provinceP,
+    cityP,
+    barangayP,
     zipP,
     houseNoR,
     streetR,
     locationTypeR,
-    barangayR,
+    regionR,
     provinceR,
+    cityR,
+    barangayR,
     zipR,
     telephoneNum,
     cellphoneNum,
@@ -284,7 +292,8 @@ const editAccountInfo = async (req, res, next) => {
     return next(error);
   }
 
-  const { userId, employeeNum, faculty, employmentType, email, profilePic } = req.body;
+  const { userId, employeeNum, faculty, employmentType, email, profilePic } =
+    req.body;
 
   const emailValidate = await User.findOne({ email: email });
 
@@ -421,7 +430,7 @@ const updateEducation = async (req, res, next) => {
     const error = new HttpError(newList[0], 422);
     return next(error);
   }
-  
+
   const {
     level,
     school,
@@ -700,12 +709,12 @@ const deleteWorkExperience = async (req, res, next) => {
     .json({ WorkExperience: newUpdate, message: "Work Experience Deleted" });
 };
 
-const getUserTraining = async(req,res,next) =>{
+const getUserTraining = async (req, res, next) => {
   const { userId } = req.body;
   const userWork = await Training.find({ user: userId });
   res.json({ userTraining: userWork });
-}
-const addUserTraining = async(req,res,next) =>{
+};
+const addUserTraining = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     errorsList = errors.array();
@@ -733,7 +742,8 @@ const addUserTraining = async(req,res,next) =>{
     hours,
     typeOfLearning,
     conducted,
-    user : userId,
+    certificatePic: req.file.path,
+    user: userId,
   });
   const sess = await mongoose.startSession();
   sess.startTransaction();
@@ -749,14 +759,14 @@ const addUserTraining = async(req,res,next) =>{
   res
     .status(200)
     .json({ message: "Training/Seminar Added!", userTraining: userTraining });
-}
-const getEditTraining = async(req,res,next) =>{
+};
+const getEditTraining = async (req, res, next) => {
   const { trainingId } = req.body;
 
   const getEditTraining = await Training.findById(trainingId);
   res.json({ editData: getEditTraining });
-}
-const editUserTraining = async(req,res,next) =>{
+};
+const editUserTraining = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     errorsList = errors.array();
@@ -785,6 +795,7 @@ const editUserTraining = async(req,res,next) =>{
     hours,
     typeOfLearning,
     conducted,
+    certificatePic: req.file.path,
   });
 
   const newUpdate = await Training.find({ user: userId });
@@ -793,8 +804,8 @@ const editUserTraining = async(req,res,next) =>{
       .status(201)
       .json({ userTraining: newUpdate, message: "Training/Seminar Updated" });
   }
-}
-const deleteUserTraining = async (req,res,next) =>{
+};
+const deleteUserTraining = async (req, res, next) => {
   const { trainingId, userId } = req.body;
 
   const training = await Training.findById(trainingId);
@@ -810,7 +821,7 @@ const deleteUserTraining = async (req,res,next) =>{
   res
     .status(201)
     .json({ userTraining: newUpdate, message: "Work Experience Deleted" });
-}
+};
 exports.signup = signup;
 exports.login = login;
 exports.getuserData = getuserData;

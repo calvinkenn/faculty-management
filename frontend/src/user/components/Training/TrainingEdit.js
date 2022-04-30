@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../../shared/components/FormElements/Button";
 
 import Input from "../../../shared/components/FormElements/Input";
@@ -13,7 +13,9 @@ import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const TrainingEdit = (props) => {
-  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  const [imageError, setImageError] = useState();
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
+    useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
@@ -29,19 +31,19 @@ const TrainingEdit = (props) => {
         isValid: false,
       },
       toDate: {
-        value: props.editData ? props.editData.toDate :"",
+        value: props.editData ? props.editData.toDate : "",
         isValid: false,
       },
       hours: {
-        value: props.editData ? props.editData.hours :"",
+        value: props.editData ? props.editData.hours : "",
         isValid: false,
       },
       typeOfLearning: {
-        value: props.editData ? props.editData.typeOfLearning :"",
+        value: props.editData ? props.editData.typeOfLearning : "",
         isValid: false,
       },
       conducted: {
-        value: props.editData ? props.editData.conducted :"",
+        value: props.editData ? props.editData.conducted : "",
         isValid: false,
       },
       certificatePic: {
@@ -57,62 +59,99 @@ const TrainingEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
-    const responseData = await sendRequest(
-      "http://localhost:5000/api/users/addUserTraining",
+    if (!formState.inputs.certificatePic.value) {
+      setImageError("Please upload photo");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("userId", storedData.userId);
+      formData.append("token", storedData.token);
+      formData.append("title", formState.inputs.title.value);
+      formData.append("type", formState.inputs.type.value);
+      formData.append("fromDate", formState.inputs.fromDate.value);
+      formData.append("toDate", formState.inputs.toDate.value);
+      formData.append("hours", formState.inputs.hours.value);
+      formData.append("typeOfLearning", formState.inputs.typeOfLearning.value);
+      formData.append("conducted", formState.inputs.conducted.value);
+      formData.append("certificatePic", formState.inputs.certificatePic.value);
+
+      const responseData = await sendRequest(
+        "http://localhost:5000/api/users/addUserTraining",
         "POST",
-        JSON.stringify({
-          title : formState.inputs.title.value,
-          type : formState.inputs.type.value,
-          fromDate: formState.inputs.fromDate.value,
-          toDate: formState.inputs.toDate.value,
-          hours: formState.inputs.hours.value,
-          typeOfLearning : formState.inputs.typeOfLearning.value,
-          conducted : formState.inputs.conducted.value,
-          userId: storedData.userId,
-          token: storedData.token
-        }),
-        { "Content-Type": "application/json" },
-    );
-    props.setUserData(responseData.userTraining, responseData.message);
-    props.updateAddModeState();
+        formData
+        // JSON.stringify({
+        //   title: formState.inputs.title.value,
+        //   type: formState.inputs.type.value,
+        //   fromDate: formState.inputs.fromDate.value,
+        //   toDate: formState.inputs.toDate.value,
+        //   hours: formState.inputs.hours.value,
+        //   typeOfLearning: formState.inputs.typeOfLearning.value,
+        //   conducted: formState.inputs.conducted.value,
+        //   userId: storedData.userId,
+        //   token: storedData.token,
+        // }),
+        // { "Content-Type": "application/json" }
+      );
+      props.setUserData(responseData.userTraining, responseData.message);
+      props.updateAddModeState();
+    } catch (err) {}
   };
 
-  const submitEditHandler =  async (event) => {
+  const submitEditHandler = async (event) => {
     event.preventDefault();
 
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
-    const responseData = await sendRequest(
-      "http://localhost:5000/api/users/editUserTraining",
+    if (!formState.inputs.certificatePic.value) {
+      setImageError("Please upload photo");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("userId", storedData.userId);
+      formData.append("token", storedData.token);
+      formData.append("title", formState.inputs.title.value);
+      formData.append("type", formState.inputs.type.value);
+      formData.append("fromDate", formState.inputs.fromDate.value);
+      formData.append("toDate", formState.inputs.toDate.value);
+      formData.append("hours", formState.inputs.hours.value);
+      formData.append("typeOfLearning", formState.inputs.typeOfLearning.value);
+      formData.append("conducted", formState.inputs.conducted.value);
+      formData.append("certificatePic", formState.inputs.certificatePic.value);
+
+      const responseData = await sendRequest(
+        "http://localhost:5000/api/users/editUserTraining",
         "PATCH",
-        
-        JSON.stringify({
-          title : formState.inputs.title.value,
-          type : formState.inputs.type.value,
-          fromDate: formState.inputs.fromDate.value,
-          toDate: formState.inputs.toDate.value,
-          hours: formState.inputs.hours.value,
-          typeOfLearning : formState.inputs.typeOfLearning.value,
-          conducted : formState.inputs.conducted.value,
-          userId: storedData.userId,
-          token: storedData.token,
-          trainingId : props.editData._id,
-        }),
-        { "Content-Type": "application/json" },
-    );
-    props.setUserData(responseData.userTraining, responseData.message);
-    props.updateAddModeState();
+        formData
+      );
+      props.setUserData(responseData.userTraining, responseData.message);
+      props.updateAddModeState();
+    } catch (err) {}
+  };
+
+  const clearImageError = () => {
+    setImageError("");
   };
 
   return (
     <React.Fragment>
-      <ErrorModal error={error} onClear={clearError} />
+      <ErrorModal
+        error={imageError ? imageError : error}
+        onClear={imageError ? clearImageError : clearError}
+      />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <ImageUpload
           center
           id="certificatePic"
-          // onInput={inputHandler}
-          // previewUrl={props.userEdit.certificatePic}
+          onInput={inputHandler}
+          previewUrl={
+            props.editData
+              ? props.editData.certificatePic
+              : formState.inputs.certificatePic.value
+          }
         />
         <Input
           element="input"

@@ -26,15 +26,21 @@ const userSchema = mongoose.Schema({
   houseNoP: { type: String, default: "" },
   streetP: { type: String, default: "" },
   locationTypeP: { type: String, default: "" },
-  barangayP: { type: String, default: "" },
+  regionP: { type: String, default: "" },
   provinceP: { type: String, default: "" },
+  cityP: { type: String, default: "" },
+  barangayP: { type: String, default: "" },
   zipP: { type: String, default: "" },
+  //Resident
   houseNoR: { type: String, default: "" },
   streetR: { type: String, default: "" },
   locationTypeR: { type: String, default: "" },
-  barangayR: { type: String, default: "" },
+  regionR: { type: String, default: "" },
   provinceR: { type: String, default: "" },
+  cityR: { type: String, default: "" },
+  barangayR: { type: String, default: "" },
   zipR: { type: String, default: "" },
+  //Additional Info
   telephoneNum: { type: String, default: "" },
   cellphoneNum: { type: String, default: "" },
   alternateEmail: { type: String, default: "" },
@@ -45,8 +51,12 @@ const userSchema = mongoose.Schema({
     { type: mongoose.Types.ObjectId, required: true, ref: "Education" },
   ],
   civil: [{ type: mongoose.Types.ObjectId, required: true, ref: "Civil" }],
-  work: [{ type: mongoose.Types.ObjectId, required: true, ref: "WorkExperience" }],
-  training: [{ type: mongoose.Types.ObjectId, required: true, ref: "Training" }],
+  work: [
+    { type: mongoose.Types.ObjectId, required: true, ref: "WorkExperience" },
+  ],
+  training: [
+    { type: mongoose.Types.ObjectId, required: true, ref: "Training" },
+  ],
 
   //for employee type and faculty
 

@@ -16,8 +16,10 @@ const BasicInfo = (props) => {
       houseNo={props.userData.houseNoR}
       street={props.userData.streetR}
       locationType={props.userData.locationTypeR}
-      barangay={props.userData.barangayR}
+      region={props.userData.regionR}
       province={props.userData.provinceR}
+      city={props.userData.cityR}
+      barangay={props.userData.barangayR}
       zip={props.userData.zipR}
       telephoneNum={props.userData.telephoneNum}
       cellphoneNum={props.userData.cellphoneNum}

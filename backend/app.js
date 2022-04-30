@@ -12,7 +12,11 @@ const app = express();
 //code for body parser
 app.use(bodyParser.json());
 
-app.use("/uploads/images", express.static(path.join("uploads", "images"))); //middleware for file path
+app.use("/uploads/images", express.static(path.join("uploads", "images"))); //middleware for profile pic file path
+app.use(
+  "/uploads/certificates",
+  express.static(path.join("uploads", "certificates"))
+); //middleware for cert pic file path
 
 //code to allow communication between 2 local host
 

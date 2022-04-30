@@ -6,7 +6,8 @@ import "./TrainingItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 const TrainingItem = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
+    useHttpClient();
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -17,36 +18,43 @@ const TrainingItem = (props) => {
   };
 
   const editModeHandler = async () => {
-    const response = await fetch('http://localhost:5000/api/users/getEditTraining',{
-      method: "POST",
-      headers : {"Content-Type" : "application/json"},
-      body : JSON.stringify({
-        trainingId : props.trainingId,
-      }),
-    });
+    const response = await fetch(
+      "http://localhost:5000/api/users/getEditTraining",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          trainingId: props.trainingId,
+        }),
+      }
+    );
     const responseData = await response.json();
     props.setIsEditModeHandler(responseData.editData);
   };
 
-  const confirmDeleteHandler =  async () => {
+  const confirmDeleteHandler = async () => {
     setShowConfirmModal(false);
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    const responseData = await sendRequest('http://localhost:5000/api/users/deleteUserTraining',
-    "DELETE",
-    JSON.stringify({
-      trainingId : props.trainingId,
-      userId :  storedData.userId
-    }),
-    { "Content-Type": "application/json" }
-    );
-
-    const getUserTraining = await fetch("http://localhost:5000/api/users/getUserTraining", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/deleteUserTraining",
+      "DELETE",
+      JSON.stringify({
+        trainingId: props.trainingId,
         userId: storedData.userId,
       }),
-    });
+      { "Content-Type": "application/json" }
+    );
+
+    const getUserTraining = await fetch(
+      "http://localhost:5000/api/users/getUserTraining",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: storedData.userId,
+        }),
+      }
+    );
     const getUserTrainingData = await getUserTraining.json();
     props.setUserData(getUserTrainingData.userTraining, responseData.message);
   };
@@ -82,7 +90,10 @@ const TrainingItem = (props) => {
           <div>Conducted/Sponsored by: {props.conducted}</div>
         </div>
         <div className="training-container__image">
-          <img src={props.certificate} alt={props.title} />
+          <img
+            src={`http://localhost:5000/${props.certificatePic}`}
+            alt={props.title}
+          />
         </div>
         <div className="training-container__actions">
           <Button onClick={editModeHandler}>Edit</Button>

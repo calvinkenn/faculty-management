@@ -76,7 +76,7 @@ const Training = (props) => {
       />
     );
   } else if (props.isEditMode) {
-    return <TrainingEdit addingItem={false} />;
+    return <TrainingEdit addingItem={false} editData ={editData} updateAddModeState = {props.updateEditModeState} setUserData = {setAddedData} />;
   } else {
     return (
       <React.Fragment>

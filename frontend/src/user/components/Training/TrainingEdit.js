@@ -17,31 +17,31 @@ const TrainingEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm(
     {
       title: {
-        value: "",
+        value: props.editData ? props.editData.title : "",
         isValid: false,
       },
       type: {
-        value: "",
+        value: props.editData ? props.editData.type : "",
         isValid: false,
       },
       fromDate: {
-        value: "",
+        value: props.editData ? props.editData.fromDate : "",
         isValid: false,
       },
       toDate: {
-        value: "",
+        value: props.editData ? props.editData.toDate :"",
         isValid: false,
       },
       hours: {
-        value: "",
+        value: props.editData ? props.editData.hours :"",
         isValid: false,
       },
       typeOfLearning: {
-        value: "",
+        value: props.editData ? props.editData.typeOfLearning :"",
         isValid: false,
       },
       conducted: {
-        value: "",
+        value: props.editData ? props.editData.conducted :"",
         isValid: false,
       },
       certificatePic: {
@@ -77,10 +77,31 @@ const TrainingEdit = (props) => {
     props.updateAddModeState();
   };
 
-  const submitEditHandler = (event) => {
-    //For Editing Data
-    console.log("clicked");
+  const submitEditHandler =  async (event) => {
     event.preventDefault();
+
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/editUserTraining",
+        "PATCH",
+        
+        JSON.stringify({
+          title : formState.inputs.title.value,
+          type : formState.inputs.type.value,
+          fromDate: formState.inputs.fromDate.value,
+          toDate: formState.inputs.toDate.value,
+          hours: formState.inputs.hours.value,
+          typeOfLearning : formState.inputs.typeOfLearning.value,
+          conducted : formState.inputs.conducted.value,
+          userId: storedData.userId,
+          token: storedData.token,
+          trainingId : props.editData._id,
+        }),
+        { "Content-Type": "application/json" },
+    );
+    props.setUserData(responseData.userTraining, responseData.message);
+    props.updateAddModeState();
   };
 
   return (

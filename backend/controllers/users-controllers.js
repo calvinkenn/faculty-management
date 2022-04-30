@@ -414,6 +414,14 @@ const getEditEducation = async (req, res, next) => {
   res.json({ editData: getEditEducation });
 };
 const updateEducation = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+  
   const {
     level,
     school,
@@ -426,12 +434,6 @@ const updateEducation = async (req, res, next) => {
     highestLevel,
     userId,
   } = req.body;
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
-  }
 
   let updateEducation = await Education.findByIdAndUpdate(educId, {
     level,
@@ -529,9 +531,10 @@ const getEditCivil = async (req, res, next) => {
 const editCivil = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
   }
   const {
     career,
@@ -592,9 +595,10 @@ const getEditWorkExperience = async (req, res, next) => {
 const EditWorkExperience = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
   }
   const {
     company,
@@ -747,10 +751,48 @@ const addUserTraining = async(req,res,next) =>{
     .json({ message: "Training/Seminar Added!", userTraining: userTraining });
 }
 const getEditTraining = async(req,res,next) =>{
+  const { trainingId } = req.body;
 
+  const getEditTraining = await Training.findById(trainingId);
+  res.json({ editData: getEditTraining });
 }
 const editUserTraining = async(req,res,next) =>{
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+  const {
+    title,
+    type,
+    fromDate,
+    toDate,
+    hours,
+    typeOfLearning,
+    conducted,
+    token,
+    userId,
+    trainingId,
+  } = req.body;
 
+  let editTraining = await Training.findByIdAndUpdate(trainingId, {
+    title,
+    type,
+    fromDate,
+    toDate,
+    hours,
+    typeOfLearning,
+    conducted,
+  });
+
+  const newUpdate = await Training.find({ user: userId });
+  if (editTraining) {
+    res
+      .status(201)
+      .json({ userTraining: newUpdate, message: "Training/Seminar Updated" });
+  }
 }
 const deleteUserTraining = async (req,res,next) =>{
   const { trainingId, userId } = req.body;
@@ -798,3 +840,5 @@ exports.EditWorkExperience = EditWorkExperience;
 exports.getUserTraining = getUserTraining;
 exports.addUserTraining = addUserTraining;
 exports.deleteUserTraining = deleteUserTraining;
+exports.getEditTraining = getEditTraining;
+exports.editUserTraining = editUserTraining;

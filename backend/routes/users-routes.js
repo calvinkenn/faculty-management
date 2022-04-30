@@ -151,6 +151,12 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("Please specify your starting date of attendance!"),
+    check("fromDate")
+      .isNumeric()
+      .withMessage("Please input numbers only in 'From' date!"),
+    check("toDate")
+      .isNumeric()
+      .withMessage("Please input numbers only in 'To' date!"),
     check("toDate")
       .not()
       .isEmpty()
@@ -180,6 +186,12 @@ router.patch(
       .not()
       .isEmpty()
       .withMessage("Please specify your starting date of attendance!"),
+    check("fromDate")
+      .isNumeric()
+      .withMessage("Please input numbers only in 'From' date!"),
+    check("toDate")
+      .isNumeric()
+      .withMessage("Please input numbers only in 'To' date!"),
     check("toDate")
       .not()
       .isEmpty()
@@ -211,6 +223,12 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("Please specify your starting date of attendance!"),
+    check("fromDate")
+      .isNumeric()
+      .withMessage("Please input numbers only in 'From' date!"),
+    check("toDate")
+      .isNumeric()
+      .withMessage("Please input numbers only in 'To' date!"),
     check("toDate")
       .not()
       .isEmpty()
@@ -355,9 +373,79 @@ router.patch("/editWorkExperience",  [
 //for training and seminar
 
 router.post('/getUserTraining', userControllers.getUserTraining);
-router.post('/addUserTraining', userControllers.addUserTraining);
-router.post('/getEditTraining',);
-router.patch('/editUserTraining');
+router.post('/addUserTraining',[
+  check('title')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar title!'),
+  check('type')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify if it is training or seminar!'),
+  check('fromDate')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar starting date!'),
+  check('fromDate')
+  .isNumeric()
+  .withMessage('Please input numbers only in "From" date!'),
+  check('toDate')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar ending date!'),
+  check('toDate')
+  .isNumeric()
+  .withMessage('Please input numbers only in "toDate" date!'),
+  check('hours')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar hours!'),
+  check('typeOfLearning')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar type of learning!'),
+  check('conducted')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify who conducted the training!'),
+], userControllers.addUserTraining);
+router.post('/getEditTraining', userControllers.getEditTraining);
+router.patch('/editUserTraining',[
+  check('title')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar title!'),
+  check('type')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify if it is training or seminar!'),
+  check('fromDate')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar starting date!'),
+  check('fromDate')
+  .isNumeric()
+  .withMessage('Please input numbers only in "From" date!'),
+  check('toDate')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar ending date!'),
+  check('toDate')
+  .isNumeric()
+  .withMessage('Please input numbers only in "toDate" date!'),
+  check('hours')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar hours!'),
+  check('typeOfLearning')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify your training/seminar type of learning!'),
+  check('conducted')
+  .not()
+  .isEmpty()
+  .withMessage('Please specify who conducted the training!'),
+], userControllers.editUserTraining);
 router.delete('/deleteUserTraining', userControllers.deleteUserTraining);
 
 

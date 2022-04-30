@@ -16,8 +16,16 @@ const TrainingItem = (props) => {
     setShowConfirmModal(false);
   };
 
-  const editModeHandler = () => {
-    props.setIsEditModeHandler(true);
+  const editModeHandler = async () => {
+    const response = await fetch('http://localhost:5000/api/users/getEditTraining',{
+      method: "POST",
+      headers : {"Content-Type" : "application/json"},
+      body : JSON.stringify({
+        trainingId : props.trainingId,
+      }),
+    });
+    const responseData = await response.json();
+    props.setIsEditModeHandler(responseData.editData);
   };
 
   const confirmDeleteHandler =  async () => {

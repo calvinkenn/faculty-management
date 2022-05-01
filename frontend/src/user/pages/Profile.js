@@ -87,6 +87,7 @@ const Profile = (props) => {
   const clearSuccess = () => {
     setSuccess(null);
   };
+
   return (
     <React.Fragment>
       <div className="user-main">

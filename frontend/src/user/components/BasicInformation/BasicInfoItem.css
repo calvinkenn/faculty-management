@@ -1,10 +1,11 @@
 .basic-container {
     width: 100%;
     display: flex;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-sizing: border-box;
 }
 
 .basic-container__data {
-    width: 30%;
+    width: 100%;
+    max-width: 100%;
 }

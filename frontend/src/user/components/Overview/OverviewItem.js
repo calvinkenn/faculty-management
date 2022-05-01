@@ -66,15 +66,28 @@ const OverviewItem = (props) => {
   return (
     <div className="basic-container">
       <div className="basic-container__data">
-        <div>Employee Number: {props.employeeNumber}</div>
-        <div>First Name: {props.firstName}</div>
-        <div>Middle Name: {props.middleName}</div>
-        <div>Last Name: {props.lastName}</div>
-        <div>Email: {props.email}</div>
-        <div>Extension Name:{props.extensionName}</div>
-        <div>
-          <hr />
-          Resident Address
+        <div className="basic-info-cont">
+          <div className="basic-info-title">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Basic Information</h1>
+            </div>
+          </div>
+          <div>Employee Number: {props.employeeNumber}</div>
+          <div>First Name: {props.firstName}</div>
+          <div>Middle Name: {props.middleName}</div>
+          <div>Last Name: {props.lastName}</div>
+          <div>Email: {props.email}</div>
+          <div>Extension Name:{props.extensionName}</div>
+        </div>
+        
+        <div className="address-info-cont">
+          <div className="basic-info-title">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Resident Address</h1>
+            </div>
+          </div>
           <div>House no.:{props.houseNo}</div>
           <div>Street:{props.street}</div>
           <div>
@@ -85,11 +98,19 @@ const OverviewItem = (props) => {
           <div>City: {cityNameR}</div>
           <div>Barangay: {barangayNameR}</div>
           <div>Zip Code:{props.zip}</div>
-          <hr />
         </div>
-        <div>Telephone no.:{props.telephoneNum}</div>
-        <div>Cellphone no.:{props.cellphoneNum}</div>
-        <div>Alternate Email:{props.alternateEmail}</div>
+
+        <div className="contact-info-cont">
+          <div className="basic-info-title">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Contact Information</h1>
+            </div>
+          </div>
+          <div>Telephone no.:{props.telephoneNum}</div>
+          <div>Cellphone no.:{props.cellphoneNum}</div>
+          <div>Alternate Email:{props.alternateEmail}</div>
+        </div>
       </div>
     </div>
   );

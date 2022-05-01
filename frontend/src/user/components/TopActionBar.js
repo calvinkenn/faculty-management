@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from "react";
 import Modal from "../../shared/components/UIElements/Modal";
 import Button from "../../shared/components/FormElements/Button";
 import { AuthContext } from "../../shared/context/auth-context";
+import PrintIcon from '@mui/icons-material/Print';
 import "./TopActionBar.css";
 
 const TopActionBar = (props) => {
@@ -63,7 +64,7 @@ const TopActionBar = (props) => {
       <div className="top-action">
         {!auth.isAdmin && (
           <ul>
-            {props.inOverview && <li>Print</li>}
+            {props.inOverview && <li><PrintIcon sx={{ fontSize: 20}}/><span>Print</span></li>}
             {!isEditMode && props.inBasicInformation && (
               <li onClick={props.updateEditModeState}>Edit</li>
             )}

@@ -1,10 +1,26 @@
 .educational-container {
     width: 100%;
     display: flex;
-    border: 1px solid black;
     box-sizing: border-box;
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
 }
 
 .educational-container__data {
-    width: 30%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.educ-info-title-cont{
+    display: flex;
+}
+
+.educ-details-cont{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1%;
 }

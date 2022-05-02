@@ -85,32 +85,44 @@ const EducationalItem = (props) => {
       </Modal>
       <div className="educational-container">
         <div className="educational-container__data">
-          <div>Level: {props.level}</div>
-          <div>School: {props.school}</div>
-          {props.degree !== "N/A" ? <div>Degree: {props.degree}</div> : ""}
-          <div>From: {props.from}</div>
-          <div>To: {props.to}</div>
-          {props.yearGraduated ? (
-            <div>yearGraduated: {props.yearGraduated}</div>
-          ) : (
-            ""
-          )}
-          <div>Highest Level/ Units Earned: {props.highestLevel}</div>
-          <div>
-            Awards:
-            {props.awards.map((award) => (
-              <div>{award.awards}</div>
-            ))}
+          <div className="educ-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>{props.level}</h1>
+            </div>
+          </div>
+          <div className="educ-details-cont">
+            <div className="details-cont">
+              <div>Level: {props.level}</div>
+              <div>School: {props.school}</div>
+              {props.degree !== "N/A" ? <div>Degree: {props.degree}</div> : ""}
+              <div>From: {props.from}</div>
+              <div>To: {props.to}</div>
+              {props.yearGraduated ? (
+                <div>yearGraduated: {props.yearGraduated}</div>
+              ) : (
+                ""
+              )}
+              <div>Highest Level/ Units Earned: {props.highestLevel}</div>
+              <div>
+                Awards:
+                {props.awards.map((award) => (
+                  <div>{award.awards}</div>
+                ))}
+              </div>
+            </div>
+            <div className="educ-action-btn">
+              {!userIdByParams && (
+              <div className="educational-container__actions">
+                <Button onClick={editModeHandler}>Edit</Button>
+                <Button danger onClick={showDeleteWarningHandler}>
+                  Delete
+                </Button>
+              </div>
+              )}
+            </div>
           </div>
         </div>
-        {!userIdByParams && (
-          <div className="educational-container__actions">
-            <Button onClick={editModeHandler}>Edit</Button>
-            <Button danger onClick={showDeleteWarningHandler}>
-              Delete
-            </Button>
-          </div>
-        )}
       </div>
     </React.Fragment>
   );

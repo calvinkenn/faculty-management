@@ -83,25 +83,38 @@ const WorkExperienceItem = (props) => {
       </Modal>
       <div className="work-container">
         <div className="work-container__data">
-          <div>Company: {props.company}</div>
-          <div>Position: {props.position}</div>
-          <div>Department: {props.department}</div>
-          <div>FROM: {props.fromDate}</div>
-          <div>TO: {props.toDate}</div>
-          <div>Monthly Salary: &#8369;{props.monthlySalary}</div>
-          <div>
-            Salary Grade: {props.salaryGrade}-{props.salaryStep}
+          <div className="work-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Work Experience - {props.position}</h1>
+            </div>
           </div>
-          <div>Government: {props.government}</div>
+          <div className="work-info-details-cont">
+            <div className="work-dets-cont">
+              <div>Company: {props.company}</div>
+              <div>Position: {props.position}</div>
+              <div>Department: {props.department}</div>
+              <div>FROM: {props.fromDate}</div>
+              <div>TO: {props.toDate}</div>
+              <div>Monthly Salary: &#8369;{props.monthlySalary}</div>
+              <div>
+                Salary Grade: {props.salaryGrade}-{props.salaryStep}
+              </div>
+              <div>Government: {props.government}</div>
+            </div>
+            <div className="work-action-btn">
+              {!userIdByParams && (
+                <div className="work-container__actions">
+                  <Button onClick={editModeHandler}>Edit</Button>
+                  <Button danger onClick={showDeleteWarningHandler}>
+                    Delete
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-        {!userIdByParams && (
-          <div className="work-container__actions">
-            <Button onClick={editModeHandler}>Edit</Button>
-            <Button danger onClick={showDeleteWarningHandler}>
-              Delete
-            </Button>
-          </div>
-        )}
+        
       </div>
     </React.Fragment>
   );

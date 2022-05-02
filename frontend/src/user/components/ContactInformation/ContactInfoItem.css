@@ -1,10 +1,34 @@
 .contact-container {
     width: 100%;
     display: flex;
-    border: 1px solid black;
     box-sizing: border-box;
 }
 
 .contact-container__data {
-    width: 30%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.resident-add-cont,
+.perma-add-cont {
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
+}
+
+.resident-info-title-cont,
+.perma-info-title-cont,
+.contact-info-title-cont{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+
+.perma-details-cont,
+.resident-add-details-cont,
+.contact-details-cont{
+    margin-top: 1%;
 }

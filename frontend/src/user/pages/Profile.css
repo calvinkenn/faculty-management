@@ -1,5 +1,6 @@
 .user-main{
   display: flex;
+  background-color: #f4f7ff;
 }
 
 .user-main-container{
@@ -50,7 +51,6 @@
 .profile-container ul {
   padding-left: 5%;
   text-align: left;
-  margin-top: 10%;
 }
 
 .basic-info-title{

@@ -116,35 +116,55 @@ const ContactInfoItem = (props) => {
   return (
     <div className="contact-container">
       <div className="contact-container__data">
-        <div>
-          Resident Address
-          <hr />
-          <div>House no.:{props.residentHouseNo}</div>
-          <div>Street:{props.residentStreet}</div>
-          <div>Subdivision:{props.residentLocationType}</div>
-          <div>Region: {regionNameR}</div>
-          <div>Province:{provinceNameR}</div>
-          <div>City: {cityNameR}</div>
-          <div>Barangay: {barangayNameR}</div>
-          <div>Zip Code:{props.residentZip}</div>
-          <hr />
+        <div className="resident-add-cont">
+          <div className="resident-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Resident Address</h1>
+            </div>
+          </div>
+          <div className="resident-add-details-cont">
+            <div>House no.:{props.residentHouseNo}</div>
+            <div>Street:{props.residentStreet}</div>
+            <div>Subdivision:{props.residentLocationType}</div>
+            <div>Region: {regionNameR}</div>
+            <div>Province:{provinceNameR}</div>
+            <div>City: {cityNameR}</div>
+            <div>Barangay: {barangayNameR}</div>
+            <div>Zip Code:{props.residentZip}</div>
+          </div>
         </div>
-        <div>
-          Permanent Address
-          <hr />
-          <div>House no.:{props.permanentHouseNo}</div>
-          <div>Street:{props.permanentStreet}</div>
-          <div>Subdivision:{props.permanentLocationType}</div>
-          <div>Region: {regionNameP}</div>
-          <div>Province:{provinceNameP}</div>
-          <div>City: {cityNameP}</div>
-          <div>Barangay: {barangayNameP}</div>
-          <div>Zip Code:{props.permanentZip}</div>
-          <hr />
+        <div className="perma-add-cont">
+          <div className="perma-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Permanent Address</h1>
+            </div>
+          </div>
+          <div className="perma-details-cont">
+            <div>House no.:{props.permanentHouseNo}</div>
+            <div>Street:{props.permanentStreet}</div>
+            <div>Subdivision:{props.permanentLocationType}</div>
+            <div>Region: {regionNameP}</div>
+            <div>Province:{provinceNameP}</div>
+            <div>City: {cityNameP}</div>
+            <div>Barangay: {barangayNameP}</div>
+            <div>Zip Code:{props.permanentZip}</div>
+          </div>
         </div>
-        <div>Telephone no.:{props.telephoneNum}</div>
-        <div>Cellphone no.:{props.cellphoneNum}</div>
-        <div>Alternate Email:{props.alternateEmail}</div>
+        <div className="contact-info-cont">
+          <div className="contact-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Contact Information</h1>
+            </div>
+          </div>
+          <div className="contact-details-cont">
+            <div>Telephone no.:{props.telephoneNum}</div>
+            <div>Cellphone no.:{props.cellphoneNum}</div>
+            <div>Alternate Email:{props.alternateEmail}</div>
+          </div>
+        </div>
       </div>
     </div>
   );

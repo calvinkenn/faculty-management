@@ -1,10 +1,23 @@
 .work-container {
-    width: 100%;
-    display: flex;
-    border: 1px solid black;
-    box-sizing: border-box;
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
 }
 
 .work-container__data {
-    width: 30%;
+    width: 100%;
+    max-width: 100%;
+}
+
+.work-info-title-cont{
+    display: flex;
+}
+
+.work-info-details-cont{
+    margin-top: 1%;
+    display: flex;
+    justify-content: space-between;
 }

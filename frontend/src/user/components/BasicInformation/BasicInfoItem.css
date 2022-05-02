@@ -9,3 +9,27 @@
     width: 100%;
     max-width: 100%;
 }
+
+.basic-name-container,
+.personal-info-cont,
+.government-id-cont{
+    width: 100%;
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
+}
+
+.name-info-title-cont{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+
+.name-detail-cont,
+.personal-info-detail-cont,
+.gov-id-detail-cont{
+    margin-top: 1%;
+}

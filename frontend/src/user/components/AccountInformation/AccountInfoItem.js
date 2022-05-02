@@ -24,16 +24,38 @@ const AccountInfoItem = (props) => {
             alt="profile-pic"
           />
         </div>
-        <div>Employee Number: {props.employeeNum}</div>
-        <div>Faculty: {props.faculty}</div>
-        <div>Employment Type: {props.employmentType}</div>
-        <div>Email: {props.email}</div>
-        {!auth.isAdmin && (
-          <div>
-            Password: ************
-            <Button onClick={changePassHandler}>Change Pass</Button>
+        <div className="employment-acc-info-cont">
+          <div className="employment-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Employment Account Information</h1>
+            </div>
           </div>
-        )}
+          <div className="employment-detail-cont">
+            <div>Employee Number: {props.employeeNum}</div>
+            <div>Faculty: {props.faculty}</div>
+            <div>Employment Type: {props.employmentType}</div>
+          </div>
+        </div>
+        <div className="account-info-cont">
+          <div className="account-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Account Information</h1>
+            </div>
+          </div>
+          <div className="account-info-detail-cont">
+            <div>Email: {props.email}</div>
+            {!auth.isAdmin && (
+              <div className="change-pass-cont">
+                Password: ************
+                <div className="change-btn-cont">
+                  <Button onClick={changePassHandler}>Change Password</Button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

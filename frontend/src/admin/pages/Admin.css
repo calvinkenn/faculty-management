@@ -22,7 +22,6 @@
   box-sizing: border-box;
   margin: 75px 0;
   background-color: #f4f7ff;
-  height: calc(100vh - 75px);
 }
 
 /* .profile-container ul {

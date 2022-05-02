@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
@@ -6,6 +7,7 @@ import "./CivilServiceItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 const CivilServiceItem = (props) => {
+  const userIdByParams = useParams().userId;
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
@@ -89,12 +91,14 @@ const CivilServiceItem = (props) => {
           <div>License Number: {props.licenseNumber}</div>
           <div>License Validity: {props.licenseValidity}</div>
         </div>
-        <div className="civil-container__actions">
-          <Button onClick={editModeHandler}>Edit</Button>
-          <Button danger onClick={showDeleteWarningHandler}>
-            Delete
-          </Button>
-        </div>
+        {!userIdByParams && (
+          <div className="civil-container__actions">
+            <Button onClick={editModeHandler}>Edit</Button>
+            <Button danger onClick={showDeleteWarningHandler}>
+              Delete
+            </Button>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

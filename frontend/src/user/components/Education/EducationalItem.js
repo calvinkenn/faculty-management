@@ -1,14 +1,18 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./EducationalItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { AuthContext } from "../../../shared/context/auth-context";
 
 const EducationalItem = (props) => {
+  const userIdByParams = useParams().userId;
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
+    useHttpClient();
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
@@ -18,37 +22,44 @@ const EducationalItem = (props) => {
     setShowConfirmModal(false);
   };
 
-const editModeHandler = async() => {
-    const response = await fetch('http://localhost:5000/api/users/getEditEducation',{
-      method: "POST",
-      headers : {"Content-Type" : "application/json"},
-      body : JSON.stringify({
-        educId : props.educId,
-      }),
-    });
+  const editModeHandler = async () => {
+    const response = await fetch(
+      "http://localhost:5000/api/users/getEditEducation",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          educId: props.educId,
+        }),
+      }
+    );
     const responseData = await response.json();
     props.setIsEditModeHandler(responseData.editData);
-}
+  };
 
-  const confirmDeleteHandler =  async () => {
+  const confirmDeleteHandler = async () => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     setShowConfirmModal(false);
-    const responseData = await sendRequest('http://localhost:5000/api/users/deleteEducation',
-    "DELETE",
-    JSON.stringify({
-      educId : props.educId,
-      userId :  storedData.userId
-    }),
-    { "Content-Type": "application/json" }
-    );
-
-    const getUserEducation = await fetch("http://localhost:5000/api/users/getUserEducation", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    const responseData = await sendRequest(
+      "http://localhost:5000/api/users/deleteEducation",
+      "DELETE",
+      JSON.stringify({
+        educId: props.educId,
         userId: storedData.userId,
       }),
-    });
+      { "Content-Type": "application/json" }
+    );
+
+    const getUserEducation = await fetch(
+      "http://localhost:5000/api/users/getUserEducation",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: storedData.userId,
+        }),
+      }
+    );
     const getUserEducationData = await getUserEducation.json();
     props.setUserData(getUserEducationData.userEducation, responseData.message);
   };
@@ -76,10 +87,14 @@ const editModeHandler = async() => {
         <div className="educational-container__data">
           <div>Level: {props.level}</div>
           <div>School: {props.school}</div>
-          {(props.degree !== "N/A" ? <div>Degree: {props.degree}</div> : '')}
+          {props.degree !== "N/A" ? <div>Degree: {props.degree}</div> : ""}
           <div>From: {props.from}</div>
           <div>To: {props.to}</div>
-          {(props.yearGraduated ? <div>yearGraduated: {props.yearGraduated}</div> : '')}
+          {props.yearGraduated ? (
+            <div>yearGraduated: {props.yearGraduated}</div>
+          ) : (
+            ""
+          )}
           <div>Highest Level/ Units Earned: {props.highestLevel}</div>
           <div>
             Awards:
@@ -88,12 +103,14 @@ const editModeHandler = async() => {
             ))}
           </div>
         </div>
-        <div className="educational-container__actions">
-          <Button onClick={editModeHandler}>Edit</Button>
-          <Button danger onClick={showDeleteWarningHandler}>
-            Delete
-          </Button>
-        </div>
+        {!userIdByParams && (
+          <div className="educational-container__actions">
+            <Button onClick={editModeHandler}>Edit</Button>
+            <Button danger onClick={showDeleteWarningHandler}>
+              Delete
+            </Button>
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

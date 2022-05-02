@@ -4,12 +4,12 @@ import FacultyItem from "./FacultyItem";
 import "../list.css";
 
 const FacultyList = (props) => {
-  if (props.list.length === 0) {
+  if (props.list?.length === 0) {
     return <div>No active users found</div>;
   }
   return (
     <div className="list">
-      {props.list.map((faculty) => (
+      {props.list?.map((faculty) => (
         <FacultyItem
           userId={faculty._id}
           employeeNum={faculty.employeeNum}

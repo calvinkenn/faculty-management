@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import SuccessModal from "../../../shared/components/UIElements/SuccessModal";
 import WorkExperienceEdit from "./WorkExperienceEdit";
 
@@ -33,61 +33,51 @@ const DUMMY_DATA = [
 ];
 
 const WorkExperience = (props) => {
-
   const [userData, setUserData] = useState([]);
   const [success, setSuccess] = useState();
   const [editData, setEditData] = useState();
 
   const clearSuccess = () => {
     setSuccess(null);
-  }
-  const setAddedData = (userData, success) =>{
+  };
+  const setAddedData = (userData, success) => {
     setUserData(userData);
     setSuccess(success);
-  }
+  };
   const setId = (editData) => {
-    setEditData(editData)
-  }
+    setEditData(editData);
+  };
   const editModeHandler = (editData) => {
     props.updateEditModeState(true);
     setId(editData);
   };
 
-  useEffect(() => {
-    const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    const sendRequest = async () => {
-      const response = await fetch("http://localhost:5000/api/users/getWorkExperience", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: storedData.userId,
-        }),
-      });
-      const responseData = await response.json();
-      setUserData(responseData.WorkExperience);
-    };
-    sendRequest();
-  }, [props.isAddMode, props.isEditMode]);
-
   if (props.isAddMode) {
     return (
       <WorkExperienceEdit
         addingItem={true}
-        updateAddModeState={props.updateAddModeState}
-        setUserData = {setAddedData}
+        // updateAddModeState={props.updateAddModeState}
+        setUserData={props.userUpdate}
       />
     );
   } else if (props.isEditMode) {
-    return <WorkExperienceEdit addingItem={false} editData = {editData}  setUserData = {setAddedData} updateAddModeState = {props.updateEditModeState}/>;
+    return (
+      <WorkExperienceEdit
+        addingItem={false}
+        editData={editData}
+        setUserData={props.userUpdate}
+        // updateAddModeState={props.updateEditModeState}
+      />
+    );
   } else {
     return (
       <React.Fragment>
-      <SuccessModal success = {success} onClear = {clearSuccess}/>
-      <WorkExperienceList
-        setUserData = {setAddedData}
-        setIsEditModeHandler={editModeHandler}
-        items={userData}
-      />
+        <SuccessModal success={success} onClear={clearSuccess} />
+        <WorkExperienceList
+          setUserData={props.userUpdate}
+          setIsEditModeHandler={editModeHandler}
+          items={props.workData}
+        />
       </React.Fragment>
     );
   }

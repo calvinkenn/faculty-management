@@ -89,7 +89,6 @@ const CivilServiceEdit = (props) => {
         { "Content-Type": "application/json" },
     );
     props.setUserData(responseData.userCivil, responseData.message);
-    props.updateAddModeState();
   };
 
   const submitEditHandler = async (event) => {
@@ -115,7 +114,6 @@ const CivilServiceEdit = (props) => {
         { "Content-Type": "application/json" },
     );
     props.setUserData(responseData.userCivil, responseData.message);
-    props.updateAddModeState();
   };
 
   return (

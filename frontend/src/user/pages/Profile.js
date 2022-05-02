@@ -17,7 +17,7 @@ import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import AccountInfo from "../components/AccountInformation/AccountInfo";
-import AccountCircleRounded from '@mui/icons-material/AccountCircleRounded';
+import AccountCircleRounded from "@mui/icons-material/AccountCircleRounded";
 
 const menu = {
   overview: true,
@@ -36,6 +36,10 @@ const Profile = (props) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAddMode, setIsAddMode] = useState(false);
   const [userData, setUserData] = useState({});
+  const [educationData, setEducationData] = useState({});
+  const [civilServiceData, setCivilServiceData] = useState({});
+  const [trainingData, setTrainingData] = useState({});
+  const [workData, setWorkData] = useState({});
   const [success, setSuccess] = useState();
   const userIdByParams = useParams().userId;
 
@@ -55,7 +59,9 @@ const Profile = (props) => {
     setIsAddMode(false);
     setIsMenuActive(stateCopy);
   };
+
   useEffect(() => {
+    //Get Basic Info
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     const getCurrentUser = async () => {
       try {
@@ -72,7 +78,81 @@ const Profile = (props) => {
       } catch (err) {}
     };
     getCurrentUser();
-    setSuccess("");
+  }, [sendRequest, success]);
+
+  useEffect(() => {
+    //Get Education
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getEducation = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/getUserEducation",
+          "POST",
+          JSON.stringify({
+            userId: userIdByParams ? userIdByParams : storedData.userId,
+          }),
+          { "Content-Type": "application/json" }
+        );
+        setEducationData(responseData.userEducation);
+      } catch (err) {}
+    };
+    getEducation();
+  }, [sendRequest, success]);
+
+  useEffect(() => {
+    //Get Civil Service
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getCivil = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/getUserCivil",
+          "POST",
+          JSON.stringify({
+            userId: userIdByParams ? userIdByParams : storedData.userId,
+          }),
+          { "Content-Type": "application/json" }
+        );
+        setCivilServiceData(responseData.userCivil);
+      } catch (err) {}
+    };
+    getCivil();
+  }, [sendRequest, success]);
+
+  useEffect(() => {
+    //Get Work Experience Data
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getWorkData = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/getWorkExperience",
+          "POST",
+          JSON.stringify({
+            userId: userIdByParams ? userIdByParams : storedData.userId,
+          }),
+          { "Content-Type": "application/json" }
+        );
+        setWorkData(responseData.WorkExperience);
+      } catch (err) {}
+    };
+    getWorkData();
+  }, [sendRequest, success]);
+
+  useEffect(() => {
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getTrainingData = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/getUserTraining",
+          "POST",
+          JSON.stringify({
+            userId: userIdByParams ? userIdByParams : storedData.userId,
+          }),
+          { "Content-Type": "application/json" }
+        );
+        setTrainingData(responseData.userTraining);
+      } catch (err) {}
+    };
+    getTrainingData();
   }, [sendRequest, success]);
 
   console.log(userData);
@@ -86,6 +166,7 @@ const Profile = (props) => {
   //function for clearing if there is no error
   const clearSuccess = () => {
     setSuccess(null);
+    setSuccess("");
   };
 
   return (
@@ -117,7 +198,7 @@ const Profile = (props) => {
                   className={isMenuActive.accountInformation ? "active" : ""}
                   onClick={() => menuChangeHandler("accountInformation")}
                 >
-                 <span>Account Information</span>
+                  <span>Account Information</span>
                 </li>
                 <li
                   className={isMenuActive.basicInformation ? "active" : ""}
@@ -200,6 +281,8 @@ const Profile = (props) => {
                   isEditMode={isEditMode}
                   updateEditModeState={editModeHandler}
                   updateAddModeState={addModeHandler}
+                  educationData={educationData}
+                  userUpdate={updateState}
                 />
               )}
               {isMenuActive.civilService && (
@@ -209,6 +292,8 @@ const Profile = (props) => {
                   isEditMode={isEditMode}
                   updateEditModeState={editModeHandler}
                   updateAddModeState={addModeHandler}
+                  civilServiceData={civilServiceData}
+                  userUpdate={updateState}
                 />
               )}
               {isMenuActive.workExperience && (
@@ -218,6 +303,8 @@ const Profile = (props) => {
                   isEditMode={isEditMode}
                   updateEditModeState={editModeHandler}
                   updateAddModeState={addModeHandler}
+                  workData={workData}
+                  userUpdate={updateState}
                 />
               )}
               {isMenuActive.training && (
@@ -227,6 +314,8 @@ const Profile = (props) => {
                   isEditMode={isEditMode}
                   updateEditModeState={editModeHandler}
                   updateAddModeState={addModeHandler}
+                  trainingData={trainingData}
+                  userUpdate={updateState}
                 />
               )}
             </div>

@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
-import Button from "../../../shared/components/FormElements/Button";
+import React, { useEffect, useState } from "react";
+import { TextField } from "@mui/material";
 
+import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 import { useForm } from "../../../shared/hooks/form-hook";
@@ -14,6 +15,17 @@ import "../../components/EditForm.css";
 
 const BasicInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
+  const [inputList, setInputList] = useState([{ extensionName: "" }]);
+
+  useEffect(() => {
+    if (props.userEdit) {
+      if (props.userEdit.extensionName?.length > 0) {
+        setInputList(props.userEdit.extensionName); //Set inputList to extension Name data
+      }
+    }
+    console.log(props.userEdit.extensionName?.length);
+  }, []);
+
   const [formState, inputHandler, setFormData] = useForm(
     {
       firstName: {
@@ -32,9 +44,13 @@ const BasicInfoEdit = (props) => {
         value: props.userEdit.email,
         isValid: true,
       },
-      extensionName: {
-        value: props.userEdit.extensionName,
+      suffixName: {
+        value: props.userEdit.suffixName,
         isValid: true,
+      },
+      extensionName: {
+        value: inputList.length > 1 ? inputList : "",
+        isValid: false,
       },
       bday: {
         value: props.userEdit.birthday.substring(0, 10),
@@ -92,6 +108,27 @@ const BasicInfoEdit = (props) => {
     false
   );
 
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+
+  // handle click event of the Remove button
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    formState.inputs.extensionName.value = "";
+    setInputList([...inputList, { extensionName: "" }]);
+  };
+
   const submitHandler = async (event) => {
     console.log("clicked");
     event.preventDefault();
@@ -106,7 +143,8 @@ const BasicInfoEdit = (props) => {
           firstName: formState.inputs.firstName.value,
           lastName: formState.inputs.lastName.value,
           middleName: formState.inputs.middleName.value,
-          extensionName: formState.inputs.extensionName.value,
+          suffixName: formState.inputs.suffixName.value,
+          extensionName: inputList,
           birthday: formState.inputs.bday.value,
           placeofBirth: formState.inputs.placeofBirth.value,
           gender: formState.inputs.gender.value,
@@ -129,7 +167,7 @@ const BasicInfoEdit = (props) => {
       props.setEditMode(responseData.updatedUser, responseData.message);
     } catch (err) {}
   };
-  
+
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
@@ -169,6 +207,47 @@ const BasicInfoEdit = (props) => {
         />
         <Input
           element="input"
+          id="suffixName"
+          type="text"
+          label="Suffix Name"
+          validators={[VALIDATOR_OPTIONAL()]}
+          errorText="Invalid Email"
+          onInput={inputHandler}
+          initialValue={formState.inputs.suffixName.value}
+          initialValid={formState.inputs.suffixName.isValid}
+        />
+        {inputList.map((x, i) => {
+          return (
+            <div className="box">
+              <TextField
+                name="extensionName"
+                id="extensionName"
+                type="text"
+                label="Extension Name"
+                value={x.extensionName}
+                onChange={(e) => handleInputChange(e, i)}
+              />
+              <div className="btn-box">
+                {inputList.length !== 1 && (
+                  <button
+                    type="button"
+                    className="mr10"
+                    onClick={() => handleRemoveClick(i)}
+                  >
+                    Remove
+                  </button>
+                )}
+                {inputList.length - 1 === i && (
+                  <button type="button" onClick={handleAddClick}>
+                    Add
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+        <Input
+          element="input"
           id="email"
           type="text"
           label="Email"
@@ -177,17 +256,6 @@ const BasicInfoEdit = (props) => {
           onInput={inputHandler}
           initialValue={formState.inputs.email.value}
           initialValid={formState.inputs.email.isValid}
-        />
-        <Input
-          element="input"
-          id="extensionName"
-          type="text"
-          label="Extension Name"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.extensionName.value}
-          initialValid={formState.inputs.extensionName.isValid}
         />
         <Input
           element="input"

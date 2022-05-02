@@ -40,6 +40,7 @@ const BasicInfo = (props) => {
         middleName={props.userData.middleName}
         lastName={props.userData.lastName}
         email={props.userData.email}
+        suffixName={props.userData.suffixName}
         extensionName={props.userData.extensionName}
         bday={formatDate(props.userData.birthday.substring(0, 10))}
         age={getAge(props.userData.birthday.substring(0, 10))}

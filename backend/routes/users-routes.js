@@ -24,6 +24,15 @@ router.post(
   userControllers.signup
 );
 
+router.patch(
+  "/reset",
+  check("email")
+    .normalizeEmail()
+    .isEmail()
+    .withMessage("please input a valid email!"),
+  userControllers.reset
+);
+
 router.post("/login", userControllers.login);
 
 router.patch(

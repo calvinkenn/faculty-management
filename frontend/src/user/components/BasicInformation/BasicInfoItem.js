@@ -16,7 +16,13 @@ const BasicInfoItem = (props) => {
         <div>Middle Name: {props.middleName}</div>
         <div>Last Name: {props.lastName}</div>
         <div>Email: {props.email}</div>
-        <div>Extension Name:{props.extensionName}</div>
+        <div>Suffix Name:{props.suffixName}</div>
+        <div>
+            Extension Name:
+            {props.extensionName?.map((extension) => (
+              <span> {extension.extensionName} </span>
+            ))}
+          </div>
         <div>Birthday:{props.bday}</div>
         <div>Age:{props.age} years old</div>
         <div>Place of Birth:{props.placeofBirth}</div>

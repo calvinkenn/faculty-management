@@ -19,11 +19,13 @@ import bulsuLogo from "../../assets/Image/bulsu.png";
 import cictLogo from "../../assets/Image/cict.png";
 import cictBuilding from "../../assets/Image/pimentel.png";
 
-
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  const [isRegisterMode, setIsRegisterMode] = useState(false);
+  const [isResetMode, setIsResetMode] = useState(false);
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
+    useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -51,8 +53,29 @@ const Auth = () => {
     false
   );
 
+  const loginModeHandler = () => {
+    setIsRegisterMode(false);
+    setIsLoginMode(true);
+    setIsResetMode(false);
+    switchModeHandler();
+  };
+
+  const registerModeHandler = () => {
+    setIsRegisterMode(true);
+    setIsLoginMode(false);
+    setIsResetMode(false);
+    switchModeHandler();
+  };
+
+  const resetModeHandler = () => {
+    setIsRegisterMode(false);
+    setIsLoginMode(false);
+    setIsResetMode(true);
+    switchModeHandler();
+  };
+
   const switchModeHandler = () => {
-    if (!isLoginMode) {
+    if (isRegisterMode) {
       setFormData(
         {
           ...formState.inputs,
@@ -62,7 +85,7 @@ const Auth = () => {
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
-    } else {
+    } else if (isLoginMode) {
       setFormData(
         {
           ...formState.inputs,
@@ -81,8 +104,30 @@ const Auth = () => {
         },
         false
       );
+    } else if (isResetMode) {
+      setFormData(
+        {
+          ...formState.inputs,
+          employeeNum: {
+            value: "",
+            isValid: false,
+          },
+          firstName: {
+            value: "",
+            isValid: false,
+          },
+          lastName: {
+            value: "",
+            isValid: false,
+          },
+          password: {
+            value: "",
+            isValid: false,
+          },
+        },
+        false
+      );
     }
-    setIsLoginMode((prevMode) => !prevMode);
   };
 
   const testLoginAdmin = (event) => {
@@ -110,14 +155,13 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
-        if(responseData.admin){
+        if (responseData.admin) {
           auth.loginAsAdmin(responseData.adminId, responseData.token);
-        }else{
+        } else {
           auth.login(responseData.userId, responseData.token);
         }
-        
       } catch (err) {}
-    } else {
+    } else if (isRegisterMode) {
       //code for signup
       try {
         const responseData = await sendRequest(
@@ -136,12 +180,27 @@ const Auth = () => {
         );
         switchModeHandler();
       } catch (err) {}
+    } else if (isResetMode) {
+      //code for signup
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/users/reset",
+          "PATCH",
+          JSON.stringify({
+            email: formState.inputs.email.value,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        // switchModeHandler();
+      } catch (err) {}
     }
   };
 
   return (
     <React.Fragment>
-      <SuccessModal success = {success} onClear = {clearSuccess}/>
+      <SuccessModal success={success} onClear={clearSuccess} />
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">
         {isLoading && <LoadingSpinner asOverlay />}
@@ -169,7 +228,7 @@ const Auth = () => {
               </h2>
               <form onSubmit={authSubmitHandler}>
                 <div className="employeeNo-container">
-                  {!isLoginMode && (
+                  {isRegisterMode && (
                     <Input
                       element="input"
                       id="employeeNum"
@@ -184,7 +243,7 @@ const Auth = () => {
                 </div>
                 <div className="fullName-container">
                   <div className="firstName-container">
-                    {!isLoginMode && (
+                    {isRegisterMode && (
                       <Input
                         element="input"
                         id="firstName"
@@ -198,7 +257,7 @@ const Auth = () => {
                     )}
                   </div>
                   <div className="lastName-container">
-                    {!isLoginMode && (
+                    {isRegisterMode && (
                       <Input
                         element="input"
                         id="lastName"
@@ -227,40 +286,41 @@ const Auth = () => {
                     />
                   </div>
                   <div className="password-container">
-                    <Input
-                      element="input"
-                      id="password"
-                      type="password"
-                      validators={[VALIDATOR_MINLENGTH(6)]}
-                      helperText="Minimum of 6 characters."
-                      onInput={inputHandler}
-                      label="Password"
-                      variant="outlined"
-                    />
+                    {!isResetMode && (
+                      <Input
+                        element="input"
+                        id="password"
+                        type="password"
+                        validators={[VALIDATOR_MINLENGTH(6)]}
+                        helperText="Minimum of 6 characters."
+                        onInput={inputHandler}
+                        label="Password"
+                        variant="outlined"
+                      />
+                    )}
                   </div>
                 </div>
 
                 <Button type="submit">
-                  {isLoginMode ? "Test Log in User" : "Register"}
+                  {isLoginMode && "Login"}
+                  {isRegisterMode && "Register"}
+                  {isResetMode && "Reset Password"}
                 </Button>
-                {isLoginMode && (
-                  <Button onClick={testLoginAdmin}>Test Log in Admin</Button>
-                )}
               </form>
 
               {isLoginMode ? (
                 <h6>
                   Don't have an account?{" "}
-                  <a onClick={switchModeHandler}>Create an account here</a>
+                  <a onClick={registerModeHandler}>Create an account here</a>
                   <h6>
                     Forgot your password?{" "}
-                    <a onClick={switchModeHandler}>Reset your password here</a>
+                    <a onClick={resetModeHandler}>Reset your password here</a>
                   </h6>
                 </h6>
               ) : (
                 <h6>
                   Already have an account?{" "}
-                  <a onClick={switchModeHandler}>Login here</a>
+                  <a onClick={loginModeHandler}>Login here</a>
                 </h6>
               )}
             </div>

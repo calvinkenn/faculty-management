@@ -13,13 +13,13 @@ const formatDate = (input) => {
 };
 const CivilServiceList = (props) => {
 
-  if (props.items.length === 0){
+  if (props.items?.length === 0){
     return <div>no civil service/s found.</div>
   }
   return (
 
     <div className="training-list">
-      {props.items.map((item) => (
+      {props.items?.map((item) => (
         <CivilServiceItem
           setUserData = {props.setUserData}
           setIsEditModeHandler={props.setIsEditModeHandler}

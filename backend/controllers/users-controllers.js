@@ -83,6 +83,35 @@ const signup = async (req, res, next) => {
   });
 };
 
+const reset = async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    existingUser = await User.findOne({ email: email });
+  } catch (err) {
+    const error = new HttpError("Email is not registered.", 500);
+    return next(error);
+  }
+
+  if (!existingUser) {
+    const error = new HttpError(
+      "Email is not registered.",
+      401
+    );
+    return next(error);
+  }
+
+  const user = await User.findByIdAndUpdate(existingUser._id, {
+    permission: "reset",
+  });
+
+  let updatedUser;
+  if (user) {
+    updatedUser = await User.findById(existingUser.userId);
+  }
+  res.status(200).json({ message: "Reset Password Requested", updatedUser: updatedUser });
+};
+
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -111,6 +140,14 @@ const login = async (req, res, next) => {
     const error = new HttpError(
       "Loggin in failed, please try again later.",
       500
+    );
+    return next(error);
+  }
+
+  if (existingUser.permission === "reset") {
+    const error = new HttpError(
+      "Account requested for a reset. Please wait for the admin to reset your password and try again.",
+      401
     );
     return next(error);
   }
@@ -163,6 +200,7 @@ const login = async (req, res, next) => {
     token: token,
   });
 };
+
 const getuserData = async (req, res, next) => {
   const { userId } = req.body;
   const user = await User.findById(userId, "-password");
@@ -182,6 +220,7 @@ const editBasicInfo = async (req, res, next) => {
     firstName,
     lastName,
     middleName,
+    suffixName,
     extensionName,
     placeofBirth,
     gender,
@@ -202,7 +241,8 @@ const editBasicInfo = async (req, res, next) => {
     firstName,
     lastName,
     middleName,
-    extensionName,
+    suffixName,
+    extensionName: extensionName,
     placeofBirth,
     gender,
     birthday,
@@ -823,6 +863,7 @@ const deleteUserTraining = async (req, res, next) => {
     .json({ userTraining: newUpdate, message: "Work Experience Deleted" });
 };
 exports.signup = signup;
+exports.reset = reset;
 exports.login = login;
 exports.getuserData = getuserData;
 exports.editBasicInfo = editBasicInfo;

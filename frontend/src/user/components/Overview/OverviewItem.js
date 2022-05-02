@@ -77,10 +77,16 @@ const OverviewItem = (props) => {
           <div>First Name: {props.firstName}</div>
           <div>Middle Name: {props.middleName}</div>
           <div>Last Name: {props.lastName}</div>
+          <div>Suffix Name: {props.suffixName}</div>
+          <div>
+            Extension Name:
+            {props.extensionName?.map((extension) => (
+              <span> {extension.extensionName} </span>
+            ))}
+          </div>
           <div>Email: {props.email}</div>
-          <div>Extension Name:{props.extensionName}</div>
         </div>
-        
+
         <div className="address-info-cont">
           <div className="basic-info-title">
             <div className="basic-title-blank"></div>

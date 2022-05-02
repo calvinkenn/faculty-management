@@ -47,7 +47,7 @@ const TrainingEdit = (props) => {
         isValid: false,
       },
       certificatePic: {
-        value: null,
+        value: props.editData ? props.editData.certificatePic :null,
         isValid: false,
       },
     },
@@ -95,7 +95,7 @@ const TrainingEdit = (props) => {
         // { "Content-Type": "application/json" }
       );
       props.setUserData(responseData.userTraining, responseData.message);
-      props.updateAddModeState();
+      // props.updateAddModeState();
     } catch (err) {}
   };
 
@@ -128,7 +128,7 @@ const TrainingEdit = (props) => {
         formData
       );
       props.setUserData(responseData.userTraining, responseData.message);
-      props.updateAddModeState();
+      // props.updateAddModeState();
     } catch (err) {}
   };
 

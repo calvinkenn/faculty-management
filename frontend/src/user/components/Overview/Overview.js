@@ -12,6 +12,7 @@ const BasicInfo = (props) => {
       middleName={props.userData.middleName}
       lastName={props.userData.lastName}
       email={props.userData.email}
+      suffixName={props.userData.suffixName}
       extensionName={props.userData.extensionName}
       houseNo={props.userData.houseNoR}
       street={props.userData.streetR}

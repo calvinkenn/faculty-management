@@ -41,53 +41,48 @@ const EducationalBackground = (props) => {
 
   const clearSuccess = () => {
     setSuccess(null);
-  }
+  };
 
   const setId = (editData) => {
-    setEditData(editData)
-  }
+    setEditData(editData);
+  };
 
   const editModeHandler = (editData) => {
     props.updateEditModeState(true);
     setId(editData);
   };
 
-  const setAddedData = (userData, success) =>{
+  const setAddedData = (userData, success) => {
     setUserData(userData);
     setSuccess(success);
-  }
-
-  //to get education
-  useEffect(() => {
-    const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    const sendRequest = async () => {
-      const response = await fetch("http://localhost:5000/api/users/getUserEducation", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: storedData.userId,
-        }),
-      });
-      const responseData = await response.json();
-      setUserData(responseData.userEducation);
-    };
-    sendRequest();
-  }, [props.isAddMode, props.isEditMode]);
+  };
 
   if (props.isAddMode) {
-    return <EducationalEdit addingItem={true} updateAddModeState = {props.updateAddModeState} setUserData = {setAddedData} />;
+    return (
+      <EducationalEdit
+        addingItem={true}
+        // updateAddModeState={props.updateAddModeState}
+        setUserData={props.userUpdate}
+      />
+    );
   } else if (props.isEditMode) {
-    return <EducationalEdit addingItem={false} editData = {editData} updateAddModeState = {props.updateEditModeState} setUserData = {setAddedData} />;
+    return (
+      <EducationalEdit
+        addingItem={false}
+        editData={editData}
+        // updateAddModeState={props.updateEditModeState}
+        setUserData={props.userUpdate}
+      />
+    );
   } else {
     return (
       <React.Fragment>
-      <SuccessModal success = {success} onClear = {clearSuccess}/>
-      <EducationalList
-        items={DUMMY_DATA}
-        setIsEditModeHandler={editModeHandler}
-        userData = {userData}
-        setUserData = {setAddedData}
-      />
+        <EducationalList
+          items={DUMMY_DATA}
+          setIsEditModeHandler={editModeHandler}
+          userData={props.educationData}
+          setUserData={props.userUpdate}
+        />
       </React.Fragment>
     );
   }

@@ -12,12 +12,14 @@ import Rejected from "../components/Rejected/Rejected";
 import TopActionBarAdmin from "../TopActionBarAdmin";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./Admin.css";
+import Reset from "../components/Reset/Reset";
 const menu = {
   overview: true,
   facultyMembers: false,
   inactive: false,
   applications: false,
   rejected: false,
+  reset: false,
 };
 
 const Admin = (props) => {
@@ -27,6 +29,7 @@ const Admin = (props) => {
   const [activeUserData, setActiveUserData] = useState();
   const [rejectedUserData, setRejectedUserData] = useState();
   const [deactivatedUserData, setDeactivatedUserData] = useState();
+  const [resetUserData, setResetUserData] = useState();
   const [updatedStatus, setUpdatedStatus] = useState("");
   const [searchField, setSearchField] = useState("");
   const [error, setError] = useState();
@@ -123,6 +126,22 @@ const Admin = (props) => {
     setUpdatedStatus("");
   }, [sendRequest, updatedStatus]);
 
+  useEffect(() => {
+    //Get reset users
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const getResetUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/admin/getAllResetUsers"
+        );
+        // const responseData = await response.json();
+        setResetUserData(responseData.resetUsers);
+      } catch (err) {}
+    };
+    getResetUsers();
+    setUpdatedStatus("");
+  }, [sendRequest, updatedStatus]);
+
   const clearModals = () => {
     setError(null);
     setSuccess(null);
@@ -183,6 +202,15 @@ const Admin = (props) => {
     );
   });
 
+  const filteredResetUsers = resetUserData?.filter((resetUser) => {
+    return (
+      resetUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      resetUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      resetUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
+      resetUser.employeeNum?.toString().includes(searchField)
+    );
+  });
+
   return (
     <React.Fragment>
       <div className="admin-main">
@@ -222,6 +250,12 @@ const Admin = (props) => {
                   onClick={() => menuChangeHandler("rejected")}
                 >
                   Rejected Applications
+                </li>
+                <li
+                  className={isMenuActive.reset ? "active" : ""}
+                  onClick={() => menuChangeHandler("reset")}
+                >
+                  Requesting Password Reset
                 </li>
               </ul>
             </SideBox>
@@ -265,6 +299,12 @@ const Admin = (props) => {
                 <Rejected
                   rejectedUserData={filteredRejectedUsers}
                   updateRejectedUsers={updateUsers}
+                />
+              )}
+              {isMenuActive.reset && (
+                <Reset
+                  resetUserData={filteredResetUsers}
+                  updateResetUsers={updateUsers}
                 />
               )}
             </div>

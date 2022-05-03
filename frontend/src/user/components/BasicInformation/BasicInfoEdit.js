@@ -400,69 +400,72 @@ const BasicInfoEdit = (props) => {
           </div>
 
           <div className="gov-id-detail-cont">
-            <Input
-              element="input"
-              id="gssId"
-              type="text"
-              label="GSS ID"
-              validators={[VALIDATOR_OPTIONAL()]}
-              errorText="Invalid Email"
-              onInput={inputHandler}
-              initialValue={formState.inputs.gssId.value}
-              initialValid={formState.inputs.gssId.isValid}
-            />
-            <span />
-            <Input
-              element="input"
-              id="pagibigId"
-              type="text"
-              label="Pagibig ID"
-              validators={[VALIDATOR_OPTIONAL()]}
-              errorText="Invalid Email"
-              onInput={inputHandler}
-              initialValue={formState.inputs.pagibigId.value}
-              initialValid={formState.inputs.pagibigId.isValid}
-            />
-            <span />
-            <Input
-              element="input"
-              id="philHealthId"
-              type="text"
-              label="Philhealth"
-              validators={[VALIDATOR_OPTIONAL()]}
-              errorText="Invalid Email"
-              onInput={inputHandler}
-              initialValue={formState.inputs.philHealthId.value}
-              initialValid={formState.inputs.philHealthId.isValid}
-            />
-            <span />
-            <Input
-              element="input"
-              id="sssNo"
-              type="text"
-              label="SSS No."
-              validators={[VALIDATOR_OPTIONAL()]}
-              errorText="Invalid Email"
-              onInput={inputHandler}
-              initialValue={formState.inputs.sssNo.value}
-              initialValid={formState.inputs.sssNo.isValid}
-            />
-            <span />
-            <Input
-              element="input"
-              id="tinNo"
-              type="text"
-              label="TIN No."
-              validators={[VALIDATOR_OPTIONAL()]}
-              errorText="Invalid Email"
-              onInput={inputHandler}
-              initialValue={formState.inputs.tinNo.value}
-              initialValid={formState.inputs.tinNo.isValid}
-            />
+            <div className="gov-id-edit">
+              <Input
+                element="input"
+                id="gssId"
+                type="text"
+                label="GSS ID"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.gssId.value}
+                initialValid={formState.inputs.gssId.isValid}
+              />
+              <span />
+              <Input
+                element="input"
+                id="pagibigId"
+                type="text"
+                label="Pagibig ID"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.pagibigId.value}
+                initialValid={formState.inputs.pagibigId.isValid}
+              />
+              <span />
+              <Input
+                element="input"
+                id="philHealthId"
+                type="text"
+                label="Philhealth"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.philHealthId.value}
+                initialValid={formState.inputs.philHealthId.isValid}
+              />
+              <span />
+              <Input
+                element="input"
+                id="sssNo"
+                type="text"
+                label="SSS No."
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.sssNo.value}
+                initialValid={formState.inputs.sssNo.isValid}
+              />
+              <span />
+              <Input
+                element="input"
+                id="tinNo"
+                type="text"
+                label="TIN No."
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.tinNo.value}
+                initialValid={formState.inputs.tinNo.isValid}
+              />
+            </div>
+            
           </div>
           <div className="edit-submit-btn">
             <Button inverse type="submit">
-              Save Info
+              Save Changes
             </Button>
           </div>
           

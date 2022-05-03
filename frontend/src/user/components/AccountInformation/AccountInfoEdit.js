@@ -99,94 +99,77 @@ const AccountInfoEdit = (props) => {
         onClear={imageError ? clearImageError : clearError}
       />
       <form onSubmit={submitHandler}>
-        {/* <ImageUpload
-          center
-          id="profilePic"
-          onInput={inputHandler}
-          previewUrl={props.userEdit.profilePic}
-        /> */}
-        <Input
-          element="input"
-          id="employeeNum"
-          type="text"
-          label="Employee Number"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.employeeNum.value}
-          initialValid={formState.inputs.employeeNum.isValid}
-        />
-        <Input
-          element="select"
-          id="faculty"
-          type="text"
-          label="Faculty"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={["BSIT", "BLIS", "ALLIED"]}
-          onInput={inputHandler}
-          initialValue={formState.inputs.faculty.value}
-          initialValid={formState.inputs.faculty.isValid}
-        />
-        <Input
-          element="select"
-          id="employmentType"
-          type="text"
-          label="Employment Type"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={["Full Time", "Part Time"]}
-          onInput={inputHandler}
-          initialValue={formState.inputs.employmentType.value}
-          initialValid={formState.inputs.employmentType.isValid}
-        />
-        <Input
-          element="input"
-          id="email"
-          type="text"
-          label="Email"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.email.value}
-          initialValid={formState.inputs.email.isValid}
-        />
-        {/* <Input
-          element="input"
-          id="oldPassword"
-          type="text"
-          label="Old Password"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.oldPassword.value}
-          initialValid={formState.inputs.oldPassword.isValid}
-        />
-        <Input
-          element="input"
-          id="newPassword"
-          type="text"
-          label="New Password"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.newPassword.value}
-          initialValid={formState.inputs.newPassword.isValid}
-        />
-        <Input
-          element="input"
-          id="confirmNewPassword"
-          type="text"
-          label="Confirm New Password"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.confirmNewPassword.value}
-          initialValid={formState.inputs.confirmNewPassword.isValid}
-        /> */}
-        <Button inverse type="submit">
-          Save Info
-        </Button>
+        <div className="account-edit-cont">
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Account Information</h1>
+            </div>
+          </div>
+          <div className="acc-details-edit">
+            <div className="acc-input-edit">
+              <div className="employee-num-cont">
+                <Input
+                  element="input"
+                  id="employeeNum"
+                  type="text"
+                  label="Employee Number"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.employeeNum.value}
+                  initialValid={formState.inputs.employeeNum.isValid}
+                />
+              </div>
+              <div className="faculty-type-cont">
+                <Input
+                  element="select"
+                  id="faculty"
+                  type="text"
+                  label="Faculty"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  items={["BSIT", "BLIS", "ALLIED"]}
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.faculty.value}
+                  initialValid={formState.inputs.faculty.isValid}
+                />
+              </div>
+              <div className="employment-type-cont">
+                <Input
+                  element="select"
+                  id="employmentType"
+                  type="text"
+                  label="Employment Type"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  items={["Full Time", "Part Time"]}
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.employmentType.value}
+                  initialValid={formState.inputs.employmentType.isValid}
+                />
+              </div>
+              <div className="email-edit-cont">
+                <Input
+                  element="input"
+                  id="email"
+                  type="text"
+                  label="Email"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.email.value}
+                  initialValid={formState.inputs.email.isValid}
+                />
+              </div>
+            </div>
+            <div className="acc-edit-btn">
+              <Button inverse type="submit">
+                Save Changes
+              </Button>
+            </div>
+          </div>
+        </div>
       </form>
     </React.Fragment>
   );

@@ -171,254 +171,303 @@ const BasicInfoEdit = (props) => {
   return (
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
-      <form onSubmit={submitHandler}>
-        <Input
-          element="input"
-          id="firstName"
-          type="text"
-          label="First Name"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.firstName.value}
-          initialValid={formState.inputs.firstName.isValid}
-        />
-        <Input
-          element="input"
-          id="middleName"
-          type="text"
-          label="Middle Name"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.middleName.value}
-          initialValid={formState.inputs.middleName.isValid}
-        />
-        <Input
-          element="input"
-          id="lastName"
-          type="text"
-          label="Last Name"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.lastName.value}
-          initialValid={formState.inputs.lastName.isValid}
-        />
-        <Input
-          element="input"
-          id="suffixName"
-          type="text"
-          label="Suffix Name"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.suffixName.value}
-          initialValid={formState.inputs.suffixName.isValid}
-        />
-        {inputList.map((x, i) => {
-          return (
-            <div className="box">
-              <TextField
-                name="extensionName"
-                id="extensionName"
-                type="text"
-                label="Extension Name"
-                value={x.extensionName}
-                onChange={(e) => handleInputChange(e, i)}
-              />
-              <div className="btn-box">
-                {inputList.length !== 1 && (
-                  <button
-                    type="button"
-                    className="mr10"
-                    onClick={() => handleRemoveClick(i)}
-                  >
-                    Remove
-                  </button>
-                )}
-                {inputList.length - 1 === i && (
-                  <button type="button" onClick={handleAddClick}>
-                    Add
-                  </button>
-                )}
+      <div className="basic-info-cont">
+        <form onSubmit={submitHandler}>
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Employee Name</h1>
+            </div>
+          </div>
+          <div className="name-detail-cont">
+            <div className="name-edit-cont">
+              <div className="first-mid-name-cont">
+                <Input
+                  element="input"
+                  id="firstName"
+                  type="text"
+                  label="First Name"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.firstName.value}
+                  initialValid={formState.inputs.firstName.isValid}
+                />
+                <span />
+                <Input
+                  element="input"
+                  id="middleName"
+                  type="text"
+                  label="Middle Name"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.middleName.value}
+                  initialValid={formState.inputs.middleName.isValid}
+                />
+              </div>
+              <div className="last-suffix-name-cont">
+                <Input
+                  element="input"
+                  id="lastName"
+                  type="text"
+                  label="Last Name"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.lastName.value}
+                  initialValid={formState.inputs.lastName.isValid}
+                />
+                <span />
+                <Input
+                  element="input"
+                  id="suffixName"
+                  type="text"
+                  label="Suffix Name (Ex. Jr. Sr. III)"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.suffixName.value}
+                  initialValid={formState.inputs.suffixName.isValid}
+                />
+              </div>
+              <div className="ext-name-cont">
+                {inputList.map((x, i) => {
+                  return (
+                    <div className="box">
+                        <TextField
+                          name="extensionName"
+                          id="extensionName"
+                          type="text"
+                          label="Extension Name"
+                          value={x.extensionName}
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                        <div className="btn-box">
+                          {inputList.length !== 1 && (
+                            <button
+                              type="button"
+                              className="mr10"
+                              onClick={() => handleRemoveClick(i)}
+                            >
+                              Remove
+                            </button>
+                          )}
+                          {inputList.length - 1 === i && (
+                            <button type="button" onClick={handleAddClick}>
+                              Add
+                            </button>
+                          )}
+                        </div>
+                    </div>
+                  );
+
+                })}
+              </div>
+              
+            </div>
+          </div>
+          
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Personal Information</h1>
+            </div>
+          </div>
+          <div className="personal-info-detail-cont">
+            <div className="personal-info-edit">
+              <div className="bday-place-citizenship">
+                <Input
+                  element="input"
+                  id="bday"
+                  type="date"
+                  label="Birthday"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.bday.value}
+                  initialValid={formState.inputs.bday.isValid}
+                />
+                <span />
+                <Input
+                  element="input"
+                  id="placeofBirth"
+                  type="text"
+                  label="Place of Birth"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.placeofBirth.value}
+                  initialValid={formState.inputs.placeofBirth.isValid}
+                />
+                <span />
+                <Input
+                  element="select"
+                  id="citizenship"
+                  type="text"
+                  label="Citizenship"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  items={["Filipino", "Other"]}
+                  defaultValue="Filipino"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.citizenship.value}
+                  initialValid={formState.inputs.citizenship.isValid}
+                />
+              </div>
+              <div className="gender-civil">
+                <Input
+                  element="select"
+                  id="gender"
+                  type="text"
+                  label="Gender"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  items={["Male", "Female", "Other"]}
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.gender.value}
+                  initialValid={formState.inputs.gender.isValid}
+                />
+                <span />
+                <Input
+                  element="select"
+                  id="civilStatus"
+                  type="text"
+                  label="Civil Status"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  items={["Single", "Married", "Widowed", "Divorced", "Separated"]}
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.civilStatus.value}
+                  initialValid={formState.inputs.civilStatus.isValid}
+                />
+              </div>
+              <div className="height-weight-bloodtype">
+                <Input
+                  element="input"
+                  id="height"
+                  type="text"
+                  label="Height"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.height.value}
+                  initialValid={formState.inputs.height.isValid}
+                />
+                <span />
+                <Input
+                  element="input"
+                  id="weight"
+                  type="text"
+                  label="Weight"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.weight.value}
+                  initialValid={formState.inputs.weight.isValid}
+                />
+                <span />
+                <Input
+                  element="select"
+                  id="bloodType"
+                  type="text"
+                  label="Blood Type"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  items={[
+                    "Type AB+",
+                    "Type AB-",
+                    "Type A+",
+                    "Type A-",
+                    "Type B+",
+                    "Type B-",
+                    "Type O+",
+                    "Type O-",
+                  ]}
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.bloodType.value}
+                  initialValid={formState.inputs.bloodType.isValid}
+                />
               </div>
             </div>
-          );
-        })}
-        <Input
-          element="input"
-          id="email"
-          type="text"
-          label="Email"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.email.value}
-          initialValid={formState.inputs.email.isValid}
-        />
-        <Input
-          element="input"
-          id="bday"
-          type="date"
-          label="Birthday"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.bday.value}
-          initialValid={formState.inputs.bday.isValid}
-        />
-        <Input
-          element="input"
-          id="placeofBirth"
-          type="text"
-          label="Place of Birth"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.placeofBirth.value}
-          initialValid={formState.inputs.placeofBirth.isValid}
-        />
-        <Input
-          element="select"
-          id="gender"
-          type="text"
-          label="Gender"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={["Male", "Female", "Other"]}
-          onInput={inputHandler}
-          initialValue={formState.inputs.gender.value}
-          initialValid={formState.inputs.gender.isValid}
-        />
+          </div>
+          
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Government Issued ID</h1>
+            </div>
+          </div>
 
-        <Input
-          element="select"
-          id="civilStatus"
-          type="text"
-          label="Civil Status"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={["Single", "Married", "Widowed", "Divorced", "Separated"]}
-          onInput={inputHandler}
-          initialValue={formState.inputs.civilStatus.value}
-          initialValid={formState.inputs.civilStatus.isValid}
-        />
-        <Input
-          element="input"
-          id="height"
-          type="text"
-          label="Height"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.height.value}
-          initialValid={formState.inputs.height.isValid}
-        />
-        <Input
-          element="input"
-          id="weight"
-          type="text"
-          label="Weight"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.weight.value}
-          initialValid={formState.inputs.weight.isValid}
-        />
-        <Input
-          element="select"
-          id="bloodType"
-          type="text"
-          label="Blood Type"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={[
-            "Type AB+",
-            "Type AB-",
-            "Type A+",
-            "Type A-",
-            "Type B+",
-            "Type B-",
-            "Type O+",
-            "Type O-",
-          ]}
-          onInput={inputHandler}
-          initialValue={formState.inputs.bloodType.value}
-          initialValid={formState.inputs.bloodType.isValid}
-        />
-        <Input
-          element="input"
-          id="gssId"
-          type="text"
-          label="GSS ID"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.gssId.value}
-          initialValid={formState.inputs.gssId.isValid}
-        />
-        <Input
-          element="input"
-          id="pagibigId"
-          type="text"
-          label="Pagibig ID"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.pagibigId.value}
-          initialValid={formState.inputs.pagibigId.isValid}
-        />
-        <Input
-          element="input"
-          id="philHealthId"
-          type="text"
-          label="Philhealth"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.philHealthId.value}
-          initialValid={formState.inputs.philHealthId.isValid}
-        />
-        <Input
-          element="input"
-          id="sssNo"
-          type="text"
-          label="SSS No."
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.sssNo.value}
-          initialValid={formState.inputs.sssNo.isValid}
-        />
-        <Input
-          element="input"
-          id="tinNo"
-          type="text"
-          label="TIN No."
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.tinNo.value}
-          initialValid={formState.inputs.tinNo.isValid}
-        />
-        <Input
-          element="select"
-          id="citizenship"
-          type="text"
-          label="Citizenship"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={["Filipino", "Other"]}
-          defaultValue="Filipino"
-          onInput={inputHandler}
-          initialValue={formState.inputs.citizenship.value}
-          initialValid={formState.inputs.citizenship.isValid}
-        />
-        <Button inverse type="submit">
-          Save Info
-        </Button>
-      </form>
+          <div className="gov-id-detail-cont">
+            <Input
+              element="input"
+              id="gssId"
+              type="text"
+              label="GSS ID"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.gssId.value}
+              initialValid={formState.inputs.gssId.isValid}
+            />
+            <span />
+            <Input
+              element="input"
+              id="pagibigId"
+              type="text"
+              label="Pagibig ID"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.pagibigId.value}
+              initialValid={formState.inputs.pagibigId.isValid}
+            />
+            <span />
+            <Input
+              element="input"
+              id="philHealthId"
+              type="text"
+              label="Philhealth"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.philHealthId.value}
+              initialValid={formState.inputs.philHealthId.isValid}
+            />
+            <span />
+            <Input
+              element="input"
+              id="sssNo"
+              type="text"
+              label="SSS No."
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.sssNo.value}
+              initialValid={formState.inputs.sssNo.isValid}
+            />
+            <span />
+            <Input
+              element="input"
+              id="tinNo"
+              type="text"
+              label="TIN No."
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.tinNo.value}
+              initialValid={formState.inputs.tinNo.isValid}
+            />
+          </div>
+          <div className="edit-submit-btn">
+            <Button inverse type="submit">
+              Save Info
+            </Button>
+          </div>
+          
+        </form>
+      </div>
     </React.Fragment>
   );
 };

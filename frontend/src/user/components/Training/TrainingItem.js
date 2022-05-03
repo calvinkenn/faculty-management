@@ -84,28 +84,42 @@ const TrainingItem = (props) => {
       </Modal>
       <div className="training-container">
         <div className="training-container__data">
-          <div>TITLE: {props.title}</div>
-          <div>TYPE: {props.type}</div>
-          <div>FROM: {props.from}</div>
-          <div>TO: {props.to}</div>
-          <div>Hours: {props.hours}</div>
-          <div>Type of learning and development: {props.typeOfLD}</div>
-          <div>Conducted/Sponsored by: {props.conducted}</div>
-        </div>
-        <div className="training-container__image">
-          <img
-            src={`http://localhost:5000/${props.certificatePic}`}
-            alt={props.title}
-          />
-        </div>
-        {!userIdByParams && (
-          <div className="training-container__actions">
-            <Button onClick={editModeHandler}>Edit</Button>
-            <Button danger onClick={showDeleteWarningHandler}>
-              Delete
-            </Button>
+          <div className="training-title-cont">
+            <div className="basic-title-blank"></div>
+              <div className="basic-title-text">
+                <h1>{props.title}</h1>
+              </div>
           </div>
-        )}
+          <div className="training-details-cont">
+            <div className="training-details">
+              <div>TITLE: {props.title}</div>
+              <div>TYPE: {props.type}</div>
+              <div>FROM: {props.from}</div>
+              <div>TO: {props.to}</div>
+              <div>Hours: {props.hours}</div>
+              <div>Type of learning and development: {props.typeOfLD}</div>
+              <div>Conducted/Sponsored by: {props.conducted}</div>
+            </div>
+            <div className="training-action-btn">
+              {!userIdByParams && (
+                <div className="training-container__actions">
+                  <Button onClick={editModeHandler}>Edit</Button>
+                  <Button danger onClick={showDeleteWarningHandler}>
+                    Delete
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="training-cert-cont">
+            <div className="training-container__image">
+              <img
+                src={`http://localhost:5000/${props.certificatePic}`}
+                alt={props.title}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );

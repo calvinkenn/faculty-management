@@ -28,8 +28,96 @@
     display: flex;
 }
 
-.name-detail-cont,
 .personal-info-detail-cont,
 .gov-id-detail-cont{
-    margin-top: 1%;
+    margin: 2% 0;
+}
+
+.name-detail-cont{
+    margin: 2% 0 1% 0;
+}
+/* .name-edit-cont, 
+.personal-info-edit{
+    margin: 3% 0;
+} */
+
+.first-mid-name-cont,
+.last-suffix-name-cont{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.ext-name-cont{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.box{
+    width: 100%;
+    max-width: 49%;
+    margin-bottom: 1.5%;
+}
+
+.box div{
+    width: 100%;
+    max-width: 100%;
+}
+
+.first-mid-name-cont div,
+.last-suffix-name-cont div{
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1%;
+}
+
+.bday-place-citizenship,
+.gender-civil,
+.height-weight-bloodtype,
+.gov-id-detail-cont {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.gov-id-detail-cont{
+    margin-top: 2%;
+}
+
+.bday-place-citizenship div,
+.gender-civil div,
+.height-weight-bloodtype div{
+    width: 100%;
+    max-width: 100%;
+}
+
+.bday-place-citizenship span,
+.gender-civil span,
+.height-weight-bloodtype span{
+    width: 100%;
+    max-width: 2%;
+}
+
+.first-mid-name-cont span,
+.last-suffix-name-cont span{
+    width: 100%;
+    max-width: 2%;
+}
+
+.edit-submit-btn{
+    width: 100%;
+    max-width: 100%;
+}
+
+.edit-submit-btn button{
+    padding: 1%;
 }

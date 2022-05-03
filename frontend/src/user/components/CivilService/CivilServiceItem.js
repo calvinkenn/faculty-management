@@ -84,21 +84,33 @@ const CivilServiceItem = (props) => {
       </Modal>
       <div className="civil-container">
         <div className="civil-container__data">
-          <div>Career: {props.career}</div>
-          <div>Rating: {props.rating}</div>
-          <div>Date: {props.date}</div>
-          <div>Place of Examination: {props.examPlace}</div>
-          <div>License Number: {props.licenseNumber}</div>
-          <div>License Validity: {props.licenseValidity}</div>
-        </div>
-        {!userIdByParams && (
-          <div className="civil-container__actions">
-            <Button onClick={editModeHandler}>Edit</Button>
-            <Button danger onClick={showDeleteWarningHandler}>
-              Delete
-            </Button>
+          <div className="civ-service-title-cont">
+            <div className="basic-title-blank"></div>
+              <div className="basic-title-text">
+                <h1>Career - {props.career}</h1>
+              </div>
           </div>
-        )}
+          <div className="civ-service-details-cont">
+            <div className="civ-service-details">
+              <div>Career: {props.career}</div>
+              <div>Rating: {props.rating}</div>
+              <div>Date: {props.date}</div>
+              <div>Place of Examination: {props.examPlace}</div>
+              <div>License Number: {props.licenseNumber}</div>
+              <div>License Validity: {props.licenseValidity}</div>
+            </div>
+            <div className="civ-service-action-btn">
+              {!userIdByParams && (
+                <div className="civil-container__actions">
+                  <Button onClick={editModeHandler}>Edit</Button>
+                  <Button danger onClick={showDeleteWarningHandler}>
+                    Delete
+                  </Button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   );

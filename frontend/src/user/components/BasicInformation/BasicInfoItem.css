@@ -102,7 +102,8 @@
 
 .bday-place-citizenship span,
 .gender-civil span,
-.height-weight-bloodtype span{
+.height-weight-bloodtype span,
+.gov-id-detail-cont span{
     width: 100%;
     max-width: 2%;
 }

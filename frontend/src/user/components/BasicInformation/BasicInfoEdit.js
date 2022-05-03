@@ -411,6 +411,7 @@ const BasicInfoEdit = (props) => {
               initialValue={formState.inputs.gssId.value}
               initialValid={formState.inputs.gssId.isValid}
             />
+            <span />
             <Input
               element="input"
               id="pagibigId"
@@ -422,6 +423,7 @@ const BasicInfoEdit = (props) => {
               initialValue={formState.inputs.pagibigId.value}
               initialValid={formState.inputs.pagibigId.isValid}
             />
+            <span />
             <Input
               element="input"
               id="philHealthId"
@@ -433,6 +435,7 @@ const BasicInfoEdit = (props) => {
               initialValue={formState.inputs.philHealthId.value}
               initialValid={formState.inputs.philHealthId.isValid}
             />
+            <span />
             <Input
               element="input"
               id="sssNo"
@@ -444,6 +447,7 @@ const BasicInfoEdit = (props) => {
               initialValue={formState.inputs.sssNo.value}
               initialValid={formState.inputs.sssNo.isValid}
             />
+            <span />
             <Input
               element="input"
               id="tinNo"

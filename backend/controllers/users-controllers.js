@@ -94,10 +94,7 @@ const reset = async (req, res, next) => {
   }
 
   if (!existingUser) {
-    const error = new HttpError(
-      "Email is not registered.",
-      401
-    );
+    const error = new HttpError("Email is not registered.", 401);
     return next(error);
   }
 
@@ -109,7 +106,9 @@ const reset = async (req, res, next) => {
   if (user) {
     updatedUser = await User.findById(existingUser.userId);
   }
-  res.status(200).json({ message: "Reset Password Requested", updatedUser: updatedUser });
+  res
+    .status(200)
+    .json({ message: "Reset Password Requested", updatedUser: updatedUser });
 };
 
 const login = async (req, res, next) => {
@@ -332,8 +331,7 @@ const editAccountInfo = async (req, res, next) => {
     return next(error);
   }
 
-  const { userId, employeeNum, faculty, employmentType, email, profilePic } =
-    req.body;
+  const { userId, employeeNum, faculty, employmentType, email } = req.body;
 
   const emailValidate = await User.findOne({ email: email });
 
@@ -343,7 +341,6 @@ const editAccountInfo = async (req, res, next) => {
       faculty,
       employmentType,
       email,
-      profilePic: req.file.path,
     });
     let updatedUser;
     if (user) {
@@ -359,6 +356,29 @@ const editAccountInfo = async (req, res, next) => {
     );
     return next(error);
   }
+};
+
+//Profile Photo
+const changeProfilePhoto = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+
+  const { userId } = req.body;
+
+  const user = await User.findByIdAndUpdate(userId, {
+    profilePic: req.file.path,
+  });
+
+  let updatedUser;
+  if (user) {
+    updatedUser = await User.findById(userId);
+  }
+  res.status(200).json({ message: "Update Success", updatedUser: updatedUser });
 };
 
 const accountChangePassword = async (req, res, next) => {
@@ -880,6 +900,9 @@ exports.addUserCivil = addUserCivil;
 exports.deleteCivil = deleteCivil;
 exports.editCivil = editCivil;
 exports.getEditCivil = getEditCivil;
+
+//for profile photochangeProfilePhoto
+exports.changeProfilePhoto = changeProfilePhoto;
 
 //for work experience
 exports.getWorkExperience = getWorkExperience;

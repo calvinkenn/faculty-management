@@ -66,17 +66,21 @@ const AccountInfoEdit = (props) => {
       formData.append("faculty", formState.inputs.faculty.value);
       formData.append("employmentType", formState.inputs.employmentType.value);
       formData.append("email", formState.inputs.email.value);
-      formData.append("profilePic", formState.inputs.profilePic.value);
-
-      if (!formState.inputs.profilePic.value) {
-        setImageError("Please upload photo");
-        return;
-      }
 
       const responseData = await sendRequest(
         "http://localhost:5000/api/users/editAccountInfo", //Change to account
         "PATCH",
-        formData
+        JSON.stringify({
+          userId: storedData.userId,
+          token: storedData.token,
+          employeeNum: formState.inputs.employeeNum.value,
+          faculty: formState.inputs.faculty.value,
+          employmentType: formState.inputs.employmentType.value,
+          email: formState.inputs.email.value,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
       );
       props.setEditMode(responseData.updatedUser, responseData.message);
     } catch (err) {
@@ -95,12 +99,12 @@ const AccountInfoEdit = (props) => {
         onClear={imageError ? clearImageError : clearError}
       />
       <form onSubmit={submitHandler}>
-        <ImageUpload
+        {/* <ImageUpload
           center
           id="profilePic"
           onInput={inputHandler}
           previewUrl={props.userEdit.profilePic}
-        />
+        /> */}
         <Input
           element="input"
           id="employeeNum"

@@ -112,7 +112,6 @@ router.patch(
 );
 router.patch(
   "/editAccountInfo",
-  fileUpload.single("profilePic"), //img upload
   [
     check("employeeNum")
       .not()
@@ -126,6 +125,11 @@ router.patch(
       .withMessage("Please choose your employment type!"),
   ],
   userControllers.editAccountInfo
+);
+router.patch(
+  "/changeProfilePhoto",
+  fileUpload.single("profilePic"), //img upload
+  userControllers.changeProfilePhoto
 );
 router.patch(
   "/userChangePassword",

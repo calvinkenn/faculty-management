@@ -14,7 +14,7 @@ const AccountInfoItem = (props) => {
   return (
     <div className="account-container">
       <div className="account-container__data">
-        <div className="account-container__image">
+        {/* <div className="account-container__image">
           <img
             src={
               props.profilePic !== ""
@@ -23,7 +23,7 @@ const AccountInfoItem = (props) => {
             }
             alt="profile-pic"
           />
-        </div>
+        </div> */}
         <div className="employment-acc-info-cont">
           <div className="employment-info-title-cont">
             <div className="basic-title-blank"></div>

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 
 import Backdrop from './Backdrop';
-import './ModalForPrint.css';
+import './ModalUpload.css';
 
-const ModalOverlay = props => {
+const ModalUploadOverlay = props => {
   const content = (
     <div className={`modal ${props.className}`} style={props.style}>
       <header className={`modal__header ${props.headerClass}`}>
@@ -20,7 +20,8 @@ const ModalOverlay = props => {
           {props.children}
         </div>
         <footer className={`modal__footer ${props.footerClass}`}>
-          {props.footer}
+          {props.upload}
+          {props.cancel}
         </footer>
       </form>
     </div>
@@ -28,7 +29,7 @@ const ModalOverlay = props => {
   return ReactDOM.createPortal(content, document.getElementById('modal-hook'));
 };
 
-const ModalForPrint = props => {
+const ModalUpload = props => {
   return (
     <React.Fragment>
       {props.show && <Backdrop onClick={props.onCancel} />}
@@ -39,10 +40,10 @@ const ModalForPrint = props => {
         timeout={200}
         classNames="modal"
       >
-        <ModalOverlay {...props} />
+        <ModalUploadOverlay {...props} />
       </CSSTransition>
     </React.Fragment>
   );
 };
 
-export default ModalForPrint;
+export default ModalUpload;

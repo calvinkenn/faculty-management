@@ -18,6 +18,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import AccountInfo from "../components/AccountInformation/AccountInfo";
 import AccountCircleRounded from "@mui/icons-material/AccountCircleRounded";
+import ProfileUpload from "../../shared/components/FormElements/ProfileUpload";
 
 const menu = {
   overview: true,
@@ -186,6 +187,13 @@ const Profile = (props) => {
                   }
                   alt="profile-pic"
                 />
+                {!userIdByParams && (
+                  <ProfileUpload
+                    center
+                    id="profilePic"
+                    updateProfile={updateState}
+                  />
+                )}
               </div>
               <ul>
                 <li

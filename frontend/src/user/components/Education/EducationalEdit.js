@@ -169,122 +169,149 @@ const EducationalEdit = (props) => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
-        <Input
-          element="select"
-          id="level"
-          type="text"
-          label="Level"
-          items={[
-            "Elementary",
-            "Junior Highschool",
-            "Senior HighSchool",
-            "College",
-            "Vocational/Trade Course",
-            "Graduate Study",
-          ]}
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.level.value}
-          initialValid={formState.inputs.level.isValid}
-        />
-        <Input
-          element="input"
-          id="school"
-          type="text"
-          label="School"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.school.value}
-          initialValid={formState.inputs.school.isValid}
-        />
-        {degree && (
-          <Input
-            element="input"
-            id="degree"
-            type="text"
-            label="Degree"
-            validators={[VALIDATOR_OPTIONAL()]}
-            errorText="Invalid Email"
-            onInput={inputHandler}
-            initialValue={formState.inputs.degree.value}
-            initialValid={formState.inputs.degree.isValid}
-          />
-        )}
-        <Input
-          element="input"
-          id="fromDate"
-          type="text"
-          label="From"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.fromDate.value}
-          initialValid={formState.inputs.fromDate.isValid}
-        />
-        <Input
-          element="input"
-          id="toDate"
-          type="text"
-          label="To"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.toDate.value}
-          initialValid={formState.inputs.toDate.isValid}
-        />
-        <Input
-          element="input"
-          id="highestLevel"
-          type="text"
-          label="Highest Level/Unit Earned"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.highestLevel.value}
-          initialValid={formState.inputs.highestLevel.isValid}
-        />
-        <Input
-          element="input"
-          id="yearGraduated"
-          type="text"
-          label="Year Graduated"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.yearGraduated.value}
-          initialValid={formState.inputs.yearGraduated.isValid}
-        />
-        <br />
-
-        {inputList.map((x, i) => {
-          return (
-            <div className="box">
-              <TextField
-                name="awards"
-                id="awards"
+        <div className="educ-add-cont">
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+              <div className="basic-title-text">
+                <h1>Educational Attainment</h1>
+              </div>
+          </div>
+          <div className="educ-add-details-cont">
+            <div className="level-unit">
+              <Input
+                element="select"
+                id="level"
                 type="text"
-                label="Academic Honors"
-                value={x.awards}
-                onChange={(e) => handleInputChange(e, i)}
+                label="Level"
+                items={[
+                  "Elementary",
+                  "Junior Highschool",
+                  "Senior HighSchool",
+                  "College",
+                  "Vocational/Trade Course",
+                  "Graduate Study",
+                ]}
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.level.value}
+                initialValid={formState.inputs.level.isValid}
               />
-              <div className="btn-box">
-                {inputList.length !== 1 && (
-                  <button className="mr10" onClick={() => handleRemoveClick(i)}>
-                    Remove
-                  </button>
-                )}
-                {inputList.length - 1 === i && (
-                  <button onClick={handleAddClick}>Add</button>
+              <span />
+              <Input
+                element="input"
+                id="highestLevel"
+                type="text"
+                label="Highest Level/Unit Earned"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.highestLevel.value}
+                initialValid={formState.inputs.highestLevel.isValid}
+              />
+            </div>
+            <div className="school-degree">
+              <div className="school">
+                <Input
+                  element="input"
+                  id="school"
+                  type="text"
+                  label="School"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.school.value}
+                  initialValid={formState.inputs.school.isValid}
+                />
+              </div>
+              <div className="degree">
+                {degree && (
+                  <Input
+                    element="input"
+                    id="degree"
+                    type="text"
+                    label="Degree"
+                    validators={[VALIDATOR_OPTIONAL()]}
+                    errorText="Invalid Email"
+                    onInput={inputHandler}
+                    initialValue={formState.inputs.degree.value}
+                    initialValid={formState.inputs.degree.isValid}
+                  />
                 )}
               </div>
             </div>
-          );
-        })}
-        <Button inverse type="submit">
-          {props.addingItem ? "Add" : "Save"}
-        </Button>
+            <div className="from-to-graduatedyear">
+              <Input
+                element="input"
+                id="fromDate"
+                type="text"
+                label="From"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.fromDate.value}
+                initialValid={formState.inputs.fromDate.isValid}
+              />
+              <span />
+              <Input
+                element="input"
+                id="toDate"
+                type="text"
+                label="To"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.toDate.value}
+                initialValid={formState.inputs.toDate.isValid}
+              />
+              <span />
+              <Input
+                element="input"
+                id="yearGraduated"
+                type="text"
+                label="Year Graduated"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.yearGraduated.value}
+                initialValid={formState.inputs.yearGraduated.isValid}
+              />
+            </div>
+            <div className="acad-honor">
+              {inputList.map((x, i) => {
+                return (
+                  <div className="awards">
+                    <div className="box">
+                      <TextField
+                        name="awards"
+                        id="awards"
+                        type="text"
+                        label="Academic Honors"
+                        value={x.awards}
+                        onChange={(e) => handleInputChange(e, i)}
+                      />
+                      <div className="btn-box">
+                        {inputList.length !== 1 && (
+                          <button className="mr10" onClick={() => handleRemoveClick(i)}>
+                            Remove
+                          </button>
+                        )}
+                        {inputList.length - 1 === i && (
+                          <button onClick={handleAddClick}>Add</button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="add-educ-btn">
+              <Button inverse type="submit">
+                {props.addingItem ? "Add" : "Save"}
+              </Button>
+            </div>
+          </div>
+        </div>
       </form>
     </React.Fragment>
   );

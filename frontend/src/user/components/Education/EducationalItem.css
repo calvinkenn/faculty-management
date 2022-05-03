@@ -24,3 +24,79 @@
     justify-content: space-between;
     margin-top: 1%;
 }
+
+.educ-add-cont{
+    width: 100%;
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
+}
+
+.educ-add-details-cont{
+    width: 100%;
+    max-width: 100%;
+    margin: 2% 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.level-unit,
+.from-to-graduatedyear{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+.school-degree{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2%;
+}
+.school{
+    margin-bottom: 2%;
+}
+.acad-honor{
+    margin-bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.level-unit div,
+.school-degree div,
+.from-to-graduatedyear div{
+    width: 100%;
+    max-width: 100%;
+}
+.level-unit span,
+.school-degree span,
+.from-to-graduatedyear span,
+.acad-honor span{
+    width: 100%;
+    max-width: 2%;
+}
+.add-educ-btn{
+    width: 100%;
+    max-width: 100%;
+}
+.add-educ-btn button{
+    padding: 1%;
+}
+.awards{
+    width: 100%;
+    max-width: 49%;
+    margin-bottom: 1.5%;
+}
+.awards .box {
+    width: 100%;
+    max-width: 100%;
+}

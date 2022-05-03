@@ -53,6 +53,10 @@
     flex-direction: column;
 }
 
+.permanent-address-edit-cont{
+    margin-top: 0.5%;
+}
+
 .houseno-street-loctype,
 .region-province,
 .city-brgy-zip,
@@ -64,6 +68,11 @@
     justify-content: space-between;
     margin-bottom: 2%;
 }
+
+.tel-cp-email{
+    margin-top: 2%;
+}
+
 .same-as-res{
     width: 100%;
     max-width: 100%;

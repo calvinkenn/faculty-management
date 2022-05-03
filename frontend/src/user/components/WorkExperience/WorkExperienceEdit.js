@@ -141,111 +141,136 @@ const WorkExperienceEdit = (props) => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
-        <Input
-          element="input"
-          id="company"
-          type="text"
-          label="Company"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.company.value}
-          initialValid={formState.inputs.company.isValid}
-        />
-        <Input
-          element="input"
-          id="position"
-          type="text"
-          label="Position"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.position.value}
-          initialValid={formState.inputs.position.isValid}
-        />
-        <Input
-          element="input"
-          id="department"
-          type="text"
-          label="Department"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.department.value}
-          initialValid={formState.inputs.department.isValid}
-        />
-        <Input
-          element="input"
-          id="fromDate"
-          type="text"
-          label="From"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.fromDate.value}
-          initialValid={formState.inputs.fromDate.isValid}
-        />
-        <Input
-          element="input"
-          id="toDate"
-          type="text"
-          label="To"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.toDate.value}
-          initialValid={formState.inputs.toDate.isValid}
-        />
-        <Input
-          element="input"
-          id="monthlySalary"
-          type="text"
-          label="Monthly Salary"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.monthlySalary.value}
-          initialValid={formState.inputs.monthlySalary.isValid}
-        />
-        <Input
-          element="select"
-          id="salaryGrade"
-          type="text"
-          label="Salary Grade"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={salaryGradeList}
-          onInput={inputHandler}
-          initialValue={formState.inputs.salaryGrade.value}
-          initialValid={formState.inputs.salaryGrade.isValid}
-        />
-        <Input
-          element="select"
-          id="salaryStep"
-          type="text"
-          label="Salary Step"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          items={salaryStepList}
-          onInput={inputHandler}
-          initialValue={formState.inputs.salaryStep.value}
-          initialValid={formState.inputs.salaryStep.isValid}
-        />
-        <Input
-          element="select"
-          id="government"
-          type="text"
-          label="Government"
-          items={['YES', 'NO']}
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.government.value}
-          initialValid={formState.inputs.government.isValid}
-        />
-        <Button inverse type="submit">
-          {props.addingItem ? "Add" : "Save"}
-        </Button>
+        <div className="work-exp-edit-cont">
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+              <div className="basic-title-text">
+                <h1>Licenses</h1>
+              </div>
+          </div>
+          <div className="work-exp-cont">
+            <div className="position-cont">
+              <Input
+                element="input"
+                id="position"
+                type="text"
+                label="Position"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.position.value}
+                initialValid={formState.inputs.position.isValid}
+              />
+            </div>
+            <div className="company-dept-cont">
+              <Input
+                element="input"
+                id="company"
+                type="text"
+                label="Company"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.company.value}
+                initialValid={formState.inputs.company.isValid}
+              />
+              <span />
+              <Input
+                element="input"
+                id="department"
+                type="text"
+                label="Department"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.department.value}
+                initialValid={formState.inputs.department.isValid}
+              />
+            </div>
+            <div className="from-to-govt">
+              <Input
+                element="input"
+                id="fromDate"
+                type="text"
+                label="From"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.fromDate.value}
+                initialValid={formState.inputs.fromDate.isValid}
+              />
+              <span />
+              <Input
+                element="input"
+                id="toDate"
+                type="text"
+                label="To"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.toDate.value}
+                initialValid={formState.inputs.toDate.isValid}
+              />
+              <span />
+              <Input
+                element="select"
+                id="government"
+                type="text"
+                label="Government"
+                items={['YES', 'NO']}
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.government.value}
+                initialValid={formState.inputs.government.isValid}
+              />
+            </div>
+            <div className="salary">
+              <Input
+                element="input"
+                id="monthlySalary"
+                type="text"
+                label="Monthly Salary"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                onInput={inputHandler}
+                initialValue={formState.inputs.monthlySalary.value}
+                initialValid={formState.inputs.monthlySalary.isValid}
+              />
+              <span />
+              <Input
+                element="select"
+                id="salaryGrade"
+                type="text"
+                label="Salary Grade"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                items={salaryGradeList}
+                onInput={inputHandler}
+                initialValue={formState.inputs.salaryGrade.value}
+                initialValid={formState.inputs.salaryGrade.isValid}
+              />
+              <span />
+              <Input
+                element="select"
+                id="salaryStep"
+                type="text"
+                label="Salary Step"
+                validators={[VALIDATOR_OPTIONAL()]}
+                errorText="Invalid Email"
+                items={salaryStepList}
+                onInput={inputHandler}
+                initialValue={formState.inputs.salaryStep.value}
+                initialValid={formState.inputs.salaryStep.isValid}
+              />
+            </div>
+          </div>
+          <div className="work-exp-btn">
+              <Button inverse type="submit">
+                {props.addingItem ? "Add" : "Save"}
+              </Button>
+            </div>
+        </div>
       </form>
     </React.Fragment>
   );

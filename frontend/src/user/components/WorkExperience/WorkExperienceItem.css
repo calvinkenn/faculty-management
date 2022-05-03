@@ -21,3 +21,60 @@
     display: flex;
     justify-content: space-between;
 }
+
+.work-exp-edit-cont{
+    width: 100%;
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
+}
+.work-exp-cont{
+    width: 100%;
+    max-width: 100%;
+    margin: 2% 0;
+    display: flex;
+    flex-direction: column;
+}
+.position-cont{
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 2%;
+}
+.position-cont div{
+    width: 100%;
+    max-width: 100%;
+}
+.company-dept-cont,
+.from-to-govt,
+.salary{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2%;
+}
+.salary{
+    margin: 0;
+}
+.company-dept-cont div,
+.from-to-govt div,
+.salary div{
+    width: 100%;
+    max-width: 100%;
+}
+.company-dept-cont span,
+.from-to-govt span,
+.salary span{
+    width: 100%;
+    max-width: 2%;
+}
+.work-exp-btn{
+    width: 100%;
+    max-width: 100%;
+}
+.work-exp-btn button{
+    padding: 1%;
+}

@@ -120,75 +120,89 @@ const CivilServiceEdit = (props) => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
-        <Input
-          element="input"
-          id="career"
-          type="text"
-          label="Career"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.career.value}
-          initialValid={formState.inputs.career.isValid}
-        />
-        <Input
-          element="input"
-          id="rating"
-          type="text"
-          label="Rating"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.rating.value}
-          initialValid={formState.inputs.rating.isValid}
-        />
-        <Input
-          element="input"
-          id="date"
-          type="date"
-          label = "Date of Examination"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.date.value}
-          initialValid={formState.inputs.date.isValid}
-        />
-        <Input
-          element="input"
-          id="placeOfExam"
-          type="text"
-          label="Place of Examination"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.placeOfExam.value}
-          initialValid={formState.inputs.placeOfExam.isValid}
-        />
-        <Input
-          element="input"
-          id="licenseNumber"
-          type="text"
-          label="License Number"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.licenseNumber.value}
-          initialValid={formState.inputs.licenseNumber.isValid}
-        />
-        <Input
-          element="input"
-          id="licenseValidity"
-          type="date"
-          label="License Validity"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.licenseValidity.value}
-          initialValid={formState.inputs.licenseValidity.isValid}
-        />
-        <Button inverse type="submit">
-          {props.addingItem ? "Add" : "Save"}
-        </Button>
+        <div className="civil-serv-edit-cont">
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+              <div className="basic-title-text">
+                <h1>Licenses</h1>
+              </div>
+          </div>
+          <div className="civil-service-cont">
+            <Input
+              element="input"
+              id="career"
+              type="text"
+              label="Career"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.career.value}
+              initialValid={formState.inputs.career.isValid}
+            />
+            <Input
+              element="input"
+              id="rating"
+              type="text"
+              label="Rating"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.rating.value}
+              initialValid={formState.inputs.rating.isValid}
+            />
+            <Input
+              element="input"
+              id="date"
+              type="date"
+              label = "Date of Examination"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.date.value}
+              initialValid={formState.inputs.date.isValid}
+            />
+            <Input
+              element="input"
+              id="placeOfExam"
+              type="text"
+              label="Place of Examination"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.placeOfExam.value}
+              initialValid={formState.inputs.placeOfExam.isValid}
+            />
+            <Input
+              element="input"
+              id="licenseNumber"
+              type="text"
+              label="License Number"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.licenseNumber.value}
+              initialValid={formState.inputs.licenseNumber.isValid}
+            />
+            <Input
+              element="input"
+              id="licenseValidity"
+              type="date"
+              label="License Validity"
+              validators={[VALIDATOR_OPTIONAL()]}
+              errorText="Invalid Email"
+              onInput={inputHandler}
+              initialValue={formState.inputs.licenseValidity.value}
+              initialValid={formState.inputs.licenseValidity.isValid}
+            />
+          </div>
+          <div className="civ-ser-btn">
+            <Button inverse type="submit">
+              {props.addingItem ? "Add" : "Save"}
+            </Button>
+          </div>
+        </div>
+        
+        
       </form>
     </React.Fragment>
   );

@@ -24,3 +24,32 @@
     justify-content: space-between;
     margin-top: 1%;
 }
+.civil-serv-edit-cont{
+    width: 100%;
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
+}
+.civil-service-cont{
+    width: 100%;
+    max-width: 100%;
+    margin: 2% 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.civil-service-cont div{
+    margin-bottom: 1%;
+}
+
+.civ-ser-btn{
+    width: 100%;
+    max-width: 100%;
+}
+.civ-ser-btn button{
+    padding: 1%;
+    margin: 0;
+}

@@ -366,7 +366,7 @@ const PrintData = (props) => {
               <td>{item.fromDate}</td>
               <td>{item.toDate}</td>
               <td>{item.hours}</td>
-              <td>{item.typeOfLD}</td>
+              <td>{item.typeOfLearning}</td>
               <td>{item.conducted}</td>
             </tr>
           ))}

@@ -19,7 +19,7 @@ const TrainingList = (props) => {
           to={training.toDate}
           certificatePic={training.certificatePic}
           hours={training.hours}
-          typeOfLD={training.typeOfLD}
+          typeOfLD={training.typeOfLearning}
           conducted={training.conducted}
           trainingId={training._id}
         />

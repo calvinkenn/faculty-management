@@ -47,7 +47,7 @@ const TrainingEdit = (props) => {
         isValid: false,
       },
       certificatePic: {
-        value: props.editData ? props.editData.certificatePic :null,
+        value: props.editData ? props.editData.certificatePic : null,
         isValid: false,
       },
     },
@@ -121,6 +121,7 @@ const TrainingEdit = (props) => {
       formData.append("typeOfLearning", formState.inputs.typeOfLearning.value);
       formData.append("conducted", formState.inputs.conducted.value);
       formData.append("certificatePic", formState.inputs.certificatePic.value);
+      formData.append("trainingId", props.editData._id);
 
       const responseData = await sendRequest(
         "http://localhost:5000/api/users/editUserTraining",

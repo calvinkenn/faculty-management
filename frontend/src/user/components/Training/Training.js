@@ -38,7 +38,7 @@ const Training = (props) => {
       <TrainingEdit
         addingItem={false}
         editData={editData}
-        // updateAddModeState={props.updateEditModeState}
+        updateAddModeState={props.updateEditModeState}
         setUserData={props.userUpdate}
       />
     );

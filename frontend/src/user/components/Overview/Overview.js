@@ -1,8 +1,20 @@
 import React from "react";
 
+import PrintData from "../PrintData/PrintData";
 import OverviewItem from "./OverviewItem";
 
 const BasicInfo = (props) => {
+  if (props.isPrintMode) {
+    return (
+      <PrintData
+        userData={props.userData}
+        educationData={props.educationData}
+        civilServiceData={props.civilServiceData}
+        workData={props.workData}
+        trainingData={props.trainingData}
+      />
+    );
+  }
   return (
     <OverviewItem
       isEditMode={props.isEditMode}

@@ -6,6 +6,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  TextField,
 } from "@mui/material";
 import {
   regions,
@@ -29,6 +30,16 @@ const ContactInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [isSameAddress, setIsSameAddress] = useState(false);
 
+  const [houseNoR, setHouseNoR] = useState("");
+  const [streetR, setStreetR] = useState("");
+  const [locationTypeR, setLocationTypeR] = useState("");
+  const [zipR, setZipR] = useState("");
+
+  const [houseNoP, setHouseNoP] = useState("");
+  const [streetP, setStreetP] = useState("");
+  const [locationTypeP, setLocationTypeP] = useState("");
+  const [zipP, setZipP] = useState("");
+
   const [regionDataR, setRegionR] = useState([]);
   const [provinceDataR, setProvinceR] = useState([]);
   const [cityDataR, setCityR] = useState([]);
@@ -51,40 +62,6 @@ const ContactInfoEdit = (props) => {
 
   const [formState, inputHandler, setFormData] = useForm(
     {
-      houseNoR: {
-        value: props.userEdit.houseNoR,
-        isValid: false,
-      },
-      streetR: {
-        value: props.userEdit.streetR,
-        isValid: false,
-      },
-      locationTypeR: {
-        value: props.userEdit.locationTypeR,
-        isValid: false,
-      },
-      zipR: {
-        value: props.userEdit.zipR,
-        isValid: false,
-      },
-
-      houseNoP: {
-        value: props.userEdit.houseNoP,
-        isValid: false,
-      },
-      streetP: {
-        value: props.userEdit.streetP,
-        isValid: false,
-      },
-      locationTypeP: {
-        value: props.userEdit.locationTypeP,
-        isValid: false,
-      },
-      zipP: {
-        value: props.userEdit.zipP,
-        isValid: false,
-      },
-
       telephoneNum: {
         value: props.userEdit.telephoneNum,
         isValid: false,
@@ -100,10 +77,6 @@ const ContactInfoEdit = (props) => {
     },
     false
   );
-
-  const sameAsResidentHandler = (event) => {
-    setIsSameAddress(event.target.checked);
-  };
 
   useEffect(() => {
     //Set default Value
@@ -165,27 +138,58 @@ const ContactInfoEdit = (props) => {
       setProvinceR(response);
       setCityR([]);
       setBarangayR([]);
+
+      if (isSameAddress) {
+        setProvinceP(response);
+        setCityP([]);
+        setBarangayP([]);
+      }
     });
+
+    // if (isSameAddress) {
+    //   setRegionAddrP(e.target.value);
+    // }
   };
 
   const cityR = (e) => {
     setProvinceAddrR(e.target.value);
     cities(e.target.value).then((response) => {
       setCityR(response);
+
+      if (isSameAddress) {
+        setCityP(response);
+      }
     });
+
+    // if (isSameAddress) {
+    //   setProvinceAddrP(e.target.value);
+    // }
   };
 
   const barangayR = (e) => {
     setCityAddrR(e.target.value);
     barangays(e.target.value).then((response) => {
       setBarangayR(response);
+
+      if (isSameAddress) {
+        setBarangayP(response);
+      }
     });
+
+    // if (isSameAddress) {
+    //   setCityAddrP(e.target.value);
+    // }
   };
 
   const brgyR = (e) => {
     setBarangayAddrR(e.target.value);
+
+    // if (isSameAddress) {
+    //   setBarangayAddrP(e.target.value);
+    // }
   };
 
+  //Permanent
   const provinceP = (e) => {
     setRegionAddrP(e.target.value);
     console.log(e.target.value);
@@ -217,11 +221,89 @@ const ContactInfoEdit = (props) => {
   useEffect(() => {
     regionR();
     regionP();
+
+    setHouseNoR(props.userEdit.houseNoR);
+    setStreetR(props.userEdit.streetR);
+    setLocationTypeR(props.userEdit.locationTypeR);
+    setZipR(props.userEdit.zipR);
+
+    setHouseNoP(props.userEdit.houseNoP);
+    setStreetP(props.userEdit.streetP);
+    setLocationTypeP(props.userEdit.locationTypeP);
+    setZipP(props.userEdit.zipP);
   }, []);
+
+  const sameAsResidentHandler = (event) => {
+    setIsSameAddress(event.target.checked);
+
+    if (event.target.checked) {
+      setHouseNoP(houseNoR);
+    }
+    if (event.target.checked) {
+      setStreetP(streetR);
+    }
+    if (event.target.checked) {
+      setLocationTypeP(locationTypeR);
+    }
+    if (event.target.checked) {
+      setZipP(zipR);
+    }
+  };
+
+  //Setting Address value
+  const houseNoRHandler = (e) => {
+    setHouseNoR(e.target.value);
+
+    if (isSameAddress) {
+      setHouseNoP(e.target.value);
+    }
+  };
+
+  const streetRHandler = (e) => {
+    setStreetR(e.target.value);
+
+    if (isSameAddress) {
+      setStreetP(e.target.value);
+    }
+  };
+
+  const locationTypeRHandler = (e) => {
+    setLocationTypeR(e.target.value);
+
+    if (isSameAddress) {
+      setLocationTypeP(e.target.value);
+    }
+  };
+
+  const zipRHandler = (e) => {
+    setZipR(e.target.value);
+
+    if (isSameAddress) {
+      setZipP(e.target.value);
+    }
+  };
+
+  // Permanent Address
+  const houseNoPHandler = (e) => {
+    setHouseNoP(e.target.value);
+  };
+
+  const streetPHandler = (e) => {
+    setStreetP(e.target.value);
+  };
+
+  const locationTypePHandler = (e) => {
+    setLocationTypeP(e.target.value);
+  };
+
+  const zipPHandler = (e) => {
+    setZipP(e.target.value);
+  };
+
+  console.log("WE");
 
   const submitHandler = async (event) => {
     console.log("clicked");
-    console.log(formState.inputs.houseNoR.value);
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
@@ -231,30 +313,22 @@ const ContactInfoEdit = (props) => {
         JSON.stringify({
           userId: storedData.userId,
           token: storedData.token,
-          houseNoR: formState.inputs.houseNoR.value,
-          streetR: formState.inputs.streetR.value,
-          locationTypeR: formState.inputs.locationTypeR.value,
+          houseNoR: houseNoR,
+          streetR: streetR,
+          locationTypeR: locationTypeR,
           regionR: regionAddrR,
           provinceR: provinceAddrR,
           cityR: cityAddrR,
           barangayR: barangayAddrR,
-          zipR: formState.inputs.zipR.value,
-          houseNoP: !isSameAddress //Copy value from Resident address if checked
-            ? formState.inputs.houseNoP.value
-            : formState.inputs.houseNoR.value,
-          streetP: !isSameAddress
-            ? formState.inputs.streetP.value
-            : formState.inputs.streetR.value,
-          locationTypeP: !isSameAddress
-            ? formState.inputs.locationTypeP.value
-            : formState.inputs.locationTypeR.value,
+          zipR: zipR,
+          houseNoP: houseNoP,
+          streetP: streetP,
+          locationTypeP: locationTypeP,
           regionP: !isSameAddress ? regionAddrP : regionAddrR,
           provinceP: !isSameAddress ? provinceAddrP : provinceAddrR,
           cityP: !isSameAddress ? cityAddrP : cityAddrR,
           barangayP: !isSameAddress ? barangayAddrP : barangayAddrR,
-          zipP: !isSameAddress
-            ? formState.inputs.zipP.value
-            : formState.inputs.zipR.value,
+          zipP: zipP,
           telephoneNum: formState.inputs.telephoneNum.value,
           cellphoneNum: formState.inputs.cellphoneNum.value,
           alternateEmail: formState.inputs.alternateEmail.value,
@@ -264,7 +338,9 @@ const ContactInfoEdit = (props) => {
         }
       );
       props.setEditMode(responseData.updatedUser, responseData.message);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -272,38 +348,41 @@ const ContactInfoEdit = (props) => {
       <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={submitHandler}>
         Resident Address
-        <Input
+        <TextField
           element="input"
           id="houseNoR"
           type="text"
           label="House no."
-          validators={[VALIDATOR_OPTIONAL()]}
+          // validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.houseNoR.value}
-          initialValid={formState.inputs.houseNoR.isValid}
+          onChange={houseNoRHandler}
+          value={houseNoR}
+          // initialValue={formState.inputs.houseNoR.value}
+          // initialValid={formState.inputs.houseNoR.isValid}
         />
-        <Input
+        <TextField
           element="input"
           id="streetR"
           type="text"
           label="Street"
           validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.streetR.value}
-          initialValid={formState.inputs.streetR.isValid}
+          onChange={streetRHandler}
+          value={streetR}
+          // initialValue={formState.inputs.streetR.value}
+          // initialValid={formState.inputs.streetR.isValid}
         />
-        <Input
+        <TextField
           element="input"
           id="locationTypeR"
           type="text"
           label="Subdivision/Village"
-          validators={[VALIDATOR_OPTIONAL()]}
+          // validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.locationTypeR.value}
-          initialValid={formState.inputs.locationTypeR.isValid}
+          onChange={locationTypeRHandler}
+          value={locationTypeR}
+          // initialValue={formState.inputs.locationTypeR.value}
+          // initialValid={formState.inputs.locationTypeR.isValid}
         />
         {/* RESIDENT ADDRESS  -------------------------------*/}
         <FormControl sx={{ minWidth: 180 }}>
@@ -359,16 +438,17 @@ const ContactInfoEdit = (props) => {
           </Select>
         </FormControl>
         {/* END OF RESIDENT ADDRESS  -------------------------------*/}
-        <Input
+        <TextField
           element="input"
           id="zipR"
           type="text"
           label="Zip Code"
-          validators={[VALIDATOR_OPTIONAL()]}
+          // validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.zipR.value}
-          initialValid={formState.inputs.zipR.isValid}
+          onInput={zipRHandler}
+          value={zipR}
+          // initialValue={formState.inputs.zipR.value}
+          // initialValid={formState.inputs.zipR.isValid}
         />
         <br />
         Permanent Address
@@ -382,46 +462,54 @@ const ContactInfoEdit = (props) => {
           }
         />
         <br />
-        <Input
+        <TextField
           element="input"
           id="houseNoP"
           type="text"
           label="House no."
-          validators={[VALIDATOR_OPTIONAL()]}
+          // validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.houseNoP.value}
-          initialValid={formState.inputs.houseNoP.isValid}
+          onChange={houseNoPHandler}
+          // initialValue={formState.inputs.houseNoP.value}
+          // initialValid={formState.inputs.houseNoP.isValid}
           disabled={isSameAddress}
+          value={houseNoP}
         />
-        <Input
+        <TextField
           element="input"
           id="streetP"
           type="text"
           label="Street"
-          validators={[VALIDATOR_OPTIONAL()]}
+          // validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.streetP.value}
-          initialValid={formState.inputs.streetP.isValid}
+          onChange={streetPHandler}
+          // initialValue={formState.inputs.streetP.value}
+          // initialValid={formState.inputs.streetP.isValid}
           disabled={isSameAddress}
+          value={streetP}
         />
-        <Input
+        <TextField
           element="input"
           id="locationTypeP"
           type="text"
           label="Subdivision/Village"
-          validators={[VALIDATOR_OPTIONAL()]}
+          // validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.locationTypeP.value}
-          initialValid={formState.inputs.locationTypeP.isValid}
+          onChange={locationTypePHandler}
+          // initialValue={formState.inputs.locationTypeP.value}
+          // initialValid={formState.inputs.locationTypeP.isValid}
           disabled={isSameAddress}
+          value={locationTypeP}
         />
         {/* PERMANENT ADDRESS  -------------------------------*/}
         <FormControl sx={{ minWidth: 180 }}>
           <InputLabel id="select">Select Region</InputLabel>
-          <Select onChange={provinceP} onSelect={regionP} value={regionAddrP}>
+          <Select
+            onChange={provinceP}
+            onSelect={regionP}
+            value={!isSameAddress ? regionAddrP : regionAddrR}
+            disabled={isSameAddress}
+          >
             <MenuItem disabled>Select Region</MenuItem>
             {regionDataP &&
               regionDataP.length > 0 &&
@@ -434,7 +522,11 @@ const ContactInfoEdit = (props) => {
         </FormControl>
         <FormControl sx={{ minWidth: 180 }}>
           <InputLabel id="select">Select Province</InputLabel>
-          <Select onChange={cityP} value={provinceAddrP}>
+          <Select
+            onChange={cityP}
+            value={!isSameAddress ? provinceAddrP : provinceAddrR}
+            disabled={isSameAddress}
+          >
             <MenuItem disabled>Select Province</MenuItem>
             {provinceDataP &&
               provinceDataP.length > 0 &&
@@ -447,7 +539,11 @@ const ContactInfoEdit = (props) => {
         </FormControl>
         <FormControl sx={{ minWidth: 180 }}>
           <InputLabel id="select">Select City</InputLabel>
-          <Select onChange={barangayP} value={cityAddrP}>
+          <Select
+            onChange={barangayP}
+            value={!isSameAddress ? cityAddrP : cityAddrR}
+            disabled={isSameAddress}
+          >
             <MenuItem disabled>Select City</MenuItem>
             {cityDataP &&
               cityDataP.length > 0 &&
@@ -460,7 +556,11 @@ const ContactInfoEdit = (props) => {
         </FormControl>
         <FormControl sx={{ minWidth: 180 }}>
           <InputLabel id="select">Select Barangay</InputLabel>
-          <Select onChange={brgyP} value={barangayAddrP}>
+          <Select
+            onChange={brgyP}
+            value={!isSameAddress ? barangayAddrP : barangayAddrR}
+            disabled={isSameAddress}
+          >
             <MenuItem disabled>Select Barangay</MenuItem>
             {barangayDataP &&
               barangayDataP.length > 0 &&
@@ -472,17 +572,18 @@ const ContactInfoEdit = (props) => {
           </Select>
         </FormControl>
         {/* END OF PERMANENT ADDRESS  -------------------------------*/}
-        <Input
+        <TextField
           element="input"
           id="zipP"
           type="text"
           label="Zip Code"
-          validators={[VALIDATOR_OPTIONAL()]}
+          // validators={[VALIDATOR_OPTIONAL()]}
           errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.zipP.value}
-          initialValid={formState.inputs.zipP.isValid}
+          onInput={zipPHandler}
+          // initialValue={formState.inputs.zipP.value}
+          // initialValid={formState.inputs.zipP.isValid}
           disabled={isSameAddress}
+          value={zipP}
         />
         <br />
         Addtl Info

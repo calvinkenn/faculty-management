@@ -153,6 +153,7 @@ const TrainingEdit = (props) => {
               ? props.editData.certificatePic
               : formState.inputs.certificatePic.value
           }
+          isEditMode={!props.addingItem}
         />
         <Input
           element="input"

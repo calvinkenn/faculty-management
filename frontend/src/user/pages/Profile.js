@@ -42,7 +42,12 @@ const Profile = (props) => {
   const [trainingData, setTrainingData] = useState({});
   const [workData, setWorkData] = useState({});
   const [success, setSuccess] = useState();
+  const [isPrintMode, setIsPrintMode] = useState(props.isPrintMode);
   const userIdByParams = useParams().userId;
+
+  const printModeHandler = () => {
+    setIsPrintMode((prevState) => !prevState);
+  };
 
   const editModeHandler = () => {
     setIsEditMode((prevState) => !prevState);
@@ -58,6 +63,7 @@ const Profile = (props) => {
     stateCopy[menuName] = true; //Set Button True
     setIsEditMode(false);
     setIsAddMode(false);
+    setIsPrintMode(false);
     setIsMenuActive(stateCopy);
   };
 
@@ -255,10 +261,22 @@ const Profile = (props) => {
                 inEducation={isMenuActive.education}
                 updateEditModeState={editModeHandler}
                 updateAddModeState={addModeHandler}
+                updatePrintModeState={printModeHandler}
                 isEditMode={isEditMode}
                 isAddMode={isAddMode}
+                isPrintMode={isPrintMode}
               />
-              {isMenuActive.overview && <Overview userData={userData} />}
+              {isMenuActive.overview && (
+                <Overview
+                  userData={userData}
+                  educationData={educationData}
+                  civilServiceData={civilServiceData}
+                  workData={workData}
+                  trainingData={trainingData}
+                  isPrintMode={isPrintMode}
+                  updatePrintModeState={printModeHandler}
+                />
+              )}
               {isMenuActive.accountInformation && (
                 <AccountInfo
                   isEditMode={isEditMode}

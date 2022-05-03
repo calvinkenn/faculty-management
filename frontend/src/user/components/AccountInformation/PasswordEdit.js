@@ -57,42 +57,62 @@ const PasswordEdit = (props) => {
     <React.Fragment>
       <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={submitHandler}>
-        <Input
-          element="input"
-          id="oldPassword"
-          type="password"
-          label="Old Password"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.oldPassword.value}
-          initialValid={formState.inputs.oldPassword.isValid}
-        />
-        <Input
-          element="input"
-          id="newPassword"
-          type="password"
-          label="New Password"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.newPassword.value}
-          initialValid={formState.inputs.newPassword.isValid}
-        />
-        <Input
-          element="input"
-          id="confirmNewPassword"
-          type="password"
-          label="Confirm New Password"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
-          onInput={inputHandler}
-          initialValue={formState.inputs.confirmNewPassword.value}
-          initialValid={formState.inputs.confirmNewPassword.isValid}
-        />
-        <Button inverse type="submit">
-          Save Info
-        </Button>
+        <div className="password-edit-cont">
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Change Password</h1>
+            </div>
+          </div>
+          <div className="password-details-edit">
+            <div className="password-input-cont">
+              <div className="old-pass-cont">
+                <Input
+                  element="input"
+                  id="oldPassword"
+                  type="password"
+                  label="Old Password"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.oldPassword.value}
+                  initialValid={formState.inputs.oldPassword.isValid}
+                />
+              </div>
+              <div className="new-pass-cont">
+                <Input
+                  element="input"
+                  id="newPassword"
+                  type="password"
+                  label="New Password"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.newPassword.value}
+                  initialValid={formState.inputs.newPassword.isValid}
+                />
+              </div>
+              <div className="confirm-pass-cont">
+                <Input
+                  element="input"
+                  id="confirmNewPassword"
+                  type="password"
+                  label="Confirm New Password"
+                  validators={[VALIDATOR_OPTIONAL()]}
+                  errorText="Invalid Email"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.confirmNewPassword.value}
+                  initialValid={formState.inputs.confirmNewPassword.isValid}
+                />
+              </div>
+            </div>
+            <div className="password-submit-btn">
+              <Button inverse type="submit">
+                Save Changes
+              </Button>
+            </div>
+          </div>
+        </div>
       </form>
     </React.Fragment>
   );

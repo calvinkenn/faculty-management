@@ -80,7 +80,7 @@
 .bday-place-citizenship,
 .gender-civil,
 .height-weight-bloodtype,
-.gov-id-detail-cont {
+.gov-id-edit {
     width: 100%;
     max-width: 100%;
     margin-bottom: 2%;
@@ -89,7 +89,7 @@
     justify-content: space-between;
 }
 
-.gov-id-detail-cont{
+.gov-id-edit{
     margin-top: 2%;
 }
 
@@ -103,7 +103,7 @@
 .bday-place-citizenship span,
 .gender-civil span,
 .height-weight-bloodtype span,
-.gov-id-detail-cont span{
+.gov-id-edit span{
     width: 100%;
     max-width: 2%;
 }

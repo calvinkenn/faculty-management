@@ -65,6 +65,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .side-container__image img {
@@ -73,4 +74,8 @@
   margin: 0 auto;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.side-container__image button{
+  padding: 5%;
 }

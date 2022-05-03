@@ -53,3 +53,54 @@
     width: 100%;
     max-width: 20%;
 }
+
+.account-edit-cont,
+.password-edit-cont {
+    width: 100%;
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
+}
+.acc-input-edit,
+.password-input-cont{
+    display: flex;
+    flex-direction: column;
+    margin: 2% 0 0;
+}
+
+.employee-num-cont,
+.faculty-type-cont,
+.employment-type-cont,
+.email-edit-cont,
+.old-pass-cont,
+.new-pass-cont,
+.confirm-pass-cont{
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 2%;
+}
+
+.employee-num-cont div,
+.faculty-type-cont div,
+.employment-type-cont div,
+.email-edit-cont div,
+.old-pass-cont div,
+.new-pass-cont div,
+.confirm-pass-cont div {
+    width: 100%;
+    max-width: 100%;
+}
+
+.acc-edit-btn,
+.password-submit-btn {
+    width: 100%;
+    max-width: 100%;
+}
+
+.acc-edit-btn button,
+.password-submit-btn button{
+    padding: 1%;
+}

@@ -32,3 +32,61 @@
 .contact-details-cont{
     margin-top: 1%;
 }
+
+.contact-info-edit-cont{
+    width: 100%;
+    max-width: -webkit-fill-available;
+    padding: 2%;
+    background-color: white;
+    border-radius: 15px;
+    margin: 2% 0;
+    box-shadow: #00000017 0 0 10px 0px;
+}
+
+.resident-add-edit,
+.permanent-address-edit-cont,
+.contact-info-edit{
+    width: 100%;
+    max-width: 100%;
+    margin: 2% 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.houseno-street-loctype,
+.region-province,
+.city-brgy-zip,
+.tel-cp-email{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+.same-as-res{
+    width: 100%;
+    max-width: 100%;
+    margin: 1% 0;
+}
+.houseno-street-loctype div,
+.region-province div,
+.city-brgy-zip div,
+.tel-cp-email div{
+    width: 100%;
+    max-width: 100%;
+}
+.houseno-street-loctype span,
+.region-province span,
+.city-brgy-zip span,
+.tel-cp-email span{
+    width: 100%;
+    max-width: 2%;
+}
+.contact-info-edit-btn{
+    width: 100%;
+    max-width: 100%;
+}
+.contact-info-edit-btn button{
+    padding: 1%;
+}

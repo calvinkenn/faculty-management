@@ -75,3 +75,7 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.side-container__image button{
+  padding: 5%;
+}

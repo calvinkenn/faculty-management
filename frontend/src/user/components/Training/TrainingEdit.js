@@ -6,8 +6,10 @@ import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 import { useForm } from "../../../shared/hooks/form-hook";
 import {
   VALIDATOR_EMAIL,
+  VALIDATOR_MAXLENGTH,
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
+  VALIDATOR_REQUIRE,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -160,77 +162,84 @@ const TrainingEdit = (props) => {
           id="title"
           type="text"
           label="Title"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
+          validators={[VALIDATOR_REQUIRE()]}
+          helperText="Please input the title"
           onInput={inputHandler}
           initialValue={formState.inputs.title.value}
           initialValid={formState.inputs.title.isValid}
+          required
         />
         <Input
           element="input"
           id="type"
           type="text"
           label="Type"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
+          validators={[VALIDATOR_REQUIRE()]}
+          helperText="Please input the type"
           onInput={inputHandler}
           initialValue={formState.inputs.type.value}
           initialValid={formState.inputs.type.isValid}
+          required
         />
         <Input
           element="input"
           id="fromDate"
-          type="text"
-          label="From"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
+          type="number"
+          label="From - year"
+          validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+          helperText="Please input valid year"
           onInput={inputHandler}
           initialValue={formState.inputs.fromDate.value}
           initialValid={formState.inputs.fromDate.isValid}
+          required
         />
         <Input
           element="input"
           id="toDate"
-          type="text"
-          label="To"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
+          type="number"
+          label="To - year"
+          validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+          helperText="Please input valid year"
           onInput={inputHandler}
           initialValue={formState.inputs.toDate.value}
           initialValid={formState.inputs.toDate.isValid}
+          required
         />
         <Input
           element="input"
           id="hours"
           type="text"
           label="No. of Hours"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
+          validators={[VALIDATOR_REQUIRE()]}
+          helperText="Please input the number of hours to complete"
           onInput={inputHandler}
           initialValue={formState.inputs.hours.value}
           initialValid={formState.inputs.hours.isValid}
+          required
         />
         <Input
           element="input"
           id="typeOfLearning"
           type="text"
           label="Type of Learning"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
+          validators={[VALIDATOR_REQUIRE()]}
+          helperText="Please input the type of learning"
           onInput={inputHandler}
           initialValue={formState.inputs.typeOfLearning.value}
           initialValid={formState.inputs.typeOfLearning.isValid}
+          required
         />
         <Input
           element="input"
           id="conducted"
           type="text"
           label="Conducted/Sponsored"
-          validators={[VALIDATOR_OPTIONAL()]}
-          errorText="Invalid Email"
+          validators={[VALIDATOR_REQUIRE()]}
+          helperText="Please input who conducted/sponsored"
           onInput={inputHandler}
           initialValue={formState.inputs.conducted.value}
           initialValid={formState.inputs.conducted.isValid}
+          required
         />
         <Button inverse type="submit">
           {props.addingItem ? "Add" : "Save"}

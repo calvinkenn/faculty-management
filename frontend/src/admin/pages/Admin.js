@@ -49,7 +49,7 @@ const Admin = (props) => {
     setSearchField("");
   };
 
-  const updateUsers = (userData, status) => {
+  const updateUsers = (userData, status) => { //prompt
     setUpdatedStatus(status);
     // setActiveUserData(userData);
     // setPendingUserData(userData);

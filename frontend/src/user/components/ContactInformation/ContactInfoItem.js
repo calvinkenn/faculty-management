@@ -126,7 +126,7 @@ const ContactInfoItem = (props) => {
           <div className="resident-add-details-cont">
             <div>House no.:{props.residentHouseNo}</div>
             <div>Street:{props.residentStreet}</div>
-            <div>Subdivision:{props.residentLocationType}</div>
+            <div>Location Type:{props.residentLocationType}</div>
             <div>Region: {regionNameR}</div>
             <div>Province:{provinceNameR}</div>
             <div>City: {cityNameR}</div>
@@ -144,7 +144,7 @@ const ContactInfoItem = (props) => {
           <div className="perma-details-cont">
             <div>House no.:{props.permanentHouseNo}</div>
             <div>Street:{props.permanentStreet}</div>
-            <div>Subdivision:{props.permanentLocationType}</div>
+            <div>Location Type:{props.permanentLocationType}</div>
             <div>Region: {regionNameP}</div>
             <div>Province:{provinceNameP}</div>
             <div>City: {cityNameP}</div>

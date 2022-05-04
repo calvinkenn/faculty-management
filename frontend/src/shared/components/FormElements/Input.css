@@ -1,9 +1,9 @@
-.login-mode-title{
+.login-mode-title {
   margin-bottom: 2em;
   color: #404040;
 }
 
-.form-control{
+.form-control {
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;
@@ -15,26 +15,33 @@
 #employeeNum,
 #fName,
 #lName,
-#password{
+#password {
   border-radius: 5px;
 }
 
 #email::placeholder,
-#password::placeholder{
+#password::placeholder {
   color: #404040;
   font-size: 0.9vw;
   opacity: 50%;
 }
 
-.form-control label{
+.form-control label {
   color: #404040;
   font-size: 1vw;
   display: none;
 }
 
-.form-control p{
+.form-control p {
   color: #f44336;
   font-size: 0.75em;
   margin-top: 0.2em;
   text-align: left;
+}
+
+input[type="date"]:required:invalid::-webkit-datetime-edit {
+  color: transparent;
+}
+input[type="date"]:focus::-webkit-datetime-edit {
+  color: black !important;
 }

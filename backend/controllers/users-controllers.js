@@ -629,7 +629,7 @@ const editCivil = async (req, res, next) => {
   if (editCivil) {
     res
       .status(201)
-      .json({ userCivil: newUpdate, message: "Education Updated" });
+      .json({ userCivil: newUpdate, message: "Civil Service Updated" });
   }
 };
 const deleteCivil = async (req, res, next) => {
@@ -855,7 +855,6 @@ const editUserTraining = async (req, res, next) => {
     hours,
     typeOfLearning,
     conducted,
-    certificatePic: req.file.path,
   });
 
   const newUpdate = await Training.find({ user: userId });

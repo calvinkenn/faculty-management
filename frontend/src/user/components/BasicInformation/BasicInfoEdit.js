@@ -10,6 +10,7 @@ import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
+  VALIDATOR_REQUIRE,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 
@@ -30,7 +31,7 @@ const BasicInfoEdit = (props) => {
     {
       firstName: {
         value: props.userEdit.firstName,
-        isValid: true,
+        isValid: false,
       },
       middleName: {
         value: props.userEdit.middleName,
@@ -38,11 +39,7 @@ const BasicInfoEdit = (props) => {
       },
       lastName: {
         value: props.userEdit.lastName,
-        isValid: true,
-      },
-      email: {
-        value: props.userEdit.email,
-        isValid: true,
+        isValid: false,
       },
       suffixName: {
         value: props.userEdit.suffixName,
@@ -54,19 +51,19 @@ const BasicInfoEdit = (props) => {
       },
       bday: {
         value: props.userEdit.birthday.substring(0, 10),
-        isValid: true,
+        isValid: false,
       },
       placeofBirth: {
         value: props.userEdit.placeofBirth,
-        isValid: true,
+        isValid: false,
       },
       gender: {
         value: props.userEdit.gender,
-        isValid: true,
+        isValid: false,
       },
       civilStatus: {
         value: props.userEdit.civilStatus,
-        isValid: true,
+        isValid: false,
       },
       height: {
         value: props.userEdit.height,
@@ -187,11 +184,12 @@ const BasicInfoEdit = (props) => {
                   id="firstName"
                   type="text"
                   label="First Name"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input your first name"
                   onInput={inputHandler}
                   initialValue={formState.inputs.firstName.value}
                   initialValid={formState.inputs.firstName.isValid}
+                  required
                 />
                 <span />
                 <Input
@@ -212,11 +210,12 @@ const BasicInfoEdit = (props) => {
                   id="lastName"
                   type="text"
                   label="Last Name"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input your last name"
                   onInput={inputHandler}
                   initialValue={formState.inputs.lastName.value}
                   initialValid={formState.inputs.lastName.isValid}
+                  required
                 />
                 <span />
                 <Input
@@ -235,39 +234,37 @@ const BasicInfoEdit = (props) => {
                 {inputList.map((x, i) => {
                   return (
                     <div className="box">
-                        <TextField
-                          name="extensionName"
-                          id="extensionName"
-                          type="text"
-                          label="Extension Name"
-                          value={x.extensionName}
-                          onChange={(e) => handleInputChange(e, i)}
-                        />
-                        <div className="btn-box">
-                          {inputList.length !== 1 && (
-                            <button
-                              type="button"
-                              className="mr10"
-                              onClick={() => handleRemoveClick(i)}
-                            >
-                              Remove
-                            </button>
-                          )}
-                          {inputList.length - 1 === i && (
-                            <button type="button" onClick={handleAddClick}>
-                              Add
-                            </button>
-                          )}
-                        </div>
+                      <TextField
+                        name="extensionName"
+                        id="extensionName"
+                        type="text"
+                        label="Extension Name"
+                        value={x.extensionName}
+                        onChange={(e) => handleInputChange(e, i)}
+                      />
+                      <div className="btn-box">
+                        {inputList.length !== 1 && (
+                          <button
+                            type="button"
+                            className="mr10"
+                            onClick={() => handleRemoveClick(i)}
+                          >
+                            Remove
+                          </button>
+                        )}
+                        {inputList.length - 1 === i && (
+                          <button type="button" onClick={handleAddClick}>
+                            Add
+                          </button>
+                        )}
+                      </div>
                     </div>
                   );
-
                 })}
               </div>
-              
             </div>
           </div>
-          
+
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
@@ -282,11 +279,12 @@ const BasicInfoEdit = (props) => {
                   id="bday"
                   type="date"
                   label="Birthday"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input your birthday"
                   onInput={inputHandler}
                   initialValue={formState.inputs.bday.value}
                   initialValid={formState.inputs.bday.isValid}
+                  required
                 />
                 <span />
                 <Input
@@ -294,11 +292,12 @@ const BasicInfoEdit = (props) => {
                   id="placeofBirth"
                   type="text"
                   label="Place of Birth"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input your place of birth"
                   onInput={inputHandler}
                   initialValue={formState.inputs.placeofBirth.value}
                   initialValid={formState.inputs.placeofBirth.isValid}
+                  required
                 />
                 <span />
                 <Input
@@ -321,12 +320,13 @@ const BasicInfoEdit = (props) => {
                   id="gender"
                   type="text"
                   label="Gender"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input your gender"
                   items={["Male", "Female", "Other"]}
                   onInput={inputHandler}
                   initialValue={formState.inputs.gender.value}
                   initialValid={formState.inputs.gender.isValid}
+                  required
                 />
                 <span />
                 <Input
@@ -334,20 +334,27 @@ const BasicInfoEdit = (props) => {
                   id="civilStatus"
                   type="text"
                   label="Civil Status"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
-                  items={["Single", "Married", "Widowed", "Divorced", "Separated"]}
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input your civil status"
+                  items={[
+                    "Single",
+                    "Married",
+                    "Widowed",
+                    "Divorced",
+                    "Separated",
+                  ]}
                   onInput={inputHandler}
                   initialValue={formState.inputs.civilStatus.value}
                   initialValid={formState.inputs.civilStatus.isValid}
+                  required
                 />
               </div>
               <div className="height-weight-bloodtype">
                 <Input
                   element="input"
                   id="height"
-                  type="text"
-                  label="Height"
+                  type="number"
+                  label="Height - ft/inches"
                   validators={[VALIDATOR_OPTIONAL()]}
                   errorText="Invalid Email"
                   onInput={inputHandler}
@@ -358,8 +365,8 @@ const BasicInfoEdit = (props) => {
                 <Input
                   element="input"
                   id="weight"
-                  type="text"
-                  label="Weight"
+                  type="number"
+                  label="Weight - kg"
                   validators={[VALIDATOR_OPTIONAL()]}
                   errorText="Invalid Email"
                   onInput={inputHandler}
@@ -391,7 +398,7 @@ const BasicInfoEdit = (props) => {
               </div>
             </div>
           </div>
-          
+
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
@@ -404,7 +411,7 @@ const BasicInfoEdit = (props) => {
               <Input
                 element="input"
                 id="gssId"
-                type="text"
+                type="number"
                 label="GSS ID"
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
@@ -416,7 +423,7 @@ const BasicInfoEdit = (props) => {
               <Input
                 element="input"
                 id="pagibigId"
-                type="text"
+                type="number"
                 label="Pagibig ID"
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
@@ -428,7 +435,7 @@ const BasicInfoEdit = (props) => {
               <Input
                 element="input"
                 id="philHealthId"
-                type="text"
+                type="number"
                 label="Philhealth"
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
@@ -440,7 +447,7 @@ const BasicInfoEdit = (props) => {
               <Input
                 element="input"
                 id="sssNo"
-                type="text"
+                type="number"
                 label="SSS No."
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
@@ -452,7 +459,7 @@ const BasicInfoEdit = (props) => {
               <Input
                 element="input"
                 id="tinNo"
-                type="text"
+                type="number"
                 label="TIN No."
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
@@ -461,14 +468,12 @@ const BasicInfoEdit = (props) => {
                 initialValid={formState.inputs.tinNo.isValid}
               />
             </div>
-            
           </div>
           <div className="edit-submit-btn">
             <Button inverse type="submit">
               Save Changes
             </Button>
           </div>
-          
         </form>
       </div>
     </React.Fragment>

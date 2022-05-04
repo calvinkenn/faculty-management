@@ -4,9 +4,10 @@ import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import { useForm } from "../../../shared/hooks/form-hook";
 import {
-  VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
+  VALIDATOR_REQUIRE,
+  VALIDATOR_MAXLENGTH
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -43,11 +44,11 @@ const WorkExperienceEdit = (props) => {
       },
       salaryGrade: {
         value: props.editData ? props.editData.salaryGrade : "",
-        isValid: false,
+        isValid: true,
       },
       salaryStep: {
         value: props.editData ? props.editData.salaryStep : "",
-        isValid: false,
+        isValid: true,
       },
       status: {
         value: "",
@@ -55,7 +56,7 @@ const WorkExperienceEdit = (props) => {
       },
       government: {
         value: props.editData ? props.editData.government : "",
-        isValid: false,
+        isValid: true,
       },
     },
     false
@@ -124,7 +125,7 @@ const WorkExperienceEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Licenses</h1>
+              <h1>Work Experience</h1>
             </div>
           </div>
           <div className="work-exp-cont">
@@ -134,11 +135,12 @@ const WorkExperienceEdit = (props) => {
                 id="position"
                 type="text"
                 label="Position"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_REQUIRE()]}
+                helperText="Please input your position"
                 onInput={inputHandler}
                 initialValue={formState.inputs.position.value}
                 initialValid={formState.inputs.position.isValid}
+                required
               />
             </div>
             <div className="company-dept-cont">
@@ -147,11 +149,12 @@ const WorkExperienceEdit = (props) => {
                 id="company"
                 type="text"
                 label="Company"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_REQUIRE()]}
+                helperText="Please input your company"
                 onInput={inputHandler}
                 initialValue={formState.inputs.company.value}
                 initialValid={formState.inputs.company.isValid}
+                required
               />
               <span />
               <Input
@@ -159,36 +162,39 @@ const WorkExperienceEdit = (props) => {
                 id="department"
                 type="text"
                 label="Department"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_REQUIRE()]}
+                helperText="Please input your department"
                 onInput={inputHandler}
                 initialValue={formState.inputs.department.value}
                 initialValid={formState.inputs.department.isValid}
+                required
               />
             </div>
             <div className="from-to-govt">
               <Input
                 element="input"
                 id="fromDate"
-                type="text"
-                label="From"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                type="number"
+                label="From - year"
+                validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+                helperText="Please input valid year"
                 onInput={inputHandler}
                 initialValue={formState.inputs.fromDate.value}
                 initialValid={formState.inputs.fromDate.isValid}
+                required
               />
               <span />
               <Input
                 element="input"
                 id="toDate"
-                type="text"
-                label="To"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                type="number"
+                label="To - year"
+                validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+                helperText="Please input valid year"
                 onInput={inputHandler}
                 initialValue={formState.inputs.toDate.value}
                 initialValid={formState.inputs.toDate.isValid}
+                required
               />
               <span />
               <Input
@@ -208,13 +214,14 @@ const WorkExperienceEdit = (props) => {
               <Input
                 element="input"
                 id="monthlySalary"
-                type="text"
+                type="number"
                 label="Monthly Salary"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_REQUIRE()]}
+                helperText="Please input valid amount"
                 onInput={inputHandler}
                 initialValue={formState.inputs.monthlySalary.value}
                 initialValid={formState.inputs.monthlySalary.isValid}
+                required
               />
               <span />
               <Input

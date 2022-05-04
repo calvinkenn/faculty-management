@@ -72,11 +72,12 @@ const PasswordEdit = (props) => {
                   id="oldPassword"
                   type="password"
                   label="Old Password"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_MINLENGTH(6)]}
+                  helperText="Please input minimum of 6 characters"
                   onInput={inputHandler}
                   initialValue={formState.inputs.oldPassword.value}
                   initialValid={formState.inputs.oldPassword.isValid}
+                  required
                 />
               </div>
               <div className="new-pass-cont">
@@ -85,11 +86,12 @@ const PasswordEdit = (props) => {
                   id="newPassword"
                   type="password"
                   label="New Password"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_MINLENGTH(6)]}
+                  helperText="Please input minimum of 6 characters"
                   onInput={inputHandler}
                   initialValue={formState.inputs.newPassword.value}
                   initialValid={formState.inputs.newPassword.isValid}
+                  required
                 />
               </div>
               <div className="confirm-pass-cont">
@@ -98,11 +100,12 @@ const PasswordEdit = (props) => {
                   id="confirmNewPassword"
                   type="password"
                   label="Confirm New Password"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_MINLENGTH(6)]}
+                  helperText="Please input minimum of 6 characters"
                   onInput={inputHandler}
                   initialValue={formState.inputs.confirmNewPassword.value}
                   initialValid={formState.inputs.confirmNewPassword.isValid}
+                  required
                 />
               </div>
             </div>

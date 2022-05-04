@@ -76,6 +76,8 @@ const Input = (props) => {
         error={!inputState.isValid && inputState.isTouched}
         value={inputState.value}
         disabled={props.disabled ? props.disabled : false}
+        required={props.required}
+        inputProps={props.inputProps}
       />
     );
   } else if (props.element === "select") {
@@ -91,6 +93,7 @@ const Input = (props) => {
           onChange={changeHandler}
           selectValue={[props.selectValue]}
           items={props.items}
+          required={props.required}
         >
           <MenuItem disabled value="">
             <em>Please Select</em>

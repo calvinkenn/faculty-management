@@ -20,6 +20,7 @@ import { useForm } from "../../../shared/hooks/form-hook";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import {
   VALIDATOR_EMAIL,
+  VALIDATOR_MAXLENGTH,
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
 } from "../../../shared/utils/validators";
@@ -64,7 +65,7 @@ const ContactInfoEdit = (props) => {
     {
       telephoneNum: {
         value: props.userEdit.telephoneNum,
-        isValid: false,
+        isValid: true,
       },
       cellphoneNum: {
         value: props.userEdit.cellphoneNum,
@@ -350,9 +351,9 @@ const ContactInfoEdit = (props) => {
         <div className="contact-info-edit-cont">
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
-              <div className="basic-title-text">
-                <h1>Resident Address</h1>
-              </div>
+            <div className="basic-title-text">
+              <h1>Resident Address</h1>
+            </div>
           </div>
           <div className="resident-add-edit">
             <div className="houseno-street-loctype">
@@ -361,12 +362,9 @@ const ContactInfoEdit = (props) => {
                 id="houseNoR"
                 type="text"
                 label="House no."
-                // validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
                 onChange={houseNoRHandler}
                 value={houseNoR}
-                // initialValue={formState.inputs.houseNoR.value}
-                // initialValid={formState.inputs.houseNoR.isValid}
               />
               <span />
               <TextField
@@ -378,28 +376,31 @@ const ContactInfoEdit = (props) => {
                 errorText="Invalid Email"
                 onChange={streetRHandler}
                 value={streetR}
-                // initialValue={formState.inputs.streetR.value}
-                // initialValid={formState.inputs.streetR.isValid}
               />
               <span />
-              <TextField
-                element="input"
-                id="locationTypeR"
-                type="text"
-                label="Subdivision/Village"
-                // validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
-                onChange={locationTypeRHandler}
-                value={locationTypeR}
-                // initialValue={formState.inputs.locationTypeR.value}
-                // initialValid={formState.inputs.locationTypeR.isValid}
-              />
+              <FormControl sx={{ minWidth: 120 }}>
+                <InputLabel id="select">Location Type</InputLabel>
+                <Select
+                  label={"Location Type"}
+                  onChange={locationTypeRHandler}
+                  value={locationTypeR}
+                >
+                  <MenuItem disabled>Select Location Type</MenuItem>
+                  <MenuItem value={"Subdivision"}>Subdivision</MenuItem>
+                  <MenuItem value={"Village"}>Village</MenuItem>
+                </Select>
+              </FormControl>
             </div>
             <div className="region-province">
               {/* RESIDENT ADDRESS  -------------------------------*/}
               <FormControl sx={{ minWidth: 180 }}>
                 <InputLabel id="select">Select Region</InputLabel>
-                <Select onChange={provinceR} onSelect={regionR} value={regionAddrR}>
+                <Select
+                  label={"Select Region"}
+                  onChange={provinceR}
+                  onSelect={regionR}
+                  value={regionAddrR}
+                >
                   <MenuItem disabled>Select Region</MenuItem>
                   {regionDataR &&
                     regionDataR.length > 0 &&
@@ -413,12 +414,19 @@ const ContactInfoEdit = (props) => {
               <span />
               <FormControl sx={{ minWidth: 180 }}>
                 <InputLabel id="select">Select Province</InputLabel>
-                <Select onChange={cityR} value={provinceAddrR}>
+                <Select
+                  label={"Select Province"}
+                  onChange={cityR}
+                  value={provinceAddrR}
+                >
                   <MenuItem disabled>Select Province</MenuItem>
                   {provinceDataR &&
                     provinceDataR.length > 0 &&
                     provinceDataR.map((item) => (
-                      <MenuItem key={item.province_code} value={item.province_code}>
+                      <MenuItem
+                        key={item.province_code}
+                        value={item.province_code}
+                      >
                         {item.province_name}
                       </MenuItem>
                     ))}
@@ -428,7 +436,11 @@ const ContactInfoEdit = (props) => {
             <div className="city-brgy-zip">
               <FormControl sx={{ minWidth: 180 }}>
                 <InputLabel id="select">Select City</InputLabel>
-                <Select onChange={barangayR} value={cityAddrR}>
+                <Select
+                  label={"Select City"}
+                  onChange={barangayR}
+                  value={cityAddrR}
+                >
                   <MenuItem disabled>Select City</MenuItem>
                   {cityDataR &&
                     cityDataR.length > 0 &&
@@ -442,7 +454,11 @@ const ContactInfoEdit = (props) => {
               <span />
               <FormControl sx={{ minWidth: 180 }}>
                 <InputLabel id="select">Select Barangay</InputLabel>
-                <Select onChange={brgyR} value={barangayAddrR}>
+                <Select
+                  label={"Select Barangay"}
+                  onChange={brgyR}
+                  value={barangayAddrR}
+                >
                   <MenuItem disabled>Select Barangay</MenuItem>
                   {barangayDataR &&
                     barangayDataR.length > 0 &&
@@ -458,22 +474,19 @@ const ContactInfoEdit = (props) => {
               <TextField
                 element="input"
                 id="zipR"
-                type="text"
+                type="number"
                 label="Zip Code"
-                // validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
                 onInput={zipRHandler}
                 value={zipR}
-                // initialValue={formState.inputs.zipR.value}
-                // initialValid={formState.inputs.zipR.isValid}
               />
             </div>
           </div>
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
-              <div className="basic-title-text">
-                <h1>Permanent Address</h1>
-              </div>
+            <div className="basic-title-text">
+              <h1>Permanent Address</h1>
+            </div>
           </div>
           <div className="permanent-address-edit-cont">
             <div className="same-as-res">
@@ -493,11 +506,8 @@ const ContactInfoEdit = (props) => {
                 id="houseNoP"
                 type="text"
                 label="House no."
-                // validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
                 onChange={houseNoPHandler}
-                // initialValue={formState.inputs.houseNoP.value}
-                // initialValid={formState.inputs.houseNoP.isValid}
                 disabled={isSameAddress}
                 value={houseNoP}
               />
@@ -507,34 +517,31 @@ const ContactInfoEdit = (props) => {
                 id="streetP"
                 type="text"
                 label="Street"
-                // validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
                 onChange={streetPHandler}
-                // initialValue={formState.inputs.streetP.value}
-                // initialValid={formState.inputs.streetP.isValid}
                 disabled={isSameAddress}
                 value={streetP}
               />
               <span />
-              <TextField
-                element="input"
-                id="locationTypeP"
-                type="text"
-                label="Subdivision/Village"
-                // validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
-                onChange={locationTypePHandler}
-                // initialValue={formState.inputs.locationTypeP.value}
-                // initialValid={formState.inputs.locationTypeP.isValid}
-                disabled={isSameAddress}
-                value={locationTypeP}
-              />
+              <FormControl sx={{ minWidth: 120 }}>
+                <InputLabel id="select">Location Type</InputLabel>
+                <Select
+                  label={"Location Type"}
+                  onChange={locationTypePHandler}
+                  value={locationTypeP}
+                >
+                  <MenuItem disabled>Select Location Type</MenuItem>
+                  <MenuItem value={"Subdivision"}>Subdivision</MenuItem>
+                  <MenuItem value={"Village"}>Village</MenuItem>
+                </Select>
+              </FormControl>
             </div>
             <div className="region-province">
               {/* PERMANENT ADDRESS  -------------------------------*/}
               <FormControl sx={{ minWidth: 180 }}>
                 <InputLabel id="select">Select Region</InputLabel>
                 <Select
+                  label={"Select Region"}
                   onChange={provinceP}
                   onSelect={regionP}
                   value={!isSameAddress ? regionAddrP : regionAddrR}
@@ -554,6 +561,7 @@ const ContactInfoEdit = (props) => {
               <FormControl sx={{ minWidth: 180 }}>
                 <InputLabel id="select">Select Province</InputLabel>
                 <Select
+                  label={"Select Province"}
                   onChange={cityP}
                   value={!isSameAddress ? provinceAddrP : provinceAddrR}
                   disabled={isSameAddress}
@@ -562,7 +570,10 @@ const ContactInfoEdit = (props) => {
                   {provinceDataP &&
                     provinceDataP.length > 0 &&
                     provinceDataP.map((item) => (
-                      <MenuItem key={item.province_code} value={item.province_code}>
+                      <MenuItem
+                        key={item.province_code}
+                        value={item.province_code}
+                      >
                         {item.province_name}
                       </MenuItem>
                     ))}
@@ -573,6 +584,7 @@ const ContactInfoEdit = (props) => {
               <FormControl sx={{ minWidth: 180 }}>
                 <InputLabel id="select">Select City</InputLabel>
                 <Select
+                  label={"Select City"}
                   onChange={barangayP}
                   value={!isSameAddress ? cityAddrP : cityAddrR}
                   disabled={isSameAddress}
@@ -591,6 +603,7 @@ const ContactInfoEdit = (props) => {
               <FormControl sx={{ minWidth: 180 }}>
                 <InputLabel id="select">Select Barangay</InputLabel>
                 <Select
+                  label={"Select Barangay"}
                   onChange={brgyP}
                   value={!isSameAddress ? barangayAddrP : barangayAddrR}
                   disabled={isSameAddress}
@@ -610,30 +623,26 @@ const ContactInfoEdit = (props) => {
               <TextField
                 element="input"
                 id="zipP"
-                type="text"
+                type="number"
                 label="Zip Code"
-                // validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
                 onInput={zipPHandler}
-                // initialValue={formState.inputs.zipP.value}
-                // initialValid={formState.inputs.zipP.isValid}
                 disabled={isSameAddress}
                 value={zipP}
               />
             </div>
-            
           </div>
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
-              <div className="basic-title-text">
-                <h1>Contact Information</h1>
-              </div>
+            <div className="basic-title-text">
+              <h1>Contact Information</h1>
+            </div>
           </div>
           <div className="tel-cp-email">
             <Input
               element="input"
               id="telephoneNum"
-              type="text"
+              type="number"
               label="Telephone No."
               validators={[VALIDATOR_OPTIONAL()]}
               errorText="Invalid Email"
@@ -645,13 +654,14 @@ const ContactInfoEdit = (props) => {
             <Input
               element="input"
               id="cellphoneNum"
-              type="text"
+              type="number"
               label="Cellphone No."
-              validators={[VALIDATOR_OPTIONAL()]}
-              errorText="Invalid Email"
+              validators={[VALIDATOR_MINLENGTH(11), VALIDATOR_MAXLENGTH(11)]}
+              helperText="Please input valid phone number"
               onInput={inputHandler}
               initialValue={formState.inputs.cellphoneNum.value}
               initialValid={formState.inputs.cellphoneNum.isValid}
+              required
             />
             <span />
             <Input
@@ -659,8 +669,8 @@ const ContactInfoEdit = (props) => {
               id="alternateEmail"
               type="text"
               label="Alternate Email Address"
-              validators={[VALIDATOR_OPTIONAL()]}
-              errorText="Invalid Email"
+              validators={[VALIDATOR_EMAIL()]}
+              helperText="Please input valid email"
               onInput={inputHandler}
               initialValue={formState.inputs.alternateEmail.value}
               initialValid={formState.inputs.alternateEmail.isValid}

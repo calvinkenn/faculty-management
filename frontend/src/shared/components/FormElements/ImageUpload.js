@@ -65,8 +65,9 @@ const ImageUpload = (props) => {
             <img src={`http://localhost:5000/${previewUrl}`} alt="Preview" />
           )}
           {previewUrl && isUploading && <img src={previewUrl} alt="Preview" />}
-          {!previewUrl && <p>Please pick an Image</p>}
         </div>
+        {!previewUrl && <p>Maximum of 5mb</p>}
+        {!previewUrl && <p>Only upload jpg/jpeg/png file format</p>}
         {!props.isEditMode && (
           <Button type="button" onClick={pickImageHandler}>
             Pick Image

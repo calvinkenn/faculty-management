@@ -18,13 +18,9 @@ const AccountInfoEdit = (props) => {
   const [imageError, setImageError] = useState();
   const [formState, inputHandler, setFormData] = useForm(
     {
-      profilePic: {
-        value: null,
-        isValid: false,
-      },
       employeeNum: {
         value: props.userEdit.employeeNum,
-        isValid: true,
+        isValid: false,
       },
       faculty: {
         value: props.userEdit.faculty,
@@ -36,20 +32,8 @@ const AccountInfoEdit = (props) => {
       },
       email: {
         value: props.userEdit.email,
-        isValid: true,
+        isValid: false,
       },
-      // oldPassword: {
-      //   value: "",
-      //   isValid: true,
-      // },
-      // newPassword: {
-      //   value: "",
-      //   isValid: true,
-      // },
-      // confirmNewPassword: {
-      //   value: "",
-      //   isValid: true,
-      // },
     },
     false
   );
@@ -112,13 +96,14 @@ const AccountInfoEdit = (props) => {
                 <Input
                   element="input"
                   id="employeeNum"
-                  type="text"
+                  type="number"
                   label="Employee Number"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input employee number"
                   onInput={inputHandler}
                   initialValue={formState.inputs.employeeNum.value}
                   initialValid={formState.inputs.employeeNum.isValid}
+                  required
                 />
               </div>
               <div className="faculty-type-cont">
@@ -155,11 +140,12 @@ const AccountInfoEdit = (props) => {
                   id="email"
                   type="text"
                   label="Email"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_EMAIL()]}
+                  helperText="Please input valid email"
                   onInput={inputHandler}
                   initialValue={formState.inputs.email.value}
                   initialValid={formState.inputs.email.isValid}
+                  required
                 />
               </div>
             </div>

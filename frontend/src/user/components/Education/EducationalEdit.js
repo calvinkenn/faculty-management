@@ -5,9 +5,10 @@ import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import { useForm } from "../../../shared/hooks/form-hook";
 import {
-  VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
+  VALIDATOR_REQUIRE,
+  VALIDATOR_MAXLENGTH
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -15,9 +16,9 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 const EducationalEdit = (props) => {
   const [inputList, setInputList] = useState([{ awards: "" }]);
-  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
+    useHttpClient();
   let degree;
-  
 
   useEffect(() => {
     if (props.editData) {
@@ -95,28 +96,28 @@ const EducationalEdit = (props) => {
     event.preventDefault();
 
     let degreeValue;
-    if(!degree){
+    if (!degree) {
       degreeValue = "N/A";
-    }else{
+    } else {
       degreeValue = formState.inputs.degree.value;
     }
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/addEducation",
-        "POST",
-        
-        JSON.stringify({
-          level: formState.inputs.level.value,
-          school: formState.inputs.school.value,
-          degree: degreeValue,
-          fromDate: formState.inputs.fromDate.value,
-          toDate: formState.inputs.toDate.value,
-          awards: inputList,
-          yearGraduated: formState.inputs.yearGraduated.value,
-          highestLevel : formState.inputs.highestLevel.value,
-          userId: storedData.userId,
-          token: storedData.token
-        }),
-        { "Content-Type": "application/json" },
+      "POST",
+
+      JSON.stringify({
+        level: formState.inputs.level.value,
+        school: formState.inputs.school.value,
+        degree: degreeValue,
+        fromDate: formState.inputs.fromDate.value,
+        toDate: formState.inputs.toDate.value,
+        awards: inputList,
+        yearGraduated: formState.inputs.yearGraduated.value,
+        highestLevel: formState.inputs.highestLevel.value,
+        userId: storedData.userId,
+        token: storedData.token,
+      }),
+      { "Content-Type": "application/json" }
     );
     props.setUserData(responseData.userEducation, responseData.message);
     props.updateAddModeState();
@@ -133,27 +134,26 @@ const EducationalEdit = (props) => {
 
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/updateEducation",
-        "PATCH",
-        
-        JSON.stringify({
-          level: formState.inputs.level.value,
-          school: formState.inputs.school.value,
-          degree: formState.inputs.degree.value,
-          fromDate: formState.inputs.fromDate.value,
-          toDate: formState.inputs.toDate.value,
-          awards: inputList,
-          yearGraduated: formState.inputs.yearGraduated.value,
-          highestLevel : formState.inputs.highestLevel.value,
-          educId: props.editData._id,
-          userId: storedData.userId,
-          token: storedData.token,
-        }),
-        { "Content-Type": "application/json" },
+      "PATCH",
+
+      JSON.stringify({
+        level: formState.inputs.level.value,
+        school: formState.inputs.school.value,
+        degree: formState.inputs.degree.value,
+        fromDate: formState.inputs.fromDate.value,
+        toDate: formState.inputs.toDate.value,
+        awards: inputList,
+        yearGraduated: formState.inputs.yearGraduated.value,
+        highestLevel: formState.inputs.highestLevel.value,
+        educId: props.editData._id,
+        userId: storedData.userId,
+        token: storedData.token,
+      }),
+      { "Content-Type": "application/json" }
     );
     props.setUserData(responseData.userEducation, responseData.message);
     props.updateAddModeState();
   };
-
 
   if (
     formState.inputs.level.value === "College" ||
@@ -172,9 +172,9 @@ const EducationalEdit = (props) => {
         <div className="educ-add-cont">
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
-              <div className="basic-title-text">
-                <h1>Educational Attainment</h1>
-              </div>
+            <div className="basic-title-text">
+              <h1>Educational Attainment</h1>
+            </div>
           </div>
           <div className="educ-add-details-cont">
             <div className="level-unit">
@@ -191,11 +191,12 @@ const EducationalEdit = (props) => {
                   "Vocational/Trade Course",
                   "Graduate Study",
                 ]}
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_REQUIRE()]}
+                helperText="Please input your educational level"
                 onInput={inputHandler}
                 initialValue={formState.inputs.level.value}
                 initialValid={formState.inputs.level.isValid}
+                required
               />
               <span />
               <Input
@@ -203,11 +204,12 @@ const EducationalEdit = (props) => {
                 id="highestLevel"
                 type="text"
                 label="Highest Level/Unit Earned"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_REQUIRE()]}
+                helperText="Please input your highest level/unit earned"
                 onInput={inputHandler}
                 initialValue={formState.inputs.highestLevel.value}
                 initialValid={formState.inputs.highestLevel.isValid}
+                required
               />
             </div>
             <div className="school-degree">
@@ -217,11 +219,12 @@ const EducationalEdit = (props) => {
                   id="school"
                   type="text"
                   label="School"
-                  validators={[VALIDATOR_OPTIONAL()]}
-                  errorText="Invalid Email"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input your school name"
                   onInput={inputHandler}
                   initialValue={formState.inputs.school.value}
                   initialValid={formState.inputs.school.isValid}
+                  required
                 />
               </div>
               <div className="degree">
@@ -236,6 +239,7 @@ const EducationalEdit = (props) => {
                     onInput={inputHandler}
                     initialValue={formState.inputs.degree.value}
                     initialValid={formState.inputs.degree.isValid}
+                    required
                   />
                 )}
               </div>
@@ -244,25 +248,27 @@ const EducationalEdit = (props) => {
               <Input
                 element="input"
                 id="fromDate"
-                type="text"
-                label="From"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                type="number"
+                label="From - year"
+                validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+                helperText="Please input the year it started"
                 onInput={inputHandler}
                 initialValue={formState.inputs.fromDate.value}
                 initialValid={formState.inputs.fromDate.isValid}
+                required
               />
               <span />
               <Input
                 element="input"
                 id="toDate"
                 type="text"
-                label="To"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                label="To - year"
+                validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+                helperText="Please input the year it ended"
                 onInput={inputHandler}
                 initialValue={formState.inputs.toDate.value}
                 initialValid={formState.inputs.toDate.isValid}
+                required
               />
               <span />
               <Input
@@ -270,11 +276,12 @@ const EducationalEdit = (props) => {
                 id="yearGraduated"
                 type="text"
                 label="Year Graduated"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_REQUIRE()]}
+                helperText="Please input the year graduated"
                 onInput={inputHandler}
                 initialValue={formState.inputs.yearGraduated.value}
                 initialValid={formState.inputs.yearGraduated.isValid}
+                required
               />
             </div>
             <div className="acad-honor">
@@ -292,7 +299,10 @@ const EducationalEdit = (props) => {
                       />
                       <div className="btn-box">
                         {inputList.length !== 1 && (
-                          <button className="mr10" onClick={() => handleRemoveClick(i)}>
+                          <button
+                            className="mr10"
+                            onClick={() => handleRemoveClick(i)}
+                          >
                             Remove
                           </button>
                         )}

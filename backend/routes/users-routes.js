@@ -271,10 +271,10 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("Please specify your place of examination!"),
-    check("licenseNumber")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your civil service license number!"),
+    // check("licenseNumber")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Please specify your civil service license number!"),
   ],
   userControllers.addUserCivil
 );
@@ -294,10 +294,10 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("Please specify your place of examination!"),
-    check("licenseNumber")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your civil service license number!"),
+    // check("licenseNumber")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Please specify your civil service license number!"),
   ],
   userControllers.getEditCivil
 );

@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import Modal from "../../shared/components/UIElements/Modal";
+import Button from "../../shared/components/FormElements/Button";
 import profile from "../../assets/Image/Qw.png";
 import Overview from "../components/Overview/Overview";
 import MainNavigation from "../../shared/components/Navigation/MainNavigation";
@@ -43,6 +45,10 @@ const Profile = (props) => {
   const [workData, setWorkData] = useState({});
   const [success, setSuccess] = useState();
   const [isPrintMode, setIsPrintMode] = useState(props.isPrintMode);
+
+  const [editingPageData, setEditingPageData] = useState();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+
   const userIdByParams = useParams().userId;
 
   const printModeHandler = () => {
@@ -58,6 +64,16 @@ const Profile = (props) => {
   };
 
   const menuChangeHandler = (menuName) => {
+    if (isEditMode || isAddMode) {
+      setShowConfirmModal(true);
+      return;
+    }
+
+    // if (editingPageData) {
+    //   setShowConfirmModal(true);
+    //   return;
+    // }
+
     const stateCopy = { ...menu };
     Object.keys(stateCopy).forEach((key) => (stateCopy[key] = false)); //Set All Button False
     stateCopy[menuName] = true; //Set Button True
@@ -65,6 +81,16 @@ const Profile = (props) => {
     setIsAddMode(false);
     setIsPrintMode(false);
     setIsMenuActive(stateCopy);
+  };
+
+  const closeEditingDataHandler = () => {
+    setIsAddMode(false);
+    setIsEditMode(false);
+    setShowConfirmModal(false);
+  };
+
+  const cancelEditingDataHandler = () => {
+    setShowConfirmModal(false);
   };
 
   useEffect(() => {
@@ -178,6 +204,24 @@ const Profile = (props) => {
 
   return (
     <React.Fragment>
+      <Modal
+        show={showConfirmModal}
+        header="Cancel editing?"
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={closeEditingDataHandler}>
+              YES
+            </Button>
+            <Button onClick={cancelEditingDataHandler}>NO</Button>
+          </React.Fragment>
+        }
+      >
+        <p>
+          Do you want to cancel {isEditMode && "editing"}{" "}
+          {isAddMode && "adding"} data? Changes will not be saved!
+        </p>
+      </Modal>
       <div className="user-main">
         <div className="user-main-container">
           <SuccessModal success={success} onClear={clearSuccess} />

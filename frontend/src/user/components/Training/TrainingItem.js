@@ -94,8 +94,8 @@ const TrainingItem = (props) => {
             <div className="training-details">
               <div>TITLE: {props.title}</div>
               <div>TYPE: {props.type}</div>
-              <div>FROM: {props.from}</div>
-              <div>TO: {props.to}</div>
+              <div>From: {props.from}</div>
+              <div>To: {props.to}</div>
               <div>Hours: {props.hours}</div>
               <div>Type of learning and development: {props.typeOfLD}</div>
               <div>Conducted/Sponsored by: {props.conducted}</div>

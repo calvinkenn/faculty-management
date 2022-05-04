@@ -15,7 +15,7 @@ import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const TrainingEdit = (props) => {
-  const [imageError, setImageError] = useState();
+  const [inputError, setInputError] = useState();
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
@@ -62,7 +62,12 @@ const TrainingEdit = (props) => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
     if (!formState.inputs.certificatePic.value) {
-      setImageError("Please upload photo");
+      setInputError("Please upload photo");
+      return;
+    }
+
+    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+      setInputError("Please input a valid time period. From - To period");
       return;
     }
 
@@ -107,7 +112,12 @@ const TrainingEdit = (props) => {
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
     if (!formState.inputs.certificatePic.value) {
-      setImageError("Please upload photo");
+      setInputError("Please upload photo");
+      return;
+    }
+
+    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+      setInputError("Please input a valid time period. From - To period");
       return;
     }
 
@@ -135,15 +145,15 @@ const TrainingEdit = (props) => {
     } catch (err) {}
   };
 
-  const clearImageError = () => {
-    setImageError("");
+  const clearInputError = () => {
+    setInputError("");
   };
 
   return (
     <React.Fragment>
       <ErrorModal
-        error={imageError ? imageError : error}
-        onClear={imageError ? clearImageError : clearError}
+        error={inputError ? inputError : error}
+        onClear={inputError ? clearInputError : clearError}
       />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <ImageUpload

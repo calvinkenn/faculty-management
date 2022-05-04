@@ -94,8 +94,8 @@ const WorkExperienceItem = (props) => {
               <div>Company: {props.company}</div>
               <div>Position: {props.position}</div>
               <div>Department: {props.department}</div>
-              <div>FROM: {props.fromDate}</div>
-              <div>TO: {props.toDate}</div>
+              <div>From: {props.fromDate}</div>
+              <div>To: {props.toDate}</div>
               <div>Monthly Salary: &#8369;{props.monthlySalary}</div>
               <div>
                 Salary Grade: {props.salaryGrade}-{props.salaryStep}

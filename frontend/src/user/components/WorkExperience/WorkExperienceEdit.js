@@ -7,7 +7,7 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
   VALIDATOR_REQUIRE,
-  VALIDATOR_MAXLENGTH
+  VALIDATOR_MAXLENGTH,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -16,6 +16,7 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const WorkExperienceEdit = (props) => {
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
+  const [yearError, setYearError] = useState();
   const [formState, inputHandler, setFormData] = useForm(
     {
       company: {
@@ -66,6 +67,11 @@ const WorkExperienceEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
+    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+      setYearError("Please input a valid time period. From - To period");
+      return;
+    }
+
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/addWorkExperience",
       "POST",
@@ -93,6 +99,11 @@ const WorkExperienceEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
+    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+      setYearError("Please input a valid time period. From - To period");
+      return;
+    }
+
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/editWorkExperience",
       "PATCH",
@@ -117,9 +128,16 @@ const WorkExperienceEdit = (props) => {
     props.updateAddModeState();
   };
 
+  const clearYearError = () => {
+    setYearError("");
+  };
+
   return (
     <React.Fragment>
-      <ErrorModal error={error} onClear={clearError} />
+      <ErrorModal
+        error={yearError ? yearError : error}
+        onClear={yearError ? clearYearError : clearError}
+      />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <div className="work-exp-edit-cont">
           <div className="name-info-title-cont">

@@ -15,7 +15,6 @@ import "../../components/EditForm.css";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const AccountInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
-  const [imageError, setImageError] = useState();
   const [formState, inputHandler, setFormData] = useForm(
     {
       employeeNum: {
@@ -72,16 +71,9 @@ const AccountInfoEdit = (props) => {
     }
   };
 
-  const clearImageError = () => {
-    setImageError("");
-  };
-
   return (
     <React.Fragment>
-      <ErrorModal
-        error={imageError ? imageError : error}
-        onClear={imageError ? clearImageError : clearError}
-      />
+      <ErrorModal error={error} onClear={clearError} />
       <form onSubmit={submitHandler}>
         <div className="account-edit-cont">
           <div className="name-info-title-cont">

@@ -529,6 +529,7 @@ const ContactInfoEdit = (props) => {
                   label={"Location Type"}
                   onChange={locationTypePHandler}
                   value={locationTypeP}
+                  disabled={isSameAddress}
                 >
                   <MenuItem disabled>Select Location Type</MenuItem>
                   <MenuItem value={"Subdivision"}>Subdivision</MenuItem>

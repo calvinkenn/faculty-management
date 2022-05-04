@@ -8,7 +8,7 @@ import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
   VALIDATOR_REQUIRE,
-  VALIDATOR_MAXLENGTH
+  VALIDATOR_MAXLENGTH,
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -16,6 +16,7 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 const EducationalEdit = (props) => {
   const [inputList, setInputList] = useState([{ awards: "" }]);
+  const [yearError, setYearError] = useState();
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
   let degree;
@@ -87,13 +88,13 @@ const EducationalEdit = (props) => {
 
   const submitAddHandler = async (event) => {
     //For Adding Data
-    console.log(typeof inputList);
-
-    let arrayList = inputList.map((list) => list.awards);
-    console.log(arrayList);
-
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     event.preventDefault();
+
+    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+      setYearError("Please input a valid time period. From - To period");
+      return;
+    }
 
     let degreeValue;
     if (!degree) {
@@ -126,11 +127,12 @@ const EducationalEdit = (props) => {
   const submitEditHandler = async (event) => {
     //For Editing Data
     event.preventDefault();
-
-    let arrayList = inputList.map((list) => list.awards);
-
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
-    event.preventDefault();
+
+    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+      setYearError("Please input a valid time period. From - To period");
+      return;
+    }
 
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/updateEducation",
@@ -165,9 +167,16 @@ const EducationalEdit = (props) => {
     degree = false;
   }
 
+  const clearYearError = () => {
+    setYearError("");
+  };
+
   return (
     <React.Fragment>
-      <ErrorModal error={error} onClear={clearError} />
+      <ErrorModal
+        error={yearError ? yearError : error}
+        onClear={yearError ? clearYearError : clearError}
+      />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <div className="educ-add-cont">
           <div className="name-info-title-cont">

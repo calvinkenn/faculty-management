@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Checkbox, FormControlLabel } from "@mui/material";
 
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -10,6 +11,7 @@ import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
+  VALIDATOR_REQUIRE,
 } from "../../shared/utils/validators";
 import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
@@ -21,6 +23,7 @@ import cictBuilding from "../../assets/Image/pimentel.png";
 
 const Auth = () => {
   const auth = useContext(AuthContext);
+  const [isAgree, setIsAgree] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [isRegisterMode, setIsRegisterMode] = useState(false);
   const [isResetMode, setIsResetMode] = useState(false);
@@ -78,12 +81,23 @@ const Auth = () => {
     if (isRegisterMode) {
       setFormData(
         {
-          ...formState.inputs,
+          email: {
+            value: "",
+            isValid: false,
+          },
+          password: {
+            value: "",
+            isValid: false,
+          },
           employeeNum: undefined,
           firstName: undefined,
           lastName: undefined,
         },
-        formState.inputs.email.isValid && formState.inputs.password.isValid
+        formState.inputs.email.isValid &&
+          formState.inputs.password.isValid &&
+          formState.inputs.employeeNum.isValid &&
+          formState.inputs.firstName.isValid &&
+          formState.inputs.lastName.isValid
       );
     } else if (isLoginMode) {
       setFormData(
@@ -102,21 +116,12 @@ const Auth = () => {
             isValid: false,
           },
         },
-        false
+        formState.inputs.email.isValid && formState.inputs.password.isValid
       );
     } else if (isResetMode) {
       setFormData(
         {
-          ...formState.inputs,
-          employeeNum: {
-            value: "",
-            isValid: false,
-          },
-          firstName: {
-            value: "",
-            isValid: false,
-          },
-          lastName: {
+          email: {
             value: "",
             isValid: false,
           },
@@ -125,7 +130,7 @@ const Auth = () => {
             isValid: false,
           },
         },
-        false
+        formState.inputs.email.isValid
       );
     }
   };
@@ -198,6 +203,10 @@ const Auth = () => {
     }
   };
 
+  const agreeHandler = (event) => {
+    setIsAgree(event.target.checked);
+  };
+
   return (
     <React.Fragment>
       <SuccessModal success={success} onClear={clearSuccess} />
@@ -224,7 +233,9 @@ const Auth = () => {
             <div className="main-form-cont">
               {/* <Router>{routes}</Router> */}
               <h2 className="login-mode-title">
-                {isLoginMode ? "LOGIN TO YOUR ACCOUNT" : "CREATE YOUR ACCOUNT"}
+                {isLoginMode && "LOGIN TO YOUR ACCOUNT"}{" "}
+                {isRegisterMode && "CREATE YOUR ACCOUNT"}
+                {isResetMode && "RESET YOUR ACCOUNT"}
               </h2>
               <form onSubmit={authSubmitHandler}>
                 <div className="employeeNo-container">
@@ -233,8 +244,8 @@ const Auth = () => {
                       element="input"
                       id="employeeNum"
                       type="text"
-                      validators={[VALIDATOR_MINLENGTH(2)]}
-                      helperText="Minimum of 2 characters."
+                      validators={[VALIDATOR_REQUIRE()]}
+                      helperText="Please input your employee number."
                       onInput={inputHandler}
                       label="Employee Number"
                       variant="outlined"
@@ -248,8 +259,8 @@ const Auth = () => {
                         element="input"
                         id="firstName"
                         type="text"
-                        validators={[VALIDATOR_MINLENGTH(2)]}
-                        helperText="Minimum of 2 characters."
+                        validators={[VALIDATOR_REQUIRE()]}
+                        helperText="Please input your first name."
                         onInput={inputHandler}
                         label="First Name"
                         variant="outlined"
@@ -262,8 +273,8 @@ const Auth = () => {
                         element="input"
                         id="lastName"
                         type="text"
-                        validators={[VALIDATOR_MINLENGTH(2)]}
-                        helperText="Minimum of 2 characters."
+                        validators={[VALIDATOR_REQUIRE()]}
+                        helperText="Please input your last name."
                         onInput={inputHandler}
                         label="Last Name"
                         variant="outlined"
@@ -279,7 +290,7 @@ const Auth = () => {
                       id="email"
                       type="text"
                       validators={[VALIDATOR_EMAIL()]}
-                      helperText="Invalid Email."
+                      helperText="Please input a valid email."
                       onInput={inputHandler}
                       label="Email"
                       variant="outlined"
@@ -292,23 +303,39 @@ const Auth = () => {
                         id="password"
                         type="password"
                         validators={[VALIDATOR_MINLENGTH(6)]}
-                        helperText="Minimum of 6 characters."
+                        helperText="Please input a minimum of 6 characters."
                         onInput={inputHandler}
                         label="Password"
                         variant="outlined"
                       />
                     )}
                   </div>
+                  <div className="password-container">
+                    {isRegisterMode && (
+                      <FormControlLabel
+                        disabled={!formState.isValid}
+                        label="I agree"
+                        control={
+                          <Checkbox checked={isAgree} onChange={agreeHandler} />
+                        }
+                      />
+                    )}
+                  </div>
                 </div>
 
-                <Button type="submit">
-                  {isLoginMode && "Login"}
-                  {isRegisterMode && "Register"}
-                  {isResetMode && "Reset Password"}
-                </Button>
+                {isLoginMode && <Button type="submit">Login</Button>}
+                {isRegisterMode && (
+                  <Button
+                    type="submit"
+                    disabled={!formState.isValid || !isAgree}
+                  >
+                    Register
+                  </Button>
+                )}
+                {isResetMode && <Button type="submit">Reset Password</Button>}
               </form>
 
-              {isLoginMode ? (
+              {isLoginMode && (
                 <h6>
                   Don't have an account?{" "}
                   <a onClick={registerModeHandler}>Create an account here</a>
@@ -317,10 +344,16 @@ const Auth = () => {
                     <a onClick={resetModeHandler}>Reset your password here</a>
                   </h6>
                 </h6>
-              ) : (
+              )}
+              {isRegisterMode && (
                 <h6>
                   Already have an account?{" "}
                   <a onClick={loginModeHandler}>Login here</a>
+                </h6>
+              )}
+              {isResetMode && (
+                <h6>
+                  <a onClick={loginModeHandler}>Back to login</a>
                 </h6>
               )}
             </div>

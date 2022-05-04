@@ -56,10 +56,21 @@ const Admin = (props) => {
     // setRejectedUserData(userData);
     // setDeactivatedUserData(userData);
     if (status === "accepted") {
-      setSuccess("Account Accepted");
-    } else {
-      setError("Account Rejected");
-    }
+      setSuccess("Account Activated");
+      return;
+    } 
+    if (status === "deactivated") {
+      setSuccess("Account Deactivated");
+      return;
+    } 
+    if (status === "rejected") {
+      setSuccess("Account Rejected");
+      return;
+    } 
+    if (status === "pending") {
+      setSuccess("Account Pending");
+      return;
+    } 
   };
 
   useEffect(() => {

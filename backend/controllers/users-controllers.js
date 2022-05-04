@@ -143,17 +143,17 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  if (existingUser.permission === "reset") {
+  if (!existingUser) {
     const error = new HttpError(
-      "Account requested for a reset. Please wait for the admin to reset your password and try again.",
+      "Invalid credentials, could not log you in.",
       401
     );
     return next(error);
   }
 
-  if (!existingUser) {
+  if (existingUser.permission === "reset") {
     const error = new HttpError(
-      "Invalid credentials, could not log you in.",
+      "Account requested for a reset. Please wait for the admin to reset your password and try again.",
       401
     );
     return next(error);

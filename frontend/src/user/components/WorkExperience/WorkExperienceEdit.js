@@ -13,9 +13,8 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 const WorkExperienceEdit = (props) => {
-  const [salaryGradeList, setSalaryGradeList] = useState([]);
-  const [salaryStepList, setSalaryStepList] = useState([]);
-  const { isLoading, error, success, sendRequest, clearError, clearSuccess} = useHttpClient();
+  const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
+    useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       company: {
@@ -62,47 +61,27 @@ const WorkExperienceEdit = (props) => {
     false
   );
 
-  let sGrade = [];
-  let sStep = [];
-  useEffect(() => {
-    for (let i = 1; i < 34; i++) {
-      if (i < 10) {
-        sGrade.push("0" + i);
-      } else {
-        sGrade.push(i);
-      }
-    }
-    setSalaryGradeList(sGrade);
-  }, []);
-
-  useEffect(() => {
-    for (let i = 1; i < 9; i++) {
-      sStep.push(i);
-    }
-    setSalaryStepList(sStep);
-  }, []);
-
   const submitAddHandler = async (event) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/addWorkExperience",
-        "POST",
-        JSON.stringify({
-          company : formState.inputs.company.value,
-          position : formState.inputs.position.value,
-          department  : formState.inputs.department.value,
-          fromDate : formState.inputs.fromDate.value,
-          toDate : formState.inputs.toDate.value,
-          monthlySalary : formState.inputs.monthlySalary.value,
-          salaryGrade : formState.inputs.salaryGrade.value,
-          salaryStep : formState.inputs.salaryStep.value,
-          government : formState.inputs.government.value,
-          userId: storedData.userId,
-          token: storedData.token
-        }),
-        { "Content-Type": "application/json" },
+      "POST",
+      JSON.stringify({
+        company: formState.inputs.company.value,
+        position: formState.inputs.position.value,
+        department: formState.inputs.department.value,
+        fromDate: formState.inputs.fromDate.value,
+        toDate: formState.inputs.toDate.value,
+        monthlySalary: formState.inputs.monthlySalary.value,
+        salaryGrade: formState.inputs.salaryGrade.value,
+        salaryStep: formState.inputs.salaryStep.value,
+        government: formState.inputs.government.value,
+        userId: storedData.userId,
+        token: storedData.token,
+      }),
+      { "Content-Type": "application/json" }
     );
     props.setUserData(responseData.WorkExperience, responseData.message);
     props.updateAddModeState();
@@ -115,23 +94,23 @@ const WorkExperienceEdit = (props) => {
 
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/editWorkExperience",
-        "PATCH",
-        
-        JSON.stringify({
-          company : formState.inputs.company.value,
-          position : formState.inputs.position.value,
-          department  : formState.inputs.department.value,
-          fromDate : formState.inputs.fromDate.value,
-          toDate : formState.inputs.toDate.value,
-          monthlySalary : formState.inputs.monthlySalary.value,
-          salaryGrade : formState.inputs.salaryGrade.value,
-          salaryStep : formState.inputs.salaryStep.value,
-          government : formState.inputs.government.value,
-          userId: storedData.userId,
-          token: storedData.token,
-          workId : props.editData._id
-        }),
-        { "Content-Type": "application/json" },
+      "PATCH",
+
+      JSON.stringify({
+        company: formState.inputs.company.value,
+        position: formState.inputs.position.value,
+        department: formState.inputs.department.value,
+        fromDate: formState.inputs.fromDate.value,
+        toDate: formState.inputs.toDate.value,
+        monthlySalary: formState.inputs.monthlySalary.value,
+        salaryGrade: formState.inputs.salaryGrade.value,
+        salaryStep: formState.inputs.salaryStep.value,
+        government: formState.inputs.government.value,
+        userId: storedData.userId,
+        token: storedData.token,
+        workId: props.editData._id,
+      }),
+      { "Content-Type": "application/json" }
     );
     props.setUserData(responseData.userWork, responseData.message);
     props.updateAddModeState();
@@ -144,9 +123,9 @@ const WorkExperienceEdit = (props) => {
         <div className="work-exp-edit-cont">
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
-              <div className="basic-title-text">
-                <h1>Licenses</h1>
-              </div>
+            <div className="basic-title-text">
+              <h1>Licenses</h1>
+            </div>
           </div>
           <div className="work-exp-cont">
             <div className="position-cont">
@@ -217,7 +196,7 @@ const WorkExperienceEdit = (props) => {
                 id="government"
                 type="text"
                 label="Government"
-                items={['YES', 'NO']}
+                items={["YES", "NO"]}
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
                 onInput={inputHandler}
@@ -245,7 +224,7 @@ const WorkExperienceEdit = (props) => {
                 label="Salary Grade"
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
-                items={salaryGradeList}
+                items={Array.from({ length: 33 }, (v, k) => k + 1)}
                 onInput={inputHandler}
                 initialValue={formState.inputs.salaryGrade.value}
                 initialValid={formState.inputs.salaryGrade.isValid}
@@ -258,7 +237,7 @@ const WorkExperienceEdit = (props) => {
                 label="Salary Step"
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
-                items={salaryStepList}
+                items={Array.from({ length: 8 }, (v, k) => k + 1)}
                 onInput={inputHandler}
                 initialValue={formState.inputs.salaryStep.value}
                 initialValid={formState.inputs.salaryStep.isValid}
@@ -266,10 +245,10 @@ const WorkExperienceEdit = (props) => {
             </div>
           </div>
           <div className="work-exp-btn">
-              <Button inverse type="submit">
-                {props.addingItem ? "Add" : "Save"}
-              </Button>
-            </div>
+            <Button inverse type="submit">
+              {props.addingItem ? "Add" : "Save"}
+            </Button>
+          </div>
         </div>
       </form>
     </React.Fragment>

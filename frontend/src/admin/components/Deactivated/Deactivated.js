@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import Sort from "../../../shared/components/Sort/Sort";
 
 import DeactivatedList from "./DeactivatedList";
 
 const Deactivated = (props) => {
+  const [selectedFilter, setSelectedFilter] = useState(1);
+
+  const handleChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
+
+  const sortedDataToShow = () => {
+    if (selectedFilter === 2) {
+      return "firstName";
+    }
+    if (selectedFilter === 3) {
+      return "lastName";
+    } else {
+      return "employeeNum";
+    }
+  };
+
   return (
-    <DeactivatedList
-      list={props.deactivatedUserData}
-      updateDeactivatedUsers={props.updateDeactivatedUsers}
-    />
+    <React.Fragment>
+      <Sort label={"Sort By"} onChange={handleChange} value={selectedFilter} />
+      <DeactivatedList
+        list={props.deactivatedUserData}
+        updateDeactivatedUsers={props.updateDeactivatedUsers}
+        sortedData={sortedDataToShow()}
+      />
+    </React.Fragment>
   );
 };
 

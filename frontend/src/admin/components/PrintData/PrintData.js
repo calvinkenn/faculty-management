@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useReactToPrint } from "react-to-print";
-
+import { useSortableData } from "../../../shared/hooks/sort-hook";
 import "./PrintData.css";
 
 export class ComponentToPrint extends React.PureComponent {
@@ -11,19 +11,28 @@ export class ComponentToPrint extends React.PureComponent {
 
 const PrintData = (props) => {
   const componentRef = useRef();
+  const { items, requestSort, sortConfig } = useSortableData(
+    props.activeUserData
+  );
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
 
   const activeAccountData = () => {
     return (
       <table>
         <tr>
-          <th>Employee Number</th>
-          <th>Email</th>
-          <th>Faculty</th>
-          <th>Last Name</th>
-          <th>First Name</th>
-          <th>Middle Name</th>
+          <th onClick={() => requestSort("employeeNum")}>Employee Number</th>
+          <th onClick={() => requestSort("email")}>Email</th>
+          <th onClick={() => requestSort("faculty")}>Faculty</th>
+          <th onClick={() => requestSort("lastName")}>Last Name</th>
+          <th onClick={() => requestSort("firstName")}>First Name</th>
+          <th onClick={() => requestSort("middleName")}>Middle Name</th>
         </tr>
-        {props.activeUserData?.map((active) => (
+        {items?.map((active) => (
           <tr>
             <td>{active.employeeNum}</td>
             <td>{active.email}</td>

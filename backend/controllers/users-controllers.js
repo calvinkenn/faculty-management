@@ -883,7 +883,7 @@ const deleteUserTraining = async (req, res, next) => {
   const newUpdate = await Training.find({ user: userId });
   res
     .status(201)
-    .json({ userTraining: newUpdate, message: "Work Experience Deleted" });
+    .json({ userTraining: newUpdate, message: "Training/Seminar Deleted" });
 };
 exports.signup = signup;
 exports.reset = reset;

@@ -9,20 +9,22 @@ const ResetList = (props) => {
   }
   return (
     <div className="list">
-      {props.list?.map((reset) => (
-        <ResetItem
-          userId={reset._id}
-          employeeNum={reset.employeeNum}
-          firstName={reset.firstName}
-          lastName={reset.lastName}
-          email={reset.email}
-          reset={reset.faculty}
-          employmentType={reset.employmentType}
-          updateResetUsers={props.updateResetUsers}
-          profilePic={reset.profilePic}
-          id={reset._id}
-        />
-      ))}
+      {props.list
+        ?.sort((a, b) => (a[props.sortedData] < b[props.sortedData] ? 1 : -1))
+        .map((reset) => (
+          <ResetItem
+            userId={reset._id}
+            employeeNum={reset.employeeNum}
+            firstName={reset.firstName}
+            lastName={reset.lastName}
+            email={reset.email}
+            reset={reset.faculty}
+            employmentType={reset.employmentType}
+            updateResetUsers={props.updateResetUsers}
+            profilePic={reset.profilePic}
+            id={reset._id}
+          />
+        ))}
     </div>
   );
 };

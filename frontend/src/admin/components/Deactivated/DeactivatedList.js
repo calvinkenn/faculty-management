@@ -9,16 +9,18 @@ const DeactivatedList = (props) => {
   }
   return (
     <div className="list">
-      {props.list?.map((application) => (
-        <DeactivatedItem
-          employeeNum={application.employeeNum}
-          firstName={application.firstName}
-          lastName={application.lastName}
-          email={application.email}
-          id={application._id}
-          updateDeactivatedUsers={props.updateDeactivatedUsers}
-        />
-      ))}
+      {props.list
+        ?.sort((a, b) => (a[props.sortedData] < b[props.sortedData] ? 1 : -1))
+        .map((application) => (
+          <DeactivatedItem
+            employeeNum={application.employeeNum}
+            firstName={application.firstName}
+            lastName={application.lastName}
+            email={application.email}
+            id={application._id}
+            updateDeactivatedUsers={props.updateDeactivatedUsers}
+          />
+        ))}
     </div>
   );
 };

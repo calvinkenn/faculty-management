@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import Sort from "../../../shared/components/Sort/Sort";
 
 import ApplicationList from "./ApplicationList";
 
 const Application = (props) => {
+  const [selectedFilter, setSelectedFilter] = useState(1);
 
-  return <ApplicationList list={props.pendingUserData} updatePendingUsers  = {props.updatePendingUsers}/>;
+  const handleChange = (event) => {
+    setSelectedFilter(event.target.value);
+  };
+
+  const sortedDataToShow = () => {
+    if (selectedFilter === 2) {
+      return "firstName";
+    }
+    if (selectedFilter === 3) {
+      return "lastName";
+    } else {
+      return "employeeNum";
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <Sort label={"Sort By"} onChange={handleChange} value={selectedFilter} />{" "}
+      <ApplicationList
+        list={props.pendingUserData}
+        updatePendingUsers={props.updatePendingUsers}
+        sortedData={sortedDataToShow()}
+      />
+    </React.Fragment>
+  );
 };
 
 export default Application;

@@ -86,6 +86,23 @@ const EducationalEdit = (props) => {
     setInputList([...inputList, { awards: "" }]);
   };
 
+  const sortLevel = () => {
+    if (formState.inputs.level.value === "Elementary") {
+      return "a";
+    } else if (formState.inputs.level.value === "Junior Highschool") {
+      return "b";
+    } else if (formState.inputs.level.value === "Senior HighSchool") {
+      return "c";
+    } else if (formState.inputs.level.value === "College") {
+      return "d";
+    } else if (formState.inputs.level.value === "Graduate Study") {
+      return "e";
+    }
+    return "f";
+  };
+
+  console.log(sortLevel());
+
   const submitAddHandler = async (event) => {
     //For Adding Data
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
@@ -107,6 +124,7 @@ const EducationalEdit = (props) => {
       "POST",
 
       JSON.stringify({
+        sorting: sortLevel(),
         level: formState.inputs.level.value,
         school: formState.inputs.school.value,
         degree: degreeValue,
@@ -139,6 +157,7 @@ const EducationalEdit = (props) => {
       "PATCH",
 
       JSON.stringify({
+        sorting: sortLevel(),
         level: formState.inputs.level.value,
         school: formState.inputs.school.value,
         degree: formState.inputs.degree.value,
@@ -255,11 +274,11 @@ const EducationalEdit = (props) => {
             </div>
             <div className="from-to-graduatedyear">
               <Input
-                element="input"
+                element="year"
                 id="fromDate"
                 type="number"
                 label="From - year"
-                validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+                validators={[VALIDATOR_MINLENGTH(4)]}
                 helperText="Please input the year it started"
                 onInput={inputHandler}
                 initialValue={formState.inputs.fromDate.value}
@@ -268,11 +287,11 @@ const EducationalEdit = (props) => {
               />
               <span />
               <Input
-                element="input"
+                element="year"
                 id="toDate"
-                type="text"
+                type="number"
                 label="To - year"
-                validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+                validators={[VALIDATOR_MINLENGTH(4)]}
                 helperText="Please input the year it ended"
                 onInput={inputHandler}
                 initialValue={formState.inputs.toDate.value}
@@ -281,11 +300,11 @@ const EducationalEdit = (props) => {
               />
               <span />
               <Input
-                element="input"
+                element="year"
                 id="yearGraduated"
-                type="text"
+                type="number"
                 label="Year Graduated"
-                validators={[VALIDATOR_REQUIRE()]}
+                validators={[VALIDATOR_MINLENGTH(4)]}
                 helperText="Please input the year graduated"
                 onInput={inputHandler}
                 initialValue={formState.inputs.yearGraduated.value}

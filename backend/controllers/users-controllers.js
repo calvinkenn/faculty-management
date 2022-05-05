@@ -422,6 +422,7 @@ const accountChangePassword = async (req, res, next) => {
 
 const addEducation = async (req, res, next) => {
   const {
+    sorting,
     level,
     school,
     degree,
@@ -442,6 +443,7 @@ const addEducation = async (req, res, next) => {
   let user = await User.findById(userId);
 
   const newEducation = new Education({
+    sorting,
     level,
     school,
     degree,
@@ -492,6 +494,7 @@ const updateEducation = async (req, res, next) => {
   }
 
   const {
+    sorting,
     level,
     school,
     degree,
@@ -505,6 +508,7 @@ const updateEducation = async (req, res, next) => {
   } = req.body;
 
   let updateEducation = await Education.findByIdAndUpdate(educId, {
+    sorting,
     level,
     school,
     degree,

@@ -5,7 +5,7 @@ import { Box, InputLabel, FormControl, Select, MenuItem } from "@mui/material";
 import OverviewList from "./OverviewList";
 
 const Overview = (props) => {
-  const [selectedFilter, setSelectedFilter] = React.useState(1);
+  const [selectedFilter, setSelectedFilter] = useState(1);
 
   const handleChange = (event) => {
     setSelectedFilter(event.target.value);

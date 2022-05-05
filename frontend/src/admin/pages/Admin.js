@@ -13,6 +13,7 @@ import TopActionBarAdmin from "../TopActionBarAdmin";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./Admin.css";
 import Reset from "../components/Reset/Reset";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 const menu = {
   overview: true,
   facultyMembers: false,
@@ -49,7 +50,8 @@ const Admin = (props) => {
     setSearchField("");
   };
 
-  const updateUsers = (userData, status) => { //prompt
+  const updateUsers = (userData, status) => {
+    //prompt
     setUpdatedStatus(status);
     // setActiveUserData(userData);
     // setPendingUserData(userData);
@@ -58,19 +60,19 @@ const Admin = (props) => {
     if (status === "accepted") {
       setSuccess("Account Activated");
       return;
-    } 
+    }
     if (status === "deactivated") {
       setSuccess("Account Deactivated");
       return;
-    } 
+    }
     if (status === "rejected") {
       setSuccess("Account Rejected");
       return;
-    } 
+    }
     if (status === "pending") {
       setSuccess("Account Pending");
       return;
-    } 
+    }
   };
 
   useEffect(() => {
@@ -278,6 +280,7 @@ const Admin = (props) => {
                 printMode={printModeHandler}
                 isPrintMode={isPrintMode}
               />
+              {isLoading && <LoadingSpinner asOverlay />}
               {isMenuActive.overview && (
                 <Overview
                   activeUserData={activeUserData}

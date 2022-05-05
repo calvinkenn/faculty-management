@@ -190,11 +190,11 @@ const WorkExperienceEdit = (props) => {
             </div>
             <div className="from-to-govt">
               <Input
-                element="input"
+                element="year"
                 id="fromDate"
                 type="number"
                 label="From - year"
-                validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+                validators={[VALIDATOR_MINLENGTH(4)]}
                 helperText="Please input valid year"
                 onInput={inputHandler}
                 initialValue={formState.inputs.fromDate.value}
@@ -203,11 +203,11 @@ const WorkExperienceEdit = (props) => {
               />
               <span />
               <Input
-                element="input"
+                element="year"
                 id="toDate"
                 type="number"
                 label="To - year"
-                validators={[VALIDATOR_MINLENGTH(4), VALIDATOR_MAXLENGTH(4)]}
+                validators={[VALIDATOR_MINLENGTH(4)]}
                 helperText="Please input valid year"
                 onInput={inputHandler}
                 initialValue={formState.inputs.toDate.value}

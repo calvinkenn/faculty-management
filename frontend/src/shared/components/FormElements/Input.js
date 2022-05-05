@@ -80,6 +80,25 @@ const Input = (props) => {
         inputProps={props.inputProps}
       />
     );
+  } else if (props.element === "year") {
+    element = (
+      <TextField
+        id={props.id}
+        helperText={
+          !inputState.isValid && inputState.isTouched ? props.helperText : ""
+        }
+        onChange={changeHandler}
+        onBlur={blurHandler}
+        type={props.type}
+        label={props.label}
+        variant={props.variant}
+        error={!inputState.isValid && inputState.isTouched}
+        value={Math.max(0, parseInt(inputState.value)).toString().slice(0, 4)}
+        disabled={props.disabled ? props.disabled : false}
+        required={props.required}
+        inputProps={props.inputProps}
+      />
+    );
   } else if (props.element === "select") {
     element = (
       <FormControl sx={{ minWidth: 150 }}>

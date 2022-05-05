@@ -9,21 +9,23 @@ const TrainingList = (props) => {
   }
   return (
     <div className="training-list">
-      {props.list?.map((training) => (
-        <TrainingItem
-          setUserData={props.setUserData}
-          setIsEditModeHandler={props.setIsEditModeHandler}
-          title={training.title}
-          type={training.type}
-          from={training.fromDate}
-          to={training.toDate}
-          certificatePic={training.certificatePic}
-          hours={training.hours}
-          typeOfLD={training.typeOfLearning}
-          conducted={training.conducted}
-          trainingId={training._id}
-        />
-      ))}
+      {props.list
+        ?.sort((a, b) => (a.fromDate < b.fromDate ? 1 : -1))
+        .map((training) => (
+          <TrainingItem
+            setUserData={props.setUserData}
+            setIsEditModeHandler={props.setIsEditModeHandler}
+            title={training.title}
+            type={training.type}
+            from={training.fromDate}
+            to={training.toDate}
+            certificatePic={training.certificatePic}
+            hours={training.hours}
+            typeOfLD={training.typeOfLearning}
+            conducted={training.conducted}
+            trainingId={training._id}
+          />
+        ))}
     </div>
   );
 };

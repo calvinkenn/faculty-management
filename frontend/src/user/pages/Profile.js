@@ -21,6 +21,7 @@ import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import AccountInfo from "../components/AccountInformation/AccountInfo";
 import AccountCircleRounded from "@mui/icons-material/AccountCircleRounded";
 import ProfileUpload from "../../shared/components/FormElements/ProfileUpload";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
 const menu = {
   overview: true,
@@ -34,7 +35,7 @@ const menu = {
 };
 
 const Profile = (props) => {
-  const { error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [isMenuActive, setIsMenuActive] = useState(menu);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAddMode, setIsAddMode] = useState(false);
@@ -310,6 +311,7 @@ const Profile = (props) => {
                 isAddMode={isAddMode}
                 isPrintMode={isPrintMode}
               />
+              {isLoading && <LoadingSpinner asOverlay />}
               {isMenuActive.overview && (
                 <Overview
                   userData={userData}

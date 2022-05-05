@@ -19,11 +19,11 @@ const NavLinks = (props) => {
           </NavLink>
         </li>
       )}
-      <li>
+      {/* <li>
         <NavLink to="/" exact>
           <NotificationsRoundedIcon sx={{ fontSize: 35, color: "#292929" }} />
         </NavLink>
-      </li>
+      </li> */}
       {auth.isLoggedIn && (
         <li>
           <button onClick={auth.logout}>

@@ -11,6 +11,10 @@ th {
   padding: 8px;
 }
 
+th:hover {
+  cursor: pointer;
+}
+
 tr:nth-child(even) {
   background-color: #dddddd;
 }

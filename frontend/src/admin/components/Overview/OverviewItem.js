@@ -4,6 +4,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Card from "../../../shared/components/UIElements/Card";
 import "../item.css";
+import icon from "../../../assets/Image/profile.png";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -70,25 +71,95 @@ const OverviewItem = (props) => {
 
   return (
     <Card>
-      <div>Total Accounts: {total}</div>
-      <div>Total Active Accounts: {props.totalActiveAccounts}</div>
-      <div>Total Deactivated Accounts: {props.totalDeactivatedAccounts}</div>
-      <div>Total Pending Accounts: {props.totalPendingAccounts}</div>
-      <div>Total Rejected Accounts: {props.totalRejectedAccounts}</div>
-      <div>Total BSIT Faculty Members: {props.totalBSIT}</div>
-      <div>Total BLIS Faculty Members: {props.totalBLIS}</div>
-      <div>Total ALLIED Faculty Members: {props.totalALLIED}</div>
-      <br />
-      <div className="chart">
-        <div>
-          TOTAL ACCOUNTS
-          <Doughnut data={totalAccounts} />
+      <div className="overview-acc-summary-cont">
+        <div className="chart">
+          <div className="chart-cont">
+            <h1>Total Accounts</h1>
+            <div className="doughnut-cont">
+              <Doughnut data={totalAccounts} />
+            </div>
+          </div>
+          <div className="chart-cont">
+            <h1>Total Faculty</h1>
+            <div className="doughnut-cont">
+              <Doughnut data={totalFaculty} />
+            </div>
+          </div>
         </div>
-        <div>
-          TOTAL FACULTY
-          <Doughnut data={totalFaculty} />
+        <div className="total-acc-summary-cont">
+          <div className="admin-overview-title-cont">
+            <div className="admin-title-blank"></div>
+            <div className="admin-title-text">
+              <h1>Account Summary</h1>
+            </div>
+          </div>
+          <div className="total-action-cont">
+            <div className="total-action-acc-cont">
+              <div className="container">
+                <div className="tot-acc-img-cont">
+                  <img src={icon} />
+                </div>
+                <div className="total-acc-text">
+                  <h1>{total}</h1>
+                  <h6>Total Accounts</h6>
+                </div>
+              </div>
+              <span />
+              <div className="container">
+                <div className="tot-acc-img-cont">
+                  <img src={icon} />
+                </div>
+                <div className="total-acc-text">
+                  <h1>{props.totalActiveAccounts}</h1>
+                  <h6>Active Accounts</h6>
+                </div>
+              </div>
+              <span />
+              <div className="container">
+                <div className="tot-acc-img-cont">
+                  <img src={icon} />
+                </div>
+                <div className="total-acc-text">
+                  <h1>{props.totalDeactivatedAccounts}</h1>
+                  <h6>Deactivated Account</h6>
+                </div>
+              </div>
+              <span />
+              <div className="container">
+                <div className="tot-acc-img-cont">
+                  <img src={icon} />
+                </div>
+                <div className="total-acc-text">
+                  <h1>{props.totalPendingAccounts}</h1>
+                  <h6>Pending Accounts</h6>
+                </div>
+              </div>
+              <span />
+              <div className="container">
+                <div className="tot-acc-img-cont">
+                  <img src={icon} />
+                </div>
+                <div className="total-acc-text">
+                  <h1>{props.totalRejectedAccounts}</h1>
+                  <h6>Rejected Accounts</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="admin-overview-title-cont">
+            <div className="admin-title-blank"></div>
+            <div className="admin-title-text">
+              <h1>Total Faculty Members</h1>
+            </div>
+          </div>
+          <div className="total-faculty-members-cont">
+            <div>Total BSIT Faculty Members: {props.totalBSIT}</div><span />
+            <div>Total BLIS Faculty Members: {props.totalBLIS}</div><span />
+            <div>Total ALLIED Faculty Members: {props.totalALLIED}</div>
+          </div>
         </div>
       </div>
+      
     </Card>
   );
 };

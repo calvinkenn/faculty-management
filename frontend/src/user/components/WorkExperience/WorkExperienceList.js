@@ -4,7 +4,7 @@ import WorkExperienceItem from "./WorkExperienceItem";
 import "./WorkExperienceList.css";
 
 const WorkExperienceList = (props) => {
-  if (props.items.length === 0) {
+  if (props.items?.length === 0) {
     return <div>No work experience/s found.</div>;
   }
   return (

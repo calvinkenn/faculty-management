@@ -4,7 +4,7 @@ import RejectedItem from "./RejectedItem";
 import "../list.css";
 
 const RejectedList = (props) => {
-  if (props.list.length === 0) {
+  if (props.list?.length === 0) {
     return <div>No rejected users found</div>;
   }
   return (

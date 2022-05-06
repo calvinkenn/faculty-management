@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
-import TrainingEdit from "./TrainingEdit";
-
-import TrainingList from "./TrainingList";
 import { Box, InputLabel, FormControl, Select, MenuItem } from "@mui/material";
+
+import Pagination from "../../../shared/components/Pagination/Pagination";
+import TrainingEdit from "./TrainingEdit";
+import TrainingList from "./TrainingList";
 
 const Training = (props) => {
   const [userData, setUserData] = useState([]);
   const [success, setSuccess] = useState();
   const [editData, setEditData] = useState();
   const [selectedFilter, setSelectedFilter] = useState(1);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const [currentItems, setCurrentItems] = useState(null);
 
   const getYear = () => {
     return new Date().getFullYear();
@@ -42,6 +46,25 @@ const Training = (props) => {
     setId(editData);
   };
 
+  let displayPerPage = 5;
+
+  useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + displayPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(filteredDataToShow?.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(filteredDataToShow?.length / displayPerPage));
+  }, [itemOffset, 5, filteredDataToShow?.length]);
+
+  const handlePageClick = (event) => {
+    const newOffset =
+      (event.selected * displayPerPage) % filteredDataToShow?.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
   if (props.isAddMode) {
     return (
       <TrainingEdit
@@ -62,7 +85,7 @@ const Training = (props) => {
   } else {
     return (
       <React.Fragment>
-        {filteredDataToShow?.length > 0 && (
+        {currentItems?.length > 0 && (
           <form>
             <Box sx={{ minWidth: 60 }}>
               <FormControl sx={{ m: 2, minWidth: 220 }}>
@@ -83,9 +106,17 @@ const Training = (props) => {
         )}
         <TrainingList
           setIsEditModeHandler={editModeHandler}
-          list={filteredDataToShow}
+          list={currentItems}
           setUserData={props.userUpdate}
         />
+        {currentItems?.length > 0 && (
+          <Pagination
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+          />
+        )}
       </React.Fragment>
     );
   }

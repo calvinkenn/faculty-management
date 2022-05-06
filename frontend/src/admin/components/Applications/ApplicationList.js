@@ -4,9 +4,10 @@ import ApplicationItem from "./ApplicationItem";
 import "../list.css";
 
 const ApplicationList = (props) => {
-  if (props.list.length === 0) {
+  if (props.list?.length === 0) {
     return <div>No pending users found</div>;
   }
+
   return (
     <div className="list">
       {props.list

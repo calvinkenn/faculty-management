@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import SuccessModal from "../../../shared/components/UIElements/SuccessModal";
 
+import Pagination from "../../../shared/components/Pagination/Pagination";
 import CivilServiceEdit from "./CivilServiceEdit";
 import CivilServiceList from "./CivilServiceList";
 
@@ -8,6 +8,9 @@ const CivilService = (props) => {
   const [userData, setUserData] = useState([]);
   const [success, setSuccess] = useState();
   const [editData, setEditData] = useState();
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const [currentItems, setCurrentItems] = useState(null);
 
   const clearSuccess = () => {
     setSuccess(null);
@@ -24,6 +27,25 @@ const CivilService = (props) => {
   const editModeHandler = (editData) => {
     props.updateEditModeState(true);
     setId(editData);
+  };
+
+  let displayPerPage = 5;
+
+  useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + displayPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(props.civilServiceData?.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(props.civilServiceData?.length / displayPerPage));
+  }, [itemOffset, 5, props.civilServiceData?.length]);
+
+  const handlePageClick = (event) => {
+    const newOffset =
+      (event.selected * displayPerPage) % props.civilServiceData?.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
   };
 
   if (props.isAddMode) {
@@ -49,9 +71,17 @@ const CivilService = (props) => {
         {/* <SuccessModal success={success} onClear={clearSuccess} /> */}
         <CivilServiceList
           setIsEditModeHandler={editModeHandler}
-          items={props.civilServiceData}
+          items={currentItems}
           setUserData={props.userUpdate}
         />
+        {currentItems?.length > 0 && (
+          <Pagination
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+          />
+        )}
       </React.Fragment>
     );
   }

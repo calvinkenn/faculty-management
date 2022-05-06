@@ -26,8 +26,6 @@ const Training = (props) => {
     }
   });
 
-  console.log(getYear());
-
   const clearSuccess = () => {
     setSuccess(null);
   };
@@ -64,23 +62,25 @@ const Training = (props) => {
   } else {
     return (
       <React.Fragment>
-        <form>
-          <Box sx={{ minWidth: 60 }}>
-            <FormControl sx={{ m: 2, minWidth: 220 }}>
-              <InputLabel id="inputData">Select Data to Print</InputLabel>
-              <Select
-                labelId="filter"
-                id="filter"
-                value={selectedFilter}
-                label="Select Data to Print"
-                onChange={handleChange}
-              >
-                <MenuItem value={1}>Display 5years or later</MenuItem>
-                <MenuItem value={2}>Display All</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </form>
+        {filteredDataToShow?.length > 0 && (
+          <form>
+            <Box sx={{ minWidth: 60 }}>
+              <FormControl sx={{ m: 2, minWidth: 220 }}>
+                <InputLabel id="inputData">Select Data to Print</InputLabel>
+                <Select
+                  labelId="filter"
+                  id="filter"
+                  value={selectedFilter}
+                  label="Select Data to Print"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={1}>Display 5years or later</MenuItem>
+                  <MenuItem value={2}>Display All</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </form>
+        )}
         <TrainingList
           setIsEditModeHandler={editModeHandler}
           list={filteredDataToShow}

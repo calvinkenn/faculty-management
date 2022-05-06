@@ -183,10 +183,10 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
-        switchModeHandler();
+        loginModeHandler();
       } catch (err) {}
     } else if (isResetMode) {
-      //code for signup
+      //code for reset
       try {
         const responseData = await sendRequest(
           "http://localhost:5000/api/users/reset",
@@ -198,7 +198,7 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
-        // switchModeHandler();
+        loginModeHandler();
       } catch (err) {}
     }
   };
@@ -243,7 +243,7 @@ const Auth = () => {
                     <Input
                       element="input"
                       id="employeeNum"
-                      type="text"
+                      type="number"
                       validators={[VALIDATOR_REQUIRE()]}
                       helperText="Please input your employee number."
                       onInput={inputHandler}

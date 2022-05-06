@@ -32,16 +32,27 @@ const PrintData = (props) => {
           <th onClick={() => requestSort("firstName")}>First Name</th>
           <th onClick={() => requestSort("middleName")}>Middle Name</th>
         </tr>
-        {items?.map((active) => (
+        {items?.length > 0 ? (
+          items?.map((active) => (
+            <tr>
+              <td>{active.employeeNum}</td>
+              <td>{active.email}</td>
+              <td>{active.faculty ? active.faculty : "N/A"}</td>
+              <td>{active.lastName}</td>
+              <td>{active.firstName}</td>
+              <td>{active.middleName ? active.middleName : "N/A"}</td>
+            </tr>
+          ))
+        ) : (
           <tr>
-            <td>{active.employeeNum}</td>
-            <td>{active.email}</td>
-            <td>{active.faculty}</td>
-            <td>{active.lastName}</td>
-            <td>{active.firstName}</td>
-            <td>{active.middleName}</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
+            <td>N/A</td>
           </tr>
-        ))}
+        )}
       </table>
     );
   };

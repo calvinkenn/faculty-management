@@ -65,51 +65,67 @@ const ContactInfoItem = (props) => {
     });
   }, []);
 
-  let regionNameR = regionDataR.map((item) => {
+  let regionNameR;
+  regionDataR.map((item) => {
     if (item.region_code === props.residentRegion) {
-      return item.region_name;
+      regionNameR = item.region_name;
+      return;
     }
   });
 
-  let provinceNameR = provinceDataR.map((item) => {
+  let provinceNameR;
+  provinceDataR.map((item) => {
     if (item.province_code === props.residentProvince) {
-      return item.province_name;
+      provinceNameR = item.province_name;
+      return;
     }
   });
 
-  let cityNameR = cityDataR.map((item) => {
+  let cityNameR;
+  cityDataR.map((item) => {
     if (item.city_code === props.residentCity) {
-      return item.city_name;
+      cityNameR = item.city_name;
+      return;
     }
   });
 
-  let barangayNameR = barangayDataR.map((item) => {
+  let barangayNameR;
+  barangayDataR.map((item) => {
     if (item.brgy_code === props.residentBarangay) {
-      return item.brgy_name;
+      barangayNameR = item.brgy_name;
+      return;
     }
   });
 
-  let regionNameP = regionDataP.map((item) => {
+  let regionNameP;
+  regionDataP.map((item) => {
     if (item.region_code === props.permanentRegion) {
-      return item.region_name;
+      regionNameP = item.region_name;
+      return;
     }
   });
 
-  let provinceNameP = provinceDataP.map((item) => {
+  let provinceNameP;
+  provinceDataP.map((item) => {
     if (item.province_code === props.permanentProvince) {
-      return item.province_name;
+      provinceNameP = item.province_name;
+      return;
     }
   });
 
-  let cityNameP = cityDataP.map((item) => {
+  let cityNameP;
+  cityDataP.map((item) => {
     if (item.city_code === props.permanentCity) {
-      return item.city_name;
+      cityNameP = item.city_name;
+      return;
     }
   });
 
-  let barangayNameP = barangayDataP.map((item) => {
+  let barangayNameP;
+  barangayDataP.map((item) => {
     if (item.brgy_code === props.permanentBarangay) {
-      return item.brgy_name;
+      barangayNameP = item.brgy_name;
+      return;
     }
   });
 
@@ -124,14 +140,21 @@ const ContactInfoItem = (props) => {
             </div>
           </div>
           <div className="resident-add-details-cont">
-            <div>House no.:{props.residentHouseNo}</div>
-            <div>Street:{props.residentStreet}</div>
-            <div>Location Type:{props.residentLocationType}</div>
-            <div>Region: {regionNameR}</div>
-            <div>Province:{provinceNameR}</div>
-            <div>City: {cityNameR}</div>
-            <div>Barangay: {barangayNameR}</div>
-            <div>Zip Code:{props.residentZip}</div>
+            <div>
+              House no.: {props.residentHouseNo ? props.residentHouseNo : "N/A"}
+            </div>
+            <div>
+              Street: {props.residentStreet ? props.residentStreet : "N/A"}
+            </div>
+            <div>
+              Location Type:
+              {props.residentLocationType ? props.residentLocationType : "N/A"}
+            </div>
+            <div>Region: {regionNameR ? regionNameR : "N/A"}</div>
+            <div>Province: {provinceNameR ? provinceNameR : "N/A"}</div>
+            <div>City: {cityNameR ? cityNameR : "N/A"}</div>
+            <div>Barangay: {barangayNameR ? barangayNameR : "N/A"}</div>
+            <div>Zip Code: {props.residentZip ? props.residentZip : "N/A"}</div>
           </div>
         </div>
         <div className="perma-add-cont">
@@ -142,14 +165,26 @@ const ContactInfoItem = (props) => {
             </div>
           </div>
           <div className="perma-details-cont">
-            <div>House no.:{props.permanentHouseNo}</div>
-            <div>Street:{props.permanentStreet}</div>
-            <div>Location Type:{props.permanentLocationType}</div>
-            <div>Region: {regionNameP}</div>
-            <div>Province:{provinceNameP}</div>
-            <div>City: {cityNameP}</div>
-            <div>Barangay: {barangayNameP}</div>
-            <div>Zip Code:{props.permanentZip}</div>
+            <div>
+              House no.:{" "}
+              {props.permanentHouseNo ? props.permanentHouseNo : "N/A"}
+            </div>
+            <div>
+              Street: {props.permanentStreet ? props.permanentStreet : "N/A"}
+            </div>
+            <div>
+              Location Type:{" "}
+              {props.permanentLocationType
+                ? props.permanentLocationType
+                : "N/A"}
+            </div>
+            <div>Region: {regionNameP ? regionNameP : "N/A"}</div>
+            <div>Province: {provinceNameP ? provinceNameP : "N/A"}</div>
+            <div>City: {cityNameP ? cityNameP : "N/A"}</div>
+            <div>Barangay: {barangayNameP ? barangayNameP : "N/A"}</div>
+            <div>
+              Zip Code: {props.permanentZip ? props.permanentZip : "N/A"}
+            </div>
           </div>
         </div>
         <div className="contact-info-cont">
@@ -160,9 +195,16 @@ const ContactInfoItem = (props) => {
             </div>
           </div>
           <div className="contact-details-cont">
-            <div>Telephone no.:{props.telephoneNum}</div>
-            <div>Cellphone no.:{props.cellphoneNum}</div>
-            <div>Alternate Email:{props.alternateEmail}</div>
+            <div>
+              Telephone no.: {props.telephoneNum ? props.telephoneNum : "N/A"}
+            </div>
+            <div>
+              Cellphone no.: {props.cellphoneNum ? props.cellphoneNum : "N/A"}
+            </div>
+            <div>
+              Alternate Email:{" "}
+              {props.alternateEmail ? props.alternateEmail : "N/A"}
+            </div>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
   weight: { type: String, default: "" },
   bloodType: { type: String, default: "" },
   citizenship: { type: String, default: "" },
-  birthday: { type: Date, default: Date.now },
+  birthday: { type: Date, default: "" },
   gssId: { type: String, default: "" },
   pagibigId: { type: String, default: "" },
   philHealthId: { type: String, default: "" },

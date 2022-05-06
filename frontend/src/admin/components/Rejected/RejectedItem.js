@@ -6,8 +6,7 @@ import Button from "../../../shared/components/FormElements/Button";
 import Card from "../../../shared/components/UIElements/Card";
 
 const RejectedItem = (props) => {
-  const { isLoading, error, success, sendRequest } =
-    useHttpClient();
+  const { isLoading, error, success, sendRequest } = useHttpClient();
   //handler for account approval
   const userApproveHandler = async (event) => {
     event.preventDefault();

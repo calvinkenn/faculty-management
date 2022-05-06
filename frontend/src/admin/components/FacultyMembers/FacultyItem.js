@@ -49,8 +49,10 @@ const FacultyItem = (props) => {
         <div>First Name: {props.firstName}</div>
         <div>Last Name: {props.lastName}</div>
         <div>Email: {props.email}</div>
-        <div>Faculty: {props.faculty}</div>
-        <div>Employment Type: {props.employmentType}</div>
+        <div>Faculty: {props.faculty ? props.faculty : "N/A"}</div>
+        <div>
+          Employment Type: {props.employmentType ? props.employmentType : "N/A"}
+        </div>
       </Link>
       <Button onClick={userDeactivateHandler}>Deactive Account</Button>
     </Card>

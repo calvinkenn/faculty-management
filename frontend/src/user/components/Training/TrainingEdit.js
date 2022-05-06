@@ -73,8 +73,14 @@ const TrainingEdit = (props) => {
       formData.append("token", storedData.token);
       formData.append("title", formState.inputs.title.value);
       formData.append("type", formState.inputs.type.value);
-      formData.append("fromDate", formState.inputs.fromDate.value);
-      formData.append("toDate", formState.inputs.toDate.value);
+      formData.append(
+        "fromDate",
+        fromDateVal instanceof Date ? fromDateVal.getFullYear() : fromDateVal
+      );
+      formData.append(
+        "toDate",
+        toDateVal instanceof Date ? toDateVal.getFullYear() : toDateVal
+      );
       formData.append("hours", formState.inputs.hours.value);
       formData.append("typeOfLearning", formState.inputs.typeOfLearning.value);
       formData.append("conducted", formState.inputs.conducted.value);
@@ -200,31 +206,31 @@ const TrainingEdit = (props) => {
               <div className="title-type">
                 <div className="training-title">
                   <Input
-                  element="input"
-                  id="title"
-                  type="text"
-                  label="Title"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  helperText="Please input the title"
-                  onInput={inputHandler}
-                  initialValue={formState.inputs.title.value}
-                  initialValid={formState.inputs.title.isValid}
-                  required
-                />
+                    element="input"
+                    id="title"
+                    type="text"
+                    label="Title"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    helperText="Please input the title"
+                    onInput={inputHandler}
+                    initialValue={formState.inputs.title.value}
+                    initialValid={formState.inputs.title.isValid}
+                    required
+                  />
                 </div>
                 <div className="training-type">
                   <Input
-                  element="input"
-                  id="type"
-                  type="text"
-                  label="Type"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  helperText="Please input the type"
-                  onInput={inputHandler}
-                  initialValue={formState.inputs.type.value}
-                  initialValid={formState.inputs.type.isValid}
-                  required
-                />
+                    element="input"
+                    id="type"
+                    type="text"
+                    label="Type"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    helperText="Please input the type"
+                    onInput={inputHandler}
+                    initialValue={formState.inputs.type.value}
+                    initialValid={formState.inputs.type.isValid}
+                    required
+                  />
                 </div>
               </div>
               <div className="training-time-hrs">
@@ -235,7 +241,9 @@ const TrainingEdit = (props) => {
                   onChange={(newValue) => {
                     setFromDateVal(newValue);
                   }}
-                  renderInput={(params) => <TextField {...params} helperText={null} />}
+                  renderInput={(params) => (
+                    <TextField {...params} helperText={null} />
+                  )}
                 />
                 <span />
                 <DatePicker
@@ -245,7 +253,9 @@ const TrainingEdit = (props) => {
                   onChange={(newValue) => {
                     setToDateVal(newValue);
                   }}
-                  renderInput={(params) => <TextField {...params} helperText={null} />}
+                  renderInput={(params) => (
+                    <TextField {...params} helperText={null} />
+                  )}
                 />
                 <span />
                 <Input
@@ -291,11 +301,11 @@ const TrainingEdit = (props) => {
             </div>
           </div>
           <div className="add-training-btn">
-                <Button inverse type="submit">
-                  {props.addingItem ? "Add" : "Save"}
-                </Button>
-              </div>
-        </div>  
+            <Button inverse type="submit">
+              {props.addingItem ? "Add" : "Save"}
+            </Button>
+          </div>
+        </div>
       </form>
     </React.Fragment>
   );

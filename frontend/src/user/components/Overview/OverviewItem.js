@@ -39,27 +39,35 @@ const OverviewItem = (props) => {
     });
   }, []);
 
-  let regionNameR = regionDataR.map((item) => {
+  let regionNameR;
+  regionDataR.map((item) => {
     if (item.region_code === props.region) {
-      return item.region_name;
+      regionNameR = item.region_name;
+      return;
     }
   });
 
-  let provinceNameR = provinceDataR.map((item) => {
+  let provinceNameR;
+  provinceDataR.map((item) => {
     if (item.province_code === props.province) {
-      return item.province_name;
+      provinceNameR = item.province_name;
+      return;
     }
   });
 
-  let cityNameR = cityDataR.map((item) => {
+  let cityNameR;
+  cityDataR.map((item) => {
     if (item.city_code === props.city) {
-      return item.city_name;
+      cityNameR = item.city_name;
+      return;
     }
   });
 
-  let barangayNameR = barangayDataR.map((item) => {
+  let barangayNameR;
+  barangayDataR.map((item) => {
     if (item.brgy_code === props.barangay) {
-      return item.brgy_name;
+      barangayNameR = item.brgy_name;
+      return;
     }
   });
 
@@ -75,14 +83,16 @@ const OverviewItem = (props) => {
           </div>
           <div>Employee Number: {props.employeeNumber}</div>
           <div>First Name: {props.firstName}</div>
-          <div>Middle Name: {props.middleName}</div>
+          <div>Middle Name: {props.middleName ? props.middleName : "N/A"}</div>
           <div>Last Name: {props.lastName}</div>
-          <div>Suffix Name: {props.suffixName}</div>
+          <div>Suffix Name: {props.suffixName ? props.suffixName : "N/A"}</div>
           <div>
-            Extension Name:
-            {props.extensionName?.map((extension) => (
-              <span> {extension.extensionName} </span>
-            ))}
+            Extension Name:{" "}
+            {props.extensionName > 0
+              ? props.extensionName?.map((extension) => (
+                  <span> {extension.extensionName} </span>
+                ))
+              : " N/A"}
           </div>
           <div>Email: {props.email}</div>
         </div>
@@ -94,16 +104,14 @@ const OverviewItem = (props) => {
               <h1>Resident Address</h1>
             </div>
           </div>
-          <div>House no.:{props.houseNo}</div>
-          <div>Street:{props.street}</div>
-          <div>
-            Type:{props.locationType === "1" ? "Subdivision" : "Village"}
-          </div>
-          <div>Region: {regionNameR}</div>
-          <div>Province:{provinceNameR}</div>
-          <div>City: {cityNameR}</div>
-          <div>Barangay: {barangayNameR}</div>
-          <div>Zip Code:{props.zip}</div>
+          <div>House no.: {props.houseNo ? props.houseNo : "N/A"}</div>
+          <div>Street: {props.street ? props.street : "N/A"}</div>
+          <div>Type:{props.locationType ? props.locationType : "N/A"}</div>
+          <div>Region: {regionNameR ? regionNameR : "N/A"}</div>
+          <div>Province:{provinceNameR ? provinceNameR : "N/A"}</div>
+          <div>City: {cityNameR ? cityNameR : "N/A"}</div>
+          <div>Barangay: {barangayNameR ? barangayNameR : "N/A"}</div>
+          <div>Zip Code: {props.zip ? props.zip : "N/A"}</div>
         </div>
 
         <div className="contact-info-cont">
@@ -113,9 +121,16 @@ const OverviewItem = (props) => {
               <h1>Contact Information</h1>
             </div>
           </div>
-          <div>Telephone no.:{props.telephoneNum}</div>
-          <div>Cellphone no.:{props.cellphoneNum}</div>
-          <div>Alternate Email:{props.alternateEmail}</div>
+          <div>
+            Telephone no.: {props.telephoneNum ? props.telephoneNum : "N/A"}
+          </div>
+          <div>
+            Cellphone no.: {props.cellphoneNum ? props.cellphoneNum : "N/A"}
+          </div>
+          <div>
+            Alternate Email:{" "}
+            {props.alternateEmail ? props.alternateEmail : "N/A"}
+          </div>
         </div>
       </div>
     </div>

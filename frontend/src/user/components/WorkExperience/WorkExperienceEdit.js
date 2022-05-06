@@ -75,8 +75,8 @@ const WorkExperienceEdit = (props) => {
         company: formState.inputs.company.value,
         position: formState.inputs.position.value,
         department: formState.inputs.department.value,
-        fromDate: formState.inputs.fromDate.value,
-        toDate: formState.inputs.toDate.value,
+        fromDate: fromDateVal.getFullYear(),
+        toDate: toDateVal.getFullYear(),
         monthlySalary: formState.inputs.monthlySalary.value,
         salaryGrade: formState.inputs.salaryGrade.value,
         salaryStep: formState.inputs.salaryStep.value,
@@ -232,12 +232,13 @@ const WorkExperienceEdit = (props) => {
                 id="government"
                 type="text"
                 label="Government"
-                items={["YES", "NO"]}
+                items={["Yes", "No"]}
                 validators={[VALIDATOR_OPTIONAL()]}
                 errorText="Invalid Email"
                 onInput={inputHandler}
                 initialValue={formState.inputs.government.value}
                 initialValid={formState.inputs.government.isValid}
+                required
               />
             </div>
             <div className="salary">

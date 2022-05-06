@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sort from "../../../shared/components/Sort/Sort";
 
+import Sort from "../../../shared/components/Sort/Sort";
 import ApplicationList from "./ApplicationList";
 
 const Application = (props) => {
@@ -23,7 +23,7 @@ const Application = (props) => {
 
   return (
     <React.Fragment>
-      <Sort label={"Sort By"} onChange={handleChange} value={selectedFilter} />{" "}
+      <Sort label={"Sort By"} onChange={handleChange} value={selectedFilter} />
       <ApplicationList
         list={props.pendingUserData}
         updatePendingUsers={props.updatePendingUsers}

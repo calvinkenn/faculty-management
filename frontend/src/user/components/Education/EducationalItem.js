@@ -105,20 +105,20 @@ const EducationalItem = (props) => {
               )}
               <div>Highest Level/ Units Earned: {props.highestLevel}</div>
               <div>
-                Awards:
-                {props.awards.map((award) => (
-                  <div>{award.awards}</div>
-                ))}
+                Awards:{" "}
+                {props.awards > 0
+                  ? props.awards.map((award) => <div>{award.awards}</div>)
+                  : "N/A"}
               </div>
             </div>
             <div className="educ-action-btn">
               {!userIdByParams && (
-              <div className="educational-container__actions">
-                <Button onClick={editModeHandler}>Edit</Button>
-                <Button danger onClick={showDeleteWarningHandler}>
-                  Delete
-                </Button>
-              </div>
+                <div className="educational-container__actions">
+                  <Button onClick={editModeHandler}>Edit</Button>
+                  <Button danger onClick={showDeleteWarningHandler}>
+                    Delete
+                  </Button>
+                </div>
               )}
             </div>
           </div>

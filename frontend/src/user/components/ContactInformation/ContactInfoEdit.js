@@ -360,7 +360,7 @@ const ContactInfoEdit = (props) => {
               <TextField
                 element="input"
                 id="houseNoR"
-                type="text"
+                type="number"
                 label="House no."
                 errorText="Invalid Email"
                 onChange={houseNoRHandler}

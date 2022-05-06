@@ -3,7 +3,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const civilScema = mongoose.Schema({
   career: { type: String, required: true },
-  rating: { type: String, required: true },
+  rating: { type: String },
   degree: { type: String },
   date: { type: Date, default: Date.now },
   placeOfExam: { type: String, required: true },

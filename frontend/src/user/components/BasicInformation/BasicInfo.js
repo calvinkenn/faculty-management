@@ -42,8 +42,16 @@ const BasicInfo = (props) => {
         email={props.userData.email}
         suffixName={props.userData.suffixName}
         extensionName={props.userData.extensionName}
-        bday={formatDate(props.userData.birthday.substring(0, 10))}
-        age={getAge(props.userData.birthday.substring(0, 10))}
+        bday={
+          props.userData.birthday
+            ? formatDate(props.userData.birthday.substring(0, 10))
+            : "N/A"
+        }
+        age={
+          props.userData.birthday
+            ? getAge(props.userData.birthday.substring(0, 10))
+            : "N/A"
+        }
         placeofBirth={props.userData.placeofBirth}
         gender={props.userData.gender}
         civilStatus={props.userData.civilStatus}

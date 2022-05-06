@@ -86,17 +86,20 @@ const CivilServiceItem = (props) => {
         <div className="civil-container__data">
           <div className="civ-service-title-cont">
             <div className="basic-title-blank"></div>
-              <div className="basic-title-text">
-                <h1>Career - {props.career}</h1>
-              </div>
+            <div className="basic-title-text">
+              <h1>Career - {props.career}</h1>
+            </div>
           </div>
           <div className="civ-service-details-cont">
             <div className="civ-service-details">
               <div>Career: {props.career}</div>
-              <div>Rating: {props.rating}</div>
+              <div>Rating: {props.rating ? props.rating : "N/A"}</div>
               <div>Date: {props.date}</div>
               <div>Place of Examination: {props.examPlace}</div>
-              <div>License Number: {props.licenseNumber}</div>
+              <div>
+                License Number:{" "}
+                {props.licenseNumber ? props.licenseNumber : "N/A"}
+              </div>
               <div>License Validity: {props.licenseValidity}</div>
             </div>
             <div className="civ-service-action-btn">

@@ -50,7 +50,9 @@ const BasicInfoEdit = (props) => {
         isValid: false,
       },
       bday: {
-        value: props.userEdit.birthday.substring(0, 10),
+        value: props.userEdit.birthday
+          ? props.userEdit.birthday.substring(0, 10)
+          : "",
         isValid: false,
       },
       placeofBirth: {

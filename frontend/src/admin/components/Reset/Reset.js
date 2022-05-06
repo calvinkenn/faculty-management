@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import Sort from "../../../shared/components/Sort/Sort";
 
+import Sort from "../../../shared/components/Sort/Sort";
+import Filter from "../../../shared/components/Filter/Filter";
 import ResetList from "./ResetList";
 
 const Reset = (props) => {
   const [selectedFilter, setSelectedFilter] = useState(1);
+  const [selectedFilterDisplay, setSelectedFilterDisplay] = useState(1);
 
   const handleChange = (event) => {
     setSelectedFilter(event.target.value);
@@ -21,14 +23,35 @@ const Reset = (props) => {
     }
   };
 
+  const filterDisplayHandler = (event) => {
+    setSelectedFilterDisplay(event.target.value);
+  };
+
+  const filteredDataToDisplay = props.deactivatedUserData?.filter((user) => {
+    if (selectedFilterDisplay === 2) {
+      return user.faculty.includes("BSIT");
+    } else if (selectedFilterDisplay === 3) {
+      return user.faculty.includes("BLIS");
+    } else if (selectedFilterDisplay === 4) {
+      return user.faculty.includes("ALLIED");
+    } else {
+      return user;
+    }
+  });
+
   return (
     <React.Fragment>
       <Sort label={"Sort By"} onChange={handleChange} value={selectedFilter} />
-      <ResetList
-        list={props.resetUserData}
-        updateResetUsers={props.updateResetUsers}
-        sortedData={sortedDataToShow()}
-      />
+      <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} />
+      {filteredDataToDisplay?.length > 0 ? (
+        <ResetList
+          list={props.resetUserData}
+          updateResetUsers={props.updateResetUsers}
+          sortedData={sortedDataToShow()}
+        />
+      ) : (
+        <h1>No Data to Display</h1>
+      )}
     </React.Fragment>
   );
 };

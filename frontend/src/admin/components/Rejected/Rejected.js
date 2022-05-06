@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sort from "../../../shared/components/Sort/Sort";
 
+import Sort from "../../../shared/components/Sort/Sort";
 import RejectedList from "./RejectedList";
 
 const Rejected = (props) => {

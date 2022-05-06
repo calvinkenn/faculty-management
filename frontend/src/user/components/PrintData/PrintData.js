@@ -86,51 +86,67 @@ const PrintData = (props) => {
     });
   }, []);
 
-  let regionNameR = regionDataR.map((item) => {
+  let regionNameR;
+  regionDataR.map((item) => {
     if (item.region_code === props.userData.regionR) {
-      return item.region_name;
+      regionNameR = item.region_name;
+      return;
     }
   });
 
-  let provinceNameR = provinceDataR.map((item) => {
+  let provinceNameR;
+  provinceDataR.map((item) => {
     if (item.province_code === props.userData.provinceR) {
-      return item.province_name;
+      provinceNameR = item.province_name;
+      return;
     }
   });
 
-  let cityNameR = cityDataR.map((item) => {
+  let cityNameR;
+  cityDataR.map((item) => {
     if (item.city_code === props.userData.cityR) {
-      return item.city_name;
+      cityNameR = item.city_name;
+      return;
     }
   });
 
-  let barangayNameR = barangayDataR.map((item) => {
+  let barangayNameR;
+  barangayDataR.map((item) => {
     if (item.brgy_code === props.userData.barangayR) {
-      return item.brgy_name;
+      barangayNameR = item.brgy_name;
+      return;
     }
   });
 
-  let regionNameP = regionDataP.map((item) => {
+  let regionNameP;
+  regionDataP.map((item) => {
     if (item.region_code === props.userData.regionP) {
-      return item.region_name;
+      regionNameP = item.region_name;
+      return;
     }
   });
 
-  let provinceNameP = provinceDataP.map((item) => {
+  let provinceNameP;
+  provinceDataP.map((item) => {
     if (item.province_code === props.userData.provinceP) {
-      return item.province_name;
+      provinceNameP = item.province_name;
+      return;
     }
   });
 
-  let cityNameP = cityDataP.map((item) => {
+  let cityNameP;
+  cityDataP.map((item) => {
     if (item.city_code === props.userData.cityP) {
-      return item.city_name;
+      cityNameP = item.city_name;
+      return;
     }
   });
 
-  let barangayNameP = barangayDataP.map((item) => {
+  let barangayNameP;
+  barangayDataP.map((item) => {
     if (item.brgy_code === props.userData.barangayP) {
-      return item.brgy_name;
+      barangayNameP = item.brgy_name;
+      return;
     }
   });
 
@@ -146,7 +162,7 @@ const PrintData = (props) => {
           </tr>
           <tr>
             <td>Surname</td>
-            <td>{props.userData.lastName}</td>
+            <td>{props.userData.lastName ? props.userData.lastName : "N/A"}</td>
           </tr>
           <tr>
             <td>First Name</td>
@@ -154,122 +170,160 @@ const PrintData = (props) => {
           </tr>
           <tr>
             <td>Middle Name</td>
-            <td>{props.userData.middleName}</td>
+            <td>
+              {props.userData.middleName ? props.userData.middleName : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>Suffix Name</td>
-            <td>{props.userData.suffixName}</td>
+            <td>
+              {props.userData.suffixName ? props.userData.suffixName : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>Extension Name</td>
             <td>
-              {props.userData.extensionName?.map((extension) => (
-                <span> {extension.extensionName} </span>
-              ))}
+              {props.userData.extensionName > 0
+                ? props.userData.extensionName?.map((extension) => (
+                    <span> {extension.extensionName} </span>
+                  ))
+                : "N/A"}
             </td>
           </tr>
           <tr>
             <td>Date of Birth</td>
-            <td>{formatDate(props.userData.birthday.substring(0, 10))}</td>
+            <td>
+              {props.userData.birthday
+                ? formatDate(props.userData.birthday.substring(0, 10))
+                : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>Sex</td>
-            <td>{props.userData.gender}</td>
+            <td>{props.userData.gender ? props.userData.gender : "N/A"}</td>
           </tr>
           <tr>
             <td>Civil Status</td>
-            <td>{props.userData.civilStatus}</td>
+            <td>
+              {props.userData.civilStatus ? props.userData.civilStatus : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>Height</td>
             <td>
-              {formatHeight(props.userData.height)}{" "}
-              {props.userData.height.indexOf(".") !== -1 ? "in" : "ft"}
+              {props.userData.height
+                ? formatHeight(props.userData.height)
+                : "N/A"}{" "}
+              {props.userData.height
+                ? props.userData.height.indexOf(".") !== -1
+                  ? "in"
+                  : "ft"
+                : ""}
             </td>
           </tr>
           <tr>
             <td>Weight</td>
-            <td>{props.userData.weight}</td>
+            <td>
+              {props.userData.weight ? props.userData.weight + "kg" : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>Blodtype</td>
-            <td>{props.userData.bloodType}</td>
+            <td>
+              {props.userData.bloodType ? props.userData.bloodType : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>GSS ID</td>
-            <td>{props.userData.gssId}</td>
+            <td>{props.userData.gssId ? props.userData.gssId : "N/A"}</td>
           </tr>
           <tr>
             <td>PAGIBIG ID</td>
-            <td>{props.userData.pagibigId}</td>
+            <td>
+              {props.userData.pagibigId ? props.userData.pagibigId : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>PHILHEALTH</td>
-            <td>{props.userData.philHealthId}</td>
+            <td>
+              {props.userData.philHealthId
+                ? props.userData.philHealthId
+                : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>SSS NO</td>
-            <td>{props.userData.sssNo}</td>
+            <td>{props.userData.sssNo ? props.userData.sssNo : "N/A"}</td>
           </tr>
           <tr>
             <td>TIN NO</td>
-            <td>{props.userData.tinNo}</td>
+            <td>{props.userData.tinNo ? props.userData.tinNo : "N/A"}</td>
           </tr>
           <tr>
             <td>Citizenship</td>
-            <td>{props.userData.citizenship}</td>
+            <td>
+              {props.userData.citizenship ? props.userData.citizenship : "N/A"}
+            </td>
           </tr>
           <tr>
             <td>Residential Address</td>
             <td>
-              House no.:{props.userData.houseNoR}
+              House no.:
+              {props.userData.houseNoR ? props.userData.houseNoR : "N/A"}
               <br />
-              Street:{props.userData.streetR}
+              Street:{props.userData.streetR ? props.userData.streetR : "N/A"}
               <br />
-              Subdivision:{props.userData.locationTypeR}
+              Subdivision:
+              {props.userData.locationTypeR
+                ? props.userData.locationTypeR
+                : "N/A"}
               <br />
-              Region: {regionNameR}
+              Region: {regionNameR ? regionNameR : "N/A"}
               <br />
-              Province:{provinceNameR}
+              Province:{provinceNameR ? provinceNameR : "N/A"}
               <br />
-              City: {cityNameR}
+              City: {cityNameR ? cityNameR : "N/A"}
               <br />
-              Barangay: {barangayNameR}
+              Barangay: {barangayNameR ? barangayNameR : "N/A"}
               <br />
-              Zip Code:{props.userData.zipR}
+              Zip Code:{props.userData.zipR ? props.userData.zipR : "N/A"}
             </td>
           </tr>
           <tr>
             <td>Permanent Address</td>
             <td>
-              House no.:{props.userData.houseNoP}
+              House no.:
+              {props.userData.houseNoP ? props.userData.houseNoP : "N/A"}
               <br />
-              Street:{props.userData.streetP}
+              Street:{props.userData.streetP ? props.userData.streetP : "N/A"}
               <br />
-              Subdivision:{props.userData.locationTypeP}
+              Subdivision:
+              {props.userData.locationTypeP
+                ? props.userData.locationTypeP
+                : "N/A"}
               <br />
-              Region: {regionNameP}
+              Region: {regionNameP ? regionNameP : "N/A"}
               <br />
-              Province:{provinceNameP}
+              Province:{provinceNameP ? provinceNameP : "N/A"}
               <br />
-              City: {cityNameP}
+              City: {cityNameP ? cityNameP : "N/A"}
               <br />
-              Barangay: {barangayNameP}
+              Barangay: {barangayNameP ? barangayNameP : "N/A"}
               <br />
-              Zip Code:{props.userData.zipP}
+              Zip Code:{props.userData.zipP ? props.userData.zipP : "N/A"}
             </td>
           </tr>
           <tr>
             <td>Telephone no.</td>
-            <td>{props.userData.telephoneNum}</td>
+            <td> {props.telephoneNum ? props.telephoneNum : "N/A"}</td>
           </tr>
           <tr>
             <td>Cellphone no.</td>
-            <td>{props.userData.cellphoneNum}</td>
+            <td>{props.cellphoneNum ? props.cellphoneNum : "N/A"}</td>
           </tr>
           <tr>
             <td>Alternate Email</td>
-            <td>{props.userData.alternateEmail}</td>
+            <td>{props.alternateEmail ? props.alternateEmail : "N/A"}</td>
           </tr>
           <tr>
             <th>II. Educational Background</th>
@@ -284,22 +338,35 @@ const PrintData = (props) => {
             <td>Year Graduated</td>
             <td>Scholarship/Academic Honors</td>
           </tr>
-          {props.educationData?.map((item) => (
+          {props.educationData?.length > 0 ? (
+            props.educationData?.map((item) => (
+              <tr>
+                <td>{item.level}</td>
+                <td>{item.school}</td>
+                <td>{item.degree}</td>
+                <td>{item.fromDate}</td>
+                <td>{item.toDate}</td>
+                <td>{item.highestLevel}</td>
+                <td>{item.yearGraduated}</td>
+                <td>
+                  {item.awards.map((award) => (
+                    <p>{award.awards}</p>
+                  ))}
+                </td>
+              </tr>
+            ))
+          ) : (
             <tr>
-              <td>{item.level}</td>
-              <td>{item.school}</td>
-              <td>{item.degree}</td>
-              <td>{item.fromDate}</td>
-              <td>{item.toDate}</td>
-              <td>{item.highestLevel}</td>
-              <td>{item.yearGraduated}</td>
-              <td>
-                {item.awards.map((award) => (
-                  <p>{award.awards}</p>
-                ))}
-              </td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
             </tr>
-          ))}
+          )}
           <tr>
             <th>III. Civil Service Eligibility</th>
           </tr>
@@ -311,16 +378,31 @@ const PrintData = (props) => {
             <td>License No.</td>
             <td>Date of Validity</td>
           </tr>
-          {props.civilServiceData?.map((item) => (
+          {props.civilServiceData?.length > 0 ? (
+            props.civilServiceData?.map((item) => (
+              <tr>
+                <td>{item.career}</td>
+                <td>{item.rating ? item.rating : "N/A"}</td>
+                <td>{formatDate(item.date.substring(0, 10))}</td>
+                <td>{item.placeOfExam}</td>
+                <td>{item.licenseNumber ? item.licenseNumber : "N/A"}</td>
+                <td>
+                  {item.licenseValidity
+                    ? formatDate(item.licenseValidity.substring(0, 10))
+                    : "N/A"}
+                </td>
+              </tr>
+            ))
+          ) : (
             <tr>
-              <td>{item.career}</td>
-              <td>{item.rating}</td>
-              <td>{formatDate(item.date.substring(0, 10))}</td>
-              <td>{item.placeOfExam}</td>
-              <td>{item.licenseNumber}</td>
-              <td>{formatDate(item.licenseValidity.substring(0, 10))}</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
             </tr>
-          ))}
+          )}
           <tr>
             <th>IV. Work Experience</th>
           </tr>
@@ -333,19 +415,31 @@ const PrintData = (props) => {
             <td>Salary Grade/Salary Step</td>
             <td>Gov't Service</td>
           </tr>
-          {props.workData?.map((item) => (
+          {props.workData?.length > 0 ? (
+            props.workData?.map((item) => (
+              <tr>
+                <td>{item.fromDate}</td>
+                <td>{item.toDate}</td>
+                <td>{item.position}</td>
+                <td>{item.department}</td>
+                <td>&#8369;{item.monthlySalary}</td>
+                <td>
+                  {item.salaryGrade}-{item.salaryStep}
+                </td>
+                <td>{item.government}</td>
+              </tr>
+            ))
+          ) : (
             <tr>
-              <td>{item.fromDate}</td>
-              <td>{item.toDate}</td>
-              <td>{item.position}</td>
-              <td>{item.department}</td>
-              <td>&#8369;{item.monthlySalary}</td>
-              <td>
-                {item.salaryGrade}-{item.salaryStep}
-              </td>
-              <td>{item.government}</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
             </tr>
-          ))}
+          )}
           <tr>
             <th>
               V. LEARNING AND DEVELOPMENT (L{"&"}D) INTERVENTIONS/TRAINING
@@ -360,16 +454,27 @@ const PrintData = (props) => {
             <td>Type of LD</td>
             <td>Conducted/Sponsored By</td>
           </tr>
-          {props.trainingData?.map((item) => (
+          {props.trainingData > 0 ? (
+            props.trainingData?.map((item) => (
+              <tr>
+                <td>{item.title}</td>
+                <td>{item.fromDate}</td>
+                <td>{item.toDate}</td>
+                <td>{item.hours}</td>
+                <td>{item.typeOfLearning}</td>
+                <td>{item.conducted}</td>
+              </tr>
+            ))
+          ) : (
             <tr>
-              <td>{item.title}</td>
-              <td>{item.fromDate}</td>
-              <td>{item.toDate}</td>
-              <td>{item.hours}</td>
-              <td>{item.typeOfLearning}</td>
-              <td>{item.conducted}</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
+              <td>N/A</td>
             </tr>
-          ))}
+          )}
         </table>
       </div>
     );

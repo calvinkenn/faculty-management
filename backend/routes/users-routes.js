@@ -263,10 +263,10 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("Please specify your civil service career!"),
-    check("rating")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your civil service rating!"),
+    // check("rating")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Please specify your civil service rating!"),
     check("placeOfExam")
       .not()
       .isEmpty()
@@ -286,10 +286,10 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("Please specify your civil service career!"),
-    check("rating")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your civil service rating!"),
+    // check("rating")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Please specify your civil service rating!"),
     check("placeOfExam")
       .not()
       .isEmpty()

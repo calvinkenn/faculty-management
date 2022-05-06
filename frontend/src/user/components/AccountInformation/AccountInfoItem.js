@@ -14,16 +14,6 @@ const AccountInfoItem = (props) => {
   return (
     <div className="account-container">
       <div className="account-container__data">
-        {/* <div className="account-container__image">
-          <img
-            src={
-              props.profilePic !== ""
-                ? `http://localhost:5000/${props.profilePic}`
-                : profilePic
-            }
-            alt="profile-pic"
-          />
-        </div> */}
         <div className="employment-acc-info-cont">
           <div className="employment-info-title-cont">
             <div className="basic-title-blank"></div>
@@ -33,8 +23,11 @@ const AccountInfoItem = (props) => {
           </div>
           <div className="employment-detail-cont">
             <div>Employee Number: {props.employeeNum}</div>
-            <div>Faculty: {props.faculty}</div>
-            <div>Employment Type: {props.employmentType}</div>
+            <div>Faculty: {props.faculty ? props.faculty : "N/A"}</div>
+            <div>
+              Employment Type:{" "}
+              {props.employmentType ? props.employmentType : "N/A"}
+            </div>
           </div>
         </div>
         <div className="account-info-cont">

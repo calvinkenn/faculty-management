@@ -21,14 +21,18 @@ const BasicInfoItem = (props) => {
           </div>
           <div className="name-detail-cont">
             <div>First Name: {props.firstName}</div>
-            <div>Middle Name: {props.middleName}</div>
+            <div>Middle Name: {props.middleName ? props.middleName : "N/A"}</div>
             <div>Last Name: {props.lastName}</div>
-            <div>Suffix Name:{props.suffixName}</div>
             <div>
-                Extension Name:
-                {props.extensionName?.map((extension) => (
-                  <span> {extension.extensionName} </span>
-                ))}
+              Suffix Name: {props.suffixName ? props.suffixName : "N/A"}
+            </div>
+            <div>
+              Extension Name:
+              {props.extensionName > 0
+                ? props.extensionName?.map((extension) => (
+                    <span> {extension.extensionName} </span>
+                  ))
+                : " N/A"}
             </div>
           </div>
         </div>
@@ -41,18 +45,28 @@ const BasicInfoItem = (props) => {
             </div>
           </div>
           <div className="personal-info-detail-cont">
-            <div>Birthday:{props.bday}</div>
-            <div>Age:{props.age} years old</div>
-            <div>Place of Birth:{props.placeofBirth}</div>
-            <div>Citizenship:{props.citizenship}</div>
-            <div>Gender:{props.gender}</div>
-            <div>Civil Status:{props.civilStatus}</div>
+            <div>Birthday: {props.bday ? props.bday : "N/A"}</div>
+            <div>Age: {props.age > 0 ? props.age + " years old" : "N/A"}</div>
             <div>
-              Height:{formatHeight(props.height)}{" "}
-              {props.height.indexOf(".") !== -1 ? "in" : "ft"}
+              Place of Birth: {props.placeofBirth ? props.placeofBirth : "N/A"}
             </div>
-            <div>Weight:{props.weight} kg</div>
-            <div>Bloodtype:{props.bloodType}</div>
+            <div>
+              Citizenship: {props.citizenship ? props.citizenship : "N/A"}
+            </div>
+            <div>Gender: {props.gender ? props.gender : "N/A"}</div>
+            <div>
+              Civil Status: {props.civilStatus ? props.civilStatus : "N/A"}
+            </div>
+            <div>
+              Height: {props.height ? formatHeight(props.height) : "N/A"}
+              {props.height !== ""
+                ? props.height.indexOf(".") !== -1
+                  ? "in"
+                  : "ft"
+                : ""}
+            </div>
+            <div>Weight: {props.weight ? props.weight + "kg" : "N/A"}</div>
+            <div>Bloodtype: {props.bloodType ? props.bloodType : "N/A"}</div>
           </div>
         </div>
         <div className="government-id-cont">
@@ -63,11 +77,13 @@ const BasicInfoItem = (props) => {
             </div>
           </div>
           <div className="gov-id-detail-cont">
-            <div>GSS ID:{props.gssId}</div>
-            <div>PAGIBIG ID:{props.pagibigId}</div>
-            <div>PHILHEALTH:{props.philHealthId}</div>
-            <div>SSS NO:{props.sssNo}</div>
-            <div>TIN NO:{props.tinNo}</div>
+            <div>GSS ID: {props.gssId ? props.gssId : "N/A"}</div>
+            <div>PAGIBIG ID: {props.pagibigId ? props.pagibigId : "N/A"}</div>
+            <div>
+              PHILHEALTH: {props.philHealthId ? props.philHealthId : "N/A"}
+            </div>
+            <div>SSS NO: {props.sssNo ? props.sssNo : "N/A"}</div>
+            <div>TIN NO: {props.tinNo ? props.tinNo : "N/A"}</div>
           </div>
         </div>
       </div>

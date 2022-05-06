@@ -98,7 +98,10 @@ const WorkExperienceItem = (props) => {
               <div>To: {props.toDate}</div>
               <div>Monthly Salary: &#8369;{props.monthlySalary}</div>
               <div>
-                Salary Grade: {props.salaryGrade}-{props.salaryStep}
+                Salary Grade:{" "}
+                {props.salaryGrade && props.salaryStep
+                  ? props.salaryGrade - props.salaryStep
+                  : "N/A"}
               </div>
               <div>Government: {props.government}</div>
             </div>
@@ -114,7 +117,6 @@ const WorkExperienceItem = (props) => {
             </div>
           </div>
         </div>
-        
       </div>
     </React.Fragment>
   );

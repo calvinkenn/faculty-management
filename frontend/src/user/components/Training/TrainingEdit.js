@@ -175,99 +175,127 @@ const TrainingEdit = (props) => {
         onClear={inputError ? clearInputError : clearError}
       />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
-        <ImageUpload
-          center
-          id="certificatePic"
-          onInput={inputHandler}
-          previewUrl={
-            props.editData
-              ? props.editData.certificatePic
-              : formState.inputs.certificatePic.value
-          }
-          isEditMode={!props.addingItem}
-        />
-        <Input
-          element="input"
-          id="title"
-          type="text"
-          label="Title"
-          validators={[VALIDATOR_REQUIRE()]}
-          helperText="Please input the title"
-          onInput={inputHandler}
-          initialValue={formState.inputs.title.value}
-          initialValid={formState.inputs.title.isValid}
-          required
-        />
-        <Input
-          element="input"
-          id="type"
-          type="text"
-          label="Type"
-          validators={[VALIDATOR_REQUIRE()]}
-          helperText="Please input the type"
-          onInput={inputHandler}
-          initialValue={formState.inputs.type.value}
-          initialValid={formState.inputs.type.isValid}
-          required
-        />
-        <DatePicker
-          views={["year"]}
-          label="Select Year Started"
-          value={fromDateVal}
-          onChange={(newValue) => {
-            setFromDateVal(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} helperText={null} />}
-        />
-        <span />
-        <DatePicker
-          views={["year"]}
-          label="Select Year Ended"
-          value={toDateVal}
-          onChange={(newValue) => {
-            setToDateVal(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} helperText={null} />}
-        />
-        <Input
-          element="input"
-          id="hours"
-          type="number"
-          label="No. of Hours"
-          validators={[VALIDATOR_REQUIRE()]}
-          helperText="Please input the number of hours to complete"
-          onInput={inputHandler}
-          initialValue={formState.inputs.hours.value}
-          initialValid={formState.inputs.hours.isValid}
-          required
-        />
-        <Input
-          element="input"
-          id="typeOfLearning"
-          type="text"
-          label="Type of Learning"
-          validators={[VALIDATOR_REQUIRE()]}
-          helperText="Please input the type of learning"
-          onInput={inputHandler}
-          initialValue={formState.inputs.typeOfLearning.value}
-          initialValid={formState.inputs.typeOfLearning.isValid}
-          required
-        />
-        <Input
-          element="input"
-          id="conducted"
-          type="text"
-          label="Conducted/Sponsored"
-          validators={[VALIDATOR_REQUIRE()]}
-          helperText="Please input who conducted/sponsored"
-          onInput={inputHandler}
-          initialValue={formState.inputs.conducted.value}
-          initialValid={formState.inputs.conducted.isValid}
-          required
-        />
-        <Button inverse type="submit">
-          {props.addingItem ? "Add" : "Save"}
-        </Button>
+        <div className="training-edit-cont">
+          <div className="name-info-title-cont">
+            <div className="basic-title-blank"></div>
+            <div className="basic-title-text">
+              <h1>Training and Seminars</h1>
+            </div>
+          </div>
+          <div className="trainings-add-cont">
+            <div className="training-cert-upload-cont">
+              <ImageUpload
+                center
+                id="certificatePic"
+                onInput={inputHandler}
+                previewUrl={
+                  props.editData
+                    ? props.editData.certificatePic
+                    : formState.inputs.certificatePic.value
+                }
+                isEditMode={!props.addingItem}
+              />
+            </div>
+            <div className="training-add-details-cont">
+              <div className="title-type">
+                <div className="training-title">
+                  <Input
+                  element="input"
+                  id="title"
+                  type="text"
+                  label="Title"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input the title"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.title.value}
+                  initialValid={formState.inputs.title.isValid}
+                  required
+                />
+                </div>
+                <div className="training-type">
+                  <Input
+                  element="input"
+                  id="type"
+                  type="text"
+                  label="Type"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input the type"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.type.value}
+                  initialValid={formState.inputs.type.isValid}
+                  required
+                />
+                </div>
+              </div>
+              <div className="training-time-hrs">
+                <DatePicker
+                  views={["year"]}
+                  label="Select Year Started"
+                  value={fromDateVal}
+                  onChange={(newValue) => {
+                    setFromDateVal(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} helperText={null} />}
+                />
+                <span />
+                <DatePicker
+                  views={["year"]}
+                  label="Select Year Ended"
+                  value={toDateVal}
+                  onChange={(newValue) => {
+                    setToDateVal(newValue);
+                  }}
+                  renderInput={(params) => <TextField {...params} helperText={null} />}
+                />
+                <span />
+                <Input
+                  element="input"
+                  id="hours"
+                  type="number"
+                  label="No. of Hours"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input the number of hours to complete"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.hours.value}
+                  initialValid={formState.inputs.hours.isValid}
+                  required
+                />
+              </div>
+              <div className="type-conduct">
+                <Input
+                  element="input"
+                  id="typeOfLearning"
+                  type="text"
+                  label="Type of Learning"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input the type of learning"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.typeOfLearning.value}
+                  initialValid={formState.inputs.typeOfLearning.isValid}
+                  required
+                />
+                <span />
+                <Input
+                  element="input"
+                  id="conducted"
+                  type="text"
+                  label="Conducted/Sponsored"
+                  validators={[VALIDATOR_REQUIRE()]}
+                  helperText="Please input who conducted/sponsored"
+                  onInput={inputHandler}
+                  initialValue={formState.inputs.conducted.value}
+                  initialValid={formState.inputs.conducted.isValid}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div className="add-training-btn">
+                <Button inverse type="submit">
+                  {props.addingItem ? "Add" : "Save"}
+                </Button>
+              </div>
+        </div>  
       </form>
     </React.Fragment>
   );

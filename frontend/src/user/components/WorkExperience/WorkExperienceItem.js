@@ -61,6 +61,10 @@ const WorkExperienceItem = (props) => {
     props.setUserData(getUserWork.WorkExperience, responseData.message);
   };
 
+  let salarySep = (s) => {
+    return s.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <React.Fragment>
       <Modal
@@ -96,7 +100,7 @@ const WorkExperienceItem = (props) => {
               <div>Department: {props.department}</div>
               <div>From: {props.fromDate}</div>
               <div>To: {props.toDate}</div>
-              <div>Monthly Salary: &#8369;{props.monthlySalary}</div>
+              <div>Monthly Salary: &#8369;{salarySep(props.monthlySalary)}</div>
               <div>
                 Salary Grade:{" "}
                 {props.salaryGrade && props.salaryStep

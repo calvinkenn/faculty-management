@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Button from "../../../shared/components/FormElements/Button";
+import TextField from "@mui/material/TextField";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
+import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import { useForm } from "../../../shared/hooks/form-hook";
 import {
@@ -17,6 +19,8 @@ const WorkExperienceEdit = (props) => {
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
   const [yearError, setYearError] = useState();
+  const [fromDateVal, setFromDateVal] = useState(new Date());
+  const [toDateVal, setToDateVal] = useState(new Date());
   const [formState, inputHandler, setFormData] = useForm(
     {
       company: {
@@ -29,14 +33,6 @@ const WorkExperienceEdit = (props) => {
       },
       department: {
         value: props.editData ? props.editData.department : "",
-        isValid: false,
-      },
-      fromDate: {
-        value: props.editData ? props.editData.fromDate : "",
-        isValid: false,
-      },
-      toDate: {
-        value: props.editData ? props.editData.toDate : "",
         isValid: false,
       },
       monthlySalary: {
@@ -67,7 +63,7 @@ const WorkExperienceEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
-    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+    if (fromDateVal.getFullYear() > toDateVal.getFullYear()) {
       setYearError("Please input a valid time period. From - To period");
       return;
     }
@@ -99,8 +95,18 @@ const WorkExperienceEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
-    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
-      setYearError("Please input a valid time period. From - To period");
+    let fromChecker = fromDateVal;
+    let toChecker = toDateVal;
+    if (fromDateVal instanceof Date) {
+      fromChecker = fromDateVal.getFullYear();
+    }
+    if (toDateVal instanceof Date) {
+      toChecker = toDateVal.getFullYear();
+    }
+    if (fromChecker > toChecker) {
+      setYearError(
+        "Please input a valid time period. Year started to Year ended"
+      );
       return;
     }
 
@@ -112,8 +118,9 @@ const WorkExperienceEdit = (props) => {
         company: formState.inputs.company.value,
         position: formState.inputs.position.value,
         department: formState.inputs.department.value,
-        fromDate: formState.inputs.fromDate.value,
-        toDate: formState.inputs.toDate.value,
+        fromDate:
+          fromDateVal instanceof Date ? fromDateVal.getFullYear() : fromDateVal,
+        toDate: toDateVal instanceof Date ? toDateVal.getFullYear() : toDateVal,
         monthlySalary: formState.inputs.monthlySalary.value,
         salaryGrade: formState.inputs.salaryGrade.value,
         salaryStep: formState.inputs.salaryStep.value,
@@ -125,12 +132,19 @@ const WorkExperienceEdit = (props) => {
       { "Content-Type": "application/json" }
     );
     props.setUserData(responseData.userWork, responseData.message);
-    props.updateAddModeState();
+    // props.updateAddModeState();
   };
 
   const clearYearError = () => {
     setYearError("");
   };
+
+  useEffect(() => {
+    if (props.editData) {
+      setFromDateVal(props.editData.fromDate);
+      setToDateVal(props.editData.toDate);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -189,30 +203,28 @@ const WorkExperienceEdit = (props) => {
               />
             </div>
             <div className="from-to-govt">
-              <Input
-                element="year"
-                id="fromDate"
-                type="number"
-                label="From - year"
-                validators={[VALIDATOR_MINLENGTH(4)]}
-                helperText="Please input valid year"
-                onInput={inputHandler}
-                initialValue={formState.inputs.fromDate.value}
-                initialValid={formState.inputs.fromDate.isValid}
-                required
+              <DatePicker
+                views={["year"]}
+                label="Select Year Started"
+                value={fromDateVal}
+                onChange={(newValue) => {
+                  setFromDateVal(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
               />
               <span />
-              <Input
-                element="year"
-                id="toDate"
-                type="number"
-                label="To - year"
-                validators={[VALIDATOR_MINLENGTH(4)]}
-                helperText="Please input valid year"
-                onInput={inputHandler}
-                initialValue={formState.inputs.toDate.value}
-                initialValid={formState.inputs.toDate.isValid}
-                required
+              <DatePicker
+                views={["year"]}
+                label="Select Year Ended"
+                value={toDateVal}
+                onChange={(newValue) => {
+                  setToDateVal(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
               />
               <span />
               <Input

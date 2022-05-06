@@ -1,7 +1,8 @@
-import { TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Button from "../../../shared/components/FormElements/Button";
+import TextField from "@mui/material/TextField";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
+import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import { useForm } from "../../../shared/hooks/form-hook";
 import {
@@ -17,6 +18,9 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const EducationalEdit = (props) => {
   const [inputList, setInputList] = useState([{ awards: "" }]);
   const [yearError, setYearError] = useState();
+  const [fromDateVal, setFromDateVal] = useState(new Date());
+  const [toDateVal, setToDateVal] = useState(new Date());
+  const [yearGraduated, setYearGraduated] = useState(new Date());
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
   let degree;
@@ -41,22 +45,22 @@ const EducationalEdit = (props) => {
         value: props.editData ? props.editData.degree : "",
         isValid: false,
       },
-      fromDate: {
-        value: props.editData ? props.editData.fromDate : "",
-        isValid: false,
-      },
-      toDate: {
-        value: props.editData ? props.editData.toDate : "",
-        isValid: false,
-      },
+      // fromDate: {
+      //   value: props.editData ? props.editData.fromDate : "",
+      //   isValid: false,
+      // },
+      // toDate: {
+      //   value: props.editData ? props.editData.toDate : "",
+      //   isValid: false,
+      // },
       highestLevel: {
         value: props.editData ? props.editData.highestLevel : "",
         isValid: false,
       },
-      yearGraduated: {
-        value: props.editData ? props.editData.yearGraduated : "",
-        isValid: false,
-      },
+      // yearGraduated: {
+      //   value: props.editData ? props.editData.yearGraduated : "",
+      //   isValid: false,
+      // },
       awards: {
         value: inputList.length > 1 ? inputList : "",
         isValid: false,
@@ -101,14 +105,12 @@ const EducationalEdit = (props) => {
     return "f";
   };
 
-  console.log(sortLevel());
-
   const submitAddHandler = async (event) => {
     //For Adding Data
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     event.preventDefault();
 
-    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+    if (fromDateVal.getFullYear() > toDateVal.getFullYear()) {
       setYearError("Please input a valid time period. From - To period");
       return;
     }
@@ -128,10 +130,10 @@ const EducationalEdit = (props) => {
         level: formState.inputs.level.value,
         school: formState.inputs.school.value,
         degree: degreeValue,
-        fromDate: formState.inputs.fromDate.value,
-        toDate: formState.inputs.toDate.value,
+        fromDate: fromDateVal.getFullYear(),
+        toDate: toDateVal.getFullYear(),
         awards: inputList,
-        yearGraduated: formState.inputs.yearGraduated.value,
+        yearGraduated: yearGraduated.getFullYear,
         highestLevel: formState.inputs.highestLevel.value,
         userId: storedData.userId,
         token: storedData.token,
@@ -139,7 +141,7 @@ const EducationalEdit = (props) => {
       { "Content-Type": "application/json" }
     );
     props.setUserData(responseData.userEducation, responseData.message);
-    props.updateAddModeState();
+    // props.updateAddModeState();
   };
 
   const submitEditHandler = async (event) => {
@@ -147,8 +149,18 @@ const EducationalEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
-    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
-      setYearError("Please input a valid time period. From - To period");
+    let fromChecker = fromDateVal;
+    let toChecker = toDateVal;
+    if (fromDateVal instanceof Date) {
+      fromChecker = fromDateVal.getFullYear();
+    }
+    if (toDateVal instanceof Date) {
+      toChecker = toDateVal.getFullYear();
+    }
+    if (fromChecker > toChecker) {
+      setYearError(
+        "Please input a valid time period. Year started to Year ended"
+      );
       return;
     }
 
@@ -161,10 +173,14 @@ const EducationalEdit = (props) => {
         level: formState.inputs.level.value,
         school: formState.inputs.school.value,
         degree: formState.inputs.degree.value,
-        fromDate: formState.inputs.fromDate.value,
-        toDate: formState.inputs.toDate.value,
+        fromDate:
+          fromDateVal instanceof Date ? fromDateVal.getFullYear() : fromDateVal,
+        toDate: toDateVal instanceof Date ? toDateVal.getFullYear() : toDateVal,
         awards: inputList,
-        yearGraduated: formState.inputs.yearGraduated.value,
+        yearGraduated:
+          yearGraduated instanceof Date
+            ? yearGraduated.getFullYear()
+            : yearGraduated,
         highestLevel: formState.inputs.highestLevel.value,
         educId: props.editData._id,
         userId: storedData.userId,
@@ -173,7 +189,7 @@ const EducationalEdit = (props) => {
       { "Content-Type": "application/json" }
     );
     props.setUserData(responseData.userEducation, responseData.message);
-    props.updateAddModeState();
+    // props.updateAddModeState();
   };
 
   if (
@@ -189,6 +205,14 @@ const EducationalEdit = (props) => {
   const clearYearError = () => {
     setYearError("");
   };
+
+  useEffect(() => {
+    if (props.editData) {
+      setFromDateVal(props.editData.fromDate);
+      setToDateVal(props.editData.toDate);
+      setYearGraduated(props.editData.yearGraduated);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -273,7 +297,29 @@ const EducationalEdit = (props) => {
               </div>
             </div>
             <div className="from-to-graduatedyear">
-              <Input
+              <DatePicker
+                views={["year"]}
+                label="Select Year Started"
+                value={fromDateVal}
+                onChange={(newValue) => {
+                  setFromDateVal(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+              <DatePicker
+                views={["year"]}
+                label="Select Year Ended"
+                value={toDateVal}
+                onChange={(newValue) => {
+                  setToDateVal(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+              {/* <Input
                 element="year"
                 id="fromDate"
                 type="number"
@@ -297,9 +343,20 @@ const EducationalEdit = (props) => {
                 initialValue={formState.inputs.toDate.value}
                 initialValid={formState.inputs.toDate.isValid}
                 required
-              />
+              /> */}
               <span />
-              <Input
+              <DatePicker
+                views={["year"]}
+                label="Select Year Graduated"
+                value={yearGraduated}
+                onChange={(newValue) => {
+                  setYearGraduated(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
+              {/* <Input
                 element="year"
                 id="yearGraduated"
                 type="number"
@@ -310,7 +367,7 @@ const EducationalEdit = (props) => {
                 initialValue={formState.inputs.yearGraduated.value}
                 initialValid={formState.inputs.yearGraduated.isValid}
                 required
-              />
+              /> */}
             </div>
             <div className="acad-honor">
               {inputList.map((x, i) => {

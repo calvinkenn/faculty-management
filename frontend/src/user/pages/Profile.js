@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import Modal from "../../shared/components/UIElements/Modal";
 import Button from "../../shared/components/FormElements/Button";
@@ -15,11 +17,9 @@ import Training from "../components/Training/Training";
 import "./Profile.css";
 import TopActionBar from "../components/TopActionBar";
 import ContactInfo from "../components/ContactInformation/ContactInfo";
-import { AuthContext } from "../../shared/context/auth-context";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import AccountInfo from "../components/AccountInformation/AccountInfo";
-import AccountCircleRounded from "@mui/icons-material/AccountCircleRounded";
 import ProfileUpload from "../../shared/components/FormElements/ProfileUpload";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 
@@ -189,7 +189,6 @@ const Profile = (props) => {
     getTrainingData();
   }, [sendRequest, success]);
 
-  console.log(userData);
   //function to update state
   const updateState = (data, message) => {
     setIsEditMode(false);
@@ -204,7 +203,7 @@ const Profile = (props) => {
   };
 
   return (
-    <React.Fragment>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Modal
         show={showConfirmModal}
         header="Cancel editing?"
@@ -394,7 +393,7 @@ const Profile = (props) => {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </LocalizationProvider>
   );
 };
 

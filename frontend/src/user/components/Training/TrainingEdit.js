@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import Button from "../../../shared/components/FormElements/Button";
+import React, { useState, useEffect } from "react";
+import TextField from "@mui/material/TextField";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
+import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import ImageUpload from "../../../shared/components/FormElements/ImageUpload";
 import { useForm } from "../../../shared/hooks/form-hook";
@@ -16,6 +18,8 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const TrainingEdit = (props) => {
   const [inputError, setInputError] = useState();
+  const [fromDateVal, setFromDateVal] = useState(new Date());
+  const [toDateVal, setToDateVal] = useState(new Date());
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
@@ -26,14 +30,6 @@ const TrainingEdit = (props) => {
       },
       type: {
         value: props.editData ? props.editData.type : "",
-        isValid: false,
-      },
-      fromDate: {
-        value: props.editData ? props.editData.fromDate : "",
-        isValid: false,
-      },
-      toDate: {
-        value: props.editData ? props.editData.toDate : "",
         isValid: false,
       },
       hours: {
@@ -66,7 +62,7 @@ const TrainingEdit = (props) => {
       return;
     }
 
-    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
+    if (fromDateVal.getFullYear() > toDateVal.getFullYear()) {
       setInputError("Please input a valid time period. From - To period");
       return;
     }
@@ -116,8 +112,18 @@ const TrainingEdit = (props) => {
       return;
     }
 
-    if (formState.inputs.fromDate.value > formState.inputs.toDate.value) {
-      setInputError("Please input a valid time period. From - To period");
+    let fromChecker = fromDateVal;
+    let toChecker = toDateVal;
+    if (fromDateVal instanceof Date) {
+      fromChecker = fromDateVal.getFullYear();
+    }
+    if (toDateVal instanceof Date) {
+      toChecker = toDateVal.getFullYear();
+    }
+    if (fromChecker > toChecker) {
+      setInputError(
+        "Please input a valid time period. Year started to Year ended"
+      );
       return;
     }
 
@@ -127,8 +133,14 @@ const TrainingEdit = (props) => {
       formData.append("token", storedData.token);
       formData.append("title", formState.inputs.title.value);
       formData.append("type", formState.inputs.type.value);
-      formData.append("fromDate", formState.inputs.fromDate.value);
-      formData.append("toDate", formState.inputs.toDate.value);
+      formData.append(
+        "fromDate",
+        fromDateVal instanceof Date ? fromDateVal.getFullYear() : fromDateVal
+      );
+      formData.append(
+        "toDate",
+        toDateVal instanceof Date ? toDateVal.getFullYear() : toDateVal
+      );
       formData.append("hours", formState.inputs.hours.value);
       formData.append("typeOfLearning", formState.inputs.typeOfLearning.value);
       formData.append("conducted", formState.inputs.conducted.value);
@@ -148,6 +160,13 @@ const TrainingEdit = (props) => {
   const clearInputError = () => {
     setInputError("");
   };
+
+  useEffect(() => {
+    if (props.editData) {
+      setFromDateVal(props.editData.fromDate);
+      setToDateVal(props.editData.toDate);
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -191,29 +210,24 @@ const TrainingEdit = (props) => {
           initialValid={formState.inputs.type.isValid}
           required
         />
-        <Input
-          element="year"
-          id="fromDate"
-          type="number"
-          label="From - year"
-          validators={[VALIDATOR_MINLENGTH(4)]}
-          helperText="Please input valid year"
-          onInput={inputHandler}
-          initialValue={formState.inputs.fromDate.value}
-          initialValid={formState.inputs.fromDate.isValid}
-          required
+        <DatePicker
+          views={["year"]}
+          label="Select Year Started"
+          value={fromDateVal}
+          onChange={(newValue) => {
+            setFromDateVal(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} helperText={null} />}
         />
-        <Input
-          element="year"
-          id="toDate"
-          type="number"
-          label="To - year"
-          validators={[VALIDATOR_MINLENGTH(4)]}
-          helperText="Please input valid year"
-          onInput={inputHandler}
-          initialValue={formState.inputs.toDate.value}
-          initialValid={formState.inputs.toDate.isValid}
-          required
+        <span />
+        <DatePicker
+          views={["year"]}
+          label="Select Year Ended"
+          value={toDateVal}
+          onChange={(newValue) => {
+            setToDateVal(newValue);
+          }}
+          renderInput={(params) => <TextField {...params} helperText={null} />}
         />
         <Input
           element="input"

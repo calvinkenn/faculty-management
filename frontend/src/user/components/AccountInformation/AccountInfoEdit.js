@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -15,6 +17,7 @@ import "../../components/EditForm.css";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 const AccountInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
+  const [value, setValue] = useState();
   const [formState, inputHandler, setFormData] = useForm(
     {
       employeeNum: {
@@ -84,6 +87,17 @@ const AccountInfoEdit = (props) => {
           </div>
           <div className="acc-details-edit">
             <div className="acc-input-edit">
+              <DatePicker
+                views={["year"]}
+                label="Year only"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} helperText={null} />
+                )}
+              />
               <div className="employee-num-cont">
                 <Input
                   element="input"

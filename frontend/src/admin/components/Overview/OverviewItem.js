@@ -4,7 +4,11 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Card from "../../../shared/components/UIElements/Card";
 import "../item.css";
-import icon from "../../../assets/Image/profile.png";
+import TotalAccount from "../../../assets/Image/total.png";
+import ActivatedAccount from "../../../assets/Image/activated.png";
+import DectivatedAccount from "../../../assets/Image/deactivated.png";
+import PendingAccount from "../../../assets/Image/pending.png";
+import RejectedAccount from "../../../assets/Image/rejected.png";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -97,7 +101,7 @@ const OverviewItem = (props) => {
             <div className="total-action-acc-cont">
               <div className="container">
                 <div className="tot-acc-img-cont">
-                  <img src={icon} />
+                  <img src={TotalAccount} />
                 </div>
                 <div className="total-acc-text">
                   <h1>{total}</h1>
@@ -107,7 +111,7 @@ const OverviewItem = (props) => {
               <span />
               <div className="container">
                 <div className="tot-acc-img-cont">
-                  <img src={icon} />
+                  <img src={ActivatedAccount} />
                 </div>
                 <div className="total-acc-text">
                   <h1>{props.totalActiveAccounts}</h1>
@@ -117,17 +121,16 @@ const OverviewItem = (props) => {
               <span />
               <div className="container">
                 <div className="tot-acc-img-cont">
-                  <img src={icon} />
+                  <img src={DectivatedAccount} />
                 </div>
                 <div className="total-acc-text">
                   <h1>{props.totalDeactivatedAccounts}</h1>
                   <h6>Deactivated Account</h6>
                 </div>
               </div>
-              <span />
               <div className="container">
                 <div className="tot-acc-img-cont">
-                  <img src={icon} />
+                  <img src={PendingAccount} />
                 </div>
                 <div className="total-acc-text">
                   <h1>{props.totalPendingAccounts}</h1>
@@ -137,7 +140,7 @@ const OverviewItem = (props) => {
               <span />
               <div className="container">
                 <div className="tot-acc-img-cont">
-                  <img src={icon} />
+                  <img src={RejectedAccount} />
                 </div>
                 <div className="total-acc-text">
                   <h1>{props.totalRejectedAccounts}</h1>
@@ -153,13 +156,38 @@ const OverviewItem = (props) => {
             </div>
           </div>
           <div className="total-faculty-members-cont">
-            <div>Total BSIT Faculty Members: {props.totalBSIT}</div><span />
-            <div>Total BLIS Faculty Members: {props.totalBLIS}</div><span />
-            <div>Total ALLIED Faculty Members: {props.totalALLIED}</div>
+            <div className="container">
+              <div className="tot-acc-img-cont">
+                <img src={TotalAccount} />
+              </div>
+              <div className="total-acc-text">
+                <h1>{props.totalBSIT}</h1>
+                <h6>BSIT Faculty Members</h6>
+              </div>
+            </div>
+            <span />
+            <div className="container">
+              <div className="tot-acc-img-cont">
+                <img src={TotalAccount} />
+              </div>
+              <div className="total-acc-text">
+                <h1>{props.totalBLIS}</h1>
+                <h6>BLIS Faculty Members</h6>
+              </div>
+            </div>
+            <span />
+            <div className="container">
+              <div className="tot-acc-img-cont">
+                <img src={TotalAccount} />
+              </div>
+              <div className="total-acc-text">
+                <h1>{props.totalALLIED}</h1>
+                <h6>Allied Faculty Members</h6>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      
     </Card>
   );
 };

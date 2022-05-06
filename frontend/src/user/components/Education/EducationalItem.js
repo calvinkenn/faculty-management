@@ -99,7 +99,7 @@ const EducationalItem = (props) => {
               <div>From: {props.from}</div>
               <div>To: {props.to}</div>
               {props.yearGraduated ? (
-                <div>yearGraduated: {props.yearGraduated}</div>
+                <div>Year graduated: {props.yearGraduated}</div>
               ) : (
                 ""
               )}

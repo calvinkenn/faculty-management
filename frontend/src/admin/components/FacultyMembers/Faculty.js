@@ -41,8 +41,16 @@ const Faculty = (props) => {
 
   return (
     <React.Fragment>
-      <Sort label={"Sort By"} onChange={handleChange} value={selectedFilter} />
-      <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} />
+      {filteredDataToDisplay?.length > 0 && (
+        <Sort
+          label={"Sort By"}
+          onChange={handleChange}
+          value={selectedFilter}
+        />
+      )}
+      {filteredDataToDisplay?.length > 0 && (
+        <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} />
+      )}
       {filteredDataToDisplay?.length > 0 ? (
         <FacultyList
           list={filteredDataToDisplay}

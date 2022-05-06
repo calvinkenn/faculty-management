@@ -23,7 +23,13 @@ const Rejected = (props) => {
 
   return (
     <React.Fragment>
-      <Sort label={"Sort By"} onChange={handleChange} value={selectedFilter} />
+      {props.rejectedUserData?.length > 0 && (
+        <Sort
+          label={"Sort By"}
+          onChange={handleChange}
+          value={selectedFilter}
+        />
+      )}
       <RejectedList
         list={props.rejectedUserData}
         updateRejectedUsers={props.updateRejectedUsers}

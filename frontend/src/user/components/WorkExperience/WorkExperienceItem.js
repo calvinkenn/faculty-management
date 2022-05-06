@@ -100,7 +100,7 @@ const WorkExperienceItem = (props) => {
               <div>
                 Salary Grade:{" "}
                 {props.salaryGrade && props.salaryStep
-                  ? props.salaryGrade - props.salaryStep
+                  ? props.salaryGrade + "-" + props.salaryStep
                   : "N/A"}
               </div>
               <div>Government: {props.government}</div>

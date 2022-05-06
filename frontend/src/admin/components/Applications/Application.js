@@ -23,7 +23,13 @@ const Application = (props) => {
 
   return (
     <React.Fragment>
-      <Sort label={"Sort By"} onChange={handleChange} value={selectedFilter} />
+      {props.pendingUserData?.length && (
+        <Sort
+          label={"Sort By"}
+          onChange={handleChange}
+          value={selectedFilter}
+        />
+      )}
       <ApplicationList
         list={props.pendingUserData}
         updatePendingUsers={props.updatePendingUsers}

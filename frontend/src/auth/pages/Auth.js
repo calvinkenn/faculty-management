@@ -183,6 +183,7 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
+        setIsAgree(false);
         loginModeHandler();
       } catch (err) {}
     } else if (isResetMode) {

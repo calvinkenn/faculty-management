@@ -27,6 +27,16 @@ const signup = async (req, res, next) => {
 
   //check if user exist
   let existingUser;
+
+  let existingEmployeeNumber = await User.findOne({employeeNum: employeeNum});
+
+  if (existingEmployeeNumber){
+    const error = new HttpError(
+      "Employee number already exists if you havent registered this employee number yet. please contact administrator immediatley!",
+      422
+    );
+    return next(error);
+  }
   try {
     existingUser = await User.findOne({ email: email });
     if (!existingUser) {

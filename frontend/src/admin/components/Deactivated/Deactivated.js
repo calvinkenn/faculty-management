@@ -73,19 +73,22 @@ const Deactivated = (props) => {
       )}
       <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} /> */}
       {currentItems?.length > 0 ? (
-        <React.Fragment>
-          <DeactivatedList
-            list={currentItems}
-            updateDeactivatedUsers={props.updateDeactivatedUsers}
-            sortedData={sortedDataToShow()}
-          />
-          <Pagination
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            pageCount={pageCount}
-          />
-        </React.Fragment>
+        <div className="faculty-list-cont">
+          <React.Fragment>
+            <DeactivatedList
+              list={currentItems}
+              updateDeactivatedUsers={props.updateDeactivatedUsers}
+              sortedData={sortedDataToShow()}
+            />
+            <Pagination
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              pageCount={pageCount}
+            />
+          </React.Fragment>
+        </div>
+        
       ) : (
         <h1>No Data to Display</h1>
       )}

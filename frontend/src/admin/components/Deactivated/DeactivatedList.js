@@ -18,6 +18,8 @@ const DeactivatedList = (props) => {
             lastName={application.lastName}
             email={application.email}
             id={application._id}
+            employmentType={application.employmentType}
+            faculty={application.faculty}
             updateDeactivatedUsers={props.updateDeactivatedUsers}
           />
         ))}

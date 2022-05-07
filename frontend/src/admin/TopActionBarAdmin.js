@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 import Modal from "../shared/components/UIElements/Modal";
 import Button from "../shared/components/FormElements/Button";
+import Filter from "../shared/components/Filter/Filter";
+import Sort from "../shared/components/Sort/Sort";
 import "./TopActionBarAdmin.css";
 
 const TopActionBarAdmin = (props) => {
@@ -60,6 +62,12 @@ const TopActionBarAdmin = (props) => {
             )}
           </ul>
         )}
+        <Filter onChange={props.onFilterChange} value={props.filterValue} />
+        <Sort
+          label={"Sort By"}
+          onChange={props.onSortChange}
+          value={props.sortValue}
+        />
       </div>
     </React.Fragment>
   );

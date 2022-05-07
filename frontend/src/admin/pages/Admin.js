@@ -33,6 +33,8 @@ const Admin = (props) => {
   const [resetUserData, setResetUserData] = useState();
   const [updatedStatus, setUpdatedStatus] = useState("");
   const [searchField, setSearchField] = useState("");
+  const [filterValue, setFilterValue] = useState(1);
+  const [sortValue, setSortValue] = useState(1);
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
   const [isPrintMode, setIsPrintMode] = useState(props.isPrintMode);
@@ -224,6 +226,16 @@ const Admin = (props) => {
     );
   });
 
+  //FILTER
+  const onFilterChange = (event) => {
+    setFilterValue(event.target.value);
+  };
+
+  //SORT
+  const onSortChange = (event) => {
+    setSortValue(event.target.value);
+  };
+
   return (
     <React.Fragment>
       <div className="admin-main">
@@ -279,6 +291,10 @@ const Admin = (props) => {
                 searchValue={searchField}
                 printMode={printModeHandler}
                 isPrintMode={isPrintMode}
+                onFilterChange={onFilterChange}
+                filterValue={filterValue}
+                onSortChange={onSortChange}
+                sortValue={sortValue}
               />
               {isLoading && <LoadingSpinner asOverlay />}
               {isMenuActive.overview && (
@@ -295,30 +311,38 @@ const Admin = (props) => {
                 <Faculty
                   activeUserData={filteredActiveUsers}
                   updateActiveUsers={updateUsers}
+                  filterValue={filterValue}
+                  sortValue={sortValue}
                 />
               )}
               {isMenuActive.applications && (
                 <Application
                   pendingUserData={filteredPendingUsers}
                   updatePendingUsers={updateUsers}
+                  sortValue={sortValue}
                 />
               )}
               {isMenuActive.inactive && (
                 <Deactivated
                   deactivatedUserData={filteredDeactivatedUsers}
                   updateDeactivatedUsers={updateUsers}
+                  filterValue={filterValue}
+                  sortValue={sortValue}
                 />
               )}
               {isMenuActive.rejected && (
                 <Rejected
                   rejectedUserData={filteredRejectedUsers}
                   updateRejectedUsers={updateUsers}
+                  sortValue={sortValue}
                 />
               )}
               {isMenuActive.reset && (
                 <Reset
                   resetUserData={filteredResetUsers}
                   updateResetUsers={updateUsers}
+                  filterValue={filterValue}
+                  sortValue={sortValue}
                 />
               )}
             </div>

@@ -34,10 +34,10 @@ const Application = (props) => {
   };
 
   const sortedDataToShow = () => {
-    if (selectedFilter === 2) {
+    if (props.sortValue === 2) {
       return "firstName";
     }
-    if (selectedFilter === 3) {
+    if (props.sortValue === 3) {
       return "lastName";
     } else {
       return "employeeNum";
@@ -46,13 +46,13 @@ const Application = (props) => {
 
   return (
     <React.Fragment>
-      {currentItems?.length > 0 && (
+      {/* {currentItems?.length > 0 && (
         <Sort
           label={"Sort By"}
           onChange={handleChange}
           value={selectedFilter}
         />
-      )}
+      )} */}
       <ApplicationList
         list={currentItems}
         updatePendingUsers={props.updatePendingUsers}

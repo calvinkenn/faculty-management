@@ -17,10 +17,10 @@ const Reset = (props) => {
   };
 
   const sortedDataToShow = () => {
-    if (selectedFilter === 2) {
+    if (props.sortValue === 2) {
       return "firstName";
     }
-    if (selectedFilter === 3) {
+    if (props.sortValue === 3) {
       return "lastName";
     } else {
       return "employeeNum";
@@ -32,11 +32,11 @@ const Reset = (props) => {
   };
 
   const filteredDataToDisplay = props.resetUserData?.filter((user) => {
-    if (selectedFilterDisplay === 2) {
+    if (props.filterValue === 2) {
       return user.faculty.includes("BSIT");
-    } else if (selectedFilterDisplay === 3) {
+    } else if (props.filterValue === 3) {
       return user.faculty.includes("BLIS");
-    } else if (selectedFilterDisplay === 4) {
+    } else if (props.filterValue === 4) {
       return user.faculty.includes("ALLIED");
     } else {
       return user;
@@ -64,14 +64,14 @@ const Reset = (props) => {
 
   return (
     <React.Fragment>
-      {currentItems?.length > 0 && (
+      {/* {currentItems?.length > 0 && (
         <Sort
           label={"Sort By"}
           onChange={handleChange}
           value={selectedFilter}
         />
       )}
-      <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} />
+      <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} /> */}
       {currentItems?.length > 0 ? (
         <React.Fragment>
           <ResetList

@@ -16,11 +16,14 @@ const Faculty = (props) => {
     setSelectedFilter(event.target.value);
   };
 
+  console.log(props.filterValue);
+  console.log(props.sortValue);
+
   const sortedDataToShow = () => {
-    if (selectedFilter === 2) {
+    if (props.sortValue === 2) {
       return "firstName";
     }
-    if (selectedFilter === 3) {
+    if (props.sortValue === 3) {
       return "lastName";
     } else {
       return "employeeNum";
@@ -32,11 +35,11 @@ const Faculty = (props) => {
   };
 
   const filteredDataToDisplay = props.activeUserData?.filter((activeUser) => {
-    if (selectedFilterDisplay === 2) {
+    if (props.filterValue === 2) {
       return activeUser.faculty.includes("BSIT");
-    } else if (selectedFilterDisplay === 3) {
+    } else if (props.filterValue === 3) {
       return activeUser.faculty.includes("BLIS");
-    } else if (selectedFilterDisplay === 4) {
+    } else if (props.filterValue === 4) {
       return activeUser.faculty.includes("ALLIED");
     } else {
       return activeUser;
@@ -65,29 +68,29 @@ const Faculty = (props) => {
   return (
     <div className="sort-filter-cont">
       <React.Fragment>
-        {currentItems?.length > 0 && (
+        {/* {currentItems?.length > 0 && (
           <Sort
             label={"Sort By"}
             onChange={handleChange}
             value={selectedFilter}
           />
-        )}
-        <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} />
+        )} */}
+        {/* <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} /> */}
         {currentItems?.length > 0 ? (
           <div className="faculty-list-cont">
             <React.Fragment>
-            <FacultyList
-              list={currentItems}
-              updateActiveUsers={props.updateActiveUsers}
-              sortedData={sortedDataToShow()}
-            />
-            <Pagination
-              onPageChange={handlePageClick}
-              pageRangeDisplayed={3}
-              marginPagesDisplayed={2}
-              pageCount={pageCount}
-            />
-          </React.Fragment>
+              <FacultyList
+                list={currentItems}
+                updateActiveUsers={props.updateActiveUsers}
+                sortedData={sortedDataToShow()}
+              />
+              <Pagination
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={3}
+                marginPagesDisplayed={2}
+                pageCount={pageCount}
+              />
+            </React.Fragment>
           </div>
         ) : (
           <h1>No Data to Display</h1>

@@ -19,6 +19,7 @@ const ResetList = (props) => {
             lastName={reset.lastName}
             email={reset.email}
             reset={reset.faculty}
+            faculty={reset.faculty}
             employmentType={reset.employmentType}
             updateResetUsers={props.updateResetUsers}
             profilePic={reset.profilePic}

@@ -6,12 +6,12 @@ import "./Pagination.css";
 const Pagination = (props) => {
   return (
     <ReactPaginate
-      nextLabel="next >"
+      nextLabel=">"
       onPageChange={props.onPageChange}
       pageRangeDisplayed={props.pageRangeDisplayed}
       marginPagesDisplayed={props.marginPagesDisplayed}
       pageCount={props.pageCount}
-      previousLabel="< previous"
+      previousLabel="<"
       pageClassName="page-item"
       pageLinkClassName="page-link"
       previousClassName="page-item"

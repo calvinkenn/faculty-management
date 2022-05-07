@@ -5,7 +5,7 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Card from "../../../shared/components/UIElements/Card";
 import Button from "../../../shared/components/FormElements/Button";
 import profilePic from "../../../assets/Image/Qw.png";
-import RemoveCircleOutlineRoundedIcon from '@mui/icons-material/RemoveCircleOutlineRounded';
+import RemoveCircleOutlineRoundedIcon from "@mui/icons-material/RemoveCircleOutlineRounded";
 import "../item.css";
 
 const FacultyItem = (props) => {
@@ -49,7 +49,15 @@ const FacultyItem = (props) => {
           </div>
           <div className="faculty-details-cont">
             <div className="faculty-name-email-cont">
-              <div><h2>{props.firstName}</h2></div><span /><div><h2>{props.lastName}</h2></div><span/><div>{props.email}</div>
+              <div>
+                <h2>{props.firstName}</h2>
+              </div>
+              <span />
+              <div>
+                <h2>{props.lastName}</h2>
+              </div>
+              <span />
+              <div>{props.email}</div>
             </div>
             <div className="employeenum-fac-type">
               <div>Employee Number: {props.employeeNum}</div>
@@ -57,13 +65,20 @@ const FacultyItem = (props) => {
               <div>Faculty: {props.faculty ? props.faculty : "N/A"}</div>
               <span />
               <div>
-                Employment Type: {props.employmentType ? props.employmentType : "N/A"}
+                Employment Type:{" "}
+                {props.employmentType ? props.employmentType : "N/A"}
+              </div>
+              <div>
+                Date of Registration:{" "}
+                {props.dateOfRegistration ? props.dateOfRegistration : "N/A"}
               </div>
             </div>
           </div>
         </Link>
       </div>
-      <Button onClick={userDeactivateHandler}><RemoveCircleOutlineRoundedIcon /></Button>
+      <Button onClick={userDeactivateHandler}>
+        <RemoveCircleOutlineRoundedIcon />
+      </Button>
     </Card>
   );
 };

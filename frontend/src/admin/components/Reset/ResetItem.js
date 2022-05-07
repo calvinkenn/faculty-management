@@ -49,6 +49,10 @@ const ResetItem = (props) => {
       <div>
         Employment Type: {props.employmentType ? props.employmentType : "N/A"}
       </div>
+      <div>
+        Date of Registration:{" "}
+        {props.dateOfRegistration ? props.dateOfRegistration : "N/A"}
+      </div>
       <Button onClick={userResetHandler}>Reset Password</Button>
     </Card>
   );

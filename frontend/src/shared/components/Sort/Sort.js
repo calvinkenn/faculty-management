@@ -20,6 +20,7 @@ const Sort = (props) => {
               <MenuItem value={1}>Employee Number</MenuItem>
               <MenuItem value={2}>First Name</MenuItem>
               <MenuItem value={3}>Last Name</MenuItem>
+              <MenuItem value={4}>Registration Date</MenuItem>
             </Select>
           </FormControl>
         </Box>

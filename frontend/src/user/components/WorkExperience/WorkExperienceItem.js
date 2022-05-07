@@ -98,6 +98,10 @@ const WorkExperienceItem = (props) => {
               <div>Company: {props.company}</div>
               <div>Position: {props.position}</div>
               <div>Department: {props.department}</div>
+              <div>
+                Status of Appointment:{" "}
+                {props.statusOfAppointment ? props.statusOfAppointment : "N/A"}
+              </div>
               <div>From: {props.fromDate}</div>
               <div>To: {props.toDate}</div>
               <div>Monthly Salary: &#8369;{salarySep(props.monthlySalary)}</div>

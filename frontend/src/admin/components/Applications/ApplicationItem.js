@@ -54,6 +54,10 @@ const ApplicationItem = (props) => {
       <div>First Name: {props.firstName}</div>
       <div>Last Name: {props.lastName}</div>
       <div>Email: {props.email}</div>
+      <div>
+        Date of Registration:{" "}
+        {props.dateOfRegistration ? props.dateOfRegistration : "N/A"}
+      </div>
       <div className="container__actions">
         <form onSubmit={userApproveHandler}>
           <input type="hidden" value={props.id} name="userId"></input>

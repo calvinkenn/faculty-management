@@ -18,6 +18,7 @@ const WorkExperienceList = (props) => {
             company={item.company}
             position={item.position}
             department={item.department}
+            statusOfAppointment={item.statusOfAppointment}
             fromDate={item.fromDate}
             toDate={item.toDate}
             monthlySalary={item.monthlySalary}

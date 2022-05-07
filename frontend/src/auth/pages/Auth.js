@@ -15,6 +15,7 @@ import {
 } from "../../shared/utils/validators";
 import { useForm } from "../../shared/hooks/form-hook";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import Modal from "../../shared/components/UIElements/Modal";
 import "./Auth.css";
 
 import bulsuLogo from "../../assets/Image/bulsu.png";
@@ -29,6 +30,7 @@ const Auth = () => {
   const [isResetMode, setIsResetMode] = useState(false);
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -185,7 +187,9 @@ const Auth = () => {
         );
         setIsAgree(false);
         loginModeHandler();
-      } catch (err) {}
+      } catch (err) {
+        setIsAgree(false);
+      }
     } else if (isResetMode) {
       //code for reset
       try {
@@ -208,8 +212,30 @@ const Auth = () => {
     setIsAgree(event.target.checked);
   };
 
+  const showAgreementHandler = () => {
+    setShowConfirmModal(true);
+  };
+
+  const closeAgeementHandler = () => {
+    setShowConfirmModal(false);
+  };
+
   return (
     <React.Fragment>
+      <Modal
+        show={showConfirmModal}
+        header={<div>Terms of Use {"&"} Privacy Policy</div>}
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={closeAgeementHandler}>
+              Ok
+            </Button>
+          </React.Fragment>
+        }
+      >
+        <p>THIS IS THE AGREEMENT!</p>
+      </Modal>
       <SuccessModal success={success} onClear={clearSuccess} />
       <ErrorModal error={error} onClear={clearError} />
       <Card className="authentication">
@@ -315,7 +341,15 @@ const Auth = () => {
                     {isRegisterMode && (
                       <FormControlLabel
                         disabled={!formState.isValid}
-                        label="I agree"
+                        label={
+                          <div>
+                            I agree to the
+                            <a onClick={showAgreementHandler}>
+                              {" "}
+                              Terms of Use {"&"} Privacy Policy
+                            </a>
+                          </div>
+                        }
                         control={
                           <Checkbox checked={isAgree} onChange={agreeHandler} />
                         }

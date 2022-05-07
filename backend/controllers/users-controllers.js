@@ -28,9 +28,9 @@ const signup = async (req, res, next) => {
   //check if user exist
   let existingUser;
 
-  let existingEmployeeNumber = await User.findOne({employeeNum: employeeNum});
+  let existingEmployeeNumber = await User.findOne({ employeeNum: employeeNum });
 
-  if (existingEmployeeNumber){
+  if (existingEmployeeNumber) {
     const error = new HttpError(
       "Employee number already exists if you havent registered this employee number yet. please contact administrator immediatley!",
       422
@@ -71,6 +71,7 @@ const signup = async (req, res, next) => {
 
   //if not create a new user
   const createdUser = new User({
+    dateOfRegistration: new Date(),
     employeeNum,
     firstName,
     lastName,
@@ -687,6 +688,7 @@ const EditWorkExperience = async (req, res, next) => {
     company,
     position,
     department,
+    statusOfAppointment,
     fromDate,
     toDate,
     monthlySalary,
@@ -701,6 +703,7 @@ const EditWorkExperience = async (req, res, next) => {
     company,
     position,
     department,
+    statusOfAppointment,
     fromDate,
     toDate,
     monthlySalary,
@@ -729,6 +732,7 @@ const addWorkExperience = async (req, res, next) => {
     position,
     department,
     fromDate,
+    statusOfAppointment,
     toDate,
     monthlySalary,
     salaryGrade,
@@ -742,6 +746,7 @@ const addWorkExperience = async (req, res, next) => {
     company,
     position,
     department,
+    statusOfAppointment,
     fromDate,
     toDate,
     monthlySalary,

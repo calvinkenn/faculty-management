@@ -35,6 +35,10 @@ const WorkExperienceEdit = (props) => {
         value: props.editData ? props.editData.department : "",
         isValid: false,
       },
+      statusOfAppointment: {
+        value: props.editData ? props.editData.statusOfAppointment : "",
+        isValid: false,
+      },
       monthlySalary: {
         value: props.editData ? props.editData.monthlySalary : "",
         isValid: false,
@@ -46,10 +50,6 @@ const WorkExperienceEdit = (props) => {
       salaryStep: {
         value: props.editData ? props.editData.salaryStep : "",
         isValid: true,
-      },
-      status: {
-        value: "",
-        isValid: false,
       },
       government: {
         value: props.editData ? props.editData.government : "",
@@ -81,6 +81,7 @@ const WorkExperienceEdit = (props) => {
         salaryGrade: formState.inputs.salaryGrade.value,
         salaryStep: formState.inputs.salaryStep.value,
         government: formState.inputs.government.value,
+        statusOfAppointment: formState.inputs.statusOfAppointment.value,
         userId: storedData.userId,
         token: storedData.token,
       }),
@@ -125,6 +126,7 @@ const WorkExperienceEdit = (props) => {
         salaryGrade: formState.inputs.salaryGrade.value,
         salaryStep: formState.inputs.salaryStep.value,
         government: formState.inputs.government.value,
+        statusOfAppointment: formState.inputs.statusOfAppointment.value,
         userId: storedData.userId,
         token: storedData.token,
         workId: props.editData._id,
@@ -202,6 +204,27 @@ const WorkExperienceEdit = (props) => {
                 required
               />
             </div>
+            <Input
+              element="select"
+              id="statusOfAppointment"
+              type="text"
+              label="Status of Appointment"
+              items={[
+                "Permanent",
+                "Temporary",
+                "Coterminous",
+                "Fixed term",
+                "Contractual",
+                "Substitute",
+                "Provisional",
+              ]}
+              validators={[VALIDATOR_REQUIRE()]}
+              errorText="Please input your status of appointment"
+              onInput={inputHandler}
+              initialValue={formState.inputs.statusOfAppointment.value}
+              initialValid={formState.inputs.statusOfAppointment.isValid}
+              required
+            />
             <div className="from-to-govt">
               <DatePicker
                 views={["year"]}

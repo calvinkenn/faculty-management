@@ -6,7 +6,7 @@ import {
   cities,
   barangays,
 } from "select-philippines-address";
-
+import profile from "../../../assets/Image/Qw.png";
 import "./PrintData.css";
 
 export class ComponentToPrint extends React.PureComponent {
@@ -156,6 +156,18 @@ const PrintData = (props) => {
         <center>
           <h1>PERSONAL DATA</h1>
         </center>
+        <div className="profile-image">
+          <div class="image">
+            <img
+              src={
+                props.userData.profilePic !== ""
+                  ? `http://localhost:5000/${props.userData.profilePic}`
+                  : profile
+              }
+              alt="profile-pic"
+            />
+          </div>
+        </div>
         <table>
           <tr>
             <th>I. Personal Information</th>

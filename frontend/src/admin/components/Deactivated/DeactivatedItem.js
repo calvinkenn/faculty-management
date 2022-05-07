@@ -40,6 +40,10 @@ const DeactivatedItem = (props) => {
         <div>
           Employment Type: {props.employmentType ? props.employmentType : "N/A"}
         </div>
+        <div>
+          Date of Registration:{" "}
+          {props.dateOfRegistration ? props.dateOfRegistration : "N/A"}
+        </div>
         <div className="container__actions">
           <form onSubmit={userApproveHandler}>
             <input type="hidden" value={props.id} name="userId"></input>

@@ -28,6 +28,7 @@ const AccountInfo = (props) => {
         faculty={props.userData.faculty}
         employmentType={props.userData.employmentType}
         email={props.userData.email}
+        id={props.userData._id}
       />
     );
   }

@@ -19,9 +19,10 @@ const Reset = (props) => {
   const sortedDataToShow = () => {
     if (props.sortValue === 2) {
       return "firstName";
-    }
-    if (props.sortValue === 3) {
+    } else if (props.sortValue === 3) {
       return "lastName";
+    } else if (props.sortValue === 4) {
+      return "registrationDate";
     } else {
       return "employeeNum";
     }

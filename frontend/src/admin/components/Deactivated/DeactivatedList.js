@@ -3,6 +3,15 @@ import React from "react";
 import DeactivatedItem from "./DeactivatedItem";
 import "../list.css";
 
+const formatDate = (input) => {
+  var datePart = input.match(/\d+/g),
+    year = datePart[0].substring(0, 4),
+    month = datePart[1],
+    day = datePart[2];
+
+  return day + "/" + month + "/" + year;
+};
+
 const DeactivatedList = (props) => {
   if (props.list?.length === 0) {
     return <div>No deactivated users found</div>;
@@ -20,6 +29,11 @@ const DeactivatedList = (props) => {
             id={application._id}
             employmentType={application.employmentType}
             faculty={application.faculty}
+            dateOfRegistration={
+              application.dateOfRegistration
+                ? formatDate(application.dateOfRegistration.substring(0, 10))
+                : ""
+            }
             updateDeactivatedUsers={props.updateDeactivatedUsers}
           />
         ))}

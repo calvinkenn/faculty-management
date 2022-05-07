@@ -3,6 +3,15 @@ import React from "react";
 import FacultyItem from "./FacultyItem";
 import "../list.css";
 
+const formatDate = (input) => {
+  var datePart = input.match(/\d+/g),
+    year = datePart[0].substring(0, 4),
+    month = datePart[1],
+    day = datePart[2];
+
+  return day + "/" + month + "/" + year;
+};
+
 const FacultyList = (props) => {
   if (props.list?.length === 0) {
     return <div>No active users found</div>;
@@ -24,6 +33,11 @@ const FacultyList = (props) => {
             employmentType={faculty.employmentType}
             updateActiveUsers={props.updateActiveUsers}
             profilePic={faculty.profilePic}
+            dateOfRegistration={
+              faculty.dateOfRegistration
+                ? formatDate(faculty.dateOfRegistration.substring(0, 10))
+                : ""
+            }
             id={faculty._id}
           />
         ))}

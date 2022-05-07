@@ -4,6 +4,22 @@ table {
   width: 100%;
 }
 
+.profile-image {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
+.profile-image .image {
+  width: 50%;
+}
+
+/* 2x2 size */
+.profile-image img {
+  width: calc(100% - (20px * 2));
+  margin: 20px;
+}
+
 /* td,
 th {
   border: 1px solid #dddddd;

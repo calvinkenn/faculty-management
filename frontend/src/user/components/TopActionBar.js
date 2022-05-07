@@ -75,7 +75,13 @@ const TopActionBar = (props) => {
           </React.Fragment>
         }
       >
-        <p>Do you want to cancel editing? Changes will not be saved.</p>
+        {props.isEditMode && (
+          <p>Do you want to cancel editing? Changes will not be saved.</p>
+        )}
+        {props.isAddMode && (
+          <p>Do you want to cancel adding? Changes will not be saved.</p>
+        )}
+        {props.isPrintMode && <p>Do you want to cancel printing? </p>}
       </Modal>
       <div className="top-action">
         <ul>

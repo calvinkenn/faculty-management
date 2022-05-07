@@ -1,0 +1,30 @@
+.home-main {
+  display: flex;
+  background-color: #f4f7ff;
+}
+
+.home-main-container {
+  height: 100vh;
+  width: 100%;
+}
+
+.vmgo-container {
+  height: 40%;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  box-sizing: border-box;
+  margin: 75px 0 15px 0;
+  background-color: #f4f7ff;
+}
+
+.announcement-container {
+  height: 40%;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  display: flex;
+  box-sizing: border-box;
+  background-color: #f4f7ff;
+}

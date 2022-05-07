@@ -11,6 +11,7 @@ import Profile from "./user/pages/Profile";
 import Auth from "./auth/pages/Auth";
 import "./App.css";
 import Admin from "./admin/pages/Admin";
+import Home from "./home/Home";
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -69,10 +70,8 @@ const App = () => {
       routes = (
         <Routes>
           <Route path={`/profile/${userId}`} element={<Profile />} />
-          <Route
-            path="/"
-            element={<Navigate to={`/profile/${userId}`} replace />}
-          />
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Navigate to={`/profile/${userId}`} replace />} />
         </Routes>
       );
     } else {

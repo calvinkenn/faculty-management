@@ -11,10 +11,10 @@
 }
 
 .container__image img {
-  width: 100px;
-  height: 100px;
+  width: 100%;
 }
 
+/*Overview Start here*/
 .chart {
   display: flex;
   justify-content: space-between;
@@ -129,3 +129,96 @@
   font-size: 1.5vw;
   font-weight: 500;
 }
+/*Overview Ends here*/
+
+/*Faculty Members start*/
+.sort-filter-cont{
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+.faculty-list-cont{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 2%;
+}
+.faculty-list-cont .list{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.faculty-list-cont .list .card{
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 2%;
+  background-color: white;
+  border-radius: 15px;
+  margin: 1% 0;
+  box-shadow: #00000017 0 0 10px 0px;
+  flex-direction: row;
+  align-items: center;
+}
+.faculty-list-cont .list .card:hover{
+  background-color: #cbd9e78f;
+}
+.faculty-list-cont .list .card button{
+  width: 100%;
+  max-width: fit-content;
+  padding: 0;
+  color: #121212;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.faculty-card-container{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+}
+.faculty-details-cont{
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  flex-direction: column;
+}
+.faculty-card-container a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-decoration: none;
+  color: #2e2e2e;
+}
+.faculty-card-container a:hover{
+  color: #2e2e2e;
+}
+.faculty-card-container .container__image{
+  width: 100%;
+  max-width: 5%;
+  margin-right: 2%;
+}
+.faculty-card-container .container__image img{
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.faculty-name-email-cont{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.faculty-name-email-cont span,
+.employeenum-fac-type span{
+  width: 100%;
+  max-width: 1%;
+}
+.employeenum-fac-type{
+  display: flex;
+}
+/*Faculty Members end*/

@@ -63,33 +63,37 @@ const Faculty = (props) => {
   };
 
   return (
-    <React.Fragment>
-      {currentItems?.length > 0 && (
-        <Sort
-          label={"Sort By"}
-          onChange={handleChange}
-          value={selectedFilter}
-        />
-      )}
-      <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} />
-      {currentItems?.length > 0 ? (
-        <React.Fragment>
-          <FacultyList
-            list={currentItems}
-            updateActiveUsers={props.updateActiveUsers}
-            sortedData={sortedDataToShow()}
+    <div className="sort-filter-cont">
+      <React.Fragment>
+        {currentItems?.length > 0 && (
+          <Sort
+            label={"Sort By"}
+            onChange={handleChange}
+            value={selectedFilter}
           />
-          <Pagination
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            marginPagesDisplayed={2}
-            pageCount={pageCount}
-          />
-        </React.Fragment>
-      ) : (
-        <h1>No Data to Display</h1>
-      )}
-    </React.Fragment>
+        )}
+        <Filter onChange={filterDisplayHandler} value={selectedFilterDisplay} />
+        {currentItems?.length > 0 ? (
+          <div className="faculty-list-cont">
+            <React.Fragment>
+            <FacultyList
+              list={currentItems}
+              updateActiveUsers={props.updateActiveUsers}
+              sortedData={sortedDataToShow()}
+            />
+            <Pagination
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              pageCount={pageCount}
+            />
+          </React.Fragment>
+          </div>
+        ) : (
+          <h1>No Data to Display</h1>
+        )}
+      </React.Fragment>
+    </div>
   );
 };
 

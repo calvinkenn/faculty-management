@@ -287,6 +287,8 @@ const Admin = (props) => {
             <div className="content-container">
               <TopActionBarAdmin
                 inOverview={isMenuActive.overview}
+                inPending={isMenuActive.applications}
+                inRejected={isMenuActive.rejected}
                 onSearchChange={onSearchChange}
                 searchValue={searchField}
                 printMode={printModeHandler}

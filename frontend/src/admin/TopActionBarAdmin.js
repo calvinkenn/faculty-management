@@ -62,12 +62,16 @@ const TopActionBarAdmin = (props) => {
             )}
           </ul>
         )}
-        <Filter onChange={props.onFilterChange} value={props.filterValue} />
-        <Sort
-          label={"Sort By"}
-          onChange={props.onSortChange}
-          value={props.sortValue}
-        />
+        {!props.inOverview && !props.inPending && !props.inRejected && (
+          <Filter onChange={props.onFilterChange} value={props.filterValue} />
+        )}
+        {!props.inOverview && (
+          <Sort
+            label={"Sort By"}
+            onChange={props.onSortChange}
+            value={props.sortValue}
+          />
+        )}
       </div>
     </React.Fragment>
   );

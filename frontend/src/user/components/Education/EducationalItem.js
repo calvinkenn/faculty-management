@@ -96,7 +96,7 @@ const EducationalItem = (props) => {
               <div>Level: {props.level}</div>
               <div>School: {props.school}</div>
               {props.degree !== "N/A" ? <div>Degree: {props.degree}</div> : ""}
-              <div>From: {props.from}</div>
+              <div>From: {props.from}</div><span/>
               <div>To: {props.to}</div>
               {props.yearGraduated ? (
                 <div>Year graduated: {props.yearGraduated}</div>

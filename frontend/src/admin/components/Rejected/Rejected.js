@@ -54,17 +54,19 @@ const Rejected = (props) => {
           value={selectedFilter}
         />
       )} */}
-      <RejectedList
-        list={currentItems}
-        updateRejectedUsers={props.updateRejectedUsers}
-        sortedData={sortedDataToShow()}
-      />
-      <Pagination
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        pageCount={pageCount}
-      />
+      <div className="faculty-list-cont">
+        <RejectedList
+          list={currentItems}
+          updateRejectedUsers={props.updateRejectedUsers}
+          sortedData={sortedDataToShow()}
+        />
+        <Pagination
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+        />
+      </div>
     </React.Fragment>
   );
 };

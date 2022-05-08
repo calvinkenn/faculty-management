@@ -54,17 +54,19 @@ const Application = (props) => {
           value={selectedFilter}
         />
       )} */}
-      <ApplicationList
-        list={currentItems}
-        updatePendingUsers={props.updatePendingUsers}
-        sortedData={sortedDataToShow()}
-      />
-      <Pagination
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        pageCount={pageCount}
-      />
+      <div className="faculty-list-cont">
+        <ApplicationList
+          list={currentItems}
+          updatePendingUsers={props.updatePendingUsers}
+          sortedData={sortedDataToShow()}
+        />
+        <Pagination
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+        />
+      </div>
     </React.Fragment>
   );
 };

@@ -48,6 +48,7 @@
     max-width: 100%;
 }
 .company-dept-cont,
+.status-of-apt,
 .from-to-govt,
 .salary{
     width: 100%;
@@ -60,6 +61,7 @@
     margin: 0;
 }
 .company-dept-cont div,
+.status-of-apt div,
 .from-to-govt div,
 .salary div{
     width: 100%;

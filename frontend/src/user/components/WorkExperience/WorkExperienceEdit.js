@@ -204,27 +204,29 @@ const WorkExperienceEdit = (props) => {
                 required
               />
             </div>
-            <Input
-              element="select"
-              id="statusOfAppointment"
-              type="text"
-              label="Status of Appointment"
-              items={[
-                "Permanent",
-                "Temporary",
-                "Coterminous",
-                "Fixed term",
-                "Contractual",
-                "Substitute",
-                "Provisional",
-              ]}
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="Please input your status of appointment"
-              onInput={inputHandler}
-              initialValue={formState.inputs.statusOfAppointment.value}
-              initialValid={formState.inputs.statusOfAppointment.isValid}
-              required
-            />
+            <div className="status-of-apt">
+              <Input
+                element="select"
+                id="statusOfAppointment"
+                type="text"
+                label="Status of Appointment"
+                items={[
+                  "Permanent",
+                  "Temporary",
+                  "Coterminous",
+                  "Fixed term",
+                  "Contractual",
+                  "Substitute",
+                  "Provisional",
+                ]}
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please input your status of appointment"
+                onInput={inputHandler}
+                initialValue={formState.inputs.statusOfAppointment.value}
+                initialValid={formState.inputs.statusOfAppointment.isValid}
+                required
+              />
+            </div>
             <div className="from-to-govt">
               <DatePicker
                 views={["year"]}

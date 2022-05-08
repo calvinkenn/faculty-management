@@ -169,13 +169,16 @@
   background-color: #cbd9e78f;
 }
 .faculty-list-cont .list .card button{
-  width: 100%;
-  max-width: fit-content;
-  padding: 0;
-  color: #121212;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+    width: 100%;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    padding: 0;
+    color: #f15c5c;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin-right: 1%;
 }
 .faculty-card-container{
   width: 100%;
@@ -195,19 +198,21 @@
   align-items: center;
   text-decoration: none;
   color: #2e2e2e;
+  width: 100%;
 }
 .faculty-card-container a:hover{
   color: #2e2e2e;
 }
 .faculty-card-container .container__image{
   width: 100%;
-  max-width: 5%;
+  max-width: max-content;
   margin-right: 2%;
 }
 .faculty-card-container .container__image img{
-  width: 100%;
-  max-width: 100%;
-  height: auto;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .faculty-name-email-cont{
   display: flex;
@@ -219,7 +224,70 @@
   width: 100%;
   max-width: 1%;
 }
+.email-cont{
+  display: flex;
+  align-items: center;
+  color: #7c7c7c;
+}
 .employeenum-fac-type{
   display: flex;
 }
+.employee-num,
+.fac-dept,
+.emp-status,
+.date-of-reg{
+  width: 100%;
+  max-width: 100%;
+}
+.date-of-reg{
+  margin-right: 5%;
+}
+.employee-num h6,
+.fac-dept h6,
+.emp-status h6,
+.date-of-reg h6{
+  font-style: italic;
+  color: #a1a1a1;
+  font-weight: 500;
+}
+.employee-num h4,
+.fac-dept h4,
+.emp-status h4,
+.date-of-reg h4{
+  font-weight: 600;
+  color: #464646;
+  font-size: 0.9vw;
+}
+.faculty-list-cont .list .card button h4,
+.container__actions__back-to-pending button h4{
+  width: 100%;
+  max-width: fit-content;
+  padding: 0;
+  color: #34d664;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  float: right;
+  margin-right: 2%;
+}
 /*Faculty Members end*/
+
+/*Pending Appllication start*/
+.container__actions{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 15%;
+  margin-right: 1%;
+}
+.container__actions span{
+  width: 100%;
+  max-width: 5%;
+}
+.approve-btn button h5{
+  color: #34d664;
+}
+.reject-btn button h5{
+  color: #f15c5c;
+}
+/*Pending Application end*/

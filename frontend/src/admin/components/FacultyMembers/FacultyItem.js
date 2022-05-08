@@ -5,7 +5,9 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Card from "../../../shared/components/UIElements/Card";
 import Button from "../../../shared/components/FormElements/Button";
 import profilePic from "../../../assets/Image/Qw.png";
-import RemoveCircleOutlineRoundedIcon from "@mui/icons-material/RemoveCircleOutlineRounded";
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import "../item.css";
 
 const FacultyItem = (props) => {
@@ -57,27 +59,43 @@ const FacultyItem = (props) => {
                 <h2>{props.lastName}</h2>
               </div>
               <span />
-              <div>{props.email}</div>
+              <div className="email-cont">
+                <ArrowBackIosIcon sx={{fontSize: '12px'}}/>
+                  {props.email}
+                <ArrowForwardIosIcon sx={{fontSize: '12px'}}/>
+              </div>
             </div>
             <div className="employeenum-fac-type">
-              <div>Employee Number: {props.employeeNum}</div>
-              <span />
-              <div>Faculty: {props.faculty ? props.faculty : "N/A"}</div>
-              <span />
-              <div>
-                Employment Type:{" "}
-                {props.employmentType ? props.employmentType : "N/A"}
+              <div className="employee-num">
+                <h4>{props.employeeNum}</h4>
+                <h6>Employee Number</h6>
               </div>
-              <div>
-                Date of Registration:{" "}
-                {props.dateOfRegistration ? props.dateOfRegistration : "N/A"}
+              <span />
+              <div className="fac-dept">
+                <h4>{props.faculty ? props.faculty : "N/A"}</h4>
+                <h6>Department</h6>
+              </div>
+              <span />
+              <div className="emp-status">
+                <h4>
+                  {" "}
+                  {props.employmentType ? props.employmentType : "N/A"}
+                </h4>
+                <h6>Employment Status</h6>
+              </div>
+              <div className="date-of-reg">
+                <h4>
+                  {" "}
+                  {props.dateOfRegistration ? props.dateOfRegistration : "N/A"}
+                </h4>
+                <h6>Date of Registration</h6>
               </div>
             </div>
           </div>
         </Link>
       </div>
       <Button onClick={userDeactivateHandler}>
-        <RemoveCircleOutlineRoundedIcon />
+        <RemoveCircleIcon sx={{fontSize: '40px'}}/>
       </Button>
     </Card>
   );

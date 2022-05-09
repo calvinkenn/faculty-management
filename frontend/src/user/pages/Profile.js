@@ -70,11 +70,6 @@ const Profile = (props) => {
       return;
     }
 
-    // if (editingPageData) {
-    //   setShowConfirmModal(true);
-    //   return;
-    // }
-
     const stateCopy = { ...menu };
     Object.keys(stateCopy).forEach((key) => (stateCopy[key] = false)); //Set All Button False
     stateCopy[menuName] = true; //Set Button True
@@ -242,6 +237,7 @@ const Profile = (props) => {
                     center
                     id="profilePic"
                     updateProfile={updateState}
+                    previewUrl={userData.profilePic}
                   />
                 )}
               </div>

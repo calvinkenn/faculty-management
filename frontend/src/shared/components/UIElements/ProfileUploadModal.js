@@ -10,7 +10,11 @@ const ProfileUploadModal = (props) => {
       header="Change Profile"
       show={!!props.display}
       onSubmit={props.submit}
-      upload={<Button type="submit">Upload</Button>}
+      upload={
+        <Button type={props.buttonType} onClick={props.upload}>
+          {props.buttonName}
+        </Button>
+      }
       cancel={
         <Button type="button" onClick={props.cancel}>
           Cancel

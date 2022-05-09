@@ -20,7 +20,7 @@ const ProfileUpload = (props) => {
       setPreviewUrl(props.previewUrl);
       setIsUploading(false);
     }
-  }, [previewUrl]);
+  }, [showUploadModal]);
 
   useEffect(() => {
     if (!file) {

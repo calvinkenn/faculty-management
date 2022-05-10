@@ -58,7 +58,7 @@ const AnnouncementEdit = (props) => {
       <Modal
         show={showConfirmModal}
         onCancel={closeEditWarningHandler}
-        header="Delete this item?"
+        header="Cancel Edit?"
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
@@ -110,6 +110,7 @@ const AnnouncementEdit = (props) => {
           type="text"
           label="Content"
           minRows={12}
+          width={500}
           validators={[VALIDATOR_REQUIRE()]}
           helperText="Please input content of the announcement"
           onInput={inputHandler}

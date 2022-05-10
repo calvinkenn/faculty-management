@@ -50,7 +50,11 @@ const MainNavigation = (props) => {
           </Link>
         </h1>
         <nav className="main-navigation__header-nav">
-          <NavLinks inProfile={props.inProfile} inHome={props.inHome} />
+          <NavLinks
+            inProfile={props.inProfile}
+            inHome={props.inHome}
+            inVMGO={props.inVMGO}
+          />
         </nav>
       </MainHeader>
     </React.Fragment>

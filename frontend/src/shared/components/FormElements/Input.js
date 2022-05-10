@@ -89,7 +89,7 @@ const Input = (props) => {
         multiline
         minRows={props.minRows}
         maxRows={Infinity}
-        style={{ width: 600 }}
+        style={{ width: props.width }}
         onChange={changeHandler}
         onBlur={blurHandler}
         type={props.type}

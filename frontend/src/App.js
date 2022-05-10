@@ -13,6 +13,7 @@ import "./App.css";
 import Admin from "./admin/pages/Admin";
 import Announce from "./home/pages/Announce";
 import AnnounceFull from "./home/pages/AnnounceFull";
+import VMGO from "./home/pages/VMGO";
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -70,6 +71,7 @@ const App = () => {
     if (!isAdmin) {
       routes = (
         <Routes>
+          <Route path="/vmgo" element={<VMGO />} />
           <Route path="/announcement/:annID" element={<AnnounceFull />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/announcement" element={<Announce />} />
@@ -79,6 +81,7 @@ const App = () => {
     } else {
       routes = (
         <Routes>
+          <Route path="/vmgo" element={<VMGO />} />
           <Route path="/announcement/:annID" element={<AnnounceFull />} />
           <Route path="/announcement" element={<Announce />} />
           <Route path="/admin" element={<Admin />} />

@@ -66,6 +66,29 @@ const NavLinks = (props) => {
             </NavLink>
           </li>
         )}
+        {props.inProfile && (
+          <li>
+            <NavLink to="/vmgo" exact>
+              VMGO
+            </NavLink>
+          </li>
+        )}
+
+        {!auth.isAdmin && props.inVMGO && (
+          <li>
+            <NavLink to="/profile" exact>
+              View Profile
+            </NavLink>
+          </li>
+        )}
+
+        {auth.isAdmin && props.inVMGO && (
+          <li>
+            <NavLink to="/admin" exact>
+              View Admin
+            </NavLink>
+          </li>
+        )}
 
         {auth.isLoggedIn && (
           <li>

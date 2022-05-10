@@ -24,7 +24,7 @@ const NavLinks = (props) => {
     <React.Fragment>
       <Modal
         show={showConfirmModal}
-        header="Logout??"
+        header="Logout?"
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
@@ -45,6 +45,28 @@ const NavLinks = (props) => {
             </NavLink>
           </li>
         )}
+        {!auth.isAdmin && props.inHome && (
+          <li>
+            <NavLink to="/profile" exact>
+              View Profile
+            </NavLink>
+          </li>
+        )}
+        {auth.isAdmin && props.inHome && (
+          <li>
+            <NavLink to="/admin" exact>
+              View Admin
+            </NavLink>
+          </li>
+        )}
+        {auth.isLoggedIn && props.inProfile && (
+          <li>
+            <NavLink to="/announcement" exact>
+              Announcements
+            </NavLink>
+          </li>
+        )}
+
         {auth.isLoggedIn && (
           <li>
             <button onClick={showLogoutHandler}>

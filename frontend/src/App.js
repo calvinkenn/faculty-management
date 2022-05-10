@@ -11,7 +11,8 @@ import Profile from "./user/pages/Profile";
 import Auth from "./auth/pages/Auth";
 import "./App.css";
 import Admin from "./admin/pages/Admin";
-import Home from "./home/Home";
+import Announce from "./home/pages/Announce";
+import AnnounceFull from "./home/pages/AnnounceFull";
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -69,14 +70,17 @@ const App = () => {
     if (!isAdmin) {
       routes = (
         <Routes>
-          <Route path={`/profile/${userId}`} element={<Profile />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Navigate to={`/profile/${userId}`} replace />} />
+          <Route path="/announcement/:annID" element={<AnnounceFull />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/announcement" element={<Announce />} />
+          <Route path="/" element={<Navigate to="/profile" replace />} />
         </Routes>
       );
     } else {
       routes = (
         <Routes>
+          <Route path="/announcement/:annID" element={<AnnounceFull />} />
+          <Route path="/announcement" element={<Announce />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/profile/:userId" element={<Profile />} />
           <Route path="/" element={<Navigate to="/admin" replace />} />

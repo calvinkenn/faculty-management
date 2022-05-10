@@ -4,7 +4,6 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  Button,
 } from "@mui/material";
 import React, { useReducer, useEffect } from "react";
 
@@ -68,6 +67,29 @@ const Input = (props) => {
         helperText={
           !inputState.isValid && inputState.isTouched ? props.helperText : ""
         }
+        onChange={changeHandler}
+        onBlur={blurHandler}
+        type={props.type}
+        label={props.label}
+        variant={props.variant}
+        error={!inputState.isValid && inputState.isTouched}
+        value={inputState.value}
+        disabled={props.disabled ? props.disabled : false}
+        required={props.required}
+        inputProps={props.inputProps}
+      />
+    );
+  } else if (props.element === "textarea") {
+    element = (
+      <TextField
+        id={props.id}
+        helperText={
+          !inputState.isValid && inputState.isTouched ? props.helperText : ""
+        }
+        multiline
+        minRows={props.minRows}
+        maxRows={Infinity}
+        style={{ width: 600 }}
         onChange={changeHandler}
         onBlur={blurHandler}
         type={props.type}

@@ -217,10 +217,11 @@ const Profile = (props) => {
           {isAddMode && "adding"} data? Changes will not be saved!
         </p>
       </Modal>
+      {isLoading && <LoadingSpinner asOverlay />}
       <div className="user-main">
         <div className="user-main-container">
           <SuccessModal success={success} onClear={clearSuccess} />
-          <MainNavigation />
+          <MainNavigation inProfile={true} />
           <div className="profile-container">
             <SideBox className="side-container">
               <div className="side-container__image">
@@ -306,7 +307,7 @@ const Profile = (props) => {
                 isAddMode={isAddMode}
                 isPrintMode={isPrintMode}
               />
-              {isLoading && <LoadingSpinner asOverlay />}
+
               {isMenuActive.overview && (
                 <Overview
                   userData={userData}

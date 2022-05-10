@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react";
+import React from "react";
+import { useParams } from "react-router-dom";
 
-import { AuthContext } from "../../../shared/context/auth-context";
-import AnnouncementList from "./AnnouncementList";
-import "./Announcement.css";
-import AnnouncementEdit from "./AnnouncementEdit";
-import Button from "../../../shared/components/FormElements/Button";
+import MainNavigation from "../../shared/components/Navigation/MainNavigation";
+import "./AnnounceFull.css";
 
 const DUMMY_DATA = [
   {
@@ -49,46 +47,30 @@ const DUMMY_DATA = [
   },
 ];
 
-const Announcement = (props) => {
-  const auth = useContext(AuthContext);
-
-  const editModeHandler = (editData) => {
-    props.updateEditModeState(true);
-  };
-
-  const addModeHandler = (editData) => {
-    props.updateAddModeState(true);
-  };
-
-  if (props.isEditMode) {
-    return (
-      <AnnouncementEdit
-        setIsEditModeHandler={editModeHandler}
-        isEditMode={true}
-      />
-    );
-  } else if (props.isAddMode) {
-    return (
-      <AnnouncementEdit
-        setIsAddModeHandler={addModeHandler}
-        isEditMode={false}
-      />
-    );
-  } else {
-    return (
-      <React.Fragment>
-        <div>
-          {auth.isAdmin && <Button onClick={addModeHandler}>Add New</Button>}
-          <h1>Announcement</h1>
-        </div>
-
-        <AnnouncementList
-          item={DUMMY_DATA}
-          setIsEditModeHandler={editModeHandler}
-        />
-      </React.Fragment>
-    );
-  }
+const AnnounceFull = (props) => {
+  const announceId = useParams().annID;
+  return (
+    <div className="announce-main">
+      <div className="announce-main-container">
+        <MainNavigation inHome={true} />
+        {DUMMY_DATA.map((item) => {
+          if (item.id === announceId) {
+            return (
+              <div className="announce-container">
+                <div>Title: {item.title}</div>
+                <div>Author: {item.author}</div>
+                <div>Date: {item.date}</div>
+                <div>
+                  <img src={item.image} alt="Announcement" />
+                </div>
+                <div>Content: {item.content}</div>
+              </div>
+            );
+          }
+        })}
+      </div>
+    </div>
+  );
 };
 
-export default Announcement;
+export default AnnounceFull;

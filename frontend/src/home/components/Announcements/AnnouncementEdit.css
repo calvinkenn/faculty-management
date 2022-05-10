@@ -1,0 +1,8 @@
+.action-bar {
+  width: 100%;
+}
+
+.action-bar button {
+  width: 150px;
+  height: 25px;
+}

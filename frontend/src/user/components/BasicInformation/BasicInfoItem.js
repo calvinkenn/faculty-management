@@ -1,7 +1,13 @@
 import React from "react";
-
 import Button from "../../../shared/components/FormElements/Button";
 import "./BasicInfoItem.css";
+
+//mikko is here
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo';
+//end
+
 
 const formatHeight = (height) => {
   let formattedHeight = height.replace(/\./g, "ft ");
@@ -9,14 +15,14 @@ const formatHeight = (height) => {
 };
 
 const BasicInfoItem = (props) => {
-  return (
+  return (    
     <div className="basic-container">
       <div className="basic-container__data">
         <div className="basic-name-container">
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Employee Name</h1>
+            <AccountCircleIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Employee Name</h1>
             </div>
           </div>
           <div className="name-detail-cont">
@@ -41,7 +47,7 @@ const BasicInfoItem = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Personal Information</h1>
+              <LibraryBooksIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Personal Information</h1>
             </div>
           </div>
           <div className="personal-info-detail-cont">
@@ -73,7 +79,7 @@ const BasicInfoItem = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Government Issued ID</h1>
+            <FeaturedVideoIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Government Issued ID</h1>
             </div>
           </div>
           <div className="gov-id-detail-cont">

@@ -9,6 +9,12 @@ import {
 import Button from "../../../shared/components/FormElements/Button";
 import "./OverviewItem.css";
 
+//mikko is here
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import OtherHousesIcon from '@mui/icons-material/OtherHouses';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+//end
+
 const OverviewItem = (props) => {
   const [regionDataR, setRegionR] = useState([]);
   const [provinceDataR, setProvinceR] = useState([]);
@@ -78,7 +84,7 @@ const OverviewItem = (props) => {
           <div className="basic-info-title">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Basic Information</h1>
+              <AccountCircleIcon  sx={{fontSize: "30px"}}/><h1 className="Marginlang">Basic Information</h1>
             </div>
           </div>
           <div>Employee Number: {props.employeeNumber}</div>
@@ -101,7 +107,7 @@ const OverviewItem = (props) => {
           <div className="basic-info-title">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Resident Address</h1>
+              <OtherHousesIcon  sx={{fontSize: "30px"}}/><h1 className="Marginlang">Resident Address</h1>
             </div>
           </div>
           <div>House no.: {props.houseNo ? props.houseNo : "N/A"}</div>
@@ -118,7 +124,7 @@ const OverviewItem = (props) => {
           <div className="basic-info-title">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Contact Information</h1>
+              <ContactPhoneIcon  sx={{fontSize: "30px"}}/><h1 className="Marginlang">Contact Information</h1>
             </div>
           </div>
           <div>

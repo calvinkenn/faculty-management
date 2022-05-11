@@ -9,6 +9,12 @@ import {
 
 import "./ContactInfoItem.css";
 
+//Mikko is here
+import OtherHousesIcon from '@mui/icons-material/OtherHouses';
+import HomeIcon from '@mui/icons-material/Home';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+//end
+
 const ContactInfoItem = (props) => {
   const [regionDataR, setRegionR] = useState([]);
   const [provinceDataR, setProvinceR] = useState([]);
@@ -136,7 +142,7 @@ const ContactInfoItem = (props) => {
           <div className="resident-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Resident Address</h1>
+              <OtherHousesIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Resident Address</h1>
             </div>
           </div>
           <div className="resident-add-details-cont">
@@ -161,7 +167,7 @@ const ContactInfoItem = (props) => {
           <div className="perma-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Permanent Address</h1>
+              <HomeIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Permanent Address</h1>
             </div>
           </div>
           <div className="perma-details-cont">
@@ -191,7 +197,7 @@ const ContactInfoItem = (props) => {
           <div className="contact-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Contact Information</h1>
+              <ContactPhoneIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Contact Information</h1>
             </div>
           </div>
           <div className="contact-details-cont">

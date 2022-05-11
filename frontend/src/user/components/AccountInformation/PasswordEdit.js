@@ -12,6 +12,10 @@ import {
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 
+//mikko is here
+import SettingsIcon from '@mui/icons-material/Settings';
+//end
+
 const PasswordEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
@@ -61,7 +65,7 @@ const PasswordEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Change Password</h1>
+            <SettingsIcon  sx={{fontSize: "30px"}}/><h1 className="MarginLang">Change Password</h1>
             </div>
           </div>
           <div className="password-details-edit">

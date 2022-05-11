@@ -14,6 +14,12 @@ import {
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 
+//mikko is here
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo';
+//end
+
 const BasicInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [inputList, setInputList] = useState([{ extensionName: "" }]);
@@ -38,7 +44,7 @@ const BasicInfoEdit = (props) => {
         isValid: true,
       },
       lastName: {
-        value: props.userEdit.lastName,
+        value: props.userEdit.lastName, 
         isValid: false,
       },
       suffixName: {
@@ -175,7 +181,7 @@ const BasicInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Employee Name</h1>
+            <AccountCircleIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Employee Name</h1>
             </div>
           </div>
           <div className="name-detail-cont">
@@ -270,7 +276,7 @@ const BasicInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Personal Information</h1>
+            <LibraryBooksIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Personal Information</h1>
             </div>
           </div>
           <div className="personal-info-detail-cont">
@@ -404,7 +410,7 @@ const BasicInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Government Issued ID</h1>
+            <FeaturedVideoIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Government Issued ID</h1>
             </div>
           </div>
 

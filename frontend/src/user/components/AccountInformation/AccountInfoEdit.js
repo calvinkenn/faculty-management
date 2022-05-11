@@ -15,6 +15,10 @@ import {
 } from "../../../shared/utils/validators";
 import "../../components/EditForm.css";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
+
+//mikko is here
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+//end
 const AccountInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [value, setValue] = useState();
@@ -82,7 +86,7 @@ const AccountInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Account Information</h1>
+            <ManageAccountsIcon  sx={{fontSize: "30px"}}/><h1 className="MarginLang">Account Information</h1>
             </div>
           </div>
           <div className="acc-details-edit">

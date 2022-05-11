@@ -15,6 +15,10 @@ import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
+//mikko is here
+import SchoolIcon from '@mui/icons-material/School';
+//
+
 const EducationalEdit = (props) => {
   const [inputList, setInputList] = useState([{ awards: "" }]);
   const [yearError, setYearError] = useState();
@@ -225,7 +229,7 @@ const EducationalEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Educational Attainment</h1>
+            <SchoolIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Educational Attainment</h1>
             </div>
           </div>
           <div className="educ-add-details-cont">

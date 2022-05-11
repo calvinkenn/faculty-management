@@ -6,6 +6,10 @@ import Button from "../../../shared/components/FormElements/Button";
 import "./CivilServiceItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
+//mikko is here
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
+//end
+
 const CivilServiceItem = (props) => {
   const userIdByParams = useParams().userId;
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -87,7 +91,7 @@ const CivilServiceItem = (props) => {
           <div className="civ-service-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Career - {props.career}</h1>
+              <WorkHistoryIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Career - {props.career}</h1>
             </div>
           </div>
           <div className="civ-service-details-cont">

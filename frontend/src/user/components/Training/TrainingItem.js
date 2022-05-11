@@ -6,6 +6,10 @@ import Button from "../../../shared/components/FormElements/Button";
 import "./TrainingItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
+//mikko is here
+import ArticleIcon from '@mui/icons-material/Article';
+//
+
 const TrainingItem = (props) => {
   const userIdByParams = useParams().userId;
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -87,7 +91,7 @@ const TrainingItem = (props) => {
           <div className="training-title-cont">
             <div className="basic-title-blank"></div>
               <div className="basic-title-text">
-                <h1>{props.title}</h1>
+                <ArticleIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">{props.title}</h1>
               </div>
           </div>
           <div className="training-details-cont">

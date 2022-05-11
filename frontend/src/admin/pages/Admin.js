@@ -75,6 +75,10 @@ const Admin = (props) => {
       setSuccess("Account Pending");
       return;
     }
+    if (status === "accepted_reset") {
+      setSuccess("Password is now Last Name(Lowercase) + Employee Number");
+      return;
+    }
   };
 
   useEffect(() => {

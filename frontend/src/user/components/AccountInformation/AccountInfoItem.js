@@ -6,6 +6,11 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Modal from "../../../shared/components/UIElements/Modal";
 import "./AccountInfoItem.css";
 
+//mikko is here
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import SettingsIcon from '@mui/icons-material/Settings';
+//
+
 const AccountInfoItem = (props) => {
   const { sendRequest } = useHttpClient();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -79,7 +84,7 @@ const AccountInfoItem = (props) => {
             <div className="employment-info-title-cont">
               <div className="basic-title-blank"></div>
               <div className="basic-title-text">
-                <h1>Employment Account Information</h1>
+                <ManageAccountsIcon  sx={{fontSize: "30px"}}/><h1 className="MarginLang">Employment Account Information</h1>
               </div>
             </div>
             <div className="employment-detail-cont">
@@ -95,7 +100,7 @@ const AccountInfoItem = (props) => {
             <div className="account-info-title-cont">
               <div className="basic-title-blank"></div>
               <div className="basic-title-text">
-                <h1>Account Information</h1>
+                <SettingsIcon  sx={{fontSize: "30px"}}/><h1 className="MarginLang">Account Information</h1>
               </div>
             </div>
             <div className="account-info-detail-cont">

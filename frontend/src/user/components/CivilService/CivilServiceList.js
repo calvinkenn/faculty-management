@@ -11,6 +11,17 @@ const formatDate = (input) => {
 
   return day + "/" + month + "/" + year;
 };
+
+const formatDateLong = (date) => {
+  const formatter = new Intl.DateTimeFormat("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+  const month1 = formatter.format(new Date(date));
+  return month1;
+};
+
 const CivilServiceList = (props) => {
   if (props.items?.length === 0) {
     return <div>no civil service/s found.</div>;
@@ -23,12 +34,12 @@ const CivilServiceList = (props) => {
           setIsEditModeHandler={props.setIsEditModeHandler}
           career={item.career}
           rating={item.rating}
-          date={formatDate(item.date.substring(0, 10))}
+          date={formatDateLong(item.date)}
           examPlace={item.placeOfExam}
           licenseNumber={item.licenseNumber}
           licenseValidity={
             item.licenseValidity !== null
-              ? formatDate(item.licenseValidity.substring(0, 10))
+              ? formatDateLong(item.licenseValidity)
               : "N/A"
           }
           civilId={item._id}

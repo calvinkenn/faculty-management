@@ -12,6 +12,16 @@ const formatDate = (input) => {
   return day + "/" + month + "/" + year;
 };
 
+const formatDateLong = (date) => {
+  const formatter = new Intl.DateTimeFormat("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+  const month1 = formatter.format(new Date(date));
+  return month1;
+};
+
 function getAge(dateString) {
   var today = new Date();
   var birthDate = new Date(dateString);
@@ -24,6 +34,7 @@ function getAge(dateString) {
 }
 
 const BasicInfo = (props) => {
+  console.log(props.userData.birthDate);
   if (props.isEditMode) {
     return (
       <BasicInfoEdit
@@ -44,7 +55,7 @@ const BasicInfo = (props) => {
         extensionName={props.userData.extensionName}
         bday={
           props.userData.birthday
-            ? formatDate(props.userData.birthday.substring(0, 10))
+            ? formatDateLong(props.userData.birthday)
             : "N/A"
         }
         age={

@@ -14,6 +14,10 @@ import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
+//mikko is here
+import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo';
+//end
+
 const CivilServiceEdit = (props) => {
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
@@ -139,7 +143,7 @@ const CivilServiceEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Licenses</h1>
+            <FeaturedVideoIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Licences</h1>
             </div>
           </div>
           <div className="civil-service-cont">

@@ -6,6 +6,10 @@ import Button from "../../../shared/components/FormElements/Button";
 import "./WorkExperienceItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
+//Mikko is here
+import WorkIcon from '@mui/icons-material/Work';
+//end
+
 const WorkExperienceItem = (props) => {
   const userIdByParams = useParams().userId;
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -90,7 +94,7 @@ const WorkExperienceItem = (props) => {
           <div className="work-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Work Experience - {props.position}</h1>
+              <WorkIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Work Experience - {props.position}</h1>
             </div>
           </div>
           <div className="work-info-details-cont">

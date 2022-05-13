@@ -16,6 +16,11 @@ import {
 import "../../components/EditForm.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
+
+//Mikko is here
+import ArticleIcon from '@mui/icons-material/Article';
+//
+
 const TrainingEdit = (props) => {
   const [inputError, setInputError] = useState();
   const [fromDateVal, setFromDateVal] = useState(new Date());
@@ -185,7 +190,7 @@ const TrainingEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Training and Seminars</h1>
+            <ArticleIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Training and Seminar</h1>
             </div>
           </div>
           <div className="trainings-add-cont">

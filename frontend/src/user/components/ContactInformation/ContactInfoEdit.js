@@ -27,6 +27,13 @@ import {
 import "../../components/EditForm.css";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
+
+//Mikko is here
+import OtherHousesIcon from '@mui/icons-material/OtherHouses';
+import HomeIcon from '@mui/icons-material/Home';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+//end
+
 const ContactInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [isSameAddress, setIsSameAddress] = useState(false);
@@ -352,7 +359,7 @@ const ContactInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Resident Address</h1>
+            <OtherHousesIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Resident Address</h1>
             </div>
           </div>
           <div className="resident-add-edit">
@@ -485,7 +492,7 @@ const ContactInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Permanent Address</h1>
+            <HomeIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Permanent Address</h1>
             </div>
           </div>
           <div className="permanent-address-edit-cont">
@@ -636,7 +643,7 @@ const ContactInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>Contact Information</h1>
+            <ContactPhoneIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Contact Information</h1>
             </div>
           </div>
           <div className="tel-cp-email">

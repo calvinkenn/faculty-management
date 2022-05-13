@@ -7,6 +7,10 @@ import "./EducationalItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { AuthContext } from "../../../shared/context/auth-context";
 
+//mikko is here
+import SchoolIcon from '@mui/icons-material/School';
+//
+
 const EducationalItem = (props) => {
   const userIdByParams = useParams().userId;
 
@@ -88,7 +92,7 @@ const EducationalItem = (props) => {
           <div className="educ-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <h1>{props.level}</h1>
+              <SchoolIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">{props.level}</h1>
             </div>
           </div>
           <div className="educ-details-cont">

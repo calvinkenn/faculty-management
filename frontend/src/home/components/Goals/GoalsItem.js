@@ -13,7 +13,10 @@ const GoalsItem = (props) => {
   return (
     <div className="goals-container">
       <h1>Our Goal</h1>
-      <div>{props.item.goals}</div>
+      <div>
+        To realize the vision and mission of the University, the College commits
+        itself to:
+      </div>
       <div>1.{props.item.g1}</div>
       <div>2.{props.item.g2}</div>
       <div>3.{props.item.g3}</div>

@@ -88,6 +88,9 @@ const GoalsEdit = (props) => {
                     id="goals"
                     type="text"
                     label="Goals"
+                    minRows={3}
+                    style={{ width: 1200 }}
+                    multiline
                     value={x.awards}
                     onChange={(e) => handleInputChange(e, i)}
                   />

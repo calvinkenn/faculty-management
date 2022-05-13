@@ -115,6 +115,9 @@ const ObjectivesEdit = (props) => {
                     id="objectivesBSIT"
                     type="text"
                     label="Objectives BSIT"
+                    minRows={3}
+                    style={{ width: 1200 }}
+                    multiline
                     value={x.awards}
                     onChange={(e) => handleInputChangeBSIT(e, i)}
                   />
@@ -148,6 +151,9 @@ const ObjectivesEdit = (props) => {
                     id="objectivesBLIS"
                     type="text"
                     label="Objectives BLIS"
+                    minRows={3}
+                    style={{ width: 1200 }}
+                    multiline
                     value={x.awards}
                     onChange={(e) => handleInputChangeBLIS(e, i)}
                   />

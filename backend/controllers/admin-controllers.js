@@ -112,21 +112,6 @@ const resetPasswordHandler = async (req, res, next) => {
     permission: "accepted",
   });
 };
-// const acceptPendingUser = async (req, res, next) => {
-//   const { userId } = req.body;
-
-//   const user = await User.findByIdAndUpdate(userId, {
-//     permission: "accepted",
-//   });
-
-//   if (user) {
-//     const pendingUsers = await User.find(
-//       { permission: "pending" },
-//       "-password"
-//     );
-//     res.json({ pendingUsers: pendingUsers, accept: "accepted" });
-//   }
-// };
 
 exports.getActiveUsers = getActiveUsers;
 exports.getPendingUsers = getPendingUsers;

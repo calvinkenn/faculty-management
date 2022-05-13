@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { VALIDATOR_REQUIRE } from "../../../shared/utils/validators";
 import { useForm } from "../../../shared/hooks/form-hook";
 import Modal from "../../../shared/components/UIElements/Modal";
@@ -8,17 +9,27 @@ import Input from "../../../shared/components/FormElements/Input";
 import Button from "../../../shared/components/FormElements/Button";
 
 const ObjectivesEdit = (props) => {
-  const [inputListBSIT, setInputListBSIT] = useState([{ objectivesBSIT: "" }]);
-  const [inputListBLIS, setInputListBLIS] = useState([{ objectivesBLIS: "" }]);
+  const { error, sendRequest, clearError } = useHttpClient();
+  const [inputListBSIT, setInputListBSIT] = useState([{ bsitObjectives: "" }]);
+  const [inputListBLIS, setInputListBLIS] = useState([{ blisObjectives: "" }]);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
+  useEffect(() => {
+    if (props.item_IT) {
+      setInputListBSIT(props.item_IT); //Set inputList to awards data
+    }
+    if (props.item_BLIS) {
+      setInputListBLIS(props.item_BLIS);
+    }
+  }, []);
+
   const [formState, inputHandler, setFormData] = useForm({
-    objectivesBSIT: {
-      value: props.objectivesBSIT,
+    bsitObjectives: {
+      value: inputListBSIT.length > 1 ? inputListBSIT : "",
       isValid: false,
     },
-    objectivesBLIS: {
-      value: props.objectivesBSIT,
+    blisObjectives: {
+      value: inputListBLIS.length > 1 ? inputListBLIS : "",
       isValid: false,
     },
   });
@@ -35,15 +46,32 @@ const ObjectivesEdit = (props) => {
     setShowConfirmModal(false);
   };
 
-  const submitEditHandler = (e) => {
+  const submitEditHandler = async (e) => {
     console.log("Edit");
     e.preventDefault();
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:5000/api/vmgo/editObjectives", //Change to account
+        "PATCH",
+        JSON.stringify({
+          id: props.id,
+          bsitObjectives: inputListBSIT,
+          blisObjectives: inputListBLIS,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      props.messageHandler(responseData.message);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // handle click event of the Add button
   const handleAddClickBSIT = () => {
-    formState.inputs.objectivesBSIT.value = "";
-    setInputListBSIT([...inputListBSIT, { objectivesBSIT: "" }]);
+    formState.inputs.bsitObjectives.value = "";
+    setInputListBSIT([...inputListBSIT, { bsitObjectives: "" }]);
   };
 
   // handle input change
@@ -63,8 +91,8 @@ const ObjectivesEdit = (props) => {
 
   // handle click event of the Add button
   const handleAddClickBLIS = () => {
-    formState.inputs.objectivesBLIS.value = "";
-    setInputListBLIS([...inputListBLIS, { objectivesBLIS: "" }]);
+    formState.inputs.blisObjectives.value = "";
+    setInputListBLIS([...inputListBLIS, { blisObjectives: "" }]);
   };
 
   // handle input change
@@ -111,14 +139,14 @@ const ObjectivesEdit = (props) => {
               <div>
                 <div>
                   <TextField
-                    name="objectivesBSIT"
-                    id="objectivesBSIT"
+                    name="bsitObjectives"
+                    id="bsitObjectives"
                     type="text"
                     label="Objectives BSIT"
                     minRows={3}
                     style={{ width: 1200 }}
                     multiline
-                    value={x.awards}
+                    value={x.bsitObjectives}
                     onChange={(e) => handleInputChangeBSIT(e, i)}
                   />
                   <div className="btn-box">
@@ -147,14 +175,14 @@ const ObjectivesEdit = (props) => {
               <div>
                 <div>
                   <TextField
-                    name="objectivesBLIS"
-                    id="objectivesBLIS"
+                    name="blisObjectives"
+                    id="blisObjectives"
                     type="text"
                     label="Objectives BLIS"
                     minRows={3}
                     style={{ width: 1200 }}
                     multiline
-                    value={x.awards}
+                    value={x.blisObjectives}
                     onChange={(e) => handleInputChangeBLIS(e, i)}
                   />
                   <div className="btn-box">
@@ -175,10 +203,13 @@ const ObjectivesEdit = (props) => {
             );
           })}
         </div>
+        <div className="action-bar">
+          <Button type="submit">Save</Button>
+          <Button type="button" onClick={showEditWarningHandler}>
+            Cancel
+          </Button>
+        </div>
       </form>
-      <div className="action-bar">
-        <Button onClick={showEditWarningHandler}>Cancel</Button>
-      </div>
     </React.Fragment>
   );
 };

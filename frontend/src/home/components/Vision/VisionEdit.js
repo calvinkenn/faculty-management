@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { VALIDATOR_REQUIRE } from "../../../shared/utils/validators";
 import { useForm } from "../../../shared/hooks/form-hook";
 import Modal from "../../../shared/components/UIElements/Modal";
@@ -7,11 +8,12 @@ import Input from "../../../shared/components/FormElements/Input";
 import Button from "../../../shared/components/FormElements/Button";
 
 const VisionEdit = (props) => {
+  const { error, sendRequest, clearError } = useHttpClient();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const [formState, inputHandler, setFormData] = useForm({
     vision: {
-      value: props.vision,
+      value: props.item ? props.item : "",
       isValid: false,
     },
   });
@@ -28,9 +30,25 @@ const VisionEdit = (props) => {
     setShowConfirmModal(false);
   };
 
-  const submitEditHandler = (e) => {
+  const submitEditHandler = async (e) => {
     console.log("Edit");
     e.preventDefault();
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:5000/api/vmgo/editVision", //Change to account
+        "PATCH",
+        JSON.stringify({
+          id: props.id,
+          vision: formState.inputs.vision.value,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      props.messageHandler(responseData.message);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <React.Fragment>
@@ -53,7 +71,7 @@ const VisionEdit = (props) => {
       >
         <p>Do you want to cancel editing Mission?</p>
       </Modal>
-      <form>
+      <form onSubmit={submitEditHandler}>
         <Input
           element="textarea"
           id="vision"
@@ -68,10 +86,13 @@ const VisionEdit = (props) => {
           initialValid={formState.inputs.vision.isValid}
           required
         />
+        <div className="action-bar">
+          <Button type="submit">Save</Button>
+          <Button type="button" onClick={showEditWarningHandler}>
+            Cancel
+          </Button>
+        </div>
       </form>
-      <div className="action-bar">
-        <Button onClick={showEditWarningHandler}>Cancel</Button>
-      </div>
     </React.Fragment>
   );
 };

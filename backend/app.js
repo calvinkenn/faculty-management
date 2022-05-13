@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const usersRoutes = require("./routes/users-routes");
 const adminRoutes = require("./routes/admin-routes");
+const vmgoRoutes = require("./routes/vmgo-routes");
 const HttpError = require("./models/http-error");
 
 const app = express();
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 
 app.use("/api/users", usersRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/vmgo", vmgoRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);

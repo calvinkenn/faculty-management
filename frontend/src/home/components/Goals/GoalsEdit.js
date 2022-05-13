@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { VALIDATOR_REQUIRE } from "../../../shared/utils/validators";
 import { useForm } from "../../../shared/hooks/form-hook";
 import Modal from "../../../shared/components/UIElements/Modal";
@@ -8,12 +9,19 @@ import Input from "../../../shared/components/FormElements/Input";
 import Button from "../../../shared/components/FormElements/Button";
 
 const GoalsEdit = (props) => {
+  const { error, sendRequest, clearError } = useHttpClient();
   const [inputList, setInputList] = useState([{ goals: "" }]);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
+  useEffect(() => {
+    if (props.item) {
+      setInputList(props.item); //Set inputList to awards data
+    }
+  }, []);
+
   const [formState, inputHandler, setFormData] = useForm({
     goals: {
-      value: props.goals,
+      value: inputList.length > 1 ? inputList : "",
       isValid: false,
     },
   });
@@ -30,9 +38,25 @@ const GoalsEdit = (props) => {
     setShowConfirmModal(false);
   };
 
-  const submitEditHandler = (e) => {
+  const submitEditHandler = async (e) => {
     console.log("Edit");
     e.preventDefault();
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:5000/api/vmgo/editGoals", //Change to account
+        "PATCH",
+        JSON.stringify({
+          id: props.id,
+          goals: inputList,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      props.messageHandler(responseData.message);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // handle input change
@@ -59,6 +83,8 @@ const GoalsEdit = (props) => {
   return (
     <React.Fragment>
       <h1>Goals</h1>
+      To realize the vision and mission of the University, the College commits
+      itself to:
       <Modal
         show={showConfirmModal}
         onCancel={closeEditWarningHandler}
@@ -77,7 +103,7 @@ const GoalsEdit = (props) => {
       >
         <p>Do you want to cancel editing Goals?</p>
       </Modal>
-      <form>
+      <form onSubmit={submitEditHandler}>
         <div>
           {inputList.map((x, i) => {
             return (
@@ -91,7 +117,7 @@ const GoalsEdit = (props) => {
                     minRows={3}
                     style={{ width: 1200 }}
                     multiline
-                    value={x.awards}
+                    value={x.goals}
                     onChange={(e) => handleInputChange(e, i)}
                   />
                   <div className="btn-box">
@@ -112,10 +138,13 @@ const GoalsEdit = (props) => {
             );
           })}
         </div>
+        <div className="action-bar">
+          <Button type="submit">Save</Button>
+          <Button type="button" onClick={showEditWarningHandler}>
+            Cancel
+          </Button>
+        </div>
       </form>
-      <div className="action-bar">
-        <Button onClick={showEditWarningHandler}>Cancel</Button>
-      </div>
     </React.Fragment>
   );
 };

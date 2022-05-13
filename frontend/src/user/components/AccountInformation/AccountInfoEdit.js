@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -17,7 +17,7 @@ import "../../components/EditForm.css";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 //mikko is here
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 //end
 const AccountInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
@@ -49,14 +49,6 @@ const AccountInfoEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
     try {
-      const formData = new FormData();
-      formData.append("userId", storedData.userId);
-      formData.append("token", storedData.token);
-      formData.append("employeeNum", formState.inputs.employeeNum.value);
-      formData.append("faculty", formState.inputs.faculty.value);
-      formData.append("employmentType", formState.inputs.employmentType.value);
-      formData.append("email", formState.inputs.email.value);
-
       const responseData = await sendRequest(
         "http://localhost:5000/api/users/editAccountInfo", //Change to account
         "PATCH",
@@ -86,7 +78,8 @@ const AccountInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <ManageAccountsIcon  sx={{fontSize: "30px"}}/><h1 className="MarginLang">Account Information</h1>
+              <ManageAccountsIcon sx={{ fontSize: "30px" }} />
+              <h1 className="MarginLang">Account Information</h1>
             </div>
           </div>
           <div className="acc-details-edit">

@@ -4,18 +4,20 @@ import "./Mission.css";
 import MissionEdit from "./MissionEdit";
 import MissionItem from "./MissionItem";
 
-const DUMMY_DATA = {
-  mission:
-    "Bulacan State University is a progressive knowledge-generating institution globally recognized for excellent instruction, pioneering research, and responsive community engagements.",
-};
-
 const Mission = (props) => {
   if (props.isEditMode) {
-    return <MissionEdit editModeHandler={props.updateEditModeState} />;
+    return (
+      <MissionEdit
+        editModeHandler={props.updateEditModeState}
+        item={props.vmgo.mission}
+        id={props.vmgo._id}
+        messageHandler={props.messageHandler}
+      />
+    );
   } else {
     return (
       <MissionItem
-        item={DUMMY_DATA.mission}
+        item={props.vmgo.mission}
         editModeHandler={props.updateEditModeState}
       />
     );

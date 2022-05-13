@@ -10,9 +10,9 @@ import Button from "../../../shared/components/FormElements/Button";
 import "./OverviewItem.css";
 
 //mikko is here
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import OtherHousesIcon from '@mui/icons-material/OtherHouses';
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import OtherHousesIcon from "@mui/icons-material/OtherHouses";
+import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 //end
 
 const OverviewItem = (props) => {
@@ -84,7 +84,8 @@ const OverviewItem = (props) => {
           <div className="basic-info-title">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <AccountCircleIcon  sx={{fontSize: "30px"}}/><h1 className="Marginlang">Basic Information</h1>
+              <AccountCircleIcon sx={{ fontSize: "30px" }} />
+              <h1 className="Marginlang">Basic Information</h1>
             </div>
           </div>
           <div>Employee Number: {props.employeeNumber}</div>
@@ -94,7 +95,7 @@ const OverviewItem = (props) => {
           <div>Suffix Name: {props.suffixName ? props.suffixName : "N/A"}</div>
           <div>
             Extension Name:{" "}
-            {props.extensionName > 0
+            {props.extensionName && props.extensionName[0].extensionName !== ""
               ? props.extensionName?.map((extension) => (
                   <span> {extension.extensionName} </span>
                 ))
@@ -107,7 +108,8 @@ const OverviewItem = (props) => {
           <div className="basic-info-title">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <OtherHousesIcon  sx={{fontSize: "30px"}}/><h1 className="Marginlang">Resident Address</h1>
+              <OtherHousesIcon sx={{ fontSize: "30px" }} />
+              <h1 className="Marginlang">Resident Address</h1>
             </div>
           </div>
           <div>House no.: {props.houseNo ? props.houseNo : "N/A"}</div>
@@ -124,7 +126,8 @@ const OverviewItem = (props) => {
           <div className="basic-info-title">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <ContactPhoneIcon  sx={{fontSize: "30px"}}/><h1 className="Marginlang">Contact Information</h1>
+              <ContactPhoneIcon sx={{ fontSize: "30px" }} />
+              <h1 className="Marginlang">Contact Information</h1>
             </div>
           </div>
           <div>

@@ -11,6 +11,9 @@ const vmgoSchema = mongoose.Schema({
     default:
       "Bulacan State University exists to provide highly competent, ethical and service-oriented professionals that contribute to the sustainable socio-economic growth and development of the nation.",
   },
+  goals: [{ type: Object }],
+  bsitObjectives: [{ type: Object }],
+  blisObjectives: [{ type: Object }],
 });
 
 module.exports = mongoose.model("VMGO", vmgoSchema);

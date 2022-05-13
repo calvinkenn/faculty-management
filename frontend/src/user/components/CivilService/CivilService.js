@@ -5,20 +5,10 @@ import CivilServiceEdit from "./CivilServiceEdit";
 import CivilServiceList from "./CivilServiceList";
 
 const CivilService = (props) => {
-  const [userData, setUserData] = useState([]);
-  const [success, setSuccess] = useState();
   const [editData, setEditData] = useState();
   const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState(0);
   const [currentItems, setCurrentItems] = useState(null);
-
-  const clearSuccess = () => {
-    setSuccess(null);
-  };
-  const setAddedData = (userData, success) => {
-    setUserData(userData);
-    setSuccess(success);
-  };
 
   const setId = (editData) => {
     setEditData(editData);
@@ -37,8 +27,8 @@ const CivilService = (props) => {
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(props.civilServiceData?.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(props.civilServiceData?.length / displayPerPage));
-  }, [itemOffset, 5, props.civilServiceData?.length]);
-
+  }, [itemOffset, 5, props.civilServiceData]);
+console.log("WEW")
   const handlePageClick = (event) => {
     const newOffset =
       (event.selected * displayPerPage) % props.civilServiceData?.length;

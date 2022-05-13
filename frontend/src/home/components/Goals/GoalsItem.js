@@ -17,10 +17,11 @@ const GoalsItem = (props) => {
         To realize the vision and mission of the University, the College commits
         itself to:
       </div>
-      <div>1.{props.item.g1}</div>
-      <div>2.{props.item.g2}</div>
-      <div>3.{props.item.g3}</div>
-      <div>4.{props.item.g4}</div>
+      {props.item?.map((item, index) => (
+        <div>
+          {index + 1}.{" "} {item.goals}
+        </div>
+      ))}
       {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
     </div>
   );

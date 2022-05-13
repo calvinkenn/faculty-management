@@ -36,7 +36,7 @@ const WorkExperience = (props) => {
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(props.workData?.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(props.workData?.length / displayPerPage));
-  }, [itemOffset, 5, props.workData?.length]);
+  }, [itemOffset, 5, props.workData]);
 
   const handlePageClick = (event) => {
     const newOffset =

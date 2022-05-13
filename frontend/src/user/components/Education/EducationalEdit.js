@@ -49,22 +49,10 @@ const EducationalEdit = (props) => {
         value: props.editData ? props.editData.degree : "",
         isValid: false,
       },
-      // fromDate: {
-      //   value: props.editData ? props.editData.fromDate : "",
-      //   isValid: false,
-      // },
-      // toDate: {
-      //   value: props.editData ? props.editData.toDate : "",
-      //   isValid: false,
-      // },
       highestLevel: {
         value: props.editData ? props.editData.highestLevel : "",
         isValid: false,
       },
-      // yearGraduated: {
-      //   value: props.editData ? props.editData.yearGraduated : "",
-      //   isValid: false,
-      // },
       awards: {
         value: inputList.length > 1 ? inputList : "",
         isValid: false,
@@ -324,31 +312,6 @@ const EducationalEdit = (props) => {
                   <TextField {...params} helperText={null} />
                 )}
               />
-              {/* <Input
-                element="year"
-                id="fromDate"
-                type="number"
-                label="From - year"
-                validators={[VALIDATOR_MINLENGTH(4)]}
-                helperText="Please input the year it started"
-                onInput={inputHandler}
-                initialValue={formState.inputs.fromDate.value}
-                initialValid={formState.inputs.fromDate.isValid}
-                required
-              />
-              <span />
-              <Input
-                element="year"
-                id="toDate"
-                type="number"
-                label="To - year"
-                validators={[VALIDATOR_MINLENGTH(4)]}
-                helperText="Please input the year it ended"
-                onInput={inputHandler}
-                initialValue={formState.inputs.toDate.value}
-                initialValid={formState.inputs.toDate.isValid}
-                required
-              /> */}
               <span />
               <DatePicker
                 views={["year"]}
@@ -361,18 +324,6 @@ const EducationalEdit = (props) => {
                   <TextField {...params} helperText={null} />
                 )}
               />
-              {/* <Input
-                element="year"
-                id="yearGraduated"
-                type="number"
-                label="Year Graduated"
-                validators={[VALIDATOR_MINLENGTH(4)]}
-                helperText="Please input the year graduated"
-                onInput={inputHandler}
-                initialValue={formState.inputs.yearGraduated.value}
-                initialValid={formState.inputs.yearGraduated.isValid}
-                required
-              /> */}
             </div>
             <div className="acad-honor">
               {inputList.map((x, i) => {

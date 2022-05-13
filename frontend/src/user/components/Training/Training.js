@@ -54,7 +54,7 @@ const Training = (props) => {
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(filteredDataToShow?.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(filteredDataToShow?.length / displayPerPage));
-  }, [itemOffset, 5, filteredDataToShow?.length]);
+  }, [itemOffset, 5, filteredDataToShow]);
 
   const handlePageClick = (event) => {
     const newOffset =

@@ -120,12 +120,14 @@ const ObjectivesEdit = (props) => {
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
+            <div className="obj-cancel-edit">
             <Button danger onClick={cancelEditHandler}>
               Yes
             </Button>
             <Button inverse onClick={closeEditWarningHandler}>
               No
             </Button>
+            </div>
           </React.Fragment>
         }
       >
@@ -152,14 +154,14 @@ const ObjectivesEdit = (props) => {
                   <div className="btn-box">
                     {inputListBSIT.length !== 1 && (
                       <button
-                        className="mr10"
+                        className="obj-remove-add"
                         onClick={() => handleRemoveClickBSIT(i)}
                       >
                         Remove
                       </button>
                     )}
                     {inputListBSIT.length - 1 === i && (
-                      <button onClick={handleAddClickBSIT}>Add</button>
+                      <button className="obj-remove-add"onClick={handleAddClickBSIT}>Add</button>
                     )}
                   </div>
                 </div>
@@ -188,14 +190,14 @@ const ObjectivesEdit = (props) => {
                   <div className="btn-box">
                     {inputListBLIS.length !== 1 && (
                       <button
-                        className="mr10"
+                        className="obj-remove-add"
                         onClick={() => handleRemoveClickBLIS(i)}
                       >
                         Remove
                       </button>
                     )}
                     {inputListBLIS.length - 1 === i && (
-                      <button onClick={handleAddClickBLIS}>Add</button>
+                      <button className="obj-remove-add" onClick={handleAddClickBLIS}>Add</button>
                     )}
                   </div>
                 </div>
@@ -204,10 +206,12 @@ const ObjectivesEdit = (props) => {
           })}
         </div>
         <div className="action-bar">
+          <div className="obj-action-bar">
           <Button type="submit">Save</Button>
           <Button type="button" onClick={showEditWarningHandler}>
             Cancel
           </Button>
+          </div>
         </div>
       </form>
     </React.Fragment>

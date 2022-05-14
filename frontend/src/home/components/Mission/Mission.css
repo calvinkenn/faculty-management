@@ -1,4 +1,21 @@
 .mission-container {
   box-sizing: border-box;
   width: 100%;
+  
 }
+.mission-edit{
+  width: 10%;
+  text-align: center;
+  margin: auto;
+}
+.mission-cancel-edit{
+  width: 20%;
+  text-align: center;
+  margin: auto;
+}
+.mission-action-bar{
+  width: 15%;
+  text-align: center;
+  margin: auto;
+}
+

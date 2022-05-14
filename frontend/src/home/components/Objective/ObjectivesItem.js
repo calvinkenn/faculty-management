@@ -29,7 +29,9 @@ const ObjectivesItem = (props) => {
           {index + 1}. {item.blisObjectives}
         </div>
       ))}
+      <div className="goals-edit">
       {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
+    </div>
     </div>
   );
 };

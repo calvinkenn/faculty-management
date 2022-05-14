@@ -14,7 +14,9 @@ const VisionItem = (props) => {
     <div className="vision-container">
       <h1>Our Vision</h1>
       {props.item}
+      <div className="vission-edit">
       {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
+      </div>
     </div>
   );
 };

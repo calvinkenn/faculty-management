@@ -1,4 +1,29 @@
 .objectives-container {
   box-sizing: border-box;
   width: 100%;
+  background-color: white;
+}
+.obj-edit{
+  width: 10%;
+  text-align: center;
+  margin: auto;
+}
+.obj-cancel-edit{
+  width: 20%;
+  text-align: center;
+  margin: auto;
+}
+.obj-action-bar{
+  width: 15%;
+  text-align: center;
+  margin: auto;
+}
+.obj-remove-add{
+  width: 7%;
+  text-align: center;
+  margin: auto;
+  background-color: #ffc000;
+  color: white;
+  font-size: large;
+  border-color: #ffc000;
 }

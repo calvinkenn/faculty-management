@@ -24,7 +24,7 @@ const PrintData = (props) => {
   const activeAccountData = () => {
     return (
       <table>
-        <tr>
+        <tr className="table-header">
           <th onClick={() => requestSort("employeeNum")}>Employee Number</th>
           <th onClick={() => requestSort("email")}>Email</th>
           <th onClick={() => requestSort("faculty")}>Faculty</th>
@@ -63,7 +63,7 @@ const PrintData = (props) => {
 
   return (
     <div>
-      <button onClick={handlePrint}>Print</button>
+      <button onClick={handlePrint} className='print-button'>Print</button>
       <ComponentToPrint data={activeAccountData()} ref={componentRef} />
     </div>
   );

@@ -1,20 +1,24 @@
 .vmgo-main {
   display: flex;
   flex-direction: column;
-  background-color: #f4f7ff;
+  /* background-color: #f4f7ff; */
 }
 
 .vmgo-main-container {
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
 }
 
 .vmgo-container {
   box-sizing: border-box;
-  width: 95%;
+  /* width: 95%; */
   padding: 0;
   text-align: left;
   box-sizing: border-box;
-  margin: 75px 10px 0 10px;
-  background-color: #f4f7ff;
+  /* margin: 75px 10px 0 10px;
+  background-color: #f4f7ff; */
+}
+.cict-banner img{
+  width: 100%;
+  object-fit: cover;
 }

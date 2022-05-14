@@ -8,6 +8,7 @@ import Goals from "../components/Goals/Goals";
 import Mission from "../components/Mission/Mission";
 import Objectives from "../components/Objective/Objectives";
 import Vision from "../components/Vision/Vision";
+import Banner from "../../../src/assets/Image/Banner.png";
 import "./VMGO.css";
 
 const VMGO = (props) => {
@@ -80,6 +81,9 @@ const VMGO = (props) => {
       <div className="vmgo-main">
         <div className="vmgo-main-container">
           <MainNavigation inVMGO={true} />
+          <div className="cict-banner">
+            <img src={Banner} />
+          </div>
           <div className="vmgo-container">
             <Mission
               isEditMode={missionEditMode}

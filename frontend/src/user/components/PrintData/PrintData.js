@@ -152,7 +152,7 @@ const PrintData = (props) => {
 
   const activeAccountData = () => {
     return (
-      <div>
+      <div className="print-data">
         <center>
           <h1>PERSONAL DATA</h1>
         </center>
@@ -168,32 +168,24 @@ const PrintData = (props) => {
             />
           </div>
         </div>
-        <table>
+        <table cellPadding={3}>
           <tr>
-            <th>I. Personal Information</th>
+            <th colSpan={8}>I. Personal Information</th>
           </tr>
           <tr>
-            <td>Surname</td>
-            <td>{props.userData.lastName ? props.userData.lastName : "N/A"}</td>
-          </tr>
-          <tr>
-            <td>First Name</td>
-            <td>{props.userData.firstName}</td>
-          </tr>
-          <tr>
-            <td>Middle Name</td>
-            <td>
-              {props.userData.middleName ? props.userData.middleName : "N/A"}
+            <td rowSpan={3} className="print-label">Surname
+            <br></br>
+              <br></br>
+              First Name
+              <br></br>
+              <br></br>
+              Middle Name
             </td>
+            <td colSpan={7}>{props.userData.lastName ? props.userData.lastName : "N/A"}</td>
           </tr>
           <tr>
-            <td>Suffix Name</td>
-            <td>
-              {props.userData.suffixName ? props.userData.suffixName : "N/A"}
-            </td>
-          </tr>
-          <tr>
-            <td>Extension Name</td>
+            <td colSpan={4}>{props.userData.firstName}</td>
+            <td colSpan={2} className="print-label">Extension Name</td>
             <td>
               {props.userData.extensionName > 0
                 ? props.userData.extensionName?.map((extension) => (
@@ -203,26 +195,69 @@ const PrintData = (props) => {
             </td>
           </tr>
           <tr>
-            <td>Date of Birth</td>
+            <td colSpan={4}>
+              {props.userData.middleName ? props.userData.middleName : "N/A"}
+            </td>
+            <td colSpan={2} className="print-label">Suffix Name</td>
             <td>
+              {props.userData.suffixName ? props.userData.suffixName : "N/A"}
+            </td>
+          </tr>
+          <tr>
+            <td className="print-label">Date of Birth</td>
+            <td colSpan={2} >
               {props.userData.birthday
                 ? formatDate(props.userData.birthday.substring(0, 10))
                 : "N/A"}
             </td>
-          </tr>
-          <tr>
-            <td>Sex</td>
+            <td className="print-label">Place of Birth</td>
+            <td colSpan={2}>
+              {props.userData.placeofBirth
+                ? props.userData.placeofBirth
+                : "N/A"}
+            </td>
+            <td className="print-label">Sex</td>
             <td>{props.userData.gender ? props.userData.gender : "N/A"}</td>
           </tr>
           <tr>
-            <td>Civil Status</td>
-            <td>
+            <td className="print-label">Civil Status</td>
+            <td colSpan={2}>
               {props.userData.civilStatus ? props.userData.civilStatus : "N/A"}
+            </td>
+
+            <td rowSpan={3} className ="print-label">Residential Address</td>
+            <td colSpan={4} rowSpan ={3}>
+              <table cellPadding={0} cellSpacing = {0} className="address-table">
+                <tr>
+                  <td className="print-label">House no.:</td>
+                  <td>{props.userData.houseNoR ? props.userData.houseNoR : "N/A"}</td>
+                  <td className="print-label">Street:</td>
+                  <td>{props.userData.streetR ? props.userData.streetR : "N/A"}</td>
+                </tr>
+                <tr>
+                <td className="print-label">Subdivision:</td>
+                  <td>{props.userData.locationTypeR
+                ? props.userData.locationTypeR
+                : "N/A"}</td>
+                  <td className="print-label">Barangay:</td>
+                  <td>{barangayNameR ? barangayNameR : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td className="print-label">City:</td>
+                  <td>{cityNameR ? cityNameR : "N/A"}</td>
+                  <td className="print-label">Province:</td>
+                  <td>{provinceNameR ? provinceNameR : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td className="print-label">Zip Code:</td>
+                  <td>{props.userData.zipR ? props.userData.zipR : "N/A"}</td>
+                </tr>
+              </table>
             </td>
           </tr>
           <tr>
-            <td>Height</td>
-            <td>
+            <td className="print-label">Height</td>
+            <td colSpan={2}>
               {props.userData.height
                 ? formatHeight(props.userData.height)
                 : "N/A"}{" "}
@@ -234,121 +269,96 @@ const PrintData = (props) => {
             </td>
           </tr>
           <tr>
-            <td>Weight</td>
-            <td>
+            <td className="print-label" >Weight</td>
+            <td colSpan={2}>
               {props.userData.weight ? props.userData.weight + "kg" : "N/A"}
             </td>
           </tr>
           <tr>
-            <td>Blodtype</td>
-            <td>
+            <td className ="print-label">Blodtype</td>
+            <td colSpan={2}>
               {props.userData.bloodType ? props.userData.bloodType : "N/A"}
+            </td>
+            <td rowSpan={4} className ="print-label">Pemanent Address</td>
+            <td colSpan={4} rowSpan ={4}>
+            <table cellPadding={0} cellSpacing = {0} className="address-table">
+                <tr>
+                  <td className="print-label">House no.:</td>
+                  <td>{props.userData.houseNoP ? props.userData.houseNoP : "N/A"}</td>
+                  <td className="print-label">Street:</td>
+                  <td>{props.userData.streetP ? props.userData.streetP : "N/A"}</td>
+                </tr>
+                <tr>
+                <td className="print-label">Subdivision:</td>
+                  <td>{props.userData.locationTypeP
+                ? props.userData.locationTypeP
+                : "N/A"}</td>
+                  <td className="print-label">Barangay:</td>
+                  <td>{barangayNameP ? barangayNameP : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td className="print-label">City:</td>
+                  <td>{cityNameP ? cityNameP : "N/A"}</td>
+                  <td className="print-label">Province:</td>
+                  <td>{provinceNameP ? provinceNameP : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td className="print-label">Zip Code:</td>
+                  <td>{props.userData.zipP ? props.userData.zipP : "N/A"}</td>
+                </tr>
+              </table>
             </td>
           </tr>
           <tr>
-            <td>GSS ID</td>
-            <td>{props.userData.gssId ? props.userData.gssId : "N/A"}</td>
+            <td className ="print-label">GSS ID</td>
+            <td colSpan={2}>{props.userData.gssId ? props.userData.gssId : "N/A"}</td>
           </tr>
           <tr>
-            <td>PAGIBIG ID</td>
-            <td>
+            <td className ="print-label">PAGIBIG ID</td>
+            <td colSpan={2}>
               {props.userData.pagibigId ? props.userData.pagibigId : "N/A"}
             </td>
           </tr>
           <tr>
-            <td>PHILHEALTH</td>
-            <td>
+            <td className ="print-label" >PHILHEALTH</td>
+            <td colSpan={2}>
               {props.userData.philHealthId
                 ? props.userData.philHealthId
                 : "N/A"}
             </td>
           </tr>
           <tr>
-            <td>SSS NO</td>
-            <td>{props.userData.sssNo ? props.userData.sssNo : "N/A"}</td>
+            <td className ="print-label">SSS NO</td>
+            <td colSpan={2}>{props.userData.sssNo ? props.userData.sssNo : "N/A"}</td>
+            <td className ="print-label">Telephone no.</td>
+            <td colSpan={4}> {props.userData.telephoneNum ? props.userData.telephoneNum : "N/A"}</td>
           </tr>
           <tr>
-            <td>TIN NO</td>
-            <td>{props.userData.tinNo ? props.userData.tinNo : "N/A"}</td>
+            <td className ="print-label">TIN NO</td>
+            <td colSpan={2}>{props.userData.tinNo ? props.userData.tinNo : "N/A"}</td>
+            <td className ="print-label">Cellphone no.</td>
+            <td colSpan={4}>{props.userData.cellphoneNum ? props.userData.cellphoneNum : "N/A"}</td>
           </tr>
           <tr>
-            <td>Citizenship</td>
-            <td>
+            <td className ="print-label">Citizenship</td>
+            <td colSpan={2}>
               {props.userData.citizenship ? props.userData.citizenship : "N/A"}
             </td>
+            <td className ="print-label">Alternate Email</td>
+            <td colSpan={4}>{props.userData.alternateEmail ? props.userData.alternateEmail : "N/A"}</td>
           </tr>
           <tr>
-            <td>Residential Address</td>
-            <td>
-              House no.:
-              {props.userData.houseNoR ? props.userData.houseNoR : "N/A"}
-              <br />
-              Street:{props.userData.streetR ? props.userData.streetR : "N/A"}
-              <br />
-              Subdivision:
-              {props.userData.locationTypeR
-                ? props.userData.locationTypeR
-                : "N/A"}
-              <br />
-              Region: {regionNameR ? regionNameR : "N/A"}
-              <br />
-              Province:{provinceNameR ? provinceNameR : "N/A"}
-              <br />
-              City: {cityNameR ? cityNameR : "N/A"}
-              <br />
-              Barangay: {barangayNameR ? barangayNameR : "N/A"}
-              <br />
-              Zip Code:{props.userData.zipR ? props.userData.zipR : "N/A"}
-            </td>
+            <th colSpan={8}>II. Educational Background</th>
           </tr>
           <tr>
-            <td>Permanent Address</td>
-            <td>
-              House no.:
-              {props.userData.houseNoP ? props.userData.houseNoP : "N/A"}
-              <br />
-              Street:{props.userData.streetP ? props.userData.streetP : "N/A"}
-              <br />
-              Subdivision:
-              {props.userData.locationTypeP
-                ? props.userData.locationTypeP
-                : "N/A"}
-              <br />
-              Region: {regionNameP ? regionNameP : "N/A"}
-              <br />
-              Province:{provinceNameP ? provinceNameP : "N/A"}
-              <br />
-              City: {cityNameP ? cityNameP : "N/A"}
-              <br />
-              Barangay: {barangayNameP ? barangayNameP : "N/A"}
-              <br />
-              Zip Code:{props.userData.zipP ? props.userData.zipP : "N/A"}
-            </td>
-          </tr>
-          <tr>
-            <td>Telephone no.</td>
-            <td> {props.telephoneNum ? props.telephoneNum : "N/A"}</td>
-          </tr>
-          <tr>
-            <td>Cellphone no.</td>
-            <td>{props.cellphoneNum ? props.cellphoneNum : "N/A"}</td>
-          </tr>
-          <tr>
-            <td>Alternate Email</td>
-            <td>{props.alternateEmail ? props.alternateEmail : "N/A"}</td>
-          </tr>
-          <tr>
-            <th>II. Educational Background</th>
-          </tr>
-          <tr>
-            <td>Level</td>
-            <td>Name of School</td>
-            <td>Degree</td>
-            <td>From</td>
-            <td>To</td>
-            <td>Highest Level/ Units Earned:</td>
-            <td>Year Graduated</td>
-            <td>Scholarship/Academic Honors</td>
+            <td className ="print-label">Level</td>
+            <td className ="print-label">Name of School</td>
+            <td className ="print-label">Degree</td>
+            <td className ="print-label">From</td>
+            <td className ="print-label">To</td>
+            <td className ="print-label">Highest Level/ Units Earned:</td>
+            <td className ="print-label">Year Graduated</td>
+            <td className ="print-label">Scholarship/Academic Honors</td>
           </tr>
           {props.educationData?.length > 0 ? (
             props.educationData?.map((item) => (
@@ -380,7 +390,7 @@ const PrintData = (props) => {
             </tr>
           )}
           <tr>
-            <th>III. Civil Service Eligibility</th>
+            <th colSpan={8}>III. Civil Service Eligibility</th>
           </tr>
           <tr>
             <td>Career</td>
@@ -388,7 +398,7 @@ const PrintData = (props) => {
             <td>Date of Examination</td>
             <td>Place of Examination</td>
             <td>License No.</td>
-            <td>Date of Validity</td>
+            <td colSpan={3}>Date of Validity</td>
           </tr>
           {props.civilServiceData?.length > 0 ? (
             props.civilServiceData?.map((item) => (
@@ -398,7 +408,7 @@ const PrintData = (props) => {
                 <td>{formatDate(item.date.substring(0, 10))}</td>
                 <td>{item.placeOfExam}</td>
                 <td>{item.licenseNumber ? item.licenseNumber : "N/A"}</td>
-                <td>
+                <td colSpan={3}>
                   {item.licenseValidity
                     ? formatDate(item.licenseValidity.substring(0, 10))
                     : "N/A"}
@@ -412,11 +422,11 @@ const PrintData = (props) => {
               <td>N/A</td>
               <td>N/A</td>
               <td>N/A</td>
-              <td>N/A</td>
+              <td colSpan={3}>N/A</td>
             </tr>
           )}
           <tr>
-            <th>IV. Work Experience</th>
+            <th colSpan={8}>IV. Work Experience</th>
           </tr>
           <tr>
             <td>From</td>
@@ -425,7 +435,7 @@ const PrintData = (props) => {
             <td>Department/Agency/Office/Company</td>
             <td>Monthly Salary</td>
             <td>Salary Grade/Salary Step</td>
-            <td>Gov't Service</td>
+            <td colSpan={2}>Gov't Service</td>
           </tr>
           {props.workData?.length > 0 ? (
             props.workData?.map((item) => (
@@ -449,11 +459,11 @@ const PrintData = (props) => {
               <td>N/A</td>
               <td>N/A</td>
               <td>N/A</td>
-              <td>N/A</td>
+              <td colSpan={2}>N/A</td>
             </tr>
           )}
           <tr>
-            <th>
+            <th colSpan={8}>
               V. LEARNING AND DEVELOPMENT (L{"&"}D) INTERVENTIONS/TRAINING
               PROGRAMS ATTENDED
             </th>
@@ -464,7 +474,7 @@ const PrintData = (props) => {
             <td>To</td>
             <td>Number of Hours</td>
             <td>Type of LD</td>
-            <td>Conducted/Sponsored By</td>
+            <td colSpan={3}>Conducted/Sponsored By</td>
           </tr>
           {props.trainingData > 0 ? (
             props.trainingData?.map((item) => (
@@ -474,7 +484,7 @@ const PrintData = (props) => {
                 <td>{item.toDate}</td>
                 <td>{item.hours}</td>
                 <td>{item.typeOfLearning}</td>
-                <td>{item.conducted}</td>
+                <td colSpan={3}>{item.conducted}</td>
               </tr>
             ))
           ) : (
@@ -484,7 +494,7 @@ const PrintData = (props) => {
               <td>N/A</td>
               <td>N/A</td>
               <td>N/A</td>
-              <td>N/A</td>
+              <td colSpan={3}>N/A</td>
             </tr>
           )}
         </table>
@@ -498,7 +508,7 @@ const PrintData = (props) => {
 
   return (
     <div>
-      <button onClick={handlePrint}>Print</button>
+      <button onClick={handlePrint} className = "print-button">Print</button>
       <ComponentToPrint data={activeAccountData()} ref={componentRef} />
     </div>
   );

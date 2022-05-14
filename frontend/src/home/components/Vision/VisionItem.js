@@ -13,7 +13,7 @@ const VisionItem = (props) => {
   return (
     <div className="vision-container">
       <h1>Our Vision</h1>
-      {props.item}
+      <span>{props.item}</span>
       <div className="vission-edit">
       {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
       </div>

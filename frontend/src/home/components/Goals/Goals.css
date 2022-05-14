@@ -20,9 +20,13 @@
 .goals-remove-add{
   width: 7%;
   text-align: center;
-  margin: auto;
   background-color: #ffc000;
   color: white;
   font-size: large;
   border-color: #ffc000;
+}
+.btn-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

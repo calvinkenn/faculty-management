@@ -1,14 +1,13 @@
 .vision-container {
   box-sizing: border-box;
   width: 100%;
-  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .vission-edit{
-  width: 10%;
+  width: 7%;
   text-align: center;
   margin: auto;
 }

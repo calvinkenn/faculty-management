@@ -2,9 +2,13 @@
   box-sizing: border-box;
   width: 100%;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .obj-edit{
-  width: 10%;
+  width: 7%;
   text-align: center;
   margin: auto;
 }
@@ -26,4 +30,8 @@
   color: white;
   font-size: large;
   border-color: #ffc000;
+}
+.objectives-container span{
+  text-align: center;
+  width: 50%;
 }

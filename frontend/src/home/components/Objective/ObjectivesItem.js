@@ -15,21 +15,21 @@ const ObjectivesItem = (props) => {
       <h1>Bachelor of Science in Information Technology Program Objectives</h1>
       <div>The following are the objectives of the BSIT program:</div>
       {props.item_IT?.map((item, index) => (
-        <div>
+        <span>
           {" "}
           {index + 1}. {item.bsitObjectives}
-        </div>
+        </span>
       ))}
       <br />
       <h1>Bachelor of Library and Information Science Program Objectives</h1>
       <div>The following are the objectives of the BLIS program:</div>
       {props.item_BLIS?.map((item, index) => (
-        <div>
+        <span>
           {" "}
           {index + 1}. {item.blisObjectives}
-        </div>
+        </span>
       ))}
-      <div className="goals-edit">
+      <div className="obj-edit">
       {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
     </div>
     </div>

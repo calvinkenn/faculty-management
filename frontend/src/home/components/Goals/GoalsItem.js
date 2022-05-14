@@ -18,9 +18,9 @@ const GoalsItem = (props) => {
         itself to:
       </div>
       {props.item?.map((item, index) => (
-        <div>
-          {index + 1}.{" "} {item.goals}
-        </div>
+        
+          <span>{index + 1}.{" "} {item.goals}</span>
+      
       ))}
       <div className="goals-edit">
       {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}

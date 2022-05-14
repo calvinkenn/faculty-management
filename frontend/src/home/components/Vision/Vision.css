@@ -1,4 +1,20 @@
 .vision-container {
   box-sizing: border-box;
   width: 100%;
+  background-color: white;
+}
+.vission-edit{
+  width: 10%;
+  text-align: center;
+  margin: auto;
+}
+.vission-cancel-edit{
+  width: 20%;
+  text-align: center;
+  margin: auto;
+}
+.vission-action-bar{
+  width: 15%;
+  text-align: center;
+  margin: auto;
 }

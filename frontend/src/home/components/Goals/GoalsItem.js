@@ -22,7 +22,9 @@ const GoalsItem = (props) => {
           {index + 1}.{" "} {item.goals}
         </div>
       ))}
+      <div className="goals-edit">
       {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
+      </div>
     </div>
   );
 };

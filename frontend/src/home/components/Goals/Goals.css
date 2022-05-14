@@ -2,3 +2,27 @@
   box-sizing: border-box;
   width: 100%;
 }
+.goals-edit{
+  width: 10%;
+  text-align: center;
+  margin: auto;
+}
+.goals-cancel-edit{
+  width: 20%;
+  text-align: center;
+  margin: auto;
+}
+.goals-action-bar{
+  width: 15%;
+  text-align: center;
+  margin: auto;
+}
+.goals-remove-add{
+  width: 7%;
+  text-align: center;
+  margin: auto;
+  background-color: #ffc000;
+  color: white;
+  font-size: large;
+  border-color: #ffc000;
+}

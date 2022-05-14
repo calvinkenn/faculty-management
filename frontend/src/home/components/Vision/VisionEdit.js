@@ -60,12 +60,14 @@ const VisionEdit = (props) => {
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
+            <div className="vission-cancel-edit">
             <Button danger onClick={cancelEditHandler}>
               Yes
             </Button>
             <Button inverse onClick={closeEditWarningHandler}>
               No
             </Button>
+            </div>
           </React.Fragment>
         }
       >
@@ -87,10 +89,12 @@ const VisionEdit = (props) => {
           required
         />
         <div className="action-bar">
+        <div className="mission-action-bar">
           <Button type="submit">Save</Button>
           <Button type="button" onClick={showEditWarningHandler}>
             Cancel
           </Button>
+          </div>
         </div>
       </form>
     </React.Fragment>

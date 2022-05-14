@@ -7,12 +7,14 @@ import MissionItem from "./MissionItem";
 const Mission = (props) => {
   if (props.isEditMode) {
     return (
+      
       <MissionEdit
         editModeHandler={props.updateEditModeState}
         item={props.vmgo.mission}
         id={props.vmgo._id}
         messageHandler={props.messageHandler}
       />
+      
     );
   } else {
     return (

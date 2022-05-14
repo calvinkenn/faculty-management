@@ -1,24 +1,41 @@
 table {
-  font-family: arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
-
+.address-table td{
+  border-collapse: collapse;
+  border: none
+}
+.print-label{
+  background-color: #F2F2F2;
+  font-weight: bold;
+}
+.print-tab{
+  display: inline-block;
+  margin-left: 40px;
+}
 .profile-image {
   display: flex;
   flex-wrap: wrap;
-  width: 50%;
+  width: 100%;
+  text-align: center;
 }
 
 .profile-image .image {
-  width: 50%;
+  width: 100%;
+  height: 100%;
 }
 
 /* 2x2 size */
 .profile-image img {
-  width: calc(100% - (20px * 2));
+  width: 2in;
+  height: 2in;
+  object-fit: cover;
+  border-radius: 50%;
   margin: 20px;
 }
+
 
 /* td,
 th {

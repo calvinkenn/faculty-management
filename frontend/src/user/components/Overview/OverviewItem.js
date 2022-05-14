@@ -95,7 +95,7 @@ const OverviewItem = (props) => {
           <div>Suffix Name: {props.suffixName ? props.suffixName : "N/A"}</div>
           <div>
             Extension Name:{" "}
-            {props.extensionName && props.extensionName[0].extensionName !== ""
+            {props.extensionName?.length > 0
               ? props.extensionName?.map((extension) => (
                   <span> {extension.extensionName} </span>
                 ))

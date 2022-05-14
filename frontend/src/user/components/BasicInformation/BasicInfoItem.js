@@ -36,8 +36,7 @@ const BasicInfoItem = (props) => {
             </div>
             <div>
               Extension Name:
-              {props.extensionName &&
-              props.extensionName[0].extensionName !== ""
+              {props.extensionName?.length > 0
                 ? props.extensionName?.map((extension) => (
                     <span> {extension.extensionName} </span>
                   ))

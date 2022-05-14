@@ -72,6 +72,7 @@ const signup = async (req, res, next) => {
   //if not create a new user
   const createdUser = new User({
     dateOfRegistration: new Date(),
+    attempts: 0,
     employeeNum,
     firstName,
     lastName,
@@ -154,9 +155,35 @@ const login = async (req, res, next) => {
     );
     return next(error);
   }
+
+  if (existingUser.attempts >= 3) {
+    const error = new HttpError(
+      "Account reached the maximum attempt for login. Please contact the admin to unlock your account",
+      401
+    );
+    return next(error);
+  }
+
   //check if hash is correct
   isValidPassword = await bcrypt.compare(password, existingUser.password);
   if (!isValidPassword) {
+    if (existingUser.attempts >= 0) {
+      let editVision = await User.findByIdAndUpdate(existingUser.id, {
+        attempts: existingUser.attempts + 1,
+      });
+      if (editVision) {
+        const error = new HttpError(
+          "Invalid credentials, could not log you in. " +
+            `${
+              2 - existingUser.attempts <= 1
+                ? 2 - existingUser.attempts + " attempt remaining"
+                : 2 - existingUser.attempts + " attempts remaining"
+            }`,
+          401
+        );
+        return next(error);
+      }
+    }
     const error = new HttpError(
       "Invalid credentials, could not log you in.",
       401
@@ -184,16 +211,41 @@ const login = async (req, res, next) => {
     return next(error);
   }
 
-  //sign user with token for authentication
-  let token = jwt.sign({ userId: existingUser.id, email: email }, "superidol", {
-    expiresIn: "1h",
-  });
-  res.json({
-    message: "Logged in!",
-    userId: existingUser.id,
-    email: existingUser.email,
-    token: token,
-  });
+  if (existingUser.attempts >= 0) {
+    let editVision = await User.findByIdAndUpdate(existingUser.id, {
+      attempts: 0,
+    });
+    if (editVision) {
+      let token = jwt.sign(
+        { userId: existingUser.id, email: email },
+        "superidol",
+        {
+          expiresIn: "1h",
+        }
+      );
+      res.json({
+        message: "Logged in!",
+        userId: existingUser.id,
+        email: existingUser.email,
+        token: token,
+      });
+    }
+  } else {
+    //sign user with token for authentication
+    let token = jwt.sign(
+      { userId: existingUser.id, email: email },
+      "superidol",
+      {
+        expiresIn: "1h",
+      }
+    );
+    res.json({
+      message: "Logged in!",
+      userId: existingUser.id,
+      email: existingUser.email,
+      token: token,
+    });
+  }
 };
 
 const getuserData = async (req, res, next) => {

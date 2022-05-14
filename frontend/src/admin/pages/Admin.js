@@ -14,6 +14,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./Admin.css";
 import Reset from "../components/Reset/Reset";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import Locked from "../components/Locked/Locked";
 const menu = {
   overview: true,
   facultyMembers: false,
@@ -21,6 +22,7 @@ const menu = {
   applications: false,
   rejected: false,
   reset: false,
+  locked: false,
 };
 
 const Admin = (props) => {
@@ -31,6 +33,8 @@ const Admin = (props) => {
   const [rejectedUserData, setRejectedUserData] = useState();
   const [deactivatedUserData, setDeactivatedUserData] = useState();
   const [resetUserData, setResetUserData] = useState();
+  const [lockedUserData, setLockedUserData] = useState();
+
   const [updatedStatus, setUpdatedStatus] = useState("");
   const [searchField, setSearchField] = useState("");
   const [filterValue, setFilterValue] = useState(1);
@@ -77,6 +81,10 @@ const Admin = (props) => {
     }
     if (status === "accepted_reset") {
       setSuccess("Password is now Last Name(Lowercase) + Employee Number");
+      return;
+    }
+    if (status === "unlocked") {
+      setSuccess("Account Unlocked");
       return;
     }
   };
@@ -161,6 +169,23 @@ const Admin = (props) => {
     setUpdatedStatus("");
   }, [sendRequest, updatedStatus]);
 
+  useEffect(() => {
+    //Get locked users
+    const getLockedUsers = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/admin/getAllLockedUsers"
+        );
+        // const responseData = await response.json();
+        setLockedUserData(responseData.lockedUsers);
+      } catch (err) {}
+    };
+    getLockedUsers();
+    setUpdatedStatus("");
+  }, [sendRequest, updatedStatus]);
+
+  console.log(lockedUserData)
+
   const clearModals = () => {
     setError(null);
     setSuccess(null);
@@ -230,6 +255,15 @@ const Admin = (props) => {
     );
   });
 
+  const filteredLockedUsers = lockedUserData?.filter((lockedUser) => {
+    return (
+      lockedUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      lockedUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      lockedUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
+      lockedUser.employeeNum?.toString().includes(searchField)
+    );
+  });
+
   //FILTER
   const onFilterChange = (event) => {
     setFilterValue(event.target.value);
@@ -285,6 +319,12 @@ const Admin = (props) => {
                   onClick={() => menuChangeHandler("reset")}
                 >
                   Requesting Password Reset
+                </li>
+                <li
+                  className={isMenuActive.locked ? "active" : ""}
+                  onClick={() => menuChangeHandler("locked")}
+                >
+                  Locked Accounts
                 </li>
               </ul>
             </SideBox>
@@ -347,6 +387,14 @@ const Admin = (props) => {
                 <Reset
                   resetUserData={filteredResetUsers}
                   updateResetUsers={updateUsers}
+                  filterValue={filterValue}
+                  sortValue={sortValue}
+                />
+              )}
+              {isMenuActive.locked && (
+                <Locked
+                  lockedUserData={filteredLockedUsers}
+                  updateLockedUsers={updateUsers}
                   filterValue={filterValue}
                   sortValue={sortValue}
                 />

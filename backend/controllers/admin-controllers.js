@@ -100,6 +100,15 @@ const getResetUsers = async (req, res, next) => {
   res.json({ resetUsers: resetUsers });
 };
 
+const getLockedUsers = async (req, res, next) => {
+  const lockedUsers = await User.find({ attempts: 3 }, "-password");
+
+  if (!lockedUsers) {
+    return res.json({ nousers: "no locked accounts found" });
+  }
+  res.json({ lockedUsers: lockedUsers });
+};
+
 const actionHandler = async (req, res, next) => {
   //All action for buttons
   const { userId, permissionUpdate } = req.body;
@@ -113,6 +122,18 @@ const actionHandler = async (req, res, next) => {
       "-password"
     );
     res.json({ pendingUsers: pendingUsers, permission: permissionUpdate });
+  }
+};
+
+const unlockAccountHandler = async (req, res, next) => {
+  //Unlock Account
+  const { userId } = req.body;
+  const user = await User.findByIdAndUpdate(userId, {
+    attempts: 0,
+  });
+
+  if (user) {
+    res.json({ user: user, message: "unlocked" });
   }
 };
 
@@ -160,6 +181,8 @@ exports.getPendingUsers = getPendingUsers;
 exports.getRejectedUsers = getRejectedUsers;
 exports.getDeactivatedUsers = getDeactivatedUsers;
 exports.getResetUsers = getResetUsers;
+exports.getLockedUsers = getLockedUsers;
 exports.actionHandler = actionHandler;
 exports.resetPasswordHandler = resetPasswordHandler;
+exports.unlockAccountHandler = unlockAccountHandler;
 // exports.acceptPendingUser = acceptPendingUser;

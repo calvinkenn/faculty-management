@@ -10,8 +10,10 @@ router.get("/getAllPendingUsers", adminControllers.getPendingUsers);
 router.get("/getAllRejectedUsers", adminControllers.getRejectedUsers);
 router.get("/getAllDeactivatedUsers", adminControllers.getDeactivatedUsers);
 router.get("/getAllResetUsers", adminControllers.getResetUsers);
+router.get("/getAllLockedUsers", adminControllers.getLockedUsers);
 router.patch("/actionHandler", adminControllers.actionHandler);
 router.patch("/resetPasswordHandler", adminControllers.resetPasswordHandler);
+router.patch("/unlockAccountHandler", adminControllers.unlockAccountHandler);
 // router.patch("/acceptPendingUser", adminControllers.acceptPendingUser);
 
 module.exports = router;

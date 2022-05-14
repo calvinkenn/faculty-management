@@ -3,6 +3,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = mongoose.Schema({
   dateOfRegistration: { type: Date },
+  attempts: { type: Number },
   employeeNum: { type: Number, required: true },
   firstName: { type: String, required: true },
   middleName: { type: String, default: "" },

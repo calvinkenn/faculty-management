@@ -205,12 +205,12 @@ const PrintData = (props) => {
           </tr>
           <tr>
             <td className="print-label">Date of Birth</td>
-            <td>
+            <td colSpan={2} >
               {props.userData.birthday
                 ? formatDate(props.userData.birthday.substring(0, 10))
                 : "N/A"}
             </td>
-            <td colSpan={2} className="print-label">Place of Birth</td>
+            <td className="print-label">Place of Birth</td>
             <td colSpan={2}>
               {props.userData.placeofBirth
                 ? props.userData.placeofBirth

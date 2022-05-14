@@ -14,6 +14,7 @@ import Admin from "./admin/pages/Admin";
 import Announce from "./home/pages/Announce";
 import AnnounceFull from "./home/pages/AnnounceFull";
 import VMGO from "./home/pages/VMGO";
+import AdminAuth from "./auth/pages/AdminAuth";
 
 const App = () => {
   const auth = useContext(AuthContext);
@@ -75,7 +76,7 @@ const App = () => {
           <Route path="/announcement/:annID" element={<AnnounceFull />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/announcement" element={<Announce />} />
-          <Route path="/" element={<Navigate to="/profile" replace />} />
+          <Route path="*" element={<Navigate to="/profile" replace />} />
         </Routes>
       );
     } else {
@@ -86,7 +87,7 @@ const App = () => {
           <Route path="/announcement" element={<Announce />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/profile/:userId" element={<Profile />} />
-          <Route path="/" element={<Navigate to="/admin" replace />} />
+          <Route path="*" element={<Navigate to="/admin" replace />} />
         </Routes>
       );
     }
@@ -94,6 +95,7 @@ const App = () => {
     routes = (
       <Routes>
         <Route path="/" element={<Auth />} />
+        <Route path="/admin" element={<AdminAuth />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     );

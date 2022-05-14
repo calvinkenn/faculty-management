@@ -1,67 +1,65 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { useHttpClient } from "../../shared/hooks/http-hook";
 import MainNavigation from "../../shared/components/Navigation/MainNavigation";
 import "./AnnounceFull.css";
 
-const DUMMY_DATA = [
-  {
-    id: "1",
-    title: "TEST TITLE",
-    author: "TEST AUTHOR",
-    date: "05/10/2022",
-    image:
-      "https://thumbs.dreamstime.com/b/important-announcement-written-speech-bubble-advertising-sign-vector-stock-illustration-173492245.jpg",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-  {
-    id: "2",
-    title: "TEST TITLE 2",
-    author: "TEST AUTHOR 2",
-    date: "05/10/2022",
-    image:
-      "https://thumbs.dreamstime.com/b/important-announcement-written-speech-bubble-advertising-sign-vector-stock-illustration-173492245.jpg",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-  {
-    id: "3",
-    title: "TEST TITLE 2",
-    author: "TEST AUTHOR 2",
-    date: "05/10/2022",
-    image:
-      "https://thumbs.dreamstime.com/b/important-announcement-written-speech-bubble-advertising-sign-vector-stock-illustration-173492245.jpg",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-  {
-    id: "4",
-    title: "TEST TITLE 2",
-    author: "TEST AUTHOR 2",
-    date: "05/10/2022",
-    image:
-      "https://thumbs.dreamstime.com/b/important-announcement-written-speech-bubble-advertising-sign-vector-stock-illustration-173492245.jpg",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-];
+const formatDateLong = (date) => {
+  const formatter = new Intl.DateTimeFormat("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  });
+  const month1 = formatter.format(new Date(date));
+  return month1;
+};
 
 const AnnounceFull = (props) => {
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [announcementData, setAnnouncementData] = useState([]);
   const announceId = useParams().annID;
+
+  useEffect(() => {
+    const getAnnouncements = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/announcement/getAnnouncements"
+        );
+        setAnnouncementData(responseData.announcement);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getAnnouncements();
+  }, []);
+
+  console.log(announcementData);
+
   return (
     <div className="announce-main">
       <div className="announce-main-container">
         <MainNavigation inHome={true} />
-        {DUMMY_DATA.map((item) => {
-          if (item.id === announceId) {
+        {announcementData?.map((item) => {
+          if (item._id === announceId) {
             return (
               <div className="announce-container">
                 <div>Title: {item.title}</div>
                 <div>Author: {item.author}</div>
-                <div>Date: {item.date}</div>
+                <div>Date: {formatDateLong(item.date)}</div>
+                {item.editDate ? (
+                  <div>Date Edited: {formatDateLong(item.editDate)}</div>
+                ) : (
+                  ""
+                )}
                 <div>
-                  <img src={item.image} alt="Announcement" />
+                  <img
+                    src={`http://localhost:5000/${item.image}`}
+                    alt="Announcement"
+                  />
                 </div>
                 <div>Content: {item.content}</div>
               </div>

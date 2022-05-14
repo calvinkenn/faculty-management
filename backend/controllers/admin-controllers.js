@@ -1,12 +1,53 @@
 const { validationResult } = require("express-validator");
 
 const bcrypt = require("bcryptjs");
-
+const jwt = require("jsonwebtoken");
 const HttpError = require("../models/http-error");
 
 const User = require("../models/user");
 const Admin = require("../models/admin");
-const { findByIdAndUpdate } = require("../models/user");
+
+const login = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  let existingUser;
+  let isValidPassword = false;
+
+  try {
+    existingUser = await Admin.findOne({ email: email });
+  } catch (err) {
+    const error = new HttpError(
+      "Loggin in failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
+
+  if (!existingUser) {
+    const error = new HttpError(
+      "Invalid credentials, could not log you in.",
+      401
+    );
+    return next(error);
+  }
+
+  //check if hash is correct
+  isValidPassword = await Admin.findOne({ password: password });
+  if (!isValidPassword) {
+    const error = new HttpError("Invalid password, could not log you in.", 401);
+    return next(error);
+  }
+
+  //sign user with token for authentication
+  let token = jwt.sign({ adminId: existingUser.id }, "superidol", {
+    expiresIn: "1h",
+  });
+  return res.json({
+    admin: "Logged in!",
+    adminId: existingUser.id,
+    token: token,
+  });
+};
 
 const getActiveUsers = async (req, res, next) => {
   const activeUsers = await User.find({ permission: "accepted" }, "-password");
@@ -113,6 +154,7 @@ const resetPasswordHandler = async (req, res, next) => {
   });
 };
 
+exports.login = login;
 exports.getActiveUsers = getActiveUsers;
 exports.getPendingUsers = getPendingUsers;
 exports.getRejectedUsers = getRejectedUsers;

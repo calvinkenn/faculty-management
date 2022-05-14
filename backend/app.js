@@ -19,6 +19,10 @@ app.use(
   "/uploads/certificates",
   express.static(path.join("uploads", "certificates"))
 ); //middleware for cert pic file path
+app.use(
+  "/uploads/announcements",
+  express.static(path.join("uploads", "announcements"))
+); //middleware for announcement pic file path
 
 //code to allow communication between 2 local host
 

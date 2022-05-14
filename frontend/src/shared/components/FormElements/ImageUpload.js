@@ -60,7 +60,13 @@ const ImageUpload = (props) => {
         onChange={pickedHandler}
       />
       <div className={`image-upload ${props.center && "center"}`}>
-        <div className="image-upload__preview">
+        <div
+          className={
+            !props.isAnnouncement
+              ? "image-upload__preview"
+              : "image-upload__preview__announcement"
+          }
+        >
           {previewUrl && !isUploading && (
             <img src={`http://localhost:5000/${previewUrl}`} alt="Preview" />
           )}
@@ -74,7 +80,7 @@ const ImageUpload = (props) => {
           </Button>
         )}
       </div>
-      {!isValid && <p>{props.errorText}</p>}
+      ){!isValid && <p>{props.errorText}</p>}
     </div>
   );
 };

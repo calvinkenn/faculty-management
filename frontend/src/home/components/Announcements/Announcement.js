@@ -1,63 +1,49 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import { AuthContext } from "../../../shared/context/auth-context";
 import AnnouncementList from "./AnnouncementList";
-import "./Announcement.css";
+import Pagination from "../../../shared/components/Pagination/Pagination";
 import AnnouncementEdit from "./AnnouncementEdit";
 import Button from "../../../shared/components/FormElements/Button";
-
-const DUMMY_DATA = [
-  {
-    id: "1",
-    title: "TEST TITLE",
-    author: "TEST AUTHOR",
-    date: "05/10/2022",
-    image:
-      "https://thumbs.dreamstime.com/b/important-announcement-written-speech-bubble-advertising-sign-vector-stock-illustration-173492245.jpg",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-  {
-    id: "2",
-    title: "TEST TITLE 2",
-    author: "TEST AUTHOR 2",
-    date: "05/10/2022",
-    image:
-      "https://thumbs.dreamstime.com/b/important-announcement-written-speech-bubble-advertising-sign-vector-stock-illustration-173492245.jpg",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-  {
-    id: "3",
-    title: "TEST TITLE 2",
-    author: "TEST AUTHOR 2",
-    date: "05/10/2022",
-    image:
-      "https://thumbs.dreamstime.com/b/important-announcement-written-speech-bubble-advertising-sign-vector-stock-illustration-173492245.jpg",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-  {
-    id: "4",
-    title: "TEST TITLE 2",
-    author: "TEST AUTHOR 2",
-    date: "05/10/2022",
-    image:
-      "https://thumbs.dreamstime.com/b/important-announcement-written-speech-bubble-advertising-sign-vector-stock-illustration-173492245.jpg",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-  },
-];
+import "./Announcement.css";
 
 const Announcement = (props) => {
   const auth = useContext(AuthContext);
+  const [editID, setEditID] = useState();
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
+  const [currentItems, setCurrentItems] = useState(null);
 
-  const editModeHandler = (editData) => {
+  const editModeHandler = (editID) => {
     props.updateEditModeState(true);
+    setEditID(editID);
   };
 
-  const addModeHandler = (editData) => {
+  const addModeHandler = () => {
     props.updateAddModeState(true);
+  };
+
+  const editData = props.announcementData?.filter((announcement) => {
+    return announcement._id?.includes(editID);
+  });
+
+  let displayPerPage = 5;
+
+  useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + displayPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(props.announcementData?.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(props.announcementData?.length / displayPerPage));
+  }, [itemOffset, 5, props.announcementData]);
+
+  const handlePageClick = (event) => {
+    const newOffset =
+      (event.selected * displayPerPage) % props.announcementData?.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
   };
 
   if (props.isEditMode) {
@@ -65,6 +51,8 @@ const Announcement = (props) => {
       <AnnouncementEdit
         setIsEditModeHandler={editModeHandler}
         isEditMode={true}
+        item={editData}
+        messageHandler={props.messageHandler}
       />
     );
   } else if (props.isAddMode) {
@@ -72,6 +60,7 @@ const Announcement = (props) => {
       <AnnouncementEdit
         setIsAddModeHandler={addModeHandler}
         isEditMode={false}
+        messageHandler={props.messageHandler}
       />
     );
   } else {
@@ -79,13 +68,21 @@ const Announcement = (props) => {
       <React.Fragment>
         <div>
           {auth.isAdmin && <Button onClick={addModeHandler}>Add New</Button>}
-          <h1>Announcement</h1>
         </div>
 
         <AnnouncementList
-          item={DUMMY_DATA}
+          items={currentItems}
           setIsEditModeHandler={editModeHandler}
+          messageHandler={props.messageHandler}
         />
+        {currentItems?.length > 0 && (
+          <Pagination
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+          />
+        )}
       </React.Fragment>
     );
   }

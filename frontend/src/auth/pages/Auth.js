@@ -162,11 +162,12 @@ const Auth = () => {
             "Content-Type": "application/json",
           }
         );
-        if (responseData.admin) {
-          auth.loginAsAdmin(responseData.adminId, responseData.token);
-        } else {
-          auth.login(responseData.userId, responseData.token);
-        }
+        auth.login(responseData.userId, responseData.token);
+        // if (responseData.admin) {
+        //   auth.loginAsAdmin(responseData.adminId, responseData.token);
+        // } else {
+        //   auth.login(responseData.userId, responseData.token);
+        // }
       } catch (err) {}
     } else if (isRegisterMode) {
       //code for signup

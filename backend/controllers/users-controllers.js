@@ -128,21 +128,6 @@ const login = async (req, res, next) => {
   let existingUser;
   let isValidPassword = false;
 
-  //for admin
-  try {
-    existingUser = await Admin.findOne({ username: email });
-
-    if (existingUser || password === existingUser.password) {
-      let token = jwt.sign({ adminId: existingUser.id }, "superidol", {
-        expiresIn: "1h",
-      });
-      return res.json({
-        admin: "Logged in!",
-        adminId: existingUser.id,
-        token: token,
-      });
-    }
-  } catch (err) {}
   //check if user is existing
   try {
     existingUser = await User.findOne({ email: email });

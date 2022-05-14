@@ -4,6 +4,7 @@ const adminControllers = require("../controllers/admin-controllers");
 const checkAuth = require("../middleware/check-auth");
 const router = express.Router();
 
+router.post("/login", adminControllers.login);
 router.get("/getAllActiveUsers", adminControllers.getActiveUsers);
 router.get("/getAllPendingUsers", adminControllers.getPendingUsers);
 router.get("/getAllRejectedUsers", adminControllers.getRejectedUsers);

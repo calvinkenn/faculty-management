@@ -1,45 +1,3 @@
-/* .objectives-container {
-  box-sizing: border-box;
-  width: 100%;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5ch;
-}
-.obj-edit{
-  width: 7%;
-  text-align: center;
-  margin: auto;
-}
-.obj-cancel-edit{
-  width: 20%;
-  text-align: center;
-  margin: auto;
-}
-.obj-action-bar{
-  width: 15%;
-  text-align: center;
-  margin: auto;
-}
-.obj-remove-add{
-  width: 7%;
-  text-align: center;
-  margin: auto;
-  background-color: #ffc000;
-  color: white;
-  font-size: large;
-  border-color: #ffc000;
-}
-.objectives-container span{
-  text-align: center;
-  width: 50%;
-}
-.course{
-  font-size: 2.5ch;
-} */
-
 .objectives-container{
   width: 100%;
   max-width: 100%;
@@ -93,4 +51,38 @@
   width: 100%;
   max-width: 100%;
   padding: 1%;
+}
+
+.bsit-obj-form{
+  margin-bottom: 5%;
+}
+
+.bsit-obj-txtfield,
+.blis-obj-txtfield{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 1.5% 0;
+}
+.bsit-obj-txtfield div,
+.blis-obj-txtfield div{
+  width: 100%;
+  max-width: 100%;
+}
+.action-bar{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.action-bar button{
+  width: 100%;
+  max-width: 50%;
+  padding: 1%;
+}
+.action-bar span{
+  width: 100%;
+  max-width: 5%;
 }

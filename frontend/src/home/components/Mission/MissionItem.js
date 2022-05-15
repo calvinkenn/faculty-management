@@ -17,7 +17,7 @@ const MissionItem = (props) => {
       <h1>Our Mission</h1>
       <span>{props.item}</span>
       <div className="mission-edit">
-      {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
+        {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
       </div>
     </div>
   );

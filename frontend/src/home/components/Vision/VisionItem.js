@@ -17,7 +17,7 @@ const VisionItem = (props) => {
       <h1>Our Vision</h1>
       <span>{props.item}</span>
       <div className="vision-edit">
-      {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
+        {auth.isAdmin && <Button onClick={editModeHandler}>Edit</Button>}
       </div>
     </div>
   );

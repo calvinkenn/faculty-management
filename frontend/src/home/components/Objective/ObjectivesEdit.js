@@ -112,7 +112,83 @@ const ObjectivesEdit = (props) => {
 
   return (
     <React.Fragment>
-      <h1>Objectives</h1>
+      <div className="obj-edit-form">
+        <h1>Objectives</h1>
+        <form onSubmit={submitEditHandler}>
+          <div className="bsit-obj-form">
+            The following are the objectives of the BSIT program:
+            {inputListBSIT.map((x, i) => {
+              return (
+                  <div className="bsit-obj-txtfield">
+                    <TextField
+                      name="bsitObjectives"
+                      id="bsitObjectives"
+                      type="text"
+                      label="Objectives BSIT"
+                      minRows={3}
+                      multiline
+                      value={x.bsitObjectives}
+                      onChange={(e) => handleInputChangeBSIT(e, i)}
+                    />
+                    <div className="btn-box">
+                      {inputListBSIT.length !== 1 && (
+                        <button
+                          className="obj-remove-add"
+                          onClick={() => handleRemoveClickBSIT(i)}
+                        >
+                          Remove
+                        </button>
+                      )}
+                      {inputListBSIT.length - 1 === i && (
+                        <button className="obj-remove-add"onClick={handleAddClickBSIT}>Add</button>
+                      )}
+                    </div>
+                  </div>
+              );
+            })}
+          </div>
+
+          <div className="blis-obj-form">
+            The following are the objectives of the BLIS program:
+            {inputListBLIS.map((x, i) => {
+              return (
+                <div className="blis-obj-txtfield">
+                    <TextField
+                      name="blisObjectives"
+                      id="blisObjectives"
+                      type="text"
+                      label="Objectives BLIS"
+                      minRows={3}
+                      multiline
+                      value={x.blisObjectives}
+                      onChange={(e) => handleInputChangeBLIS(e, i)}
+                    />
+                    <div className="btn-box">
+                      {inputListBLIS.length !== 1 && (
+                        <button
+                          className="obj-remove-add"
+                          onClick={() => handleRemoveClickBLIS(i)}
+                        >
+                          Remove
+                        </button>
+                      )}
+                      {inputListBLIS.length - 1 === i && (
+                        <button className="obj-remove-add" onClick={handleAddClickBLIS}>Add</button>
+                      )}
+                    </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="action-bar">
+            <Button type="submit">Save</Button>
+            <span />
+            <Button type="button" onClick={showEditWarningHandler}>
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </div>
       <Modal
         show={showConfirmModal}
         onCancel={closeEditWarningHandler}
@@ -131,89 +207,8 @@ const ObjectivesEdit = (props) => {
           </React.Fragment>
         }
       >
-        <p>Do you want to cancel editing Objectives?</p>
+      <p>Do you want to cancel editing Objectives?</p>
       </Modal>
-      <form onSubmit={submitEditHandler}>
-        <div>
-          The following are the objectives of the BSIT program:
-          {inputListBSIT.map((x, i) => {
-            return (
-              <div>
-                <div>
-                  <TextField
-                    name="bsitObjectives"
-                    id="bsitObjectives"
-                    type="text"
-                    label="Objectives BSIT"
-                    minRows={3}
-                    style={{ width: 1200 }}
-                    multiline
-                    value={x.bsitObjectives}
-                    onChange={(e) => handleInputChangeBSIT(e, i)}
-                  />
-                  <div className="btn-box">
-                    {inputListBSIT.length !== 1 && (
-                      <button
-                        className="obj-remove-add"
-                        onClick={() => handleRemoveClickBSIT(i)}
-                      >
-                        Remove
-                      </button>
-                    )}
-                    {inputListBSIT.length - 1 === i && (
-                      <button className="obj-remove-add"onClick={handleAddClickBSIT}>Add</button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div>
-          The following are the objectives of the BLIS program:
-          {inputListBLIS.map((x, i) => {
-            return (
-              <div>
-                <div>
-                  <TextField
-                    name="blisObjectives"
-                    id="blisObjectives"
-                    type="text"
-                    label="Objectives BLIS"
-                    minRows={3}
-                    style={{ width: 1200 }}
-                    multiline
-                    value={x.blisObjectives}
-                    onChange={(e) => handleInputChangeBLIS(e, i)}
-                  />
-                  <div className="btn-box">
-                    {inputListBLIS.length !== 1 && (
-                      <button
-                        className="obj-remove-add"
-                        onClick={() => handleRemoveClickBLIS(i)}
-                      >
-                        Remove
-                      </button>
-                    )}
-                    {inputListBLIS.length - 1 === i && (
-                      <button className="obj-remove-add" onClick={handleAddClickBLIS}>Add</button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="action-bar">
-          <div className="obj-action-bar">
-          <Button type="submit">Save</Button>
-          <Button type="button" onClick={showEditWarningHandler}>
-            Cancel
-          </Button>
-          </div>
-        </div>
-      </form>
     </React.Fragment>
   );
 };

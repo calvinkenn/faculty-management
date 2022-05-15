@@ -24,6 +24,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 5%;
+  flex-wrap: wrap;
 }
 .cict-banner img{
   width: 100%;

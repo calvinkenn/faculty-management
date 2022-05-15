@@ -3,6 +3,6 @@
 }
 
 .action-bar button {
-  width: 150px;
-  height: 25px;
+  width: 100%;
+  max-width: 50%;
 }

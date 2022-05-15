@@ -52,7 +52,32 @@ const VisionEdit = (props) => {
   };
   return (
     <React.Fragment>
-      <h1>Vision</h1>
+      <div className="vision-edit-form">
+        <h1>Vision</h1>
+        <form onSubmit={submitEditHandler}>
+          <Input
+            element="textarea"
+            id="vision"
+            type="text"
+            label="Vision"
+            minRows={5}
+            width={1200}
+            validators={[VALIDATOR_REQUIRE()]}
+            helperText="Please input the vision"
+            onInput={inputHandler}
+            initialValue={formState.inputs.vision.value}
+            initialValid={formState.inputs.vision.isValid}
+            required
+          />
+          <div className="action-bar">
+            <Button type="submit">Save</Button>
+            <span />
+            <Button type="button" onClick={showEditWarningHandler}>
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </div>
       <Modal
         show={showConfirmModal}
         onCancel={closeEditWarningHandler}
@@ -71,32 +96,8 @@ const VisionEdit = (props) => {
           </React.Fragment>
         }
       >
-        <p>Do you want to cancel editing Mission?</p>
+        <p>Do you want to cancel editing Vision?</p>
       </Modal>
-      <form onSubmit={submitEditHandler}>
-        <Input
-          element="textarea"
-          id="vision"
-          type="text"
-          label="Vision"
-          minRows={5}
-          width={1200}
-          validators={[VALIDATOR_REQUIRE()]}
-          helperText="Please input the vision"
-          onInput={inputHandler}
-          initialValue={formState.inputs.vision.value}
-          initialValid={formState.inputs.vision.isValid}
-          required
-        />
-        <div className="action-bar">
-        <div className="mission-action-bar">
-          <Button type="submit">Save</Button>
-          <Button type="button" onClick={showEditWarningHandler}>
-            Cancel
-          </Button>
-          </div>
-        </div>
-      </form>
     </React.Fragment>
   );
 };

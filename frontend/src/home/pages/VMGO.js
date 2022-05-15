@@ -100,19 +100,22 @@ const VMGO = (props) => {
                   messageHandler={messageHandler}
                 />
               </div>
-              
-              <Goals
-                isEditMode={goalsEditMode}
-                updateEditModeState={goalsEditModeHandler}
-                vmgo={vmgoData}
-                messageHandler={messageHandler}
-              />
-              <Objectives
-                isEditMode={objectivesEditMode}
-                updateEditModeState={objectivesEditModeHandler}
-                vmgo={vmgoData}
-                messageHandler={messageHandler}
-              />
+              <div className="goals-main-cont">
+                <Goals
+                  isEditMode={goalsEditMode}
+                  updateEditModeState={goalsEditModeHandler}
+                  vmgo={vmgoData}
+                  messageHandler={messageHandler}
+                />
+              </div>
+              <div className="objectives-main-cont">
+                <Objectives
+                  isEditMode={objectivesEditMode}
+                  updateEditModeState={objectivesEditModeHandler}
+                  vmgo={vmgoData}
+                  messageHandler={messageHandler}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -16,7 +16,13 @@
   align-items: center;
 }
 .announcement-container h1{
-  margin-top: 3%;
   font-size: 3vw;
   color: #303030;
+  width: 100%;
+  max-width: 100%;
+}
+.announcment-header button{
+  width: 100%;
+  max-width: 15%;
+  padding: 1%;
 }

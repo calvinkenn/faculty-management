@@ -1,10 +1,15 @@
-.objectives-container {
+/* .objectives-container {
   box-sizing: border-box;
   width: 100%;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5ch;
 }
 .obj-edit{
-  width: 10%;
+  width: 7%;
   text-align: center;
   margin: auto;
 }
@@ -26,4 +31,66 @@
   color: white;
   font-size: large;
   border-color: #ffc000;
+}
+.objectives-container span{
+  text-align: center;
+  width: 50%;
+}
+.course{
+  font-size: 2.5ch;
+} */
+
+.objectives-container{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bsit-blis-obj{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.bsit-obj,
+.blis-obj{
+  width: 100%;
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+}
+.bsit-obj img,
+.blis-obj img{
+  width: 100%;
+  max-width: 150px;
+}
+.enumeration-cont span{
+  font-size: 1vw;
+  margin-bottom: 1%;
+}
+.bsit-obj h1,
+.blis-obj h1{
+  color: #303030;
+  margin-top: 5%;
+}
+.enumeration-cont{
+  height: 25vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  margin-top: 2%;
+  margin-left: 5%;
+}
+.obj-img{
+  display: flex;
+  justify-content: center;
+}
+.obj-edit{
+  width: 100%;
+  max-width: 100%;
+}
+.obj-edit button{
+  width: 100%;
+  max-width: 100%;
+  padding: 1%;
 }

@@ -8,7 +8,7 @@ import Goals from "../components/Goals/Goals";
 import Mission from "../components/Mission/Mission";
 import Objectives from "../components/Objective/Objectives";
 import Vision from "../components/Vision/Vision";
-import Banner from "../../../src/assets/Image/Banner.png";
+import Banner from "../../../src/assets/Image/Banner1.png";
 import "./VMGO.css";
 
 const VMGO = (props) => {
@@ -84,31 +84,36 @@ const VMGO = (props) => {
           <div className="cict-banner">
             <img src={Banner} />
           </div>
-          <div className="vmgo-container">
-            <Mission
-              isEditMode={missionEditMode}
-              updateEditModeState={missionEditModeHandler}
-              vmgo={vmgoData}
-              messageHandler={messageHandler}
-            />
-            <Vision
-              isEditMode={visionEditMode}
-              updateEditModeState={visionEditModeHandler}
-              vmgo={vmgoData}
-              messageHandler={messageHandler}
-            />
-            <Goals
-              isEditMode={goalsEditMode}
-              updateEditModeState={goalsEditModeHandler}
-              vmgo={vmgoData}
-              messageHandler={messageHandler}
-            />
-            <Objectives
-              isEditMode={objectivesEditMode}
-              updateEditModeState={objectivesEditModeHandler}
-              vmgo={vmgoData}
-              messageHandler={messageHandler}
-            />
+          <div className="vmgo-mainsub-container">
+            <div className="vmgo-cont">
+              <div className="vision-mission-cont">
+                <Mission
+                  isEditMode={missionEditMode}
+                  updateEditModeState={missionEditModeHandler}
+                  vmgo={vmgoData}
+                  messageHandler={messageHandler}
+                />
+                <Vision
+                  isEditMode={visionEditMode}
+                  updateEditModeState={visionEditModeHandler}
+                  vmgo={vmgoData}
+                  messageHandler={messageHandler}
+                />
+              </div>
+              
+              <Goals
+                isEditMode={goalsEditMode}
+                updateEditModeState={goalsEditModeHandler}
+                vmgo={vmgoData}
+                messageHandler={messageHandler}
+              />
+              <Objectives
+                isEditMode={objectivesEditMode}
+                updateEditModeState={objectivesEditModeHandler}
+                vmgo={vmgoData}
+                messageHandler={messageHandler}
+              />
+            </div>
           </div>
         </div>
       </div>

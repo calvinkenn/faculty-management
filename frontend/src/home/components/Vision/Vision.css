@@ -1,20 +1,28 @@
-.vision-container {
-  box-sizing: border-box;
+.vision-container{
   width: 100%;
-  background-color: white;
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.vission-edit{
-  width: 10%;
-  text-align: center;
-  margin: auto;
+.vision-container img{
+  width: 100%;
+  max-width: 150px;
 }
-.vission-cancel-edit{
-  width: 20%;
+.vision-container span{
   text-align: center;
-  margin: auto;
+  font-size: 1vw;
 }
-.vission-action-bar{
-  width: 15%;
-  text-align: center;
-  margin: auto;
+.vision-container h1{
+  color: #303030;
+  margin-top: 5%;
+}
+.vision-edit{
+  width: 100%;
+  max-width: 100%;
+}
+.vision-edit button{
+  width: 100%;
+  max-width: 100%;
+  padding: 2%;
 }

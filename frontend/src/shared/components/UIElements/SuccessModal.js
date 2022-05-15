@@ -9,7 +9,7 @@ const SuccessModal = props => {
       onCancel={props.onClear}
       header="Success!"
       show={!!props.success}
-      footer={<Button onClick={props.onClear}>Close</Button>}
+      footer={<Button id="close" onClick={props.onClear}>Close</Button>}
     >
       <p style={{color: 'green'}}>{props.success}</p>
     </Modal>

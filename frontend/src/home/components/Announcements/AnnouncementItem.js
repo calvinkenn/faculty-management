@@ -7,6 +7,7 @@ import { AuthContext } from "../../../shared/context/auth-context";
 import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./AnnouncementItem.css";
+import ArrowCircleRightRoundedIcon from '@mui/icons-material/ArrowCircleRightRounded';
 
 const AnnouncementItem = (props) => {
   const auth = useContext(AuthContext);
@@ -60,31 +61,37 @@ const AnnouncementItem = (props) => {
           </React.Fragment>
         }
       >
-        <p>Do you want to proceed and delete this item?</p>
+      <p>Do you want to proceed and delete this item?</p>
       </Modal>
-      <div className="announcement-container">
+      <div className="announcement-cont">
         <div className="item">
-          <div>Title: {props.title}</div>
-          <div>Author: {props.author}</div>
-          <div>Date Created: {props.date}</div>
-          {props.editDate ? <div>Date Edited: {props.editDate}</div> : ""}
           <div className="image-container">
             <img
               src={`http://localhost:5000/${props.image}`}
               alt="Announcement"
             />
           </div>
-          <div>
-            Content:{" "}
-            <LinesEllipsisLoose
-              text={props.content}
-              maxLine="3"
-              lineHeight="15"
-            />
+          <div className="content-cont">
+            <div className="content-title"><h3>{props.title}</h3></div>
+            <div className="content-author"><h5>{props.author}</h5></div>
+            {props.editDate ? <div className="content-date-edited">Date Edited: {props.editDate}</div> : ""}
+              <p>
+                {" "}
+                <LinesEllipsisLoose
+                  text={props.content}
+                  maxLine="3"
+                  
+                />
+              </p>
           </div>
-          <NavLink to={`/announcement/${props.id}`} exact>
-            View
-          </NavLink>
+          <div className="card-date-view-cont">
+            <div className="content-date-created"><p>{props.date}</p></div>
+            <div className="view-more-cont">
+              <NavLink to={`/announcement/${props.id}`} exact>
+                <ArrowCircleRightRoundedIcon sx={{fontSize: '40px'}}/>
+              </NavLink>
+            </div>
+          </div>
           {auth.isAdmin && <Button onClick={editHandler}>Edit</Button>}
           {auth.isAdmin && (
             <Button onClick={showDeleteWarningHandler}>Delete</Button>

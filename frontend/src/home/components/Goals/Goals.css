@@ -1,41 +1,33 @@
-.goals-container {
-  box-sizing: border-box;
+.goals-container{
   width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 2.5ch;
+  margin-bottom: 5%;
 }
-.goals-edit{
-  width: 7%;
-  text-align: center;
-  margin: auto;
-}
-.goals-cancel-edit{
-  width: 20%;
-  text-align: center;
-  margin: auto;
-}
-.goals-action-bar{
-  width: 15%;
-  text-align: center;
-  margin: auto;
-}
-.goals-remove-add{
-  width: 7%;
-  text-align: center;
-  background-color: #ffc000;
-  color: white;
-  font-size: large;
-  border-color: #ffc000;
-}
-.btn-box{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.goals-container img{
+  width: 100%;
+  max-width: 150px;
 }
 .goals-container span{
-  text-align: center;
-  width: 50%;
+  font-size: 1vw;
+  width: 100%;
+  margin-bottom: 1%;
+}
+.goal-desc-cont{
+  margin-bottom: 1%;
+}
+.goals-container h1{
+  color: #303030;
+  margin-top: 30px;
+}
+.goals-edit{
+  width: 100%;
+  max-width: 100%;
+}
+.goals-edit button{
+  width: 100%;
+  max-width: 100%;
+  padding: 1%;
 }

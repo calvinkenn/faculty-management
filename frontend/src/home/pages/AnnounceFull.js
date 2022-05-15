@@ -47,21 +47,24 @@ const AnnounceFull = (props) => {
           if (item._id === announceId) {
             return (
               <div className="announce-container">
-                <div>Title: {item.title}</div>
-                <div>Author: {item.author}</div>
-                <div>Date: {formatDateLong(item.date)}</div>
+                <div className="content-title"><h2>{item.title}</h2></div>
+                <div className="content-author-date">
+                  <div className="content-date-created">{formatDateLong(item.date)}</div>
+                  <span />
+                  <div className="content-author">Author: {item.author}</div>
+                </div>
                 {item.editDate ? (
-                  <div>Date Edited: {formatDateLong(item.editDate)}</div>
+                  <div className="content-date-edited">Date Edited: {formatDateLong(item.editDate)}</div>
                 ) : (
                   ""
                 )}
-                <div>
+                <div className="content-img-container">
                   <img
                     src={`http://localhost:5000/${item.image}`}
                     alt="Announcement"
                   />
                 </div>
-                <div>Content: {item.content}</div>
+                <div className="content-contain">{item.content}</div>
               </div>
             );
           }

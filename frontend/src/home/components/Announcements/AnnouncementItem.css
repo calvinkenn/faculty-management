@@ -57,11 +57,11 @@
 }
 .content-date-created{
   width: 100%;
-  max-width: -webkit-fill-available;
+  max-width: fit-content;
   display: flex;
   margin-bottom: 5%;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
 }
 .content-date-created p{
   font-size: 0.8vw;
@@ -75,4 +75,14 @@
 }
 .view-more-cont a{
   color: #ffb001;
+}
+.announcement-action-bar{
+  width: 100%;
+  max-width: -webkit-fill-available;
+  display: flex;
+  padding: 5%;
+}
+.announcement-action-bar span{
+  width: 100%;
+  max-width: 5%;
 }

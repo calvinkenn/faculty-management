@@ -61,36 +61,7 @@ const MissionEdit = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <div className="mission-edit-form">
-        <h1>Mission</h1>
-        <form onSubmit={submitEditHandler}>
-          <Input
-            element="textarea"
-            id="mission"
-            type="text"
-            label="Mission"
-            minRows={5}
-            width={1200}
-            validators={[VALIDATOR_REQUIRE()]}
-            helperText="Please input the mission"
-            onInput={inputHandler}
-            initialValue={formState.inputs.mission.value}
-            initialValid={formState.inputs.mission.isValid}
-            required
-          />
-          <div className="action-bar">
-            <div className="mission-action-bar">
-            <Button type="submit">Save</Button>
-            <span />
-            <Button type="button" onClick={showEditWarningHandler}>
-              Cancel
-            </Button>
-            </div>
-          </div>
-        </form>
-      </div>
-      
+    <React.Fragment>      
       <Modal
         show={showConfirmModal || showSaveConfirmModal}
         onCancel={showConfirmModal ? closeEditWarningHandler : closeSaveConfirmHandler}
@@ -121,29 +92,33 @@ const MissionEdit = (props) => {
         )}
       </Modal>
 
-      <Input
-        element="textarea"
-        id="mission"
-        type="text"
-        label="Mission"
-        minRows={5}
-        width={1200}
-        validators={[VALIDATOR_REQUIRE()]}
-        helperText="Please input the mission"
-        onInput={inputHandler}
-        initialValue={formState.inputs.mission.value}
-        initialValid={formState.inputs.mission.isValid}
-        required
-      />
-      <div className="action-bar">
-        <div className="mission-action-bar">
-          <Button type="button" onClick={showSaveConfirmHandler}>
+      <div className="mission-edit-form">
+        <h1>Mission</h1>
+          <Input
+            element="textarea"
+            id="mission"
+            type="text"
+            label="Mission"
+            minRows={5}
+            width={1200}
+            validators={[VALIDATOR_REQUIRE()]}
+            helperText="Please input the mission"
+            onInput={inputHandler}
+            initialValue={formState.inputs.mission.value}
+            initialValid={formState.inputs.mission.isValid}
+            required
+          />
+          <div className="action-bar">
+            <div className="mission-action-bar">
+            <Button type="button" onClick={showSaveConfirmHandler}>
             Save
           </Button>
+          <span />
           <Button type="button" onClick={showEditWarningHandler}>
             Cancel
           </Button>
-        </div>
+            </div>
+          </div>
       </div>
     </React.Fragment>
   );

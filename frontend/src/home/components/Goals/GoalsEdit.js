@@ -91,53 +91,6 @@ const GoalsEdit = (props) => {
 
   return (
     <React.Fragment>
-      <div className="goals-edit-form">
-        <h1>Goals</h1>
-        To realize the vision and mission of the University, the College commits
-        itself to:
-        <form onSubmit={submitEditHandler}>
-          <div className="goals-form">
-            {inputList.map((x, i) => {
-              return (
-                  <div className="goals-txtfield">
-                    <TextField
-                      name="goals"
-                      id="goals"
-                      type="text"
-                      label="Goals"
-                      minRows={3}
-                      multiline
-                      value={x.goals}
-                      onChange={(e) => handleInputChange(e, i)}
-                    />
-                    <div className="btn-box">
-                      {inputList.length !== 1 && (
-                      
-                        <button
-                          className="goals-remove-add"
-                          onClick={() => handleRemoveClick(i)}
-                        >
-                          Remove
-                        </button>
-                      
-                      )}
-                      {inputList.length - 1 === i && (
-                        <button className="goals-remove-add" onClick={handleAddClick}>Add</button>
-                      )}
-                    </div>
-                  </div>
-              );
-            })}
-          </div>
-          <div className="goals-action-bar">
-            <Button type="submit">Save</Button>
-            <span />
-            <Button type="button" onClick={showEditWarningHandler}>
-              Cancel
-            </Button>
-          </div>
-        </form>
-      </div>
       <Modal
         show={showConfirmModal || showSaveConfirmModal}
         onCancel={
@@ -176,18 +129,20 @@ const GoalsEdit = (props) => {
           <p>Do you want to save changes to Goals?</p>
         )}
       </Modal>
-      <div>
-        {inputList.map((x, i) => {
-          return (
-            <div>
-              <div>
+      <div className="goals-edit-form">
+        <h1>Goals</h1>
+        To realize the vision and mission of the University, the College commits
+        itself to:
+        <div className="goals-form">
+          {inputList.map((x, i) => {
+            return (
+              <div className="goals-txtfield">
                 <TextField
                   name="goals"
                   id="goals"
                   type="text"
                   label="Goals"
                   minRows={3}
-                  style={{ width: 1200 }}
                   multiline
                   value={x.goals}
                   onChange={(e) => handleInputChange(e, i)}
@@ -211,15 +166,14 @@ const GoalsEdit = (props) => {
                   )}
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-      <div className="action-bar">
+            );
+          })}
+        </div>
         <div className="goals-action-bar">
           <Button type="button" onClick={showSaveConfirmHandler}>
             Save
           </Button>
+          <span />
           <Button type="button" onClick={showEditWarningHandler}>
             Cancel
           </Button>

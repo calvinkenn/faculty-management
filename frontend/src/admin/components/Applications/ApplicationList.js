@@ -16,11 +16,11 @@ const ApplicationList = (props) => {
   if (props.list?.length === 0) {
     return <div>No pending users found</div>;
   }
-
+  console.log(props.sortedData);
   return (
     <div className="list">
       {props.list
-        ?.sort((a, b) => (a[props.sortedData] > b[props.sortedData] ? 1 : -1))
+        ?.sort((a, b) => (a[props.sortedData] < b[props.sortedData] ? 1 : -1))
         .map((application) => (
           <ApplicationItem
             employeeNum={application.employeeNum}

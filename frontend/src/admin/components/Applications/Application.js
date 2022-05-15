@@ -22,7 +22,7 @@ const Application = (props) => {
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(props.pendingUserData.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(props.pendingUserData?.length / displayPerPage));
-  }, [itemOffset, 5, props.pendingUserData?.length]);
+  }, [itemOffset, 5, props.pendingUserData, props.sortValue]);
 
   const handlePageClick = (event) => {
     const newOffset =

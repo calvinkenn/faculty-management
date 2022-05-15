@@ -192,7 +192,7 @@ const ObjectivesEdit = (props) => {
           </React.Fragment>
         }
       >
-        <p>Do you want to cancel editing Objectives?</p>
+      <p>Do you want to cancel editing Objectives?</p>
       </Modal>
       <form
         onSubmit={props.bsitObj ? submitBSITEditHandler : submitBLISEditHandler}

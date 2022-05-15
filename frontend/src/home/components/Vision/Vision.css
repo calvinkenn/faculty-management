@@ -26,3 +26,24 @@
   max-width: 100%;
   padding: 2%;
 }
+.vision-edit-form{
+  width: 100%;
+  max-width: 45%;
+}
+.vision-edit-form div{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.vision-edit-form h1{
+  margin-bottom: 2%;
+}
+.action-bar button{
+  width: 100%;
+  max-width: 50%;
+}
+.action-bar span{
+  width: 100%;
+  max-width: 5%;
+}

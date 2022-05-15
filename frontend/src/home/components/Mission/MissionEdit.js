@@ -62,7 +62,35 @@ const MissionEdit = (props) => {
 
   return (
     <React.Fragment>
-      <h1>Mission</h1>
+      <div className="mission-edit-form">
+        <h1>Mission</h1>
+        <form onSubmit={submitEditHandler}>
+          <Input
+            element="textarea"
+            id="mission"
+            type="text"
+            label="Mission"
+            minRows={5}
+            width={1200}
+            validators={[VALIDATOR_REQUIRE()]}
+            helperText="Please input the mission"
+            onInput={inputHandler}
+            initialValue={formState.inputs.mission.value}
+            initialValid={formState.inputs.mission.isValid}
+            required
+          />
+          <div className="action-bar">
+            <div className="mission-action-bar">
+            <Button type="submit">Save</Button>
+            <span />
+            <Button type="button" onClick={showEditWarningHandler}>
+              Cancel
+            </Button>
+            </div>
+          </div>
+        </form>
+      </div>
+      
       <Modal
         show={showConfirmModal || showSaveConfirmModal}
         onCancel={showConfirmModal ? closeEditWarningHandler : closeSaveConfirmHandler}

@@ -31,3 +31,62 @@
   max-width: 100%;
   padding: 1%;
 }
+.goals-main-cont{
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 3%;
+}
+.goals-main-cont div{
+  width: 100%;
+  max-width: 100%;
+}
+
+.goals-edit-form{
+  width: 100%;
+  max-width: 45%;
+}
+.goals-form{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.goals-edit-form h1{
+  margin-bottom: 2%;
+}
+/* .goals-edit-form div{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+} */
+.goals-txtfield{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 1% 0;
+}
+.goals-action-bar{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.goals-action-bar button{
+  width: 100%;
+  max-width: 50%;
+  padding: 1%;
+}
+.goals-action-bar span{
+  width: 100%;
+  max-width: 5%;
+}
+.btn-box{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}

@@ -69,7 +69,6 @@ const Announcement = (props) => {
         <div>
           {auth.isAdmin && <Button onClick={addModeHandler}>Add New</Button>}
         </div>
-
         <AnnouncementList
           items={currentItems}
           setIsEditModeHandler={editModeHandler}

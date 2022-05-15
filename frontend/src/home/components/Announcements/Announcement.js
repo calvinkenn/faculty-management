@@ -66,7 +66,8 @@ const Announcement = (props) => {
   } else {
     return (
       <React.Fragment>
-        <div className="add-new-announcement">
+        <div className="announcment-header">
+          <h1>Announcement</h1>
           {auth.isAdmin && <Button onClick={addModeHandler}>Add New</Button>}
         </div>
         <AnnouncementList

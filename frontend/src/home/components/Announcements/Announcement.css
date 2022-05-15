@@ -1,5 +1,8 @@
 .announcement-item {
-    width: 100%;
-    border: 1px solid black;
-  }
-  
+  width: 100%;
+  border: 1px solid black;
+}
+
+.announcment-header {
+  display: flex;
+}

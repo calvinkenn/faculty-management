@@ -22,7 +22,6 @@ const AnnouncementList = (props) => {
   }
   return (
     <React.Fragment>
-      <h1>Announcement</h1>
       <div className="announcement-list">
         {props.items?.map((item) => (
           <AnnouncementItem

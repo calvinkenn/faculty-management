@@ -19,8 +19,8 @@ const ApplicationList = (props) => {
   console.log(props.sortedData);
   return (
     <div className="list">
-      {props.list
-        ?.sort((a, b) => (a[props.sortedData] < b[props.sortedData] ? 1 : -1))
+      {props?.list
+        // ?.sort((a, b) => (a[props.sortedData] < b[props.sortedData] ? 1 : -1))
         .map((application) => (
           <ApplicationItem
             employeeNum={application.employeeNum}

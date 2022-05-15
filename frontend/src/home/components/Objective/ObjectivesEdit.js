@@ -13,6 +13,7 @@ const ObjectivesEdit = (props) => {
   const [inputListBSIT, setInputListBSIT] = useState([{ bsitObjectives: "" }]);
   const [inputListBLIS, setInputListBLIS] = useState([{ blisObjectives: "" }]);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showBSITConfirmModal, setShowBSITConfirmModal] = useState(false);
 
   useEffect(() => {
     if (props.item_IT) {
@@ -34,24 +35,34 @@ const ObjectivesEdit = (props) => {
     },
   });
 
-  const cancelEditHandler = () => {
-    props.editModeHandler();
-  };
-
-  const showEditWarningHandler = () => {
-    setShowConfirmModal(true);
-  };
-
-  const closeEditWarningHandler = () => {
-    setShowConfirmModal(false);
-  };
-
-  const submitEditHandler = async (e) => {
+  const submitBSITEditHandler = async (e) => {
     console.log("Edit");
     e.preventDefault();
     try {
       const responseData = await sendRequest(
-        "http://localhost:5000/api/vmgo/editObjectives", //Change to account
+        "http://localhost:5000/api/vmgo/editBSITObjectives", //Change to account
+        "PATCH",
+        JSON.stringify({
+          id: props.id,
+          bsitObjectives: inputListBSIT,
+          blisObjectives: inputListBLIS,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      props.messageHandler(responseData.message);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const submitBLISEditHandler = async (e) => {
+    console.log("Edit");
+    e.preventDefault();
+    try {
+      const responseData = await sendRequest(
+        "http://localhost:5000/api/vmgo/editBLISObjectives", //Change to account
         "PATCH",
         JSON.stringify({
           id: props.id,
@@ -110,9 +121,59 @@ const ObjectivesEdit = (props) => {
     setInputListBLIS(list);
   };
 
+  const cancelEditHandler = () => {
+    props.editModeHandler();
+  };
+
+  const showEditWarningHandler = () => {
+    setShowConfirmModal(true);
+  };
+
+  const closeEditWarningHandler = () => {
+    setShowConfirmModal(false);
+  };
+
+  const showBSITConfirmHandler = () => {
+    setShowBSITConfirmModal(true);
+  };
+
+  const closeSaveConfirmHandler = () => {
+    setShowBSITConfirmModal(false);
+  };
+
   return (
     <React.Fragment>
       <h1>Objectives</h1>
+      <Modal //Modal for SaveChanges
+        show={showBSITConfirmModal}
+        onCancel={closeEditWarningHandler}
+        header="Save Changes?"
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <div className="obj-cancel-edit">
+              <Button
+                danger
+                onClick={
+                  props.bsitObj ? submitBSITEditHandler : submitBLISEditHandler
+                }
+              >
+                Yes
+              </Button>
+              <Button inverse onClick={closeSaveConfirmHandler}>
+                No
+              </Button>
+            </div>
+          </React.Fragment>
+        }
+      >
+        {props.bsitObj && (
+          <p>Do you want to save changes to BSIT Objectives?</p>
+        )}
+        {!props.bsitObj && (
+          <p>Do you want to save changes to BLIS Objectives?</p>
+        )}
+      </Modal>
       <Modal
         show={showConfirmModal}
         onCancel={closeEditWarningHandler}
@@ -121,96 +182,112 @@ const ObjectivesEdit = (props) => {
         footer={
           <React.Fragment>
             <div className="obj-cancel-edit">
-            <Button danger onClick={cancelEditHandler}>
-              Yes
-            </Button>
-            <Button inverse onClick={closeEditWarningHandler}>
-              No
-            </Button>
+              <Button danger onClick={cancelEditHandler}>
+                Yes
+              </Button>
+              <Button inverse onClick={closeEditWarningHandler}>
+                No
+              </Button>
             </div>
           </React.Fragment>
         }
       >
         <p>Do you want to cancel editing Objectives?</p>
       </Modal>
-      <form onSubmit={submitEditHandler}>
-        <div>
-          The following are the objectives of the BSIT program:
-          {inputListBSIT.map((x, i) => {
-            return (
-              <div>
+      <form
+        onSubmit={props.bsitObj ? submitBSITEditHandler : submitBLISEditHandler}
+      >
+        {props.bsitObj && (
+          <div>
+            The following are the objectives of the BSIT program:
+            {inputListBSIT.map((x, i) => {
+              return (
                 <div>
-                  <TextField
-                    name="bsitObjectives"
-                    id="bsitObjectives"
-                    type="text"
-                    label="Objectives BSIT"
-                    minRows={3}
-                    style={{ width: 1200 }}
-                    multiline
-                    value={x.bsitObjectives}
-                    onChange={(e) => handleInputChangeBSIT(e, i)}
-                  />
-                  <div className="btn-box">
-                    {inputListBSIT.length !== 1 && (
-                      <button
-                        className="obj-remove-add"
-                        onClick={() => handleRemoveClickBSIT(i)}
-                      >
-                        Remove
-                      </button>
-                    )}
-                    {inputListBSIT.length - 1 === i && (
-                      <button className="obj-remove-add"onClick={handleAddClickBSIT}>Add</button>
-                    )}
+                  <div>
+                    <TextField
+                      name="bsitObjectives"
+                      id="bsitObjectives"
+                      type="text"
+                      label="Objectives BSIT"
+                      minRows={3}
+                      style={{ width: 1200 }}
+                      multiline
+                      value={x.bsitObjectives}
+                      onChange={(e) => handleInputChangeBSIT(e, i)}
+                    />
+                    <div className="btn-box">
+                      {inputListBSIT.length !== 1 && (
+                        <button
+                          className="obj-remove-add"
+                          onClick={() => handleRemoveClickBSIT(i)}
+                        >
+                          Remove
+                        </button>
+                      )}
+                      {inputListBSIT.length - 1 === i && (
+                        <button
+                          className="obj-remove-add"
+                          onClick={handleAddClickBSIT}
+                        >
+                          Add
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
 
-        <div>
-          The following are the objectives of the BLIS program:
-          {inputListBLIS.map((x, i) => {
-            return (
-              <div>
+        {!props.bsitObj && (
+          <div>
+            The following are the objectives of the BLIS program:
+            {inputListBLIS.map((x, i) => {
+              return (
                 <div>
-                  <TextField
-                    name="blisObjectives"
-                    id="blisObjectives"
-                    type="text"
-                    label="Objectives BLIS"
-                    minRows={3}
-                    style={{ width: 1200 }}
-                    multiline
-                    value={x.blisObjectives}
-                    onChange={(e) => handleInputChangeBLIS(e, i)}
-                  />
-                  <div className="btn-box">
-                    {inputListBLIS.length !== 1 && (
-                      <button
-                        className="obj-remove-add"
-                        onClick={() => handleRemoveClickBLIS(i)}
-                      >
-                        Remove
-                      </button>
-                    )}
-                    {inputListBLIS.length - 1 === i && (
-                      <button className="obj-remove-add" onClick={handleAddClickBLIS}>Add</button>
-                    )}
+                  <div>
+                    <TextField
+                      name="blisObjectives"
+                      id="blisObjectives"
+                      type="text"
+                      label="Objectives BLIS"
+                      minRows={3}
+                      style={{ width: 1200 }}
+                      multiline
+                      value={x.blisObjectives}
+                      onChange={(e) => handleInputChangeBLIS(e, i)}
+                    />
+                    <div className="btn-box">
+                      {inputListBLIS.length !== 1 && (
+                        <button
+                          className="obj-remove-add"
+                          onClick={() => handleRemoveClickBLIS(i)}
+                        >
+                          Remove
+                        </button>
+                      )}
+                      {inputListBLIS.length - 1 === i && (
+                        <button
+                          className="obj-remove-add"
+                          onClick={handleAddClickBLIS}
+                        >
+                          Add
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
         <div className="action-bar">
           <div className="obj-action-bar">
-          <Button type="submit">Save</Button>
-          <Button type="button" onClick={showEditWarningHandler}>
-            Cancel
-          </Button>
+            <Button type="button" onClick={showBSITConfirmHandler}>Save</Button>
+            <Button type="button" onClick={showEditWarningHandler}>
+              Cancel
+            </Button>
           </div>
         </div>
       </form>

@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./Objectives.css";
 import ObjectivesEdit from "./ObjectivesEdit";
 import ObjectivesItem from "./ObjectivesItem";
 
 const Objectives = (props) => {
+  const [objEdit, setObjEdit] = useState(false);
+
+  const editModeHandler = (obj) => {
+    props.updateEditModeState();
+    setObjEdit(obj);
+  };
+
   if (props.isEditMode) {
     return (
       <ObjectivesEdit
@@ -13,6 +20,7 @@ const Objectives = (props) => {
         editModeHandler={props.updateEditModeState}
         id={props.vmgo._id}
         messageHandler={props.messageHandler}
+        bsitObj={objEdit}
       />
     );
   } else {
@@ -20,7 +28,7 @@ const Objectives = (props) => {
       <ObjectivesItem
         item_IT={props.vmgo.bsitObjectives}
         item_BLIS={props.vmgo.blisObjectives}
-        editModeHandler={props.updateEditModeState}
+        editModeHandler={editModeHandler}
         id={props.vmgo._id}
         messageHandler={props.messageHandler}
       />

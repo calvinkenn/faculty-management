@@ -15,13 +15,14 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 //mikko is here
-import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo';
+import FeaturedVideoIcon from "@mui/icons-material/FeaturedVideo";
 //end
 
 const CivilServiceEdit = (props) => {
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
   const [hasLicense, setHasLicense] = useState();
+  const [errorData, setErrorData] = useState("");
 
   const today = new Date();
   const raw_month = today.getMonth() + 1;
@@ -87,6 +88,11 @@ const CivilServiceEdit = (props) => {
 
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
+    if (formState.inputs.licenseValidity.value < formState.inputs.date.value) {
+      setErrorData("Invalid License Validity");
+      return;
+    }
+
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/addUserCivil",
       "POST",
@@ -110,6 +116,11 @@ const CivilServiceEdit = (props) => {
     //For Editing Data
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
+
+    if (formState.inputs.licenseValidity.value < formState.inputs.date.value) {
+      setErrorData("Invalid License Validity");
+      return;
+    }
 
     const responseData = await sendRequest(
       "http://localhost:5000/api/users/editCivil",
@@ -135,15 +146,23 @@ const CivilServiceEdit = (props) => {
     setHasLicense(event.target.checked);
   };
 
+  const clearErrorData = () => {
+    setErrorData("");
+  };
+
   return (
     <React.Fragment>
-      <ErrorModal error={error} onClear={clearError} />
+      <ErrorModal
+        error={errorData ? errorData : error}
+        onClear={errorData ? clearErrorData : clearError}
+      />
       <form onSubmit={props.addingItem ? submitAddHandler : submitEditHandler}>
         <div className="civil-serv-edit-cont">
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <FeaturedVideoIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Licences</h1>
+              <FeaturedVideoIcon sx={{ fontSize: "30px" }} />
+              <h1 className="Marginlang">Licences</h1>
             </div>
           </div>
           <div className="civil-service-cont">

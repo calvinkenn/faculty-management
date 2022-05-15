@@ -10,6 +10,7 @@ import Button from "../../../shared/components/FormElements/Button";
 const MissionEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showSaveConfirmModal, setShowSaveConfirmModal] = useState(false);
 
   const [formState, inputHandler, setFormData] = useForm({
     mission: {
@@ -17,18 +18,6 @@ const MissionEdit = (props) => {
       isValid: false,
     },
   });
-
-  const cancelEditHandler = () => {
-    props.editModeHandler();
-  };
-
-  const showEditWarningHandler = () => {
-    setShowConfirmModal(true);
-  };
-
-  const closeEditWarningHandler = () => {
-    setShowConfirmModal(false);
-  };
 
   const submitEditHandler = async (e) => {
     console.log("Edit");
@@ -51,53 +40,83 @@ const MissionEdit = (props) => {
     }
   };
 
+  const cancelEditHandler = () => {
+    props.editModeHandler();
+  };
+
+  const showEditWarningHandler = () => {
+    setShowConfirmModal(true);
+  };
+
+  const closeEditWarningHandler = () => {
+    setShowConfirmModal(false);
+  };
+
+  const showSaveConfirmHandler = () => {
+    setShowSaveConfirmModal(true);
+  };
+
+  const closeSaveConfirmHandler = () => {
+    setShowSaveConfirmModal(false);
+  };
+
   return (
     <React.Fragment>
       <h1>Mission</h1>
       <Modal
-        show={showConfirmModal}
-        onCancel={closeEditWarningHandler}
-        header="Cancel Edit?"
+        show={showConfirmModal || showSaveConfirmModal}
+        onCancel={showConfirmModal ? closeEditWarningHandler : closeSaveConfirmHandler}
+        header={showConfirmModal ? "Cancel Edit?" : "Save Changes"}
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>
             <div className="mission-cancel-edit">
-            <Button danger onClick={cancelEditHandler}>
-              Yes
-            </Button>
-            <Button inverse onClick={closeEditWarningHandler}>
-              No
-            </Button>
+              <Button
+                danger
+                onClick={
+                  showConfirmModal ? cancelEditHandler : submitEditHandler
+                }
+              >
+                Yes
+              </Button>
+              <Button inverse onClick={showConfirmModal ? closeEditWarningHandler : closeSaveConfirmHandler}>
+                No
+              </Button>
             </div>
           </React.Fragment>
         }
       >
-        <p>Do you want to cancel editing Mission?</p>
+        {showConfirmModal ? (
+          <p>Do you want to cancel editing Mission?</p>
+        ) : (
+          <p>Do you want to save changes to Mission?</p>
+        )}
       </Modal>
-      <form onSubmit={submitEditHandler}>
-        <Input
-          element="textarea"
-          id="mission"
-          type="text"
-          label="Mission"
-          minRows={5}
-          width={1200}
-          validators={[VALIDATOR_REQUIRE()]}
-          helperText="Please input the mission"
-          onInput={inputHandler}
-          initialValue={formState.inputs.mission.value}
-          initialValid={formState.inputs.mission.isValid}
-          required
-        />
-        <div className="action-bar">
-          <div className="mission-action-bar">
-          <Button type="submit">Save</Button>
+
+      <Input
+        element="textarea"
+        id="mission"
+        type="text"
+        label="Mission"
+        minRows={5}
+        width={1200}
+        validators={[VALIDATOR_REQUIRE()]}
+        helperText="Please input the mission"
+        onInput={inputHandler}
+        initialValue={formState.inputs.mission.value}
+        initialValid={formState.inputs.mission.isValid}
+        required
+      />
+      <div className="action-bar">
+        <div className="mission-action-bar">
+          <Button type="button" onClick={showSaveConfirmHandler}>
+            Save
+          </Button>
           <Button type="button" onClick={showEditWarningHandler}>
             Cancel
           </Button>
-          </div>
         </div>
-      </form>
+      </div>
     </React.Fragment>
   );
 };

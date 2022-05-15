@@ -14,25 +14,6 @@ const Application = (props) => {
     setSelectedFilter(event.target.value);
   };
 
-  let displayPerPage = 5;
-
-  useEffect(() => {
-    // Fetch items from another resources.
-    const endOffset = itemOffset + displayPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(props.pendingUserData.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(props.pendingUserData?.length / displayPerPage));
-  }, [itemOffset, 5, props.pendingUserData, props.sortValue]);
-
-  const handlePageClick = (event) => {
-    const newOffset =
-      (event.selected * displayPerPage) % props.pendingUserData?.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-  };
-
   const sortedDataToShow = () => {
     if (props.sortValue === 2) {
       return "firstName";
@@ -45,6 +26,43 @@ const Application = (props) => {
     }
   };
 
+  let displayPerPage = 5;
+
+  useEffect(() => {
+    // Fetch items from another resources.
+    const endOffset = itemOffset + displayPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentItems(
+      sortedDataToShow() === "employeeNum" ||
+        sortedDataToShow() === "registrationDate"
+        ? props.pendingUserData
+            ?.sort((a, b) =>
+              a[sortedDataToShow()] > b[sortedDataToShow()] ? 1 : -1
+            )
+            .slice(itemOffset, endOffset)
+        : props.pendingUserData
+            ?.sort((a, b) =>
+              a[sortedDataToShow()].toLowerCase() >
+              b[sortedDataToShow()].toLowerCase()
+                ? 1
+                : -1
+            )
+            .slice(itemOffset, endOffset)
+    );
+    setPageCount(Math.ceil(props.pendingUserData?.length / displayPerPage));
+  }, [itemOffset, 5, props.pendingUserData?.length, props.sortValue]);
+
+  const handlePageClick = (event) => {
+    const newOffset =
+      (event.selected * displayPerPage) % props.pendingUserData?.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
+  console.log(currentItems);
+
   return (
     <React.Fragment>
       {/* {currentItems?.length > 0 && (
@@ -56,7 +74,7 @@ const Application = (props) => {
       )} */}
       <div className="faculty-list-cont">
         <ApplicationList
-          list={currentItems}
+          list={currentItems !== null ? currentItems : props.pendingUserData}
           updatePendingUsers={props.updatePendingUsers}
           sortedData={sortedDataToShow()}
         />

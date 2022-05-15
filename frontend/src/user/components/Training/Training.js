@@ -85,7 +85,7 @@ const Training = (props) => {
   } else {
     return (
       <React.Fragment>
-        {currentItems?.length > 0 && (
+        {props.trainingData?.length > 0 && (
           <form>
             <Box sx={{ minWidth: 60 }}>
               <FormControl sx={{ m: 2, minWidth: 220 }}>

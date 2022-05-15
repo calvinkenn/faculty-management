@@ -19,7 +19,7 @@ const LockedList = (props) => {
   return (
     <div className="list">
       {props.list
-        ?.sort((a, b) => (a[props.sortedData] > b[props.sortedData] ? 1 : -1))
+        // ?.sort((a, b) => (a[props.sortedData] > b[props.sortedData] ? 1 : -1))
         .map((reset) => (
           <LockedItem
             userId={reset._id}

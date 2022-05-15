@@ -35,27 +35,45 @@ const Faculty = (props) => {
     setSelectedFilterDisplay(event.target.value);
   };
 
-  const filteredDataToDisplay = props.activeUserData?.filter((activeUser) => {
-    if (props.filterValue === 2) {
-      return activeUser.faculty.includes("BSIT");
-    } else if (props.filterValue === 3) {
-      return activeUser.faculty.includes("BLIS");
-    } else if (props.filterValue === 4) {
-      return activeUser.faculty.includes("ALLIED");
-    } else {
-      return activeUser;
-    }
-  });
-
+  const filteredDataToDisplay = props.activeUserData
+    ?.sort((a, b) => (a[sortedDataToShow()] > b[sortedDataToShow()] ? 1 : -1))
+    .filter((activeUser) => {
+      if (props.filterValue === 2) {
+        return activeUser.faculty.includes("BSIT");
+      } else if (props.filterValue === 3) {
+        return activeUser.faculty.includes("BLIS");
+      } else if (props.filterValue === 4) {
+        return activeUser.faculty.includes("ALLIED");
+      } else {
+        return activeUser;
+      }
+    });
+  console.log("WEW");
   let displayPerPage = 5;
 
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = itemOffset + displayPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(filteredDataToDisplay?.slice(itemOffset, endOffset));
+    setCurrentItems(
+      sortedDataToShow() === "employeeNum" ||
+        sortedDataToShow() === "registrationDate"
+        ? filteredDataToDisplay
+            ?.sort((a, b) =>
+              a[sortedDataToShow()] > b[sortedDataToShow()] ? 1 : -1
+            )
+            .slice(itemOffset, endOffset)
+        : filteredDataToDisplay
+            ?.sort((a, b) =>
+              a[sortedDataToShow()].toLowerCase() >
+              b[sortedDataToShow()].toLowerCase()
+                ? 1
+                : -1
+            )
+            .slice(itemOffset, endOffset)
+    );
     setPageCount(Math.ceil(filteredDataToDisplay?.length / displayPerPage));
-  }, [itemOffset, 5, filteredDataToDisplay?.length]);
+  }, [itemOffset, 5, filteredDataToDisplay?.length, props.sortValue]);
 
   const handlePageClick = (event) => {
     const newOffset =

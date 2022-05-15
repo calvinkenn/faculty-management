@@ -73,7 +73,7 @@ const editGoals = async (req, res, next) => {
   }
 };
 
-const editObjectives = async (req, res, next) => {
+const editBSITObjectives = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     errorsList = errors.array();
@@ -81,16 +81,39 @@ const editObjectives = async (req, res, next) => {
     const error = new HttpError(newList[0], 422);
     return next(error);
   }
-  const { bsitObjectives, blisObjectives, id } = req.body;
+  const { bsitObjectives, id } = req.body;
 
   let editObjectives = await VMGO.findByIdAndUpdate(id, {
     bsitObjectives: bsitObjectives,
+  });
+
+  const newUpdate = await VMGO.find({ id: id });
+  if (editObjectives) {
+    res
+      .status(201)
+      .json({ objectives: newUpdate, message: "BSIT Objectives Updated" });
+  }
+};
+
+const editBLISObjectives = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+  const { blisObjectives, id } = req.body;
+
+  let editObjectives = await VMGO.findByIdAndUpdate(id, {
     blisObjectives: blisObjectives,
   });
 
   const newUpdate = await VMGO.find({ id: id });
   if (editObjectives) {
-    res.status(201).json({ objectives: newUpdate, message: "Objectives Updated" });
+    res
+      .status(201)
+      .json({ objectives: newUpdate, message: "BLIS Objectives Updated" });
   }
 };
 
@@ -98,4 +121,5 @@ exports.getVMGOData = getVMGOData;
 exports.editMission = editMission;
 exports.editVision = editVision;
 exports.editGoals = editGoals;
-exports.editObjectives = editObjectives;
+exports.editBSITObjectives = editBSITObjectives;
+exports.editBLISObjectives = editBLISObjectives;

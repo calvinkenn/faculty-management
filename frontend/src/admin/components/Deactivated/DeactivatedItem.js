@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 
 import "../item.css";
+import Modal from "../../../shared/components/UIElements/Modal";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Button from "../../../shared/components/FormElements/Button";
 import Card from "../../../shared/components/UIElements/Card";
-import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import profilePic from "../../../assets/Image/Qw.png";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const DeactivatedItem = (props) => {
   const { isLoading, error, success, sendRequest } = useHttpClient();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   //handler for account approval
   const userApproveHandler = async (event) => {
+    setShowConfirmModal(false);
     event.preventDefault();
     try {
       const responseData = await sendRequest(
         "http://localhost:5000/api/admin/actionHandler",
         "PATCH",
         JSON.stringify({
-          userId: event.target.userId.value,
+          userId: props.id,
           permissionUpdate: "accepted",
         }),
         { "Content-Type": "application/json" }
@@ -33,19 +36,36 @@ const DeactivatedItem = (props) => {
     }
   };
 
+  const showConfirmModalHandler = () => {
+    setShowConfirmModal(true);
+  };
+
+  const cancelHandler = () => {
+    setShowConfirmModal(false);
+  };
+
   return (
-    <Card>
-      <div className="faculty-card-container">
-          {/* <div className="container__image">
-            <img
-              src={
-                props.profilePic !== ""
-                  ? `http://localhost:5000/${props.profilePic}`
-                  : profilePic
-              }
-              alt={props.firstName}
-            />
-          </div> */}
+    <React.Fragment>
+      <Modal
+        show={showConfirmModal}
+        onCancel={cancelHandler}
+        header={"Reactivate this Account?"}
+        footerClass="place-item__modal-actions"
+        footer={
+          <React.Fragment>
+            <Button inverse onClick={userApproveHandler}>
+              Yes
+            </Button>
+            <Button danger onClick={cancelHandler}>
+              No
+            </Button>
+          </React.Fragment>
+        }
+      >
+        <p>Do you want to proceed and reactivate this account?</p>
+      </Modal>
+      <Card>
+        <div className="faculty-card-container">
           <div className="faculty-details-cont">
             <div className="faculty-name-email-cont">
               <div>
@@ -57,9 +77,9 @@ const DeactivatedItem = (props) => {
               </div>
               <span />
               <div className="email-cont">
-                <ArrowBackIosIcon sx={{fontSize: '12px'}}/>
-                  {props.email}
-                <ArrowForwardIosIcon sx={{fontSize: '12px'}}/>
+                <ArrowBackIosIcon sx={{ fontSize: "12px" }} />
+                {props.email}
+                <ArrowForwardIosIcon sx={{ fontSize: "12px" }} />
               </div>
             </div>
             <div className="employeenum-fac-type">
@@ -74,10 +94,7 @@ const DeactivatedItem = (props) => {
               </div>
               <span />
               <div className="emp-status">
-                <h4>
-                  {" "}
-                  {props.employmentType ? props.employmentType : "N/A"}
-                </h4>
+                <h4> {props.employmentType ? props.employmentType : "N/A"}</h4>
                 <h6>Employment Status</h6>
               </div>
               <div className="date-of-reg">
@@ -89,14 +106,17 @@ const DeactivatedItem = (props) => {
               </div>
             </div>
           </div>
-        <div className="container__actions">
-          <form onSubmit={userApproveHandler}>
+          <div className="container__actions">
             <input type="hidden" value={props.id} name="userId"></input>
-            <Button type="submit"><h4><ChangeCircleIcon sx={{fontSize: '40px'}}/></h4></Button>
-          </form>
+            <Button type="button" onClick={showConfirmModalHandler}>
+              <h4>
+                <ChangeCircleIcon sx={{ fontSize: "40px" }} />
+              </h4>
+            </Button>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </React.Fragment>
   );
 };
 

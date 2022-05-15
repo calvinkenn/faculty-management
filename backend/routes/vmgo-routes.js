@@ -7,6 +7,7 @@ router.get("/getVMGOData", vmgoControllers.getVMGOData);
 router.patch("/editMission", vmgoControllers.editMission);
 router.patch("/editVision", vmgoControllers.editVision);
 router.patch("/editGoals", vmgoControllers.editGoals);
-router.patch("/editObjectives", vmgoControllers.editObjectives);
+router.patch("/editBSITObjectives", vmgoControllers.editBSITObjectives);
+router.patch("/editBLISObjectives", vmgoControllers.editBLISObjectives);
 
 module.exports = router;

@@ -112,7 +112,39 @@ const CivilServiceItem = (props) => {
           </div>
           <div className="civ-service-details-cont">
             <div className="civ-service-details">
-              <div>Career: {props.career}</div>
+              <table>
+                <tr>
+                  <td className="label"><div>Career</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.career}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Rating</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.rating ? props.rating : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Date</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.date}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Place of Examination</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.examPlace}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>License Number</div></td>
+                  <td className="colon">:</td>
+                  <td>{" "}{props.licenseNumber ? props.licenseNumber : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>License Validity</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.licenseValidity}</td>
+                </tr>
+              </table>
+              {/* <div>Career: {props.career}</div>
               <div>Rating: {props.rating ? props.rating : "N/A"}</div>
               <div>Date: {props.date}</div>
               <div>Place of Examination: {props.examPlace}</div>
@@ -120,9 +152,8 @@ const CivilServiceItem = (props) => {
                 License Number:{" "}
                 {props.licenseNumber ? props.licenseNumber : "N/A"}
               </div>
-              <div>License Validity: {props.licenseValidity}</div>
+              <div>License Validity: {props.licenseValidity}</div> */}
             </div>
-            
           </div>
         </div>
       </div>

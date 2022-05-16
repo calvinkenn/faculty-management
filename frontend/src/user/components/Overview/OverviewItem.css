@@ -10,8 +10,22 @@
     max-width: 100%;
 }
 
-/*Mikko is here*/
-.Marginlang
-{
-    margin-left: 1%;
+.basic-info-cont table td,
+.address-info-cont table td,
+.contact-info-cont table td{
+    padding: 10px;
+    border: none;
+}
+.basic-info-cont table .label,
+.address-info-cont table .label,
+.contact-info-cont table .label{
+    width: 100%;
+    max-width: 15%;
+    font-weight: 600;
+}
+.basic-info-cont table .colon,
+.address-info-cont table .colon,
+.contact-info-cont table .colon{
+    width: 100%;
+    max-width: 2%;
 }

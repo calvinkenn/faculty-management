@@ -153,8 +153,17 @@
     background-color: #d32f2f;
     border-radius: 0;
 }
-/*Mikko is here*/
-.Marginlang
-{
-    margin-left: 1%;
+
+.training-details table td{
+    padding: 10px;
+    border: none;
+}
+.training-details table .label{
+    width: 100%;
+    max-width: 45%;
+    font-weight: 600;
+}
+.training-details table .colon{
+    width: 100%;
+    max-width: 2%;
 }

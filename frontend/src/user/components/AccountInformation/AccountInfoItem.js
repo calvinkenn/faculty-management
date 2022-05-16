@@ -89,12 +89,23 @@ const AccountInfoItem = (props) => {
               </div>
             </div>
             <div className="employment-detail-cont">
-              <div>Employee Number: {props.employeeNum}</div>
-              <div>Faculty: {props.faculty ? props.faculty : "N/A"}</div>
-              <div>
-                Employment Type:{" "}
-                {props.employmentType ? props.employmentType : "N/A"}
-              </div>
+              <table>
+                <tr>
+                  <td className="label"><div>Employee Number</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.employeeNum}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Faculty</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.faculty ? props.faculty : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Employment Type</div></td>
+                  <td className="colon">:</td>
+                  <td>{" "}{props.employmentType ? props.employmentType : "N/A"}</td>
+                </tr>
+              </table>
             </div>
           </div>
           <div className="account-info-cont">
@@ -113,12 +124,30 @@ const AccountInfoItem = (props) => {
               </div>
             </div>
             <div className="account-info-detail-cont">
-              <div>Email: {props.email}</div>
+              <table>
+                <tr>
+                  <td className="label"><div>Email</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.email}</td>
+                </tr>
+                <tr>
+                  <td className="label">
+                    {!auth.isAdmin && (
+                      <div className="change-pass-cont">
+                        Password
+                      </div>
+                    )}
+                  </td>
+                  <td className="colon">:</td>
+                  <td>********</td>
+                </tr>
+              </table>
+              {/* <div>Email: {props.email}</div>
               {!auth.isAdmin && (
                 <div className="change-pass-cont">
                   Password: ************
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </div>

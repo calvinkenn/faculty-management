@@ -112,13 +112,43 @@ const TrainingItem = (props) => {
           </div>
           <div className="training-details-cont">
             <div className="training-details">
-              <div>TITLE: {props.title}</div>
-              <div>TYPE: {props.type}</div>
-              <div>From: {props.from}</div>
-              <div>To: {props.to}</div>
-              <div>Hours: {props.hours}</div>
-              <div>Type of learning and development: {props.typeOfLD}</div>
-              <div>Conducted/Sponsored by: {props.conducted}</div>
+              <table>
+                <tr>
+                  <td className="label"><div>Seminar/Training Title</div></td>
+                  <td className="colon">:</td>
+                  <td> {props.title}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Type</div></td>
+                  <td className="colon">:</td>
+                  <td> {props.type}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>From</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.from}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>To</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.to}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Hours</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.hours}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Type of learning and development</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.typeOfLD}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Conducted/Sponsored by</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.conducted}</td>
+                </tr>
+              </table>
             </div>
           </div>
           <div className="training-cert-cont">

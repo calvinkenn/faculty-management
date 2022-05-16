@@ -130,8 +130,23 @@
     border-radius: 0;
     border: none;
 }
-/*Mikko is here*/
-.MarginLang
-{
-    margin-left: 1%;
+.change-pass-cont{
+    width: 100%;
+    max-width: 100%;
+}
+.employment-detail-cont table td,
+.account-info-detail-cont table td{
+    padding: 10px;
+    border: none;
+}
+.employment-detail-cont table .label,
+.account-info-detail-cont table .label{
+    width: 100%;
+    max-width: 15%;
+    font-weight: 600;
+}
+.employment-detail-cont table .colon,
+.account-info-detail-cont table .colon{
+    width: 100%;
+    max-width: 2%;
 }

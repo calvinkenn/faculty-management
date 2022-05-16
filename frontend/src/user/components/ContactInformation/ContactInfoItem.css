@@ -99,7 +99,19 @@
 .contact-info-edit-btn button{
     padding: 1%;
 }
-/*mikko is here*/
-.Marginlang{
-    margin-left: 1%;
+.resident-add-details-cont table td,
+.perma-details-cont table td{
+    padding: 10px;
+    border: none;
+}
+.resident-add-details-cont table .label,
+.perma-details-cont table .label{
+    width: 100%;
+    max-width: 15%;
+    font-weight: 600;
+}
+.resident-add-details-cont table .colon,
+.perma-details-cont table .colon{
+    width: 100%;
+    max-width: 2%;
 }

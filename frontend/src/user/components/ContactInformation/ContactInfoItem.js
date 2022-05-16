@@ -146,21 +146,48 @@ const ContactInfoItem = (props) => {
             </div>
           </div>
           <div className="resident-add-details-cont">
-            <div>
-              House no.: {props.residentHouseNo ? props.residentHouseNo : "N/A"}
-            </div>
-            <div>
-              Street: {props.residentStreet ? props.residentStreet : "N/A"}
-            </div>
-            <div>
-              Location Type:
-              {props.residentLocationType ? props.residentLocationType : "N/A"}
-            </div>
-            <div>Region: {regionNameR ? regionNameR : "N/A"}</div>
-            <div>Province: {provinceNameR ? provinceNameR : "N/A"}</div>
-            <div>City: {cityNameR ? cityNameR : "N/A"}</div>
-            <div>Barangay: {barangayNameR ? barangayNameR : "N/A"}</div>
-            <div>Zip Code: {props.residentZip ? props.residentZip : "N/A"}</div>
+            <table>
+              <tr>
+                <td className="label"><div>House no.</div></td>
+                <td className="colon">:</td>
+                <td>{props.residentHouseNo ? props.residentHouseNo : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Street</div></td>
+                <td className="colon">:</td>
+                <td>{props.residentStreet ? props.residentStreet : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Location Type</div></td>
+                <td className="colon">:</td>
+                <td>{props.residentLocationType ? props.residentLocationType : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Region</div></td>
+                <td className="colon">:</td>
+                <td>{regionNameR ? regionNameR : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Province</div></td>
+                <td className="colon">:</td>
+                <td>{provinceNameR ? provinceNameR : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>City</div></td>
+                <td className="colon">:</td>
+                <td>{cityNameR ? cityNameR : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Barangay</div></td>
+                <td className="colon">:</td>
+                <td>{barangayNameR ? barangayNameR : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Zip Code</div></td>
+                <td className="colon">:</td>
+                <td>{props.residentZip ? props.residentZip : "N/A"}</td>
+              </tr>
+            </table>
           </div>
         </div>
         <div className="perma-add-cont">
@@ -171,26 +198,48 @@ const ContactInfoItem = (props) => {
             </div>
           </div>
           <div className="perma-details-cont">
-            <div>
-              House no.:{" "}
-              {props.permanentHouseNo ? props.permanentHouseNo : "N/A"}
-            </div>
-            <div>
-              Street: {props.permanentStreet ? props.permanentStreet : "N/A"}
-            </div>
-            <div>
-              Location Type:{" "}
-              {props.permanentLocationType
-                ? props.permanentLocationType
-                : "N/A"}
-            </div>
-            <div>Region: {regionNameP ? regionNameP : "N/A"}</div>
-            <div>Province: {provinceNameP ? provinceNameP : "N/A"}</div>
-            <div>City: {cityNameP ? cityNameP : "N/A"}</div>
-            <div>Barangay: {barangayNameP ? barangayNameP : "N/A"}</div>
-            <div>
-              Zip Code: {props.permanentZip ? props.permanentZip : "N/A"}
-            </div>
+            <table>
+              <tr>
+                <td className="label"><div>House no.</div></td>
+                <td className="colon">:</td>
+                <td>{" "}{props.permanentHouseNo ? props.permanentHouseNo : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Street</div></td>
+                <td className="colon">:</td>
+                <td>{props.permanentStreet ? props.permanentStreet : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Location Type</div></td>
+                <td className="colon">:</td>
+                <td>{" "}{props.permanentLocationType ? props.permanentLocationType : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Region</div></td>
+                <td className="colon">:</td>
+                <td>{regionNameP ? regionNameP : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Province</div></td>
+                <td className="colon">:</td>
+                <td>{provinceNameP ? provinceNameP : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>City</div></td>
+                <td className="colon">:</td>
+                <td>{cityNameP ? cityNameP : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Barangay</div></td>
+                <td className="colon">:</td>
+                <td>{barangayNameP ? barangayNameP : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Zip Code</div></td>
+                <td className="colon">:</td>
+                <td>{props.permanentZip ? props.permanentZip : "N/A"}</td>
+              </tr>
+            </table>
           </div>
         </div>
         <div className="contact-info-cont">
@@ -201,16 +250,23 @@ const ContactInfoItem = (props) => {
             </div>
           </div>
           <div className="contact-details-cont">
-            <div>
-              Telephone no.: {props.telephoneNum ? props.telephoneNum : "N/A"}
-            </div>
-            <div>
-              Cellphone no.: {props.cellphoneNum ? props.cellphoneNum : "N/A"}
-            </div>
-            <div>
-              Alternate Email:{" "}
-              {props.alternateEmail ? props.alternateEmail : "N/A"}
-            </div>
+            <table>
+              <tr>
+                <td className="label"><div>Telephone no.</div></td>
+                <td className="colon">:</td>
+                <td>{props.telephoneNum ? props.telephoneNum : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Cellphone no.</div></td>
+                <td className="colon">:</td>
+                <td>{props.cellphoneNum ? props.cellphoneNum : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Alternate Email</div></td>
+                <td className="colon">:</td>
+                <td>{" "}{props.alternateEmail ? props.alternateEmail : "N/A"}</td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

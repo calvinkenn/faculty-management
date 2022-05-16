@@ -127,8 +127,21 @@
     background-color: #d32f2f;
     border-radius: 0;
 }
-/*Mikko is here*/
-.MarginLang
-{
-    margin-left: 1%;
+
+.details-cont{
+    width: 100%;
+    max-width: 100%;
+}
+.details-cont table td {
+    padding: 10px;
+    border: none;
+}
+.details-cont table .label{
+    width: 100%;
+    max-width: 20%;
+    font-weight: 600;
+}
+.details-cont table .colon{
+    width: 100%;
+    max-width: 2%;
 }

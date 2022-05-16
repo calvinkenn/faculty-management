@@ -88,20 +88,50 @@ const OverviewItem = (props) => {
               <h1 className="Marginlang">Basic Information</h1>
             </div>
           </div>
-          <div>Employee Number: {props.employeeNumber}</div>
-          <div>First Name: {props.firstName}</div>
-          <div>Middle Name: {props.middleName ? props.middleName : "N/A"}</div>
-          <div>Last Name: {props.lastName}</div>
-          <div>Suffix Name: {props.suffixName ? props.suffixName : "N/A"}</div>
-          <div>
-            Extension Name:{" "}
-            {props.extensionName?.length > 0
-              ? props.extensionName?.map((extension) => (
-                  <span> {extension.extensionName} </span>
-                ))
-              : " N/A"}
-          </div>
-          <div>Email: {props.email}</div>
+          <table className="basic-info-table">
+            <tr>
+              <td className="label"><div>Employee Number</div></td>
+              <td className="colon">:</td>
+              <td>{props.employeeNumber}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>First Name</div></td>
+              <td className="colon">:</td>
+              <td>{props.firstName}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Middle Name</div></td>
+              <td className="colon">:</td>
+              <td>{props.middleName ? props.middleName : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Last Name</div></td>
+              <td className="colon">:</td>
+              <td>{props.lastName}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Suffix Name</div></td>
+              <td className="colon">:</td>
+              <td> {props.suffixName ? props.suffixName : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Extension Name{" "}</div></td>
+              <td className="colon">:</td>
+              <td>
+                {props.extensionName?.length > 0
+                  ? props.extensionName?.map((extension) => (
+                    <span> {extension.extensionName} </span>
+                  ))
+                  : " N/A"
+                }
+              </td>
+            </tr>
+            <tr>
+              <td className="label"><div>Email</div></td>
+              <td className="colon">:</td>
+              <td>{props.email}</td>
+            </tr>
+          </table>
         </div>
 
         <div className="address-info-cont">
@@ -112,14 +142,48 @@ const OverviewItem = (props) => {
               <h1 className="Marginlang">Resident Address</h1>
             </div>
           </div>
-          <div>House no.: {props.houseNo ? props.houseNo : "N/A"}</div>
-          <div>Street: {props.street ? props.street : "N/A"}</div>
-          <div>Type:{props.locationType ? props.locationType : "N/A"}</div>
-          <div>Region: {regionNameR ? regionNameR : "N/A"}</div>
-          <div>Province:{provinceNameR ? provinceNameR : "N/A"}</div>
-          <div>City: {cityNameR ? cityNameR : "N/A"}</div>
-          <div>Barangay: {barangayNameR ? barangayNameR : "N/A"}</div>
-          <div>Zip Code: {props.zip ? props.zip : "N/A"}</div>
+          <table className="basic-info-table">
+            <tr>
+              <td className="label"><div>House Number</div></td>
+              <td className="colon">:</td>
+              <td>{props.houseNo ? props.houseNo : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Street</div></td>
+              <td className="colon">:</td>
+              <td>{props.street ? props.street : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Type</div></td>
+              <td className="colon">:</td>
+              <td>{props.locationType ? props.locationType : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Region</div></td>
+              <td className="colon">:</td>
+              <td>{regionNameR ? regionNameR : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Province</div></td>
+              <td className="colon">:</td>
+              <td>{provinceNameR ? provinceNameR : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>City</div></td>
+              <td className="colon">:</td>
+              <td>{cityNameR ? cityNameR : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Barangay</div></td>
+              <td className="colon">:</td>
+              <td>{barangayNameR ? barangayNameR : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Zip Code</div></td>
+              <td className="colon">:</td>
+              <td>{props.zip ? props.zip : "N/A"}</td>
+            </tr>
+          </table>
         </div>
 
         <div className="contact-info-cont">
@@ -130,7 +194,24 @@ const OverviewItem = (props) => {
               <h1 className="Marginlang">Contact Information</h1>
             </div>
           </div>
-          <div>
+          <table>
+            <tr>
+              <td className="label"><div>Telephone no.</div></td>
+              <td className="colon">:</td>
+              <td>{props.telephoneNum ? props.telephoneNum : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Cellphone no.</div></td>
+              <td className="colon">:</td>
+              <td>{props.cellphoneNum ? props.cellphoneNum : "N/A"}</td>
+            </tr>
+            <tr>
+              <td className="label"><div>Alternate Email</div></td>
+              <td className="colon">:</td>
+              <td>{" "}{props.alternateEmail ? props.alternateEmail : "N/A"}</td>
+            </tr>
+          </table>
+          {/* <div>
             Telephone no.: {props.telephoneNum ? props.telephoneNum : "N/A"}
           </div>
           <div>
@@ -139,7 +220,7 @@ const OverviewItem = (props) => {
           <div>
             Alternate Email:{" "}
             {props.alternateEmail ? props.alternateEmail : "N/A"}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

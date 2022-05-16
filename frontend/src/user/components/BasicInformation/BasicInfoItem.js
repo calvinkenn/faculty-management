@@ -26,22 +26,40 @@ const BasicInfoItem = (props) => {
             </div>
           </div>
           <div className="name-detail-cont">
-            <div>First Name: {props.firstName}</div>
-            <div>
-              Middle Name: {props.middleName ? props.middleName : "N/A"}
-            </div>
-            <div>Last Name: {props.lastName}</div>
-            <div>
-              Suffix Name: {props.suffixName ? props.suffixName : "N/A"}
-            </div>
-            <div>
-              Extension Name:
-              {props.extensionName?.length > 0
-                ? props.extensionName?.map((extension) => (
+            <table>
+              <tr>
+                <td className="label"><div>First Name</div></td>
+                <td className="colon">:</td>
+                <td>{props.firstName}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Middle Name</div></td>
+                <td className="colon">:</td>
+                <td>{props.middleName ? props.middleName : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Last Name</div></td>
+                <td className="colon">:</td>
+                <td>{props.lastName}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Suffix Name</div></td>
+                <td className="colon">:</td>
+                <td>{props.suffixName ? props.suffixName : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label">Extension Name</td>
+                <td className="colon">:</td>
+                <td>
+                  {props.extensionName?.length > 0
+                    ? props.extensionName?.map((extension) => (
                     <span> {extension.extensionName} </span>
-                  ))
-                : " N/A"}
-            </div>
+                    ))
+                    : " N/A"
+                  }
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
         {/* <div>Email: {props.email}</div> */}
@@ -54,28 +72,59 @@ const BasicInfoItem = (props) => {
             </div>
           </div>
           <div className="personal-info-detail-cont">
-            <div>Birthday: {props.bday ? props.bday : "N/A"}</div>
-            <div>Age: {props.age > 0 ? props.age + " years old" : "N/A"}</div>
-            <div>
-              Place of Birth: {props.placeofBirth ? props.placeofBirth : "N/A"}
-            </div>
-            <div>
-              Citizenship: {props.citizenship ? props.citizenship : "N/A"}
-            </div>
-            <div>Gender: {props.gender ? props.gender : "N/A"}</div>
-            <div>
-              Civil Status: {props.civilStatus ? props.civilStatus : "N/A"}
-            </div>
-            <div>
-              Height: {props.height ? formatHeight(props.height) : "N/A"}
-              {props.height !== ""
-                ? props.height.indexOf(".") !== -1
-                  ? "in"
-                  : "ft"
-                : ""}
-            </div>
-            <div>Weight: {props.weight ? props.weight + "kg" : "N/A"}</div>
-            <div>Bloodtype: {props.bloodType ? props.bloodType : "N/A"}</div>
+            <table>
+              <tr>
+                <td className="label"><div>Birthday</div></td>
+                <td className="colon">:</td>
+                <td> {props.bday ? props.bday : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Age</div></td>
+                <td className="colon">:</td>
+                <td>{props.age > 0 ? props.age + " years old" : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Place of Birth</div></td>
+                <td className="colon">:</td>
+                <td>{props.placeofBirth ? props.placeofBirth : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Citizenship</div></td>
+                <td className="colon">:</td>
+                <td>{props.citizenship ? props.citizenship : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Gender</div></td>
+                <td className="colon">:</td>
+                <td> {props.gender ? props.gender : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Civil Status</div></td>
+                <td className="colon">:</td>
+                <td> {props.civilStatus ? props.civilStatus : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Height</div></td>
+                <td className="colon">:</td>
+                <td>{props.height ? formatHeight(props.height) : "N/A"}
+                    {props.height !== ""
+                      ? props.height.indexOf(".") !== -1
+                      ? "in"
+                      : "ft"
+                      : ""}
+                </td>
+              </tr>
+              <tr>
+                <td className="label"><div>Weight</div></td>
+                <td className="colon">:</td>
+                <td>{props.weight ? props.weight + "kg" : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>Bloodtype</div></td>
+                <td className="colon">:</td>
+                <td>{props.bloodType ? props.bloodType : "N/A"}</td>
+              </tr>
+            </table>
           </div>
         </div>
         <div className="government-id-cont">
@@ -87,13 +136,33 @@ const BasicInfoItem = (props) => {
             </div>
           </div>
           <div className="gov-id-detail-cont">
-            <div>GSS ID: {props.gssId ? props.gssId : "N/A"}</div>
-            <div>PAGIBIG ID: {props.pagibigId ? props.pagibigId : "N/A"}</div>
-            <div>
-              PHILHEALTH: {props.philHealthId ? props.philHealthId : "N/A"}
-            </div>
-            <div>SSS NO: {props.sssNo ? props.sssNo : "N/A"}</div>
-            <div>TIN NO: {props.tinNo ? props.tinNo : "N/A"}</div>
+            <table>
+              <tr>
+                <td className="label"><div>GSS ID</div></td>
+                <td className="colon">:</td>
+                <td>{props.gssId ? props.gssId : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>PAGIBIG ID</div></td>
+                <td className="colon">:</td>
+                <td>{props.pagibigId ? props.pagibigId : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>PHILHEALTH</div></td>
+                <td className="colon">:</td>
+                <td>{props.philHealthId ? props.philHealthId : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>SSS NO</div></td>
+                <td className="colon">:</td>
+                <td>{props.sssNo ? props.sssNo : "N/A"}</td>
+              </tr>
+              <tr>
+                <td className="label"><div>TIN NO</div></td>
+                <td className="colon">:</td>
+                <td>{props.tinNo ? props.tinNo : "N/A"}</td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

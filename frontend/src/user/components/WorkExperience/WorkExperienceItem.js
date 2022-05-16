@@ -115,23 +115,56 @@ const WorkExperienceItem = (props) => {
           </div>
           <div className="work-info-details-cont">
             <div className="work-dets-cont">
-              <div>Company: {props.company}</div>
-              <div>Position: {props.position}</div>
-              <div>Department: {props.department}</div>
-              <div>
-                Status of Appointment:{" "}
-                {props.statusOfAppointment ? props.statusOfAppointment : "N/A"}
-              </div>
-              <div>From: {props.fromDate}</div>
-              <div>To: {props.toDate}</div>
-              <div>Monthly Salary: &#8369;{salarySep(props.monthlySalary)}</div>
-              <div>
-                Salary Grade:{" "}
-                {props.salaryGrade && props.salaryStep
-                  ? props.salaryGrade + "-" + props.salaryStep
-                  : "N/A"}
-              </div>
-              <div>Government: {props.government}</div>
+              <table>
+                <tr>
+                  <td className="label"><div>Company</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.company}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Position</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.position}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Department</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.department}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Status of Appointment</div></td>
+                  <td className="colon">:</td>
+                  <td>{" "}{props.statusOfAppointment ? props.statusOfAppointment : "N/A"}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>From</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.fromDate}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>To</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.toDate}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Monthly Salary</div></td>
+                  <td className="colon">:</td>
+                  <td>&#8369;{salarySep(props.monthlySalary)}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Salary Grade</div></td>
+                  <td className="colon">:</td>
+                  <td>{" "}{props.salaryGrade && props.salaryStep
+                    ? props.salaryGrade + "-" + props.salaryStep
+                    : "N/A"}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Government</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.government}</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>

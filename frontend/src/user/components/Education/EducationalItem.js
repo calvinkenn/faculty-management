@@ -114,7 +114,59 @@ const EducationalItem = (props) => {
           </div>
           <div className="educ-details-cont">
             <div className="details-cont">
-              <div>Level: {props.level}</div>
+              <table>
+                <tr>
+                  <td className="label"><div>Level</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.level}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>School</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.school}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Degree</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.degree !== "N/A" ? <div>{props.degree}</div> : ""}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>From</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.from}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>To</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.to}</td>
+                </tr>
+                {/* may error sa year graduated, di lumilitaw */}
+                <tr>
+                  <td className="label">Year Graduated</td>
+                  <td className="colon">:</td>
+                  <td>
+                    {props.yearGraduated ? (
+                      <div>Year graduated: {props.yearGraduated}</div>
+                    ) : (
+                      ""
+                    )}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Highest Level/ Units Earned</div></td>
+                  <td className="colon">:</td>
+                  <td>{props.highestLevel}</td>
+                </tr>
+                <tr>
+                  <td className="label"><div>Awards</div></td>
+                  <td className="colon">:</td>
+                  <td>{" "}{props.awards && props.awards[0].awards !== ""
+                    ? props.awards.map((award) => <div>{award.awards}</div>)
+                    : "N/A"}
+                  </td>
+                </tr>
+              </table>
+              {/* <div>Level: {props.level}</div>
               <div>School: {props.school}</div>
               {props.degree !== "N/A" ? <div>Degree: {props.degree}</div> : ""}
               <div>From: {props.from}</div>
@@ -131,7 +183,7 @@ const EducationalItem = (props) => {
                 {props.awards && props.awards[0].awards !== ""
                   ? props.awards.map((award) => <div>{award.awards}</div>)
                   : "N/A"}
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

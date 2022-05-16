@@ -125,8 +125,22 @@
     padding: 1%;
 }
 
-/*Mikko is here*/
-.MarginLang
-{
-    margin-left: 1%;
+.name-detail-cont table td,
+.personal-info-detail-cont table td,
+.gov-id-detail-cont table td{
+    padding: 10px;
+    border: none;
+}
+.name-detail-cont table .label,
+.personal-info-detail-cont table .label,
+.gov-id-detail-cont table .label{
+    width: 100%;
+    max-width: 15%;
+    font-weight: 600;
+}
+.name-detail-cont table .colon,
+.personal-info-detail-cont table .colon,
+.gov-id-detail-cont table .colon{
+    width: 100%;
+    max-width: 2%;
 }

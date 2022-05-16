@@ -95,6 +95,7 @@ const AccountInfoEdit = (props) => {
                   <TextField {...params} helperText={null} />
                 )}
               />
+              <br />
               <div className="employee-num-cont">
                 <Input
                   element="input"

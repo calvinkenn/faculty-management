@@ -146,7 +146,7 @@ const EducationalItem = (props) => {
                   <td className="colon">:</td>
                   <td>
                     {props.yearGraduated ? (
-                      <div>Year graduated: {props.yearGraduated}</div>
+                      <div>{props.yearGraduated}</div>
                     ) : (
                       ""
                     )}

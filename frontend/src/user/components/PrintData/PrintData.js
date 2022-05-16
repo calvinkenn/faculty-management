@@ -30,6 +30,8 @@ const formatHeight = (height) => {
 };
 
 const PrintData = (props) => {
+
+  console.log(props.trainingData)
   const componentRef = useRef();
   const [regionDataR, setRegionR] = useState([]);
   const [provinceDataR, setProvinceR] = useState([]);
@@ -392,7 +394,7 @@ const PrintData = (props) => {
           <tr>
             <th colSpan={8}>III. Civil Service Eligibility</th>
           </tr>
-          <tr>
+          <tr className ="print-label" >
             <td>Career</td>
             <td>Rating</td>
             <td>Date of Examination</td>
@@ -428,8 +430,8 @@ const PrintData = (props) => {
           <tr>
             <th colSpan={8}>IV. Work Experience</th>
           </tr>
-          <tr>
-            <td>From</td>
+          <tr className ="print-label">
+            <td >From</td>
             <td>To</td>
             <td>Position Title</td>
             <td>Department/Agency/Office/Company</td>
@@ -448,7 +450,7 @@ const PrintData = (props) => {
                 <td>
                   {item.salaryGrade}-{item.salaryStep}
                 </td>
-                <td>{item.government}</td>
+                <td colSpan={2}>{item.government}</td>
               </tr>
             ))
           ) : (
@@ -468,7 +470,7 @@ const PrintData = (props) => {
               PROGRAMS ATTENDED
             </th>
           </tr>
-          <tr>
+          <tr className ="print-label">
             <td>Title of Learning and Development</td>
             <td>From</td>
             <td>To</td>
@@ -476,7 +478,7 @@ const PrintData = (props) => {
             <td>Type of LD</td>
             <td colSpan={3}>Conducted/Sponsored By</td>
           </tr>
-          {props.trainingData > 0 ? (
+          {props.trainingData.length > 0 ? (
             props.trainingData?.map((item) => (
               <tr>
                 <td>{item.title}</td>

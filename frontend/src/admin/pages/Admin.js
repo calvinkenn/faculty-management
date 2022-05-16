@@ -184,7 +184,7 @@ const Admin = (props) => {
     setUpdatedStatus("");
   }, [sendRequest, updatedStatus]);
 
-  console.log(lockedUserData)
+  console.log(lockedUserData);
 
   const clearModals = () => {
     setError(null);
@@ -201,7 +201,11 @@ const Admin = (props) => {
       activeUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
       activeUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
       activeUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
-      activeUser.employeeNum?.toString().includes(searchField)
+      activeUser.employeeNum?.toString().includes(searchField) ||
+      activeUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
+      `${activeUser.firstName} ${activeUser.lastName}`
+        ?.toLowerCase()
+        .includes(searchField.toLowerCase())
     );
   });
 
@@ -217,7 +221,10 @@ const Admin = (props) => {
         deactivatedUser.email
           ?.toLowerCase()
           .includes(searchField.toLowerCase()) ||
-        deactivatedUser.employeeNum?.toString().includes(searchField)
+        deactivatedUser.employeeNum?.toString().includes(searchField) ||
+        `${deactivatedUser.firstName} ${deactivatedUser.lastName}`
+          ?.toLowerCase()
+          .includes(searchField.toLowerCase())
       );
     }
   );
@@ -229,7 +236,10 @@ const Admin = (props) => {
         .includes(searchField.toLowerCase()) ||
       pendingUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
       pendingUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
-      pendingUser.employeeNum?.toString().includes(searchField)
+      pendingUser.employeeNum?.toString().includes(searchField) ||
+      `${pendingUser.firstName} ${pendingUser.lastName}`
+        ?.toLowerCase()
+        .includes(searchField.toLowerCase())
     );
   });
 
@@ -242,7 +252,10 @@ const Admin = (props) => {
         ?.toLowerCase()
         .includes(searchField.toLowerCase()) ||
       rejectedUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
-      rejectedUser.employeeNum?.toString().includes(searchField)
+      rejectedUser.employeeNum?.toString().includes(searchField) ||
+      `${rejectedUser.firstName} ${rejectedUser.lastName}`
+        ?.toLowerCase()
+        .includes(searchField.toLowerCase())
     );
   });
 
@@ -251,7 +264,10 @@ const Admin = (props) => {
       resetUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
       resetUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
       resetUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
-      resetUser.employeeNum?.toString().includes(searchField)
+      resetUser.employeeNum?.toString().includes(searchField) ||
+      `${resetUser.firstName} ${resetUser.lastName}`
+        ?.toLowerCase()
+        .includes(searchField.toLowerCase())
     );
   });
 
@@ -260,7 +276,10 @@ const Admin = (props) => {
       lockedUser.firstName?.toLowerCase().includes(searchField.toLowerCase()) ||
       lockedUser.lastName?.toLowerCase().includes(searchField.toLowerCase()) ||
       lockedUser.email?.toLowerCase().includes(searchField.toLowerCase()) ||
-      lockedUser.employeeNum?.toString().includes(searchField)
+      lockedUser.employeeNum?.toString().includes(searchField) ||
+      `${lockedUser.firstName} ${lockedUser.lastName}`
+        ?.toLowerCase()
+        .includes(searchField.toLowerCase())
     );
   });
 

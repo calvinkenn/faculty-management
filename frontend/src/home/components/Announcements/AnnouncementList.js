@@ -23,19 +23,20 @@ const AnnouncementList = (props) => {
   return (
     <React.Fragment>
       <div className="announcement-list">
-        {props.items?.map((item) => (
-          <AnnouncementItem
-            id={item._id}
-            title={item.title}
-            author={item.author}
-            date={formatDateLong(item.date)}
-            editDate={(item.editDate ? formatDateLong(item.editDate) : "")}
-            content={item.content}
-            image={item.image}
-            setIsEditModeHandler={props.setIsEditModeHandler}
-            messageHandler={props.messageHandler}
-          />
-        ))}
+        {props.items
+          .map((item) => (
+            <AnnouncementItem
+              id={item._id}
+              title={item.title}
+              author={item.author}
+              date={formatDateLong(item.date)}
+              editDate={item.editDate ? formatDateLong(item.editDate) : ""}
+              content={item.content}
+              image={item.image}
+              setIsEditModeHandler={props.setIsEditModeHandler}
+              messageHandler={props.messageHandler}
+            />
+          ))}
       </div>
     </React.Fragment>
   );

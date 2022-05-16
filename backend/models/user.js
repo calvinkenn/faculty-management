@@ -69,6 +69,9 @@ const userSchema = mongoose.Schema({
 
   //for profile
   profilePic: { type: String, default: "" },
+
+  //announcement
+  announcementCount: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model("User", userSchema);

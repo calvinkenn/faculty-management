@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const HttpError = require("../models/http-error");
 const { default: mongoose } = require("mongoose");
 const Announcement = require("../models/announcement");
+const User = require("../models/user");
 
 const getAnnouncements = async (req, res, next) => {
   const announcement = await Announcement.find();
@@ -33,6 +34,18 @@ const addNewAnnouncement = async (req, res, next) => {
   });
 
   try {
+    const activeUsers = await User.find(
+      { permission: "accepted" },
+      "-password"
+    );
+
+    if (activeUsers) {
+      User.updateMany(
+        { announcementCount: 0 },
+        { $set: { announcementCount: 1 } }
+      );
+    }
+
     await createdAnnouncement.save();
   } catch (err) {
     console.log(err.message);

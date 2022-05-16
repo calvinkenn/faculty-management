@@ -273,6 +273,20 @@ const Auth = () => {
                     />
                   </div>
                 )}
+                {isResetMode && (
+                  <div className="email-container">
+                    <Input
+                      element="input"
+                      id="email"
+                      type="text"
+                      validators={[VALIDATOR_EMAIL()]}
+                      helperText="Please input a valid email."
+                      onInput={inputHandler}
+                      label="Email"
+                      variant="outlined"
+                    />
+                  </div>
+                )}
                 {isRegisterMode && (
                   <div className="email-container">
                     <Input

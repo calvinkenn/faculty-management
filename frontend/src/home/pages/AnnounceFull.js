@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { NavLink } from "react-router-dom";
+
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import MainNavigation from "../../shared/components/Navigation/MainNavigation";
 import "./AnnounceFull.css";
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 
 const formatDateLong = (date) => {
   const formatter = new Intl.DateTimeFormat("en-us", {
@@ -47,6 +50,11 @@ const AnnounceFull = (props) => {
           if (item._id === announceId) {
             return (
               <div className="announce-container">
+                <div className="back-btn">
+                  <NavLink to={`/announcement/`} exact>
+                    <ArrowCircleLeftIcon sx={{fontSize: '40px'}}/><span>Go Back</span>
+                  </NavLink>
+                </div>
                 <div className="content-title"><h2>{item.title}</h2></div>
                 <div className="content-author-date">
                   <div className="content-date-created">{formatDateLong(item.date)}</div>

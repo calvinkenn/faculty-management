@@ -93,11 +93,15 @@ const AnnouncementItem = (props) => {
             </div>
           </div>
           <div className="announcement-action-bar">
-            {auth.isAdmin && <Button onClick={editHandler}>Edit</Button>}
+            <div className="announcement-edit-btn">
+              {auth.isAdmin && <Button onClick={editHandler}>Edit</Button>}
+            </div>
             <span />
-            {auth.isAdmin && (
-              <Button onClick={showDeleteWarningHandler}>Delete</Button>
-            )}
+            <div className="announcement-del-btn">
+              {auth.isAdmin && (
+                <Button onClick={showDeleteWarningHandler}>Delete</Button>
+              )}
+            </div>
           </div>
         </div>
       </div>

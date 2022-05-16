@@ -32,6 +32,11 @@
 .content-title h3{
   font-size: 1.3vw;
   font-weight: 600;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 .content-author{
   margin-bottom: 5%;
@@ -40,6 +45,11 @@
   font-style: italic;
   font-weight: 400;
   font-size: 0.8vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .content-date-edited{
@@ -80,9 +90,48 @@
   width: 100%;
   max-width: -webkit-fill-available;
   display: flex;
-  padding: 5%;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 5% 5%;
 }
 .announcement-action-bar span{
   width: 100%;
   max-width: 5%;
+}
+.announcement-edit-btn,
+.announcement-del-btn{
+  width: 100%;
+  max-width: -webkit-fill-available;
+  display: flex;
+}
+.announcement-edit-btn button{
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  border: 2px solid #ffc000;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 1em;
+  margin-top: 1em;
+  cursor: pointer;
+  color: #ffc000;
+  padding: 8%;
+}
+.announcement-del-btn button{
+  background-color: #d32f2f;
+}
+.back-btn{
+  margin-bottom: 2%;
+}
+.back-btn a{
+  color: #ffc000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.back-btn span{
+  color: #303030;
+  font-weight: 600;
+  font-size: larger;
+  margin-left: 1%;
 }

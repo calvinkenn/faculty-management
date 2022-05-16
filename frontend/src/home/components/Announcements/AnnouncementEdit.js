@@ -103,112 +103,121 @@ const AnnouncementEdit = (props) => {
 
   return (
     <React.Fragment>
-      <ErrorModal error={inputError} onClear={clearInputError} />
-      <Modal
-        show={showConfirmModal || showSaveConfirmModal}
-        onCancel={
-          showConfirmModal ? closeEditWarningHandler : closeSaveConfirmHandler
-        }
-        header={
-          showConfirmModal
-            ? props.isEditMode
-              ? "Cancel Editing?"
-              : "Cancel Adding?"
-            : "Save Changes"
-        }
-        footerClass="place-item__modal-actions"
-        footer={
-          <React.Fragment>
-            <div className="mission-cancel-edit">
-              <Button
-                danger
-                onClick={
-                  showConfirmModal
-                    ? cancelEditHandler
-                    : props.isEditMode
-                    ? submitEditHandler
-                    : submitAddHandler
-                }
-              >
-                Yes
-              </Button>
-              <Button
-                inverse
-                onClick={
-                  showConfirmModal
-                    ? closeEditWarningHandler
-                    : closeSaveConfirmHandler
-                }
-              >
-                No
-              </Button>
-            </div>
-          </React.Fragment>
-        }
-      >
-        {showConfirmModal ? (
-          <p>
-            Do you want to cancel {props.isEditMode ? "editing" : "adding"}{" "}
-            announcement?
-          </p>
-        ) : (
-          <p>Do you want to save changes to Announcement?</p>
-        )}
-      </Modal>{" "}
-      <div className="action-bar">
-        <Button onClick={showEditWarningHandler}>Cancel</Button>
+      <div className="edit-announcement-cont">
+        <ErrorModal error={inputError} onClear={clearInputError} />
+        <Modal
+          show={showConfirmModal || showSaveConfirmModal}
+          onCancel={
+            showConfirmModal ? closeEditWarningHandler : closeSaveConfirmHandler
+          }
+          header={
+            showConfirmModal
+              ? props.isEditMode
+                ? "Cancel Editing?"
+                : "Cancel Adding?"
+              : "Save Changes"
+          }
+          footerClass="place-item__modal-actions"
+          footer={
+            <React.Fragment>
+              <div className="mission-cancel-edit">
+                <Button
+                  danger
+                  onClick={
+                    showConfirmModal
+                      ? cancelEditHandler
+                      : props.isEditMode
+                      ? submitEditHandler
+                      : submitAddHandler
+                  }
+                >
+                  Yes
+                </Button>
+                <Button
+                  inverse
+                  onClick={
+                    showConfirmModal
+                      ? closeEditWarningHandler
+                      : closeSaveConfirmHandler
+                  }
+                >
+                  No
+                </Button>
+              </div>
+            </React.Fragment>
+          }
+        >
+          {showConfirmModal ? (
+            <p>
+              Do you want to cancel {props.isEditMode ? "editing" : "adding"}{" "}
+              announcement?
+            </p>
+          ) : (
+            <p>Do you want to save changes to Announcement?</p>
+          )}
+        </Modal>{" "}
+        <div className="announce-edit-form">
+          <ImageUpload
+            center
+            id="announcementPic"
+            onInput={inputHandler}
+            previewUrl={formState.inputs.announcementPic.value}
+            isEditMode={props.isEditMode}
+            isAnnouncement={true}
+          />
+        </div>
+        <div className="edit-title-input">
+          <Input
+            element="input"
+            id="title"
+            type="text"
+            label="Title"
+            validators={[VALIDATOR_REQUIRE()]}
+            helperText="Please input the title of the announcement"
+            onInput={inputHandler}
+            initialValue={formState.inputs.title.value}
+            initialValid={formState.inputs.title.isValid}
+            required
+          />
+        </div>
+        <div className="edit-author-input">
+          <Input
+            element="input"
+            id="author"
+            type="text"
+            label="Author"
+            validators={[VALIDATOR_REQUIRE()]}
+            helperText="Please input the author of the announcement"
+            onInput={inputHandler}
+            initialValue={formState.inputs.author.value}
+            initialValid={formState.inputs.author.isValid}
+            required
+          />
+        </div>
+        <div className="edit-content-input">
+          <Input
+            element="textarea"
+            id="content"
+            type="text"
+            label="Content"
+            minRows={12}
+            validators={[VALIDATOR_REQUIRE()]}
+            helperText="Please input content of the announcement"
+            onInput={inputHandler}
+            initialValue={formState.inputs.content.value}
+            initialValid={formState.inputs.content.isValid}
+            required
+          />
+        </div>
+
+        <div className="action-bar">
+          <Button type="button" onClick={showSaveConfirmHandler}>
+            {props.isEditMode ? "Save" : "Publish"}
+          </Button>
+          <span />
+          <Button onClick={showEditWarningHandler}>Cancel</Button>
+        </div>
       </div>
-      <div>
-        <ImageUpload
-          center
-          id="announcementPic"
-          onInput={inputHandler}
-          previewUrl={formState.inputs.announcementPic.value}
-          isEditMode={props.isEditMode}
-          isAnnouncement={true}
-        />
-      </div>
-      <Input
-        element="input"
-        id="title"
-        type="text"
-        label="Title"
-        validators={[VALIDATOR_REQUIRE()]}
-        helperText="Please input the title of the announcement"
-        onInput={inputHandler}
-        initialValue={formState.inputs.title.value}
-        initialValid={formState.inputs.title.isValid}
-        required
-      />
-      <Input
-        element="input"
-        id="author"
-        type="text"
-        label="Author"
-        validators={[VALIDATOR_REQUIRE()]}
-        helperText="Please input the author of the announcement"
-        onInput={inputHandler}
-        initialValue={formState.inputs.author.value}
-        initialValid={formState.inputs.author.isValid}
-        required
-      />
-      <Input
-        element="textarea"
-        id="content"
-        type="text"
-        label="Content"
-        minRows={12}
-        width={500}
-        validators={[VALIDATOR_REQUIRE()]}
-        helperText="Please input content of the announcement"
-        onInput={inputHandler}
-        initialValue={formState.inputs.content.value}
-        initialValid={formState.inputs.content.isValid}
-        required
-      />
-      <Button type="button" onClick={showSaveConfirmHandler}>
-        {props.isEditMode ? "Save" : "Publish"}
-      </Button>
     </React.Fragment>
   );
 };

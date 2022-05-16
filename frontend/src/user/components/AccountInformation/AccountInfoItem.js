@@ -5,6 +5,7 @@ import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Modal from "../../../shared/components/UIElements/Modal";
 import "./AccountInfoItem.css";
+import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 
 //mikko is here
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
@@ -102,21 +103,23 @@ const AccountInfoItem = (props) => {
               <div className="basic-title-text">
                 <SettingsIcon  sx={{fontSize: "30px"}}/><h1 className="MarginLang">Account Information</h1>
               </div>
+              <div className="change-btn-cont">
+                <Button onClick={changePassHandler}><ManageAccountsIcon/></Button>
+              </div>
+              <div className="deact-btn">
+                {!auth.isAdmin && (
+                  <Button onClick={showDeactivateHandler}><DoNotDisturbOnIcon /></Button>
+                )}
+              </div>
             </div>
             <div className="account-info-detail-cont">
               <div>Email: {props.email}</div>
               {!auth.isAdmin && (
                 <div className="change-pass-cont">
                   Password: ************
-                  <div className="change-btn-cont">
-                    <Button onClick={changePassHandler}>Change Password</Button>
-                  </div>
                 </div>
               )}
             </div>
-            {!auth.isAdmin && (
-              <Button onClick={showDeactivateHandler}>Deactive Account</Button>
-            )}
           </div>
         </div>
       </div>

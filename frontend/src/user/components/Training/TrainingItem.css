@@ -127,6 +127,32 @@
     padding: 1%;
 }
 
+.training-action-btn{
+    width: 100%;
+    max-width: 10%;
+    display: flex;
+}
+.training-container__actions{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+.training-edit-btn,
+.training-del-btn{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+.training-edit-btn button{
+    margin: 0;
+    background-color: #303030;
+    border-radius: 0;
+}
+.training-del-btn button{
+    margin: 0;
+    background-color: #d32f2f;
+    border-radius: 0;
+}
 /*Mikko is here*/
 .Marginlang
 {

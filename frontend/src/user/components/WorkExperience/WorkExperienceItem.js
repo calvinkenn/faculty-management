@@ -5,6 +5,8 @@ import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./WorkExperienceItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 //Mikko is here
 import WorkIcon from '@mui/icons-material/Work';
@@ -96,6 +98,20 @@ const WorkExperienceItem = (props) => {
             <div className="basic-title-text">
               <WorkIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Work Experience - {props.position}</h1>
             </div>
+            <div className="work-action-btn">
+              {!userIdByParams && (
+                <div className="work-container__actions">
+                  <div className="work-edit-btn">
+                    <Button onClick={editModeHandler}><EditIcon /></Button>
+                  </div>
+                  <div className="work-del-btn">
+                    <Button danger onClick={showDeleteWarningHandler}>
+                      <DeleteIcon />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           <div className="work-info-details-cont">
             <div className="work-dets-cont">
@@ -116,16 +132,6 @@ const WorkExperienceItem = (props) => {
                   : "N/A"}
               </div>
               <div>Government: {props.government}</div>
-            </div>
-            <div className="work-action-btn">
-              {!userIdByParams && (
-                <div className="work-container__actions">
-                  <Button onClick={editModeHandler}>Edit</Button>
-                  <Button danger onClick={showDeleteWarningHandler}>
-                    Delete
-                  </Button>
-                </div>
-              )}
             </div>
           </div>
         </div>

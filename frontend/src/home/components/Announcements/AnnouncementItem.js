@@ -92,10 +92,17 @@ const AnnouncementItem = (props) => {
               </NavLink>
             </div>
           </div>
-          {auth.isAdmin && <Button onClick={editHandler}>Edit</Button>}
-          {auth.isAdmin && (
-            <Button onClick={showDeleteWarningHandler}>Delete</Button>
-          )}
+          <div className="announcement-action-bar">
+            <div className="announcement-edit-btn">
+              {auth.isAdmin && <Button onClick={editHandler}>Edit</Button>}
+            </div>
+            <span />
+            <div className="announcement-del-btn">
+              {auth.isAdmin && (
+                <Button onClick={showDeleteWarningHandler}>Delete</Button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </React.Fragment>

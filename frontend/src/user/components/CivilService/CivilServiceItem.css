@@ -53,6 +53,32 @@
     padding: 1%;
     margin: 0;
 }
+.civ-service-action-btn{
+    width: 100%;
+    max-width: 10%;
+    display: flex;
+}
+.civil-container__actions{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+.civ-edit-btn,
+.civ-del-btn{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+.civ-edit-btn button{
+    margin: 0;
+    background-color: #303030;
+    border-radius: 0;
+}
+.civ-del-btn button{
+    margin: 0;
+    background-color: #d32f2f;
+    border-radius: 0;
+}
 
 /*Mikko is here*/
 .Marginlang

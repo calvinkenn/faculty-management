@@ -23,7 +23,7 @@ const GoalsEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm({
     goals: {
       value: inputList.length > 1 ? inputList : "",
-      isValid: false,
+      isValid: inputList.length > 1 ? true : false,
     },
   });
 

@@ -26,7 +26,7 @@ const AccountInfoEdit = (props) => {
     {
       employeeNum: {
         value: props.userEdit.employeeNum,
-        isValid: false,
+        isValid: props.userEdit.employeeNum ? true : false,
       },
       faculty: {
         value: props.userEdit.faculty,
@@ -38,7 +38,7 @@ const AccountInfoEdit = (props) => {
       },
       email: {
         value: props.userEdit.email,
-        isValid: false,
+        isValid: props.userEdit.email ? true : false,
       },
     },
     false

@@ -128,7 +128,7 @@ const EducationalItem = (props) => {
                 <tr>
                   <td className="label"><div>Degree</div></td>
                   <td className="colon">:</td>
-                  <td>{props.degree !== "N/A" ? <div>{props.degree}</div> : ""}</td>
+                  <td>{props.degree ? <div>{props.degree}</div> : "N/A"}</td>
                 </tr>
                 <tr>
                   <td className="label"><div>From</div></td>

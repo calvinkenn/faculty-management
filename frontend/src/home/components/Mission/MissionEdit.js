@@ -15,7 +15,7 @@ const MissionEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm({
     mission: {
       value: props.item ? props.item : "",
-      isValid: false,
+      isValid: props.item ? true : false,
     },
   });
 

@@ -52,7 +52,7 @@ const CivilServiceEdit = (props) => {
     {
       career: {
         value: props.editData ? props.editData.career : "",
-        isValid: false,
+        isValid: props.editData && props.editData.career ? true : false,
       },
       rating: {
         value: props.editData ? props.editData.rating : "",
@@ -62,11 +62,11 @@ const CivilServiceEdit = (props) => {
         value: props.editData
           ? formatDate(props.editData.date.substring(0, 10))
           : now,
-        isValid: false,
+        isValid: props.editData && props.editData.date ? true : false,
       },
       placeOfExam: {
         value: props.editData ? props.editData.placeOfExam : "",
-        isValid: false,
+        isValid: props.editData && props.editData.placeOfExam ? true : false,
       },
       licenseNumber: {
         value: props.editData ? props.editData.licenseNumber : "",

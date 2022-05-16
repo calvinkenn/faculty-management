@@ -16,7 +16,7 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 //mikko is here
-import SchoolIcon from '@mui/icons-material/School';
+import SchoolIcon from "@mui/icons-material/School";
 //
 
 const EducationalEdit = (props) => {
@@ -39,23 +39,23 @@ const EducationalEdit = (props) => {
     {
       level: {
         value: props.editData ? props.editData.level : "",
-        isValid: false,
+        isValid: props.editData && props.editData.level ? true : false,
       },
       school: {
         value: props.editData ? props.editData.school : "",
-        isValid: false,
+        isValid: props.editData && props.editData.school ? true : false,
       },
       degree: {
         value: props.editData ? props.editData.degree : "",
-        isValid: false,
+        isValid: props.editData && props.editData.degree ? true : false,
       },
       highestLevel: {
         value: props.editData ? props.editData.highestLevel : "",
-        isValid: false,
+        isValid: props.editData && props.editData.highestLevel ? true : false,
       },
       awards: {
         value: inputList.length > 1 ? inputList : "",
-        isValid: false,
+        isValid: inputList.length > 1 ? true : false,
       },
     },
     false
@@ -125,7 +125,7 @@ const EducationalEdit = (props) => {
         fromDate: fromDateVal.getFullYear(),
         toDate: toDateVal.getFullYear(),
         awards: inputList,
-        yearGraduated: yearGraduated.getFullYear,
+        yearGraduated: yearGraduated.getFullYear(),
         highestLevel: formState.inputs.highestLevel.value,
         userId: storedData.userId,
         token: storedData.token,
@@ -217,7 +217,8 @@ const EducationalEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <SchoolIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Educational Attainment</h1>
+              <SchoolIcon sx={{ fontSize: "30px" }} />
+              <h1 className="MarginLang">Educational Attainment</h1>
             </div>
           </div>
           <div className="educ-add-details-cont">

@@ -5,6 +5,8 @@ import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./TrainingItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 //mikko is here
 import ArticleIcon from '@mui/icons-material/Article';
@@ -90,9 +92,23 @@ const TrainingItem = (props) => {
         <div className="training-container__data">
           <div className="training-title-cont">
             <div className="basic-title-blank"></div>
-              <div className="basic-title-text">
-                <ArticleIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">{props.title}</h1>
-              </div>
+            <div className="basic-title-text">
+              <ArticleIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">{props.title}</h1>
+            </div>
+            <div className="training-action-btn">
+              {!userIdByParams && (
+                <div className="training-container__actions">
+                  <div className="training-edit-btn">
+                    <Button onClick={editModeHandler}><EditIcon/></Button>
+                  </div>
+                  <div className="training-del-btn">
+                    <Button danger onClick={showDeleteWarningHandler}>
+                      <DeleteIcon />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           <div className="training-details-cont">
             <div className="training-details">
@@ -103,16 +119,6 @@ const TrainingItem = (props) => {
               <div>Hours: {props.hours}</div>
               <div>Type of learning and development: {props.typeOfLD}</div>
               <div>Conducted/Sponsored by: {props.conducted}</div>
-            </div>
-            <div className="training-action-btn">
-              {!userIdByParams && (
-                <div className="training-container__actions">
-                  <Button onClick={editModeHandler}>Edit</Button>
-                  <Button danger onClick={showDeleteWarningHandler}>
-                    Delete
-                  </Button>
-                </div>
-              )}
             </div>
           </div>
           <div className="training-cert-cont">

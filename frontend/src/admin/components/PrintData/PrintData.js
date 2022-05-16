@@ -64,7 +64,9 @@ const PrintData = (props) => {
   return (
     <div>
       <button onClick={handlePrint} className='print-button'>Print</button>
-      <ComponentToPrint data={activeAccountData()} ref={componentRef} />
+      <div className="print-table-cont">
+        <ComponentToPrint data={activeAccountData()} ref={componentRef} />
+      </div>
     </div>
   );
 };

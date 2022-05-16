@@ -5,6 +5,8 @@ import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./CivilServiceItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 //mikko is here
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
@@ -93,6 +95,20 @@ const CivilServiceItem = (props) => {
             <div className="basic-title-text">
               <WorkHistoryIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Career - {props.career}</h1>
             </div>
+            <div className="civ-service-action-btn">
+              {!userIdByParams && (
+                <div className="civil-container__actions">
+                  <div className="civ-edit-btn">
+                    <Button onClick={editModeHandler}><EditIcon /></Button>
+                  </div>
+                  <div className="civ-del-btn">
+                    <Button danger onClick={showDeleteWarningHandler}>
+                      <DeleteIcon />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           <div className="civ-service-details-cont">
             <div className="civ-service-details">
@@ -106,16 +122,7 @@ const CivilServiceItem = (props) => {
               </div>
               <div>License Validity: {props.licenseValidity}</div>
             </div>
-            <div className="civ-service-action-btn">
-              {!userIdByParams && (
-                <div className="civil-container__actions">
-                  <Button onClick={editModeHandler}>Edit</Button>
-                  <Button danger onClick={showDeleteWarningHandler}>
-                    Delete
-                  </Button>
-                </div>
-              )}
-            </div>
+            
           </div>
         </div>
       </div>

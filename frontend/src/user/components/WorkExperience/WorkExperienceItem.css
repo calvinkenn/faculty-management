@@ -80,7 +80,32 @@
 .work-exp-btn button{
     padding: 1%;
 }
-
+.work-action-btn{
+    width: 100%;
+    max-width: 10%;
+    display: flex;
+}
+.work-container__actions{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+.work-edit-btn,
+.work-del-btn{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+.work-edit-btn button{
+    margin: 0;
+    background-color: #303030;
+    border-radius: 0;
+}
+.work-del-btn button{
+    margin: 0;
+    background-color: #d32f2f;
+    border-radius: 0;
+}
 /*Mikko is here*/
 .MarginLang
 {

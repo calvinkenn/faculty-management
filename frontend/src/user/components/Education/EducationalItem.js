@@ -6,6 +6,8 @@ import Button from "../../../shared/components/FormElements/Button";
 import "./EducationalItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { AuthContext } from "../../../shared/context/auth-context";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 //mikko is here
 import SchoolIcon from "@mui/icons-material/School";
@@ -95,6 +97,20 @@ const EducationalItem = (props) => {
               <SchoolIcon sx={{ fontSize: "30px" }} />
               <h1 className="MarginLang">{props.level}</h1>
             </div>
+            <div className="educ-action-btn">
+              {!userIdByParams && (
+                <div className="educational-container__actions">
+                  <div className="educ-edit-btn">
+                    <Button onClick={editModeHandler}><EditIcon/></Button>
+                  </div>
+                  <div className="del-edit-btn">
+                    <Button danger onClick={showDeleteWarningHandler}>
+                      <DeleteIcon />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           <div className="educ-details-cont">
             <div className="details-cont">
@@ -116,16 +132,6 @@ const EducationalItem = (props) => {
                   ? props.awards.map((award) => <div>{award.awards}</div>)
                   : "N/A"}
               </div>
-            </div>
-            <div className="educ-action-btn">
-              {!userIdByParams && (
-                <div className="educational-container__actions">
-                  <Button onClick={editModeHandler}>Edit</Button>
-                  <Button danger onClick={showDeleteWarningHandler}>
-                    Delete
-                  </Button>
-                </div>
-              )}
             </div>
           </div>
         </div>

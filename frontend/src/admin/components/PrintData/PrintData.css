@@ -23,9 +23,9 @@ th {
 }
 
 .print-button{
-  width: 20%;
-  max-width: 100%;
-  padding: 2%;
+  width: 100%;
+  max-width: 20%;
+  padding: 1%;
   background-color: #ffc000;
   border: none;
   border-radius: 5px;

@@ -22,7 +22,6 @@
 li:hover {
   cursor: pointer;
   background-color: #adadad;
-  color: #ffffff;
 }
 
 .active {

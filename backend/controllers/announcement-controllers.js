@@ -39,11 +39,13 @@ const addNewAnnouncement = async (req, res, next) => {
       "-password"
     );
 
-    if (activeUsers) {
-      User.updateMany(
-        { announcementCount: 0 },
-        { $set: { announcementCount: 1 } }
-      );
+    const updateAnnouncement = await User.updateMany(
+      { permission: "accepted" },
+      { $inc: { announcementCount: 1 } }
+    );
+
+    if (updateAnnouncement) {
+      console.log("Added to notif");
     }
 
     await createdAnnouncement.save();
@@ -105,7 +107,16 @@ const editAnnouncement = async (req, res, next) => {
   }
 };
 
+const clearAnnouncementCount = async (req, res, next) => {
+  //All action for buttons
+  const { userId } = req.body;
+  const user = await User.findByIdAndUpdate(userId, {
+    announcementCount: 0,
+  });
+};
+
 exports.getAnnouncements = getAnnouncements;
 exports.addNewAnnouncement = addNewAnnouncement;
 exports.deleteAnnouncement = deleteAnnouncement;
 exports.editAnnouncement = editAnnouncement;
+exports.clearAnnouncementCount = clearAnnouncementCount;

@@ -166,24 +166,6 @@ const EducationalItem = (props) => {
                   </td>
                 </tr>
               </table>
-              {/* <div>Level: {props.level}</div>
-              <div>School: {props.school}</div>
-              {props.degree !== "N/A" ? <div>Degree: {props.degree}</div> : ""}
-              <div>From: {props.from}</div>
-              <span />
-              <div>To: {props.to}</div>
-              {props.yearGraduated ? (
-                <div>Year graduated: {props.yearGraduated}</div>
-              ) : (
-                ""
-              )}
-              <div>Highest Level/ Units Earned: {props.highestLevel}</div>
-              <div>
-                Awards:{" "}
-                {props.awards && props.awards[0].awards !== ""
-                  ? props.awards.map((award) => <div>{award.awards}</div>)
-                  : "N/A"}
-              </div> */}
             </div>
           </div>
         </div>

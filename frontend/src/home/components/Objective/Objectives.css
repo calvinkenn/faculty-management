@@ -71,6 +71,19 @@
   width: 100%;
   max-width: 100%;
 }
+
+
+.bsit-obj-forms,
+.blis-obj-forms{
+  display: flex;
+  flex-direction: column;
+}
+.bsit-obj-forms div,
+.blis-obj-forms div{
+  margin-top: 0.5%;
+  width: 100%;
+}
+
 .action-bar{
   width: 100%;
   max-width: 100%;
@@ -85,4 +98,10 @@
 .action-bar span{
   width: 100%;
   max-width: 5%;
+}
+
+.obj-cancel-edit{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

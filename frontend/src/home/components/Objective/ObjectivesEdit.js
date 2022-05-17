@@ -198,7 +198,7 @@ const ObjectivesEdit = (props) => {
         onSubmit={props.bsitObj ? submitBSITEditHandler : submitBLISEditHandler}
       >
         {props.bsitObj && (
-          <div>
+          <div className="bsit-obj-forms">
             The following are the objectives of the BSIT program:
             {inputListBSIT.map((x, i) => {
               return (
@@ -210,7 +210,6 @@ const ObjectivesEdit = (props) => {
                       type="text"
                       label="Objectives BSIT"
                       minRows={3}
-                      style={{ width: 1200 }}
                       multiline
                       value={x.bsitObjectives}
                       onChange={(e) => handleInputChangeBSIT(e, i)}
@@ -241,7 +240,7 @@ const ObjectivesEdit = (props) => {
         )}
 
         {!props.bsitObj && (
-          <div>
+          <div className="blis-obj-forms">
             The following are the objectives of the BLIS program:
             {inputListBLIS.map((x, i) => {
               return (
@@ -253,7 +252,6 @@ const ObjectivesEdit = (props) => {
                       type="text"
                       label="Objectives BLIS"
                       minRows={3}
-                      style={{ width: 1200 }}
                       multiline
                       value={x.blisObjectives}
                       onChange={(e) => handleInputChangeBLIS(e, i)}
@@ -283,12 +281,11 @@ const ObjectivesEdit = (props) => {
           </div>
         )}
         <div className="action-bar">
-          <div className="obj-action-bar">
             <Button type="button" onClick={showBSITConfirmHandler}>Save</Button>
+            <span />
             <Button type="button" onClick={showEditWarningHandler}>
               Cancel
             </Button>
-          </div>
         </div>
       </form>
     </React.Fragment>

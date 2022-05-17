@@ -178,7 +178,10 @@ const Auth = () => {
           information you provide in completing this registration will be used
           for eligibility verification only and processed according to CICT
           which includes important information on why and how CICT is processing
-          your personal data. I agree to the use or processing of my personal
+          your personal data. 
+          <br/>
+          <br />
+          I agree to the use or processing of my personal
           and sensitive personal information by CICT for the purpose of
           profiling related activities in accordance with the applicable local
           data protection laws.

@@ -47,7 +47,7 @@ const Overview = (props) => {
         </form>
 
         {filteredDataToPrint?.length > 0 ? (
-          <PrintData activeUserData={filteredDataToPrint} />
+          <PrintData activeUserData={filteredDataToPrint} filterValue={selectedFilter} />
         ) : (
           <h2>No data to print</h2>
         )}

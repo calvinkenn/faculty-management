@@ -102,8 +102,8 @@ const AccountInfoEdit = (props) => {
                   id="employeeNum"
                   type="number"
                   label="Employee Number"
-                  validators={[VALIDATOR_REQUIRE()]}
-                  helperText="Please input employee number"
+                  validators={[VALIDATOR_MINLENGTH(6)]}
+                  helperText="Please input a valid employee number"
                   onInput={inputHandler}
                   initialValue={formState.inputs.employeeNum.value}
                   initialValid={formState.inputs.employeeNum.isValid}

@@ -8,6 +8,7 @@ import { useForm } from "../../../shared/hooks/form-hook";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import {
   VALIDATOR_EMAIL,
+  VALIDATOR_MAXLENGTH,
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
   VALIDATOR_REQUIRE,
@@ -87,23 +88,23 @@ const BasicInfoEdit = (props) => {
       },
       gssId: {
         value: props.userEdit.gssId,
-        isValid: true,
+        isValid:props.userEdit.pagibigId ? true : false,
       },
       pagibigId: {
         value: props.userEdit.pagibigId,
-        isValid: true,
+        isValid: props.userEdit.pagibigId ? true : false,
       },
       philHealthId: {
         value: props.userEdit.philHealthId,
-        isValid: true,
+        isValid: props.userEdit.philHealthId ? true : false,
       },
       sssNo: {
         value: props.userEdit.sssNo,
-        isValid: true,
+        isValid: props.userEdit.sssNo ? true : false,
       },
       tinNo: {
         value: props.userEdit.tinNo,
-        isValid: true,
+        isValid: props.userEdit.tinNo ? true : false,
       },
       citizenship: {
         value: props.userEdit.citizenship,
@@ -420,9 +421,9 @@ const BasicInfoEdit = (props) => {
                 element="input"
                 id="gssId"
                 type="number"
-                label="GSS ID"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                label="GSIS ID"
+                validators={[VALIDATOR_MINLENGTH(11), VALIDATOR_MAXLENGTH(11)]}
+                helperText="Please input a valid GSIS ID number"
                 onInput={inputHandler}
                 initialValue={formState.inputs.gssId.value}
                 initialValid={formState.inputs.gssId.isValid}
@@ -433,8 +434,8 @@ const BasicInfoEdit = (props) => {
                 id="pagibigId"
                 type="number"
                 label="Pagibig ID"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_MINLENGTH(12), VALIDATOR_MAXLENGTH(12)]}
+                helperText="Please input a valid Pag-Ibig ID number"
                 onInput={inputHandler}
                 initialValue={formState.inputs.pagibigId.value}
                 initialValid={formState.inputs.pagibigId.isValid}
@@ -445,8 +446,8 @@ const BasicInfoEdit = (props) => {
                 id="philHealthId"
                 type="number"
                 label="Philhealth"
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_MINLENGTH(12), VALIDATOR_MAXLENGTH(12)]}
+                helperText="Please input a valid Philhealth ID number"
                 onInput={inputHandler}
                 initialValue={formState.inputs.philHealthId.value}
                 initialValid={formState.inputs.philHealthId.isValid}
@@ -457,8 +458,8 @@ const BasicInfoEdit = (props) => {
                 id="sssNo"
                 type="number"
                 label="SSS No."
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_MINLENGTH(10), VALIDATOR_MAXLENGTH(10)]}
+                helperText="Please input a valid SSS ID number"
                 onInput={inputHandler}
                 initialValue={formState.inputs.sssNo.value}
                 initialValid={formState.inputs.sssNo.isValid}
@@ -469,8 +470,8 @@ const BasicInfoEdit = (props) => {
                 id="tinNo"
                 type="number"
                 label="TIN No."
-                validators={[VALIDATOR_OPTIONAL()]}
-                errorText="Invalid Email"
+                validators={[VALIDATOR_MINLENGTH(10), VALIDATOR_MAXLENGTH(10)]}
+                helperText="Please input a valid TIN number"
                 onInput={inputHandler}
                 initialValue={formState.inputs.tinNo.value}
                 initialValid={formState.inputs.tinNo.isValid}

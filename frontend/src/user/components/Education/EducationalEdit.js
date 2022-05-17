@@ -298,7 +298,7 @@ const EducationalEdit = (props) => {
                   setFromDateVal(newValue);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
+                  <TextField {...params} required helperText={null} />
                 )}
               />
               <span />
@@ -310,7 +310,7 @@ const EducationalEdit = (props) => {
                   setToDateVal(newValue);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
+                  <TextField {...params} required helperText={null} />
                 )}
               />
               <span />
@@ -322,7 +322,7 @@ const EducationalEdit = (props) => {
                   setYearGraduated(newValue);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
+                  <TextField {...params} required helperText={null} />
                 )}
               />
             </div>

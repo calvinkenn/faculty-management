@@ -1,17 +1,28 @@
+.print-container {
+  margin: 0 0.5rem 0 2rem;
+}
+
+.print-data h1 {
+  color: #636363;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
 table {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
-.address-table td{
+.address-table td {
   border-collapse: collapse;
-  border: none
+  border: none;
 }
-.print-label{
-  background-color: #F2F2F2;
+.print-label {
+  background-color: #f2f2f2;
   font-weight: bold;
 }
-.print-tab{
+.print-tab {
   display: inline-block;
   margin-left: 40px;
 }
@@ -35,4 +46,3 @@ table {
   /* border-radius: 50%; */
   margin: 20px;
 }
-

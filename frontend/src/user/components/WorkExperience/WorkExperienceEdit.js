@@ -242,7 +242,7 @@ const WorkExperienceEdit = (props) => {
                   setFromDateVal(newValue);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
+                  <TextField {...params} required helperText={null} />
                 )}
               />
               <span />
@@ -254,7 +254,7 @@ const WorkExperienceEdit = (props) => {
                   setToDateVal(newValue);
                 }}
                 renderInput={(params) => (
-                  <TextField {...params} helperText={null} />
+                  <TextField {...params} required helperText={null} />
                 )}
               />
               <span />

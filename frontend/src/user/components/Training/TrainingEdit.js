@@ -248,7 +248,7 @@ const TrainingEdit = (props) => {
                     setFromDateVal(newValue);
                   }}
                   renderInput={(params) => (
-                    <TextField {...params} helperText={null} />
+                    <TextField {...params} required helperText={null} />
                   )}
                 />
                 <span />
@@ -260,7 +260,7 @@ const TrainingEdit = (props) => {
                     setToDateVal(newValue);
                   }}
                   renderInput={(params) => (
-                    <TextField {...params} helperText={null} />
+                    <TextField {...params} required helperText={null} />
                   )}
                 />
                 <span />

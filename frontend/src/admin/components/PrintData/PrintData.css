@@ -1,19 +1,35 @@
+.print-container {
+  margin: 0 1rem 0 1rem;
+}
+
+.print-data {
+  margin-top: 25px;
+}
+
+.print-data h1 {
+  color: #636363;
+  font-weight: bold;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
 table {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   border-collapse: collapse;
   width: 100%;
   background-color: white;
   font-size: 14px;
 }
-.table-header{
+.table-header {
   border-radius: 10px;
 }
-th{
+th {
   background-color: #ffc711;
 }
 
-td,th{
-  border:  1px solid #FFE59D;
+td,
+th {
+  border: 1px solid #ffe59d;
   border-collapse: collapse;
 }
 td,
@@ -22,7 +38,7 @@ th {
   padding: 8px;
 }
 
-.print-button{
+.print-button {
   width: 100%;
   max-width: 20%;
   padding: 1%;

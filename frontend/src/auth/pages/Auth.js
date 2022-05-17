@@ -219,8 +219,8 @@ const Auth = () => {
                     element="input"
                     id="employeeNum"
                     type="number"
-                    validators={[VALIDATOR_REQUIRE()]}
-                    helperText="Please input your employee number."
+                    validators={[VALIDATOR_MINLENGTH(6)]}
+                    helperText="Please input a valid employee number."
                     onInput={inputHandler}
                     label="Employee Number"
                     variant="outlined"

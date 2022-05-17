@@ -15,7 +15,7 @@ const VisionEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm({
     vision: {
       value: props.item ? props.item : "",
-      isValid: false,
+      isValid: props.item ? true : false,
     },
   });
 

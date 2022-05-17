@@ -19,7 +19,7 @@ const AnnouncementEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm({
     title: {
       value: props.isEditMode ? props.item[0].title : "",
-      isValid: false,
+      isValid: props.isEditMode && props.item[0].title ? true : false,
     },
     author: {
       value: props.isEditMode ? props.item[0].author : "",
@@ -27,7 +27,7 @@ const AnnouncementEdit = (props) => {
     },
     announcementPic: {
       value: props.isEditMode ? props.item[0].image : "",
-      isValid: false,
+      isValid:  props.isEditMode && props.item[0].image ? true : false,
     },
     content: {
       value: props.isEditMode ? props.item[0].content : "",

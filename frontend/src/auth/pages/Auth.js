@@ -9,6 +9,7 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import {
+  VALIDATOR_CONFIRMPASSWORD,
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
@@ -42,6 +43,10 @@ const Auth = () => {
         value: "",
         isValid: false,
       },
+      confirmPassword: {
+        value: "",
+        isValid: false,
+      },
       employeeNum: {
         value: "",
         isValid: false,
@@ -62,85 +67,21 @@ const Auth = () => {
     setIsRegisterMode(false);
     setIsLoginMode(true);
     setIsResetMode(false);
-    switchModeHandler();
+    // switchModeHandler();
   };
 
   const registerModeHandler = () => {
     setIsRegisterMode(true);
     setIsLoginMode(false);
     setIsResetMode(false);
-    switchModeHandler();
+    // switchModeHandler();
   };
 
   const resetModeHandler = () => {
     setIsRegisterMode(false);
     setIsLoginMode(false);
     setIsResetMode(true);
-    switchModeHandler();
-  };
-
-  const switchModeHandler = () => {
-    if (isRegisterMode) {
-      setFormData(
-        {
-          email: {
-            value: "",
-            isValid: false,
-          },
-          password: {
-            value: "",
-            isValid: false,
-          },
-          employeeNum: undefined,
-          firstName: undefined,
-          lastName: undefined,
-        },
-        formState.inputs.email.isValid &&
-          formState.inputs.password.isValid &&
-          formState.inputs.employeeNum.isValid &&
-          formState.inputs.firstName.isValid &&
-          formState.inputs.lastName.isValid
-      );
-    } else if (isLoginMode) {
-      setFormData(
-        {
-          ...formState.inputs,
-          employeeNum: {
-            value: "",
-            isValid: false,
-          },
-          firstName: {
-            value: "",
-            isValid: false,
-          },
-          lastName: {
-            value: "",
-            isValid: false,
-          },
-        },
-        formState.inputs.email.isValid && formState.inputs.password.isValid
-      );
-    } else if (isResetMode) {
-      setFormData(
-        {
-          email: {
-            value: "",
-            isValid: false,
-          },
-          password: {
-            value: "",
-            isValid: false,
-          },
-        },
-        formState.inputs.email.isValid
-      );
-    }
-  };
-
-  const testLoginAdmin = (event) => {
-    event.preventDefault();
-    console.log(formState.inputs);
-    auth.loginAsAdmin();
+    // switchModeHandler();
   };
 
   //added by ralph
@@ -163,11 +104,6 @@ const Auth = () => {
           }
         );
         auth.login(responseData.userId, responseData.token);
-        // if (responseData.admin) {
-        //   auth.loginAsAdmin(responseData.adminId, responseData.token);
-        // } else {
-        //   auth.login(responseData.userId, responseData.token);
-        // }
       } catch (err) {}
     } else if (isRegisterMode) {
       //code for signup
@@ -235,7 +171,18 @@ const Auth = () => {
           </React.Fragment>
         }
       >
-        <p>THIS IS THE AGREEMENT!</p>
+        <p>
+          The protection of your personal data is very important to CICT.
+          College of Information and Communications Technology will process your
+          personal data in compliance with applicable data protection laws. The
+          information you provide in completing this registration will be used
+          for eligibility verification only and processed according to CICT
+          which includes important information on why and how CICT is processing
+          your personal data. I agree to the use or processing of my personal
+          and sensitive personal information by CICT for the purpose of
+          profiling related activities in accordance with the applicable local
+          data protection laws.
+        </p>
       </Modal>
       <SuccessModal success={success} onClear={clearSuccess} />
       <ErrorModal error={error} onClear={clearError} />
@@ -257,61 +204,76 @@ const Auth = () => {
               <img src={cictBuilding} />
             </div>
           </div>
-          {!isLoading && (
-            <div className="main-form-cont">
-              {/* <Router>{routes}</Router> */}
-              <h2 className="login-mode-title">
-                {isLoginMode && "LOGIN TO YOUR ACCOUNT"}{" "}
-                {isRegisterMode && "CREATE YOUR ACCOUNT"}
-                {isResetMode && "RESET YOUR ACCOUNT"}
-              </h2>
-              <form onSubmit={authSubmitHandler}>
-                <div className="employeeNo-container">
+          {/* {!isLoading && ( */}
+          <div className="main-form-cont">
+            {/* <Router>{routes}</Router> */}
+            <h2 className="login-mode-title">
+              {isLoginMode && "LOGIN TO YOUR ACCOUNT"}{" "}
+              {isRegisterMode && "CREATE YOUR ACCOUNT"}
+              {isResetMode && "RESET YOUR ACCOUNT"}
+            </h2>
+            <form onSubmit={authSubmitHandler}>
+              <div className="employeeNo-container">
+                {isRegisterMode && (
+                  <Input
+                    element="input"
+                    id="employeeNum"
+                    type="number"
+                    validators={[VALIDATOR_REQUIRE()]}
+                    helperText="Please input your employee number."
+                    onInput={inputHandler}
+                    label="Employee Number"
+                    variant="outlined"
+                  />
+                )}
+              </div>
+              <div className="fullName-container">
+                <div className="firstName-container">
                   {isRegisterMode && (
                     <Input
                       element="input"
-                      id="employeeNum"
-                      type="number"
+                      id="firstName"
+                      type="text"
                       validators={[VALIDATOR_REQUIRE()]}
-                      helperText="Please input your employee number."
+                      helperText="Please input your first name."
                       onInput={inputHandler}
-                      label="Employee Number"
+                      label="First Name"
                       variant="outlined"
                     />
                   )}
                 </div>
-                <div className="fullName-container">
-                  <div className="firstName-container">
-                    {isRegisterMode && (
-                      <Input
-                        element="input"
-                        id="firstName"
-                        type="text"
-                        validators={[VALIDATOR_REQUIRE()]}
-                        helperText="Please input your first name."
-                        onInput={inputHandler}
-                        label="First Name"
-                        variant="outlined"
-                      />
-                    )}
-                  </div>
-                  <div className="lastName-container">
-                    {isRegisterMode && (
-                      <Input
-                        element="input"
-                        id="lastName"
-                        type="text"
-                        validators={[VALIDATOR_REQUIRE()]}
-                        helperText="Please input your last name."
-                        onInput={inputHandler}
-                        label="Last Name"
-                        variant="outlined"
-                      />
-                    )}
-                  </div>
+                <div className="lastName-container">
+                  {isRegisterMode && (
+                    <Input
+                      element="input"
+                      id="lastName"
+                      type="text"
+                      validators={[VALIDATOR_REQUIRE()]}
+                      helperText="Please input your last name."
+                      onInput={inputHandler}
+                      label="Last Name"
+                      variant="outlined"
+                    />
+                  )}
                 </div>
+              </div>
 
-                <div className="email-pass-container">
+              <div className="email-pass-container">
+                {isLoginMode && (
+                  <div className="email-container">
+                    <Input
+                      element="input"
+                      id="email"
+                      type="text"
+                      validators={[VALIDATOR_REQUIRE()]}
+                      helperText="Please input a valid username."
+                      onInput={inputHandler}
+                      label="Email/Employee Number"
+                      variant="outlined"
+                    />
+                  </div>
+                )}
+                {isResetMode && (
                   <div className="email-container">
                     <Input
                       element="input"
@@ -324,6 +286,54 @@ const Auth = () => {
                       variant="outlined"
                     />
                   </div>
+                )}
+                {isRegisterMode && (
+                  <div className="email-container">
+                    <Input
+                      element="input"
+                      id="email"
+                      type="text"
+                      validators={[VALIDATOR_EMAIL()]}
+                      helperText="Please input a valid email."
+                      onInput={inputHandler}
+                      label="Email"
+                      variant="outlined"
+                    />
+                  </div>
+                )}
+                {!isLoading && isRegisterMode && (
+                  <React.Fragment>
+                    <div className="password-container">
+                      {!isResetMode && (
+                        <Input
+                          element="input"
+                          id="password"
+                          type="password"
+                          validators={[VALIDATOR_MINLENGTH(6)]}
+                          helperText="Please input a minimum of 6 characters."
+                          onInput={inputHandler}
+                          label="Password"
+                          variant="outlined"
+                        />
+                      )}
+                    </div>
+                    <div className="password-container">
+                      {!isResetMode && (
+                        <Input
+                          element="input"
+                          id="confirmPassword"
+                          type="password"
+                          validators={[VALIDATOR_CONFIRMPASSWORD(formState.inputs.password.value)]}
+                          helperText="Please make sure your password match."
+                          onInput={inputHandler}
+                          label="Confirm Password"
+                          variant="outlined"
+                        />
+                      )}
+                    </div>
+                  </React.Fragment>
+                )}
+                {!isLoading && isLoginMode && (
                   <div className="password-container">
                     {!isResetMode && (
                       <Input
@@ -338,62 +348,88 @@ const Auth = () => {
                       />
                     )}
                   </div>
-                  <div className="password-container">
-                    {isRegisterMode && (
-                      <FormControlLabel
-                        disabled={!formState.isValid}
-                        label={
-                          <div>
-                            I agree to the
-                            <a onClick={showAgreementHandler}>
-                              {" "}
-                              Terms of Use {"&"} Privacy Policy
-                            </a>
-                          </div>
-                        }
-                        control={
-                          <Checkbox checked={isAgree} onChange={agreeHandler} />
-                        }
-                      />
-                    )}
-                  </div>
-                </div>
-
-                {isLoginMode && <Button type="submit">Login</Button>}
-                {isRegisterMode && (
-                  <Button
-                    type="submit"
-                    disabled={!formState.isValid || !isAgree}
-                  >
-                    Register
-                  </Button>
                 )}
-                {isResetMode && <Button type="submit">Reset Password</Button>}
-              </form>
+                <div className="password-container">
+                  {isRegisterMode && (
+                    <FormControlLabel
+                      disabled={!formState.isValid}
+                      label={
+                        <div>
+                          I agree to the
+                          <a onClick={showAgreementHandler}>
+                            {" "}
+                            Terms of Use {"&"} Privacy Policy
+                          </a>
+                        </div>
+                      }
+                      control={
+                        <Checkbox checked={isAgree} onChange={agreeHandler} />
+                      }
+                    />
+                  )}
+                </div>
+              </div>
 
               {isLoginMode && (
-                <h6>
-                  Don't have an account?{" "}
-                  <a onClick={registerModeHandler}>Create an account here</a>
-                  <h6>
-                    Forgot your password?{" "}
-                    <a onClick={resetModeHandler}>Reset your password here</a>
-                  </h6>
-                </h6>
+                <Button
+                  type="submit"
+                  disabled={
+                    !formState.inputs.email.isValid ||
+                    !formState.inputs.password.isValid
+                  }
+                >
+                  Login
+                </Button>
               )}
               {isRegisterMode && (
-                <h6>
-                  Already have an account?{" "}
-                  <a onClick={loginModeHandler}>Login here</a>
-                </h6>
+                <Button
+                  type="submit"
+                  disabled={
+                    !formState.inputs.email.isValid ||
+                    !formState.inputs.password.isValid ||
+                    !formState.inputs.employeeNum.isValid ||
+                    !formState.inputs.firstName.isValid ||
+                    !formState.inputs.lastName.isValid ||
+                    !formState.inputs.confirmPassword.isValid ||
+                    !isAgree
+                  }
+                >
+                  Register
+                </Button>
               )}
               {isResetMode && (
-                <h6>
-                  <a onClick={loginModeHandler}>Back to login</a>
-                </h6>
+                <Button
+                  type="submit"
+                  disabled={!formState.inputs.email.isValid}
+                >
+                  Reset Password
+                </Button>
               )}
-            </div>
-          )}
+            </form>
+
+            {isLoginMode && (
+              <h6>
+                Don't have an account?{" "}
+                <a onClick={registerModeHandler}>Create an account here</a>
+                <h6>
+                  Forgot your password?{" "}
+                  <a onClick={resetModeHandler}>Reset your password here</a>
+                </h6>
+              </h6>
+            )}
+            {isRegisterMode && (
+              <h6>
+                Already have an account?{" "}
+                <a onClick={loginModeHandler}>Login here</a>
+              </h6>
+            )}
+            {isResetMode && (
+              <h6>
+                <a onClick={loginModeHandler}>Back to login</a>
+              </h6>
+            )}
+          </div>
+          {/* )} */}
         </div>
       </Card>
     </React.Fragment>

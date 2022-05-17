@@ -27,11 +27,11 @@ const ObjectivesEdit = (props) => {
   const [formState, inputHandler, setFormData] = useForm({
     bsitObjectives: {
       value: inputListBSIT.length > 1 ? inputListBSIT : "",
-      isValid: false,
+      isValid: inputListBSIT.length > 1 ? true : false,
     },
     blisObjectives: {
       value: inputListBLIS.length > 1 ? inputListBLIS : "",
-      isValid: false,
+      isValid: inputListBLIS.length > 1 ? true : false,
     },
   });
 

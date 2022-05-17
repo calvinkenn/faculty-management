@@ -32,7 +32,7 @@ const signup = async (req, res, next) => {
 
   if (existingEmployeeNumber) {
     const error = new HttpError(
-      "Employee number already exists if you havent registered this employee number yet. please contact administrator immediatley!",
+      "Employee number already exists, if you havent registered this employee number yet. Please contact administrator immediatley!",
       422
     );
     return next(error);
@@ -131,7 +131,7 @@ const login = async (req, res, next) => {
 
   //check if user is existing
   try {
-    existingUser = await User.findOne({ email: email });
+    existingUser = await User.findOne({ email: email }) || await User.findOne({ employeeNum: email });
   } catch (err) {
     const error = new HttpError(
       "Loggin in failed, please try again later.",
@@ -321,6 +321,7 @@ const editContactInfo = async (req, res, next) => {
   }
   const {
     userId,
+    isSameAddress,
     houseNoP,
     streetP,
     locationTypeP,
@@ -343,6 +344,7 @@ const editContactInfo = async (req, res, next) => {
   } = req.body;
 
   const user = await User.findByIdAndUpdate(userId, {
+    isSameAddress,
     houseNoP,
     streetP,
     locationTypeP,

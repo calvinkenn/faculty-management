@@ -18,7 +18,7 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
 //Mikko is here
-import ArticleIcon from '@mui/icons-material/Article';
+import ArticleIcon from "@mui/icons-material/Article";
 //
 
 const TrainingEdit = (props) => {
@@ -31,27 +31,27 @@ const TrainingEdit = (props) => {
     {
       title: {
         value: props.editData ? props.editData.title : "",
-        isValid: false,
+        isValid: props.editData && props.editData.title ? true : false,
       },
       type: {
         value: props.editData ? props.editData.type : "",
-        isValid: false,
+        isValid: props.editData && props.editData.type ? true : false,
       },
       hours: {
         value: props.editData ? props.editData.hours : "",
-        isValid: false,
+        isValid: props.editData && props.editData.hours ? true : false,
       },
       typeOfLearning: {
         value: props.editData ? props.editData.typeOfLearning : "",
-        isValid: false,
+        isValid: props.editData && props.editData.typeOfLearning ? true : false,
       },
       conducted: {
         value: props.editData ? props.editData.conducted : "",
-        isValid: false,
+        isValid: props.editData && props.editData.conducted ? true : false,
       },
       certificatePic: {
         value: props.editData ? props.editData.certificatePic : null,
-        isValid: false,
+        isValid: props.editData && props.editData.certificatePic ? true : false,
       },
     },
     false
@@ -190,7 +190,8 @@ const TrainingEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <ArticleIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Training and Seminar</h1>
+              <ArticleIcon sx={{ fontSize: "30px" }} />
+              <h1 className="Marginlang">Training and Seminar</h1>
             </div>
           </div>
           <div className="trainings-add-cont">

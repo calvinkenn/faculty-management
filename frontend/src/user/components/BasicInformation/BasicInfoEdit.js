@@ -37,7 +37,7 @@ const BasicInfoEdit = (props) => {
     {
       firstName: {
         value: props.userEdit.firstName,
-        isValid: false,
+        isValid: props.userEdit.firstName ? true : false,
       },
       middleName: {
         value: props.userEdit.middleName,
@@ -45,7 +45,7 @@ const BasicInfoEdit = (props) => {
       },
       lastName: {
         value: props.userEdit.lastName, 
-        isValid: false,
+        isValid: props.userEdit.lastName ? true : false,
       },
       suffixName: {
         value: props.userEdit.suffixName,
@@ -53,25 +53,25 @@ const BasicInfoEdit = (props) => {
       },
       extensionName: {
         value: inputList.length > 1 ? inputList : "",
-        isValid: false,
+        isValid: inputList.length > 1 ? true : false,
       },
       bday: {
         value: props.userEdit.birthday
           ? props.userEdit.birthday.substring(0, 10)
           : "",
-        isValid: false,
+        isValid: props.userEdit.birthday ? true : false,
       },
       placeofBirth: {
         value: props.userEdit.placeofBirth,
-        isValid: false,
+        isValid: props.userEdit.placeofBirth ? true : false,
       },
       gender: {
         value: props.userEdit.gender,
-        isValid: false,
+        isValid: props.userEdit.gender ? true : false,
       },
       civilStatus: {
         value: props.userEdit.civilStatus,
-        isValid: false,
+        isValid: props.userEdit.civilStatus ? true : false,
       },
       height: {
         value: props.userEdit.height,

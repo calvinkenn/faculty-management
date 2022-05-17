@@ -33,7 +33,11 @@ const Announcement = (props) => {
     // Fetch items from another resources.
     const endOffset = itemOffset + displayPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(props.announcementData?.slice(itemOffset, endOffset));
+    setCurrentItems(
+      props.announcementData
+        ?.sort((a, b) => (a.date < b.date ? 1 : -1))
+        .slice(itemOffset, endOffset)
+    );
     setPageCount(Math.ceil(props.announcementData?.length / displayPerPage));
   }, [itemOffset, 5, props.announcementData]);
 
@@ -71,7 +75,7 @@ const Announcement = (props) => {
           {auth.isAdmin && <Button onClick={addModeHandler}>Add New</Button>}
         </div>
         <AnnouncementList
-          items={currentItems}
+          items={currentItems ? currentItems : props.announcementData}
           setIsEditModeHandler={editModeHandler}
           messageHandler={props.messageHandler}
         />

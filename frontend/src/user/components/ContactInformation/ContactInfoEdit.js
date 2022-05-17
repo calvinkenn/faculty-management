@@ -76,17 +76,18 @@ const ContactInfoEdit = (props) => {
       },
       cellphoneNum: {
         value: props.userEdit.cellphoneNum,
-        isValid: false,
+        isValid: props.userEdit.cellphoneNum ? true : false,
       },
       alternateEmail: {
         value: props.userEdit.alternateEmail,
-        isValid: false,
+        isValid: props.userEdit.alternateEmail ? true : false,
       },
     },
     false
   );
 
   useEffect(() => {
+    setIsSameAddress(props.userEdit.isSameAddress)
     //Set default Value
     setRegionAddrR(props.userEdit.regionR);
     setProvinceAddrR(props.userEdit.provinceR);
@@ -321,6 +322,7 @@ const ContactInfoEdit = (props) => {
         JSON.stringify({
           userId: storedData.userId,
           token: storedData.token,
+          isSameAddress, isSameAddress,
           houseNoR: houseNoR,
           streetR: streetR,
           locationTypeR: locationTypeR,
@@ -395,6 +397,7 @@ const ContactInfoEdit = (props) => {
                   <MenuItem disabled>Select Location Type</MenuItem>
                   <MenuItem value={"Subdivision"}>Subdivision</MenuItem>
                   <MenuItem value={"Village"}>Village</MenuItem>
+                  <MenuItem value={"Other"}>Other</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -442,13 +445,13 @@ const ContactInfoEdit = (props) => {
             </div>
             <div className="city-brgy-zip">
               <FormControl sx={{ minWidth: 180 }}>
-                <InputLabel id="select">Select City</InputLabel>
+                <InputLabel id="select">Select City/Municipality</InputLabel>
                 <Select
-                  label={"Select City"}
+                  label={"Select City/Municipality"}
                   onChange={barangayR}
                   value={cityAddrR}
                 >
-                  <MenuItem disabled>Select City</MenuItem>
+                  <MenuItem disabled>Select City/Municipality</MenuItem>
                   {cityDataR &&
                     cityDataR.length > 0 &&
                     cityDataR.map((item) => (
@@ -541,6 +544,7 @@ const ContactInfoEdit = (props) => {
                   <MenuItem disabled>Select Location Type</MenuItem>
                   <MenuItem value={"Subdivision"}>Subdivision</MenuItem>
                   <MenuItem value={"Village"}>Village</MenuItem>
+                  <MenuItem value={"Other"}>Other</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -590,14 +594,14 @@ const ContactInfoEdit = (props) => {
             </div>
             <div className="city-brgy-zip">
               <FormControl sx={{ minWidth: 180 }}>
-                <InputLabel id="select">Select City</InputLabel>
+                <InputLabel id="select">Select City/Municipality</InputLabel>
                 <Select
-                  label={"Select City"}
+                  label={"Select City/Municipality"}
                   onChange={barangayP}
                   value={!isSameAddress ? cityAddrP : cityAddrR}
                   disabled={isSameAddress}
                 >
-                  <MenuItem disabled>Select City</MenuItem>
+                  <MenuItem disabled>Select City/Municipality</MenuItem>
                   {cityDataP &&
                     cityDataP.length > 0 &&
                     cityDataP.map((item) => (

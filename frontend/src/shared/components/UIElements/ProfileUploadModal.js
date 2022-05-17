@@ -16,9 +16,11 @@ const ProfileUploadModal = (props) => {
         </Button>
       }
       cancel={
-        <Button type="button" onClick={props.cancel}>
-          Cancel
-        </Button>
+        <div className="btn-cancel">
+          <Button type="button" onClick={props.cancel}>
+            Cancel
+          </Button>
+        </div>
       }
     >
       <div>{props.display}</div>

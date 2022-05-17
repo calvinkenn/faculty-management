@@ -5,8 +5,7 @@
   width: 100%;
   height: 100%;
   display: flex;
-  /* flex-direction: column; */
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -15,11 +14,10 @@
 }
 
 .nav-links li .announcement-count {
-  border: 1px solid black;
   border-radius: 50%;
   width: 25px;
   height: 25px;
-  background-color: red;
+  background-color: #f34343;
   color: white;
   float: right;
   text-align: center;

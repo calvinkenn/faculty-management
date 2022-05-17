@@ -14,9 +14,11 @@ router.delete(
   "/deleteAnnouncement",
   announcementControllers.deleteAnnouncement
 );
+router.patch("/editAnnouncement", announcementControllers.editAnnouncement);
+
 router.patch(
-  "/editAnnouncement",
-  announcementControllers.editAnnouncement
+  "/clearAnnouncementCount",
+  announcementControllers.clearAnnouncementCount
 );
 
 module.exports = router;

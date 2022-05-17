@@ -39,6 +39,7 @@ const Profile = (props) => {
   const [isMenuActive, setIsMenuActive] = useState(menu);
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAddMode, setIsAddMode] = useState(false);
+  const [userAnnouncementCount, setUserAnnouncementCount] = useState(0);
   const [userData, setUserData] = useState({});
   const [educationData, setEducationData] = useState({});
   const [civilServiceData, setCivilServiceData] = useState({});
@@ -104,6 +105,7 @@ const Profile = (props) => {
           { "Content-Type": "application/json" }
         );
         setUserData(responseData.userData);
+        setUserAnnouncementCount(responseData.userData.announcementCount);
       } catch (err) {}
     };
     getCurrentUser();
@@ -221,7 +223,12 @@ const Profile = (props) => {
       <div className="user-main">
         <div className="user-main-container">
           <SuccessModal success={success} onClear={clearSuccess} />
-          <MainNavigation inProfile={true} />
+          <MainNavigation
+            inProfile={true}
+            announcementCount={
+              userAnnouncementCount ? userAnnouncementCount : 0
+            }
+          />
           <div className="profile-container">
             <SideBox className="side-container">
               <div className="side-container__image">

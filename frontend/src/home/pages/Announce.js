@@ -36,6 +36,25 @@ const Announce = (props) => {
     getAnnouncements();
   }, [message]);
 
+  useEffect(() => {
+    const storedData = JSON.parse(sessionStorage.getItem("userData"));
+    const clearAnnouncement = async () => {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:5000/api/announcement/clearAnnouncementCount",
+          "PATCH",
+          JSON.stringify({
+            userId: storedData.userId,
+          }),
+          { "Content-Type": "application/json" }
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    clearAnnouncement();
+  }, []);
+
   const messageHandler = (message) => {
     setMessage(message);
     setIsAddMode(false);

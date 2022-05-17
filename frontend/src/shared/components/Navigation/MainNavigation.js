@@ -54,6 +54,7 @@ const MainNavigation = (props) => {
             inProfile={props.inProfile}
             inHome={props.inHome}
             inVMGO={props.inVMGO}
+            announcementCount={props.announcementCount}
           />
         </nav>
       </MainHeader>

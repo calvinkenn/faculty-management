@@ -37,6 +37,7 @@ const NavLinks = (props) => {
       >
         <p>Are you sure you want to logout?</p>
       </Modal>
+
       <ul className="nav-links">
         {auth.isLoggedIn && userIdByParams && (
           <li>
@@ -62,6 +63,13 @@ const NavLinks = (props) => {
         {auth.isLoggedIn && props.inProfile && (
           <li>
             <NavLink to="/announcement" exact>
+              {props.announcementCount > 0 ? (
+                <div className="announcement-count">
+                  {props.announcementCount}
+                </div>
+              ) : (
+                ""
+              )}
               Announcements
             </NavLink>
           </li>

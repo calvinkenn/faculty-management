@@ -28,6 +28,8 @@
   color: #292929;
   text-decoration: none;
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .nav-links a:hover,
@@ -65,7 +67,9 @@
 
   .nav-links a {
     color: #292929;
-    text-decoration: none;
+    text-decoration: none; 
+    display: flex;
+    align-items: center;
   }
 
   .nav-links button {

@@ -6,6 +6,9 @@ import Modal from "../UIElements/Modal";
 import Button from "../FormElements/Button";
 import { AuthContext } from "../../context/auth-context";
 import "./NavLinks.css";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 const NavLinks = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -42,7 +45,7 @@ const NavLinks = (props) => {
         {auth.isLoggedIn && userIdByParams && (
           <li>
             <NavLink to="/" exact>
-              Back to Admin
+              <ArrowBackIcon sx={{fontSize: '35px'}}/> Admin
             </NavLink>
           </li>
         )}
@@ -70,14 +73,14 @@ const NavLinks = (props) => {
               ) : (
                 ""
               )}
-              Announcements
+              <NotificationsNoneIcon sx={{fontSize: '35px'}}/>
             </NavLink>
           </li>
         )}
         {props.inProfile && (
           <li>
             <NavLink to="/vmgo" exact>
-              VMGO
+              <FeedOutlinedIcon sx={{fontSize: '35px'}}/>
             </NavLink>
           </li>
         )}

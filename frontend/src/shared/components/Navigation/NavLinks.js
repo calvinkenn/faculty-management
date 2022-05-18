@@ -6,9 +6,9 @@ import Modal from "../UIElements/Modal";
 import Button from "../FormElements/Button";
 import { AuthContext } from "../../context/auth-context";
 import "./NavLinks.css";
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 
 const NavLinks = (props) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -45,21 +45,21 @@ const NavLinks = (props) => {
         {auth.isLoggedIn && userIdByParams && (
           <li>
             <NavLink to="/" exact>
-              <ArrowBackIcon sx={{fontSize: '35px'}}/> Admin
+              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Admin
             </NavLink>
           </li>
         )}
         {!auth.isAdmin && props.inHome && (
           <li>
             <NavLink to="/profile" exact>
-              View Profile
+              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Profile
             </NavLink>
           </li>
         )}
         {auth.isAdmin && props.inHome && (
           <li>
             <NavLink to="/admin" exact>
-              View Admin
+              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Admin
             </NavLink>
           </li>
         )}
@@ -73,14 +73,14 @@ const NavLinks = (props) => {
               ) : (
                 ""
               )}
-              <NotificationsNoneIcon sx={{fontSize: '35px'}}/>
+              <NotificationsNoneIcon sx={{ fontSize: "35px" }} />
             </NavLink>
           </li>
         )}
         {props.inProfile && (
           <li>
             <NavLink to="/vmgo" exact>
-              <FeedOutlinedIcon sx={{fontSize: '35px'}}/>
+              <FeedOutlinedIcon sx={{ fontSize: "35px" }} />
             </NavLink>
           </li>
         )}
@@ -88,7 +88,7 @@ const NavLinks = (props) => {
         {!auth.isAdmin && props.inVMGO && (
           <li>
             <NavLink to="/profile" exact>
-              View Profile
+              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Profile
             </NavLink>
           </li>
         )}
@@ -96,7 +96,7 @@ const NavLinks = (props) => {
         {auth.isAdmin && props.inVMGO && (
           <li>
             <NavLink to="/admin" exact>
-              View Admin
+              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Admin
             </NavLink>
           </li>
         )}

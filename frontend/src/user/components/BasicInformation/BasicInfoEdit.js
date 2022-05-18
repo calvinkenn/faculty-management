@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from '@mui/icons-material/Delete';
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
@@ -16,9 +19,9 @@ import {
 import "../../components/EditForm.css";
 
 //mikko is here
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-import FeaturedVideoIcon from '@mui/icons-material/FeaturedVideo';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import FeaturedVideoIcon from "@mui/icons-material/FeaturedVideo";
 //end
 
 const BasicInfoEdit = (props) => {
@@ -45,7 +48,7 @@ const BasicInfoEdit = (props) => {
         isValid: true,
       },
       lastName: {
-        value: props.userEdit.lastName, 
+        value: props.userEdit.lastName,
         isValid: props.userEdit.lastName ? true : false,
       },
       suffixName: {
@@ -88,7 +91,7 @@ const BasicInfoEdit = (props) => {
       },
       gssId: {
         value: props.userEdit.gssId,
-        isValid:props.userEdit.pagibigId ? true : false,
+        isValid: props.userEdit.pagibigId ? true : false,
       },
       pagibigId: {
         value: props.userEdit.pagibigId,
@@ -182,7 +185,8 @@ const BasicInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <AccountCircleIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Employee Name</h1>
+              <AccountCircleIcon sx={{ fontSize: "30px" }} />
+              <h1 className="MarginLang">Employee Name</h1>
             </div>
           </div>
           <div className="name-detail-cont">
@@ -253,18 +257,22 @@ const BasicInfoEdit = (props) => {
                       />
                       <div className="btn-box">
                         {inputList.length !== 1 && (
-                          <button
+                          <muiBtn
                             type="button"
                             className="mr10"
                             onClick={() => handleRemoveClick(i)}
                           >
-                            Remove
-                          </button>
+                            <IconButton aria-label="delete" size="small">
+                              <DeleteIcon fontSize="small" />
+                            </IconButton>
+                          </muiBtn>
                         )}
                         {inputList.length - 1 === i && (
-                          <button type="button" onClick={handleAddClick}>
-                            Add
-                          </button>
+                          <muiBtn type="button" onClick={handleAddClick}>
+                            <IconButton aria-label="add" size="small">
+                              <AddIcon fontSize="small" />
+                            </IconButton>
+                          </muiBtn>
                         )}
                       </div>
                     </div>
@@ -277,7 +285,8 @@ const BasicInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <LibraryBooksIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Personal Information</h1>
+              <LibraryBooksIcon sx={{ fontSize: "30px" }} />
+              <h1 className="MarginLang">Personal Information</h1>
             </div>
           </div>
           <div className="personal-info-detail-cont">
@@ -411,7 +420,8 @@ const BasicInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <FeaturedVideoIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Government Issued ID</h1>
+              <FeaturedVideoIcon sx={{ fontSize: "30px" }} />
+              <h1 className="MarginLang">Government Issued ID</h1>
             </div>
           </div>
 

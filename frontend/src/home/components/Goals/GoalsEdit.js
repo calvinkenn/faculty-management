@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { VALIDATOR_REQUIRE } from "../../../shared/utils/validators";
 import { useForm } from "../../../shared/hooks/form-hook";
@@ -149,20 +152,22 @@ const GoalsEdit = (props) => {
                 />
                 <div className="btn-box">
                   {inputList.length !== 1 && (
-                    <button
-                      className="goals-remove-add"
+                    <muiBtn
+                      type="button"
+                      className="mr10"
                       onClick={() => handleRemoveClick(i)}
                     >
-                      Remove
-                    </button>
+                      <IconButton aria-label="delete" size="small">
+                        <DeleteIcon fontSize="small" />
+                      </IconButton>
+                    </muiBtn>
                   )}
                   {inputList.length - 1 === i && (
-                    <button
-                      className="goals-remove-add"
-                      onClick={handleAddClick}
-                    >
-                      Add
-                    </button>
+                    <muiBtn type="button" onClick={handleAddClick}>
+                      <IconButton aria-label="add" size="small">
+                        <AddIcon fontSize="small" />
+                      </IconButton>
+                    </muiBtn>
                   )}
                 </div>
               </div>

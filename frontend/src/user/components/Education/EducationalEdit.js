@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import { useForm } from "../../../shared/hooks/form-hook";
@@ -341,15 +344,22 @@ const EducationalEdit = (props) => {
                       />
                       <div className="btn-box">
                         {inputList.length !== 1 && (
-                          <button
+                          <muiBtn
+                            type="button"
                             className="mr10"
                             onClick={() => handleRemoveClick(i)}
                           >
-                            Remove
-                          </button>
+                            <IconButton aria-label="delete" size="small">
+                              <DeleteIcon fontSize="small" />
+                            </IconButton>
+                          </muiBtn>
                         )}
                         {inputList.length - 1 === i && (
-                          <button onClick={handleAddClick}>Add</button>
+                          <muiBtn type="button" onClick={handleAddClick}>
+                            <IconButton aria-label="add" size="small">
+                              <AddIcon fontSize="small" />
+                            </IconButton>
+                          </muiBtn>
                         )}
                       </div>
                     </div>

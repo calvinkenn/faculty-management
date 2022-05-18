@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 
+import IconButton from "@mui/material/IconButton";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { VALIDATOR_REQUIRE } from "../../../shared/utils/validators";
 import { useForm } from "../../../shared/hooks/form-hook";
@@ -192,7 +195,7 @@ const ObjectivesEdit = (props) => {
           </React.Fragment>
         }
       >
-      <p>Do you want to cancel editing Objectives?</p>
+        <p>Do you want to cancel editing Objectives?</p>
       </Modal>
       <form
         onSubmit={props.bsitObj ? submitBSITEditHandler : submitBLISEditHandler}
@@ -216,20 +219,24 @@ const ObjectivesEdit = (props) => {
                     />
                     <div className="btn-box">
                       {inputListBSIT.length !== 1 && (
-                        <button
+                        <muiBtn
                           className="obj-remove-add"
                           onClick={() => handleRemoveClickBSIT(i)}
                         >
-                          Remove
-                        </button>
+                          <IconButton aria-label="delete" size="small">
+                            <DeleteIcon fontSize="small" />
+                          </IconButton>
+                        </muiBtn>
                       )}
                       {inputListBSIT.length - 1 === i && (
-                        <button
+                        <muiBtn
                           className="obj-remove-add"
                           onClick={handleAddClickBSIT}
                         >
-                          Add
-                        </button>
+                          <IconButton aria-label="add" size="small">
+                            <AddIcon fontSize="small" />
+                          </IconButton>
+                        </muiBtn>
                       )}
                     </div>
                   </div>
@@ -258,20 +265,24 @@ const ObjectivesEdit = (props) => {
                     />
                     <div className="btn-box">
                       {inputListBLIS.length !== 1 && (
-                        <button
+                        <muiBtn
                           className="obj-remove-add"
                           onClick={() => handleRemoveClickBLIS(i)}
                         >
-                          Remove
-                        </button>
+                          <IconButton aria-label="delete" size="small">
+                            <DeleteIcon fontSize="small" />
+                          </IconButton>
+                        </muiBtn>
                       )}
                       {inputListBLIS.length - 1 === i && (
-                        <button
+                        <muiBtn
                           className="obj-remove-add"
                           onClick={handleAddClickBLIS}
                         >
-                          Add
-                        </button>
+                          <IconButton aria-label="add" size="small">
+                            <AddIcon fontSize="small" />
+                          </IconButton>
+                        </muiBtn>
                       )}
                     </div>
                   </div>
@@ -281,11 +292,13 @@ const ObjectivesEdit = (props) => {
           </div>
         )}
         <div className="action-bar">
-            <Button type="button" onClick={showBSITConfirmHandler}>Save</Button>
-            <span />
-            <Button type="button" onClick={showEditWarningHandler}>
-              Cancel
-            </Button>
+          <Button type="button" onClick={showBSITConfirmHandler}>
+            Save
+          </Button>
+          <span />
+          <Button type="button" onClick={showEditWarningHandler}>
+            Cancel
+          </Button>
         </div>
       </form>
     </React.Fragment>

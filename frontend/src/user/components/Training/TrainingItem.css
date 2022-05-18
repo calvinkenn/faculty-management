@@ -1,169 +1,176 @@
 .training-container {
-    width: 100%;
-    display: flex;
-    box-sizing: border-box;
-    max-width: -webkit-fill-available;
-    padding: 2%;
-    background-color: white;
-    border-radius: 15px;
-    margin: 2% 0;
-    box-shadow: #00000017 0 0 10px 0px;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  max-width: -webkit-fill-available;
+  padding: 2%;
+  background-color: white;
+  border-radius: 15px;
+  margin: 2% 0;
+  box-shadow: #00000017 0 0 10px 0px;
+}
+
+.training-v {
+  display: flex;
 }
 
 .training-container__data {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
-.training-title-cont{
-    display: flex;
+.training-title-cont {
+  display: flex;
 }
 
-.training-details-cont{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1%;
+.training-details-cont {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1%;
+  width: 40%;
 }
 
-.training-cert-cont{
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.training-cert-cont {
+  width: 50%;
+  max-width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0 0 5rem;
 }
 
 .training-container__image {
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .training-container__image img {
-    height: 30vh;
-    object-fit: cover;
+  height: 25vh;
+  width: 100%;
+  object-fit: contain;
 }
 
-.training-edit-cont{
-    width: 100%;
-    max-width: -webkit-fill-available;
-    padding: 2%;
-    background-color: white;
-    border-radius: 15px;
-    margin: 2% 0;
-    box-shadow: #00000017 0 0 10px 0px;
+.training-edit-cont {
+  width: 100%;
+  max-width: -webkit-fill-available;
+  padding: 2%;
+  background-color: white;
+  border-radius: 15px;
+  margin: 2% 0;
+  box-shadow: #00000017 0 0 10px 0px;
 }
 
-.trainings-add-cont{
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    margin-top: 2%;
+.trainings-add-cont {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  margin-top: 2%;
 }
 
-.training-cert-upload-cont{
-    width: 100%;
-    max-width: 30%;
-    padding: 0 2%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.training-cert-upload-cont {
+  width: 100%;
+  max-width: 30%;
+  padding: 0 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.training-add-details-cont{
-    width: 100%;
-    max-width: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.training-add-details-cont {
+  width: 100%;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.training-cert-upload-cont .form-control{
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
+.training-cert-upload-cont .form-control {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
 }
 
 .title-type,
 .training-title,
-.training-type{
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 2%;
+.training-type {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2%;
 }
-.title-type{
-    margin-bottom: 1%;
+.title-type {
+  margin-bottom: 1%;
 }
 .training-time-hrs,
-.type-conduct{
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 2%;
-    display: flex;
+.type-conduct {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2%;
+  display: flex;
 }
-.type-conduct{
-    margin: 0;
+.type-conduct {
+  margin: 0;
 }
 
 .training-title div,
 .training-type div,
 .training-time-hrs div,
-.type-conduct div{
-    width: 100%;
-    max-width: 100%;
+.type-conduct div {
+  width: 100%;
+  max-width: 100%;
 }
 .training-time-hrs span,
-.type-conduct span{
-    width: 100%;
-    max-width: 2%;
+.type-conduct span {
+  width: 100%;
+  max-width: 2%;
 }
-.add-training-btn{
-    width: 100%;
-    max-width: 100%;
-    margin-top: 3%;
+.add-training-btn {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 3%;
 }
-.add-training-btn button{
-    padding: 1%;
+.add-training-btn button {
+  padding: 1%;
 }
 
-.training-action-btn{
-    width: 100%;
-    max-width: 10%;
-    display: flex;
+.training-action-btn {
+  width: 100%;
+  max-width: 10%;
+  display: flex;
 }
-.training-container__actions{
-    width: 100%;
-    max-width: 100%;
-    display: flex;
+.training-container__actions {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
 }
 .training-edit-btn,
-.training-del-btn{
-    width: 100%;
-    max-width: 100%;
-    display: flex;
+.training-del-btn {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
 }
-.training-edit-btn button{
-    margin: 0;
-    background-color: #303030;
-    border-radius: 0;
+.training-edit-btn button {
+  margin: 0;
+  background-color: #303030;
+  border-radius: 0;
 }
-.training-del-btn button{
-    margin: 0;
-    background-color: #d32f2f;
-    border-radius: 0;
+.training-del-btn button {
+  margin: 0;
+  background-color: #d32f2f;
+  border-radius: 0;
 }
 
-.training-details table td{
-    padding: 10px;
-    border: none;
+.training-details table td {
+  padding: 10px;
+  border: none;
 }
-.training-details table .label{
-    width: 100%;
-    max-width: 45%;
-    font-weight: 600;
+.training-details table .label {
+  width: 100%;
+  max-width: 45%;
+  font-weight: 600;
 }
-.training-details table .colon{
-    width: 100%;
-    max-width: 2%;
+.training-details table .colon {
+  width: 100%;
+  max-width: 2%;
 }

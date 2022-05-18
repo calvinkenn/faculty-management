@@ -63,7 +63,7 @@ const NavLinks = (props) => {
         {auth.isLoggedIn && props.inProfile && (
           <li>
             <NavLink to="/announcement" exact>
-              {props.announcementCount > 0 ? (
+              {!auth.isAdmin && props.announcementCount > 0 ? (
                 <div className="announcement-count">
                   {props.announcementCount}
                 </div>

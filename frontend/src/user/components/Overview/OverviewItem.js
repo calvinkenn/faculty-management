@@ -90,31 +90,48 @@ const OverviewItem = (props) => {
           </div>
           <table className="basic-info-table">
             <tr>
-              <td className="label"><div>Employee Number</div></td>
+              <td className="label">
+                <div>Employee Number</div>
+              </td>
               <td className="colon">:</td>
-              <td>{props.employeeNumber}</td>
+              <td>
+                {props.employeeNumber
+                  ? props.employeeNumber
+                      .toString()
+                      .match(/\d{4}|\d+/g)
+                      .join("-")
+                  : "N/A"}
+              </td>
             </tr>
             <tr>
-              <td className="label"><div>First Name</div></td>
+              <td className="label">
+                <div>First Name</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.firstName}</td>
             </tr>
             <tr>
-              <td className="label"><div>Middle Name</div></td>
+              <td className="label">
+                <div>Middle Name</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.middleName ? props.middleName : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Last Name</div></td>
+              <td className="label">
+                <div>Last Name</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.lastName}</td>
             </tr>
             <tr>
-              <td className="label"><div>Suffix Name</div></td>
+              <td className="label">
+                <div>Suffix Name</div>
+              </td>
               <td className="colon">:</td>
               <td> {props.suffixName ? props.suffixName : "N/A"}</td>
             </tr>
-            <tr>
+            {/* <tr>
               <td className="label"><div>Extension Name{" "}</div></td>
               <td className="colon">:</td>
               <td>
@@ -125,9 +142,11 @@ const OverviewItem = (props) => {
                   : " N/A"
                 }
               </td>
-            </tr>
+            </tr> */}
             <tr>
-              <td className="label"><div>Email</div></td>
+              <td className="label">
+                <div>Email</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.email}</td>
             </tr>
@@ -144,42 +163,58 @@ const OverviewItem = (props) => {
           </div>
           <table className="basic-info-table">
             <tr>
-              <td className="label"><div>House Number</div></td>
+              <td className="label">
+                <div>House Number</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.houseNo ? props.houseNo : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Street</div></td>
+              <td className="label">
+                <div>Street</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.street ? props.street : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Type</div></td>
+              <td className="label">
+                <div>Type</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.locationType ? props.locationType : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Region</div></td>
+              <td className="label">
+                <div>Region</div>
+              </td>
               <td className="colon">:</td>
               <td>{regionNameR ? regionNameR : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Province</div></td>
+              <td className="label">
+                <div>Province</div>
+              </td>
               <td className="colon">:</td>
               <td>{provinceNameR ? provinceNameR : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>City</div></td>
+              <td className="label">
+                <div>City</div>
+              </td>
               <td className="colon">:</td>
               <td>{cityNameR ? cityNameR : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Barangay</div></td>
+              <td className="label">
+                <div>Barangay</div>
+              </td>
               <td className="colon">:</td>
               <td>{barangayNameR ? barangayNameR : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Zip Code</div></td>
+              <td className="label">
+                <div>Zip Code</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.zip ? props.zip : "N/A"}</td>
             </tr>
@@ -196,19 +231,25 @@ const OverviewItem = (props) => {
           </div>
           <table>
             <tr>
-              <td className="label"><div>Telephone no.</div></td>
+              <td className="label">
+                <div>Telephone no.</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.telephoneNum ? props.telephoneNum : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Cellphone no.</div></td>
+              <td className="label">
+                <div>Cellphone no.</div>
+              </td>
               <td className="colon">:</td>
               <td>{props.cellphoneNum ? props.cellphoneNum : "N/A"}</td>
             </tr>
             <tr>
-              <td className="label"><div>Alternate Email</div></td>
+              <td className="label">
+                <div>Alternate Email</div>
+              </td>
               <td className="colon">:</td>
-              <td>{" "}{props.alternateEmail ? props.alternateEmail : "N/A"}</td>
+              <td> {props.alternateEmail ? props.alternateEmail : "N/A"}</td>
             </tr>
           </table>
           {/* <div>

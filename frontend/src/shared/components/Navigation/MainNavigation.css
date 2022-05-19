@@ -22,6 +22,7 @@
   max-width: 75%;
   color: #121212;
   padding: 0.5% 1%;
+  display: flex;
 }
 
 .main-navigation__title a {
@@ -41,7 +42,7 @@
   height: 100%;
 }
 
-.nav-logo-main-cont{
+.nav-logo-main-cont {
   width: 100%;
   max-width: 3em;
   display: flex;
@@ -49,12 +50,16 @@
   margin-right: 1%;
 }
 
-.nav-logo-main-cont img{
+.nav-logo-main-cont img {
   width: 100%;
   max-width: 50%;
 }
 
-.nav-title-cont h4{
+.nav-title-cont {
+  display: flex;
+}
+
+.nav-title-cont h4 {
   font-size: 1.5vw;
 }
 

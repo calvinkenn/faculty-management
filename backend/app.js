@@ -23,6 +23,10 @@ app.use(
   "/uploads/announcements",
   express.static(path.join("uploads", "announcements"))
 ); //middleware for announcement pic file path
+app.use(
+  "/uploads/header",
+  express.static(path.join("uploads", "header"))
+); //middleware for announcement logo file path
 
 //code to allow communication between 2 local host
 

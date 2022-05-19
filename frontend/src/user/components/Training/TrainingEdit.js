@@ -229,9 +229,9 @@ const TrainingEdit = (props) => {
                     element="input"
                     id="type"
                     type="text"
-                    label="Type"
+                    label="Location"
                     validators={[VALIDATOR_REQUIRE()]}
-                    helperText="Please input the type"
+                    helperText="Please input the location of the training/seminar"
                     onInput={inputHandler}
                     initialValue={formState.inputs.type.value}
                     initialValid={formState.inputs.type.isValid}
@@ -279,7 +279,7 @@ const TrainingEdit = (props) => {
               </div>
               <div className="type-conduct">
                 <Input
-                  element="input"
+                  element="select"
                   id="typeOfLearning"
                   type="text"
                   label="Type of Learning"
@@ -289,6 +289,20 @@ const TrainingEdit = (props) => {
                   initialValue={formState.inputs.typeOfLearning.value}
                   initialValid={formState.inputs.typeOfLearning.isValid}
                   required
+                  items={[
+                    "Culture",
+                    "Geography",
+                    "Health",
+                    "History",
+                    "Human activities",
+                    "Mathematics",
+                    "Nature",
+                    "People",
+                    "Philosophy",
+                    "Religion",
+                    "Society",
+                    "Technology",
+                  ]}
                 />
                 <span />
                 <Input

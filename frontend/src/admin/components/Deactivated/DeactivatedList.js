@@ -29,6 +29,8 @@ const DeactivatedList = (props) => {
             id={application._id}
             employmentType={application.employmentType}
             faculty={application.faculty}
+            deactivateNote={application.deactivateNote}
+            profilePic={application.profilePic}
             dateOfRegistration={
               application.dateOfRegistration
                 ? formatDate(application.dateOfRegistration.substring(0, 10))

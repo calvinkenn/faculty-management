@@ -77,6 +77,8 @@ const Input = (props) => {
         disabled={props.disabled ? props.disabled : false}
         required={props.required}
         inputProps={props.inputProps}
+        onKeyDown={props.onKeyDown}
+        style={{ width: props.width }}
       />
     );
   } else if (props.element === "textarea") {

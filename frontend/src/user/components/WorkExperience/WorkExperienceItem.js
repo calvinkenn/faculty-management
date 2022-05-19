@@ -5,12 +5,21 @@ import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./WorkExperienceItem.css";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 //Mikko is here
-import WorkIcon from '@mui/icons-material/Work';
+import WorkIcon from "@mui/icons-material/Work";
 //end
+
+const formatDateLong = (date) => {
+  const formatter = new Intl.DateTimeFormat("en-us", {
+    month: "long",
+    year: "numeric",
+  });
+  const month1 = formatter.format(new Date(date));
+  return month1;
+};
 
 const WorkExperienceItem = (props) => {
   const userIdByParams = useParams().userId;
@@ -96,13 +105,16 @@ const WorkExperienceItem = (props) => {
           <div className="work-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <WorkIcon sx={{fontSize: "30px"}}/><h1 className="MarginLang">Work Experience - {props.position}</h1>
+              <WorkIcon sx={{ fontSize: "30px" }} />
+              <h1 className="MarginLang">Work Experience - {props.position}</h1>
             </div>
             <div className="work-action-btn">
               {!userIdByParams && (
                 <div className="work-container__actions">
                   <div className="work-edit-btn">
-                    <Button onClick={editModeHandler}><EditIcon /></Button>
+                    <Button onClick={editModeHandler}>
+                      <EditIcon />
+                    </Button>
                   </div>
                   <div className="work-del-btn">
                     <Button danger onClick={showDeleteWarningHandler}>
@@ -117,50 +129,79 @@ const WorkExperienceItem = (props) => {
             <div className="work-dets-cont">
               <table>
                 <tr>
-                  <td className="label"><div>Company</div></td>
+                  <td className="label">
+                    <div>Company</div>
+                  </td>
                   <td className="colon">:</td>
                   <td>{props.company}</td>
                 </tr>
                 <tr>
-                  <td className="label"><div>Position</div></td>
+                  <td className="label">
+                    <div>Position</div>
+                  </td>
                   <td className="colon">:</td>
                   <td>{props.position}</td>
                 </tr>
                 <tr>
-                  <td className="label"><div>Department</div></td>
+                  <td className="label">
+                    <div>Department</div>
+                  </td>
                   <td className="colon">:</td>
                   <td>{props.department}</td>
                 </tr>
                 <tr>
-                  <td className="label"><div>Status of Appointment</div></td>
+                  <td className="label">
+                    <div>Status of Appointment</div>
+                  </td>
                   <td className="colon">:</td>
-                  <td>{" "}{props.statusOfAppointment ? props.statusOfAppointment : "N/A"}</td>
+                  <td>
+                    {" "}
+                    {props.statusOfAppointment
+                      ? props.statusOfAppointment
+                      : "N/A"}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="label"><div>From</div></td>
+                  <td className="label">
+                    <div>From</div>
+                  </td>
                   <td className="colon">:</td>
-                  <td>{props.fromDate}</td>
+                  <td>{formatDateLong(props.fromDate)}</td>
                 </tr>
                 <tr>
-                  <td className="label"><div>To</div></td>
+                  <td className="label">
+                    <div>To</div>
+                  </td>
                   <td className="colon">:</td>
-                  <td>{props.toDate}</td>
+                  <td>
+                    {props.toDate !== "Present"
+                      ? formatDateLong(props.toDate)
+                      : "Present"}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="label"><div>Monthly Salary</div></td>
+                  <td className="label">
+                    <div>Monthly Salary</div>
+                  </td>
                   <td className="colon">:</td>
                   <td>&#8369;{salarySep(props.monthlySalary)}</td>
                 </tr>
                 <tr>
-                  <td className="label"><div>Salary Grade</div></td>
+                  <td className="label">
+                    <div>Salary Grade</div>
+                  </td>
                   <td className="colon">:</td>
-                  <td>{" "}{props.salaryGrade && props.salaryStep
-                    ? props.salaryGrade + "-" + props.salaryStep
-                    : "N/A"}
+                  <td>
+                    {" "}
+                    {props.salaryGrade && props.salaryStep
+                      ? props.salaryGrade + "-" + props.salaryStep
+                      : "N/A"}
                   </td>
                 </tr>
                 <tr>
-                  <td className="label"><div>Government</div></td>
+                  <td className="label">
+                    <div>Government</div>
+                  </td>
                   <td className="colon">:</td>
                   <td>{props.government}</td>
                 </tr>

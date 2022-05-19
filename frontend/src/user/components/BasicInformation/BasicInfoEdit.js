@@ -243,7 +243,7 @@ const BasicInfoEdit = (props) => {
                   initialValid={formState.inputs.suffixName.isValid}
                 />
               </div>
-              <div className="ext-name-cont">
+              {/* <div className="ext-name-cont">
                 {inputList.map((x, i) => {
                   return (
                     <div className="box">
@@ -278,7 +278,7 @@ const BasicInfoEdit = (props) => {
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
           </div>
 

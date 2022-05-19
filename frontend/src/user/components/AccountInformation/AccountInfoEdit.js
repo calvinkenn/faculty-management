@@ -9,6 +9,7 @@ import { useForm } from "../../../shared/hooks/form-hook";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import {
   VALIDATOR_EMAIL,
+  VALIDATOR_EMPLOYEENUMBER,
   VALIDATOR_MINLENGTH,
   VALIDATOR_OPTIONAL,
   VALIDATOR_REQUIRE,
@@ -55,7 +56,9 @@ const AccountInfoEdit = (props) => {
         JSON.stringify({
           userId: storedData.userId,
           token: storedData.token,
-          employeeNum: formState.inputs.employeeNum.value,
+          employeeNum: formState.inputs.employeeNum.value
+            .toString()
+            .replace(/-/g, ""),
           faculty: formState.inputs.faculty.value,
           employmentType: formState.inputs.employmentType.value,
           email: formState.inputs.email.value,
@@ -69,6 +72,8 @@ const AccountInfoEdit = (props) => {
       console.log(err);
     }
   };
+
+  const ALPHA_NUMERIC_DASH_REGEX = /^[0-9-\b]+$/;
 
   return (
     <React.Fragment>
@@ -100,10 +105,17 @@ const AccountInfoEdit = (props) => {
                 <Input
                   element="input"
                   id="employeeNum"
-                  type="number"
+                  type="text"
                   label="Employee Number"
-                  validators={[VALIDATOR_MINLENGTH(6)]}
-                  helperText="Please input a valid employee number"
+                  onKeyDown={(event) => {
+                    if (event.keyCode !== 8) {
+                      if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
+                        event.preventDefault();
+                      }
+                    }
+                  }}
+                  validators={[VALIDATOR_EMPLOYEENUMBER()]}
+                  helperText="Please input a valid employee number."
                   onInput={inputHandler}
                   initialValue={formState.inputs.employeeNum.value}
                   initialValid={formState.inputs.employeeNum.isValid}
@@ -115,7 +127,7 @@ const AccountInfoEdit = (props) => {
                   element="select"
                   id="faculty"
                   type="text"
-                  label="Faculty"
+                  label="Department"
                   validators={[VALIDATOR_OPTIONAL()]}
                   errorText="Invalid Email"
                   items={["BSIT", "BLIS", "ALLIED"]}

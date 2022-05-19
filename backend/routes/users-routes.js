@@ -319,20 +319,20 @@ router.post(
       .not()
       .isEmpty()
       .withMessage("Please specify your work department!"),
-    check("fromDate")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your starting work date!"),
-    check("fromDate")
-      .isNumeric()
-      .withMessage("please input numbers only in 'From' Date"),
-    check("toDate")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your last work date!"),
-    check("toDate")
-      .isNumeric()
-      .withMessage("please input numbers only in 'To' Date"),
+    // check("fromDate")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Please specify your starting work date!"),
+    // check("fromDate")
+    //   .isNumeric()
+    //   .withMessage("please input numbers only in 'From' Date"),
+    // check("toDate")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Please specify your last work date!"),
+    // check("toDate")
+    //   .isNumeric()
+    //   .withMessage("please input numbers only in 'To' Date"),
     check("monthlySalary")
       .not()
       .isEmpty()
@@ -361,20 +361,20 @@ router.patch(
       .not()
       .isEmpty()
       .withMessage("Please specify your work department!"),
-    check("fromDate")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your starting work date!"),
-    check("fromDate")
-      .isNumeric()
-      .withMessage("please input numbers only in 'From' Date"),
-    check("toDate")
-      .not()
-      .isEmpty()
-      .withMessage("Please specify your last work date!"),
-    check("toDate")
-      .isNumeric()
-      .withMessage("please input numbers only in 'To' Date"),
+    // check("fromDate")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Please specify your starting work date!"),
+    // check("fromDate")
+    //   .isNumeric()
+    //   .withMessage("please input numbers only in 'From' Date"),
+    // check("toDate")
+    //   .not()
+    //   .isEmpty()
+    //   .withMessage("Please specify your last work date!"),
+    // check("toDate")
+    //   .isNumeric()
+    //   .withMessage("please input numbers only in 'To' Date"),
     check("monthlySalary")
       .not()
       .isEmpty()

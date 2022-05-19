@@ -72,6 +72,9 @@ const userSchema = mongoose.Schema({
 
   //announcement
   announcementCount: { type: Number, default: 0 },
+
+  //disabled account notes/comment
+  deactivateNote: { type: String },
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -26,6 +26,7 @@ const RejectedList = (props) => {
             firstName={application.firstName}
             lastName={application.lastName}
             email={application.email}
+            deactivateNote={application.deactivateNote}
             id={application._id}
             dateOfRegistration={
               application.dateOfRegistration

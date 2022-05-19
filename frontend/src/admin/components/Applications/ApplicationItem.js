@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
+import Input from "../../../shared/components/FormElements/Input";
+import {
+  VALIDATOR_OPTIONAL,
+  VALIDATOR_REQUIRE,
+} from "../../../shared/utils/validators";
 import Modal from "../../../shared/components/UIElements/Modal";
+import { useForm } from "../../../shared/hooks/form-hook";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Button from "../../../shared/components/FormElements/Button";
 import Card from "../../../shared/components/UIElements/Card";
@@ -11,10 +17,19 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import "../item.css";
 
 const ApplicationItem = (props) => {
-  const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
-    useHttpClient();
+  const { sendRequest } = useHttpClient();
   const [showApproveModal, setShowApproveModal] = useState(false);
   const [showRejectModal, setShowRejectModal] = useState(false);
+
+  const [formState, inputHandler, setFormData] = useForm(
+    {
+      note: {
+        value: "",
+        isValid: true,
+      },
+    },
+    false
+  );
 
   //handler for account approval
   const userApproveHandler = async (event) => {
@@ -42,11 +57,12 @@ const ApplicationItem = (props) => {
     event.preventDefault();
     try {
       const responseData = await sendRequest(
-        "http://localhost:5000/api/admin/actionHandler",
+        "http://localhost:5000/api/admin/deactivateAccount",
         "PATCH",
         JSON.stringify({
           userId: props.id,
           permissionUpdate: "rejected",
+          deactivateNote: formState.inputs.note.value,
         }),
         { "Content-Type": "application/json" }
       );
@@ -101,7 +117,22 @@ const ApplicationItem = (props) => {
           <p>Do you want to proceed and activate this account?</p>
         )}
         {showRejectModal && (
-          <p>Do you want to proceed and reject this account?</p>
+          <React.Fragment>
+            <p>Do you want to proceed and reject this account?</p>
+            <Input
+              element="textarea"
+              id="note"
+              type="text"
+              label="Deactivation Reason/Note"
+              minRows={2}
+              width={400}
+              validators={[VALIDATOR_OPTIONAL()]}
+              helperText="Please input the reason/note for deactivation"
+              onInput={inputHandler}
+              initialValue={formState.inputs.note.value}
+              initialValid={formState.inputs.note.isValid}
+            />
+          </React.Fragment>
         )}
       </Modal>
       <Card>

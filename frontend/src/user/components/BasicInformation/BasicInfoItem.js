@@ -61,7 +61,7 @@ const BasicInfoItem = (props) => {
                 <td className="colon">:</td>
                 <td>{props.suffixName ? props.suffixName : "N/A"}</td>
               </tr>
-              <tr>
+              {/* <tr>
                 <td className="label">Extension Name</td>
                 <td className="colon">:</td>
                 <td>
@@ -71,7 +71,7 @@ const BasicInfoItem = (props) => {
                       ))
                     : " N/A"}
                 </td>
-              </tr>
+              </tr> */}
             </table>
           </div>
         </div>

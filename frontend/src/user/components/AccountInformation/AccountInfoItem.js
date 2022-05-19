@@ -5,11 +5,11 @@ import { AuthContext } from "../../../shared/context/auth-context";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import Modal from "../../../shared/components/UIElements/Modal";
 import "./AccountInfoItem.css";
-import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
+import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
 
 //mikko is here
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import SettingsIcon from '@mui/icons-material/Settings';
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import SettingsIcon from "@mui/icons-material/Settings";
 //
 
 const AccountInfoItem = (props) => {
@@ -85,25 +85,40 @@ const AccountInfoItem = (props) => {
             <div className="employment-info-title-cont">
               <div className="basic-title-blank"></div>
               <div className="basic-title-text">
-                <ManageAccountsIcon  sx={{fontSize: "30px"}}/><h1 className="MarginLang">Employment Account Information</h1>
+                <ManageAccountsIcon sx={{ fontSize: "30px" }} />
+                <h1 className="MarginLang">Employment Account Information</h1>
               </div>
             </div>
             <div className="employment-detail-cont">
               <table>
                 <tr>
-                  <td className="label"><div>Employee Number</div></td>
+                  <td className="label">
+                    <div>Employee Number</div>
+                  </td>
                   <td className="colon">:</td>
-                  <td>{props.employeeNum}</td>
+                  <td>
+                    {props.employeeNum
+                      .toString()
+                      .match(/\d{4}|\d+/g)
+                      .join("-")}
+                  </td>
                 </tr>
                 <tr>
-                  <td className="label"><div>Faculty</div></td>
+                  <td className="label">
+                    <div>Department</div>
+                  </td>
                   <td className="colon">:</td>
                   <td>{props.faculty ? props.faculty : "N/A"}</td>
                 </tr>
                 <tr>
-                  <td className="label"><div>Employment Type</div></td>
+                  <td className="label">
+                    <div>Employment Type</div>
+                  </td>
                   <td className="colon">:</td>
-                  <td>{" "}{props.employmentType ? props.employmentType : "N/A"}</td>
+                  <td>
+                    {" "}
+                    {props.employmentType ? props.employmentType : "N/A"}
+                  </td>
                 </tr>
               </table>
             </div>
@@ -112,30 +127,35 @@ const AccountInfoItem = (props) => {
             <div className="account-info-title-cont">
               <div className="basic-title-blank"></div>
               <div className="basic-title-text">
-                <SettingsIcon  sx={{fontSize: "30px"}}/><h1 className="MarginLang">Account Information</h1>
+                <SettingsIcon sx={{ fontSize: "30px" }} />
+                <h1 className="MarginLang">Account Information</h1>
               </div>
               <div className="change-btn-cont">
-                <Button onClick={changePassHandler}><ManageAccountsIcon/></Button>
+                <Button onClick={changePassHandler}>
+                  <ManageAccountsIcon />
+                </Button>
               </div>
               <div className="deact-btn">
                 {!auth.isAdmin && (
-                  <Button onClick={showDeactivateHandler}><DoNotDisturbOnIcon /></Button>
+                  <Button onClick={showDeactivateHandler}>
+                    <DoNotDisturbOnIcon />
+                  </Button>
                 )}
               </div>
             </div>
             <div className="account-info-detail-cont">
               <table>
                 <tr>
-                  <td className="label"><div>Email</div></td>
+                  <td className="label">
+                    <div>Email</div>
+                  </td>
                   <td className="colon">:</td>
                   <td>{props.email}</td>
                 </tr>
                 <tr>
                   <td className="label">
                     {!auth.isAdmin && (
-                      <div className="change-pass-cont">
-                        Password
-                      </div>
+                      <div className="change-pass-cont">Password</div>
                     )}
                   </td>
                   <td className="colon">:</td>

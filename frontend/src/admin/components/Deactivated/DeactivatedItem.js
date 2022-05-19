@@ -66,6 +66,16 @@ const DeactivatedItem = (props) => {
       </Modal>
       <Card>
         <div className="faculty-card-container">
+          <div className="container__image">
+            <img
+              src={
+                props.profilePic !== ""
+                  ? `http://localhost:5000/${props.profilePic}`
+                  : profilePic
+              }
+              alt={props.firstName}
+            />
+          </div>
           <div className="faculty-details-cont">
             <div className="faculty-name-email-cont">
               <div>
@@ -104,6 +114,10 @@ const DeactivatedItem = (props) => {
                 </h4>
                 <h6>Date of Registration</h6>
               </div>
+            </div>
+            <div>
+              Deactivated Reason/Note :{" "}
+              {props.deactivateNote ? props.deactivateNote : "N/A"}
             </div>
           </div>
           <div className="container__actions">

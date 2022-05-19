@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
 import { AuthContext } from "../../shared/context/auth-context";
@@ -11,7 +11,12 @@ import SuccessModal from "../../shared/components/UIElements/SuccessModal";
 import {
   VALIDATOR_CONFIRMPASSWORD,
   VALIDATOR_EMAIL,
+  VALIDATOR_EMPLOYEENUMBER,
   VALIDATOR_MINLENGTH,
+  VALIDATOR_PASSWORD_LOWERCASE,
+  VALIDATOR_PASSWORD_NUMBER,
+  VALIDATOR_PASSWORD_SPECIAL,
+  VALIDATOR_PASSWORD_UPPERCASE,
   VALIDATOR_REQUIRE,
 } from "../../shared/utils/validators";
 import { useForm } from "../../shared/hooks/form-hook";
@@ -29,6 +34,7 @@ const Auth = () => {
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [isRegisterMode, setIsRegisterMode] = useState(false);
   const [isResetMode, setIsResetMode] = useState(false);
+  const [passwordErr, setPasswordErr] = useState();
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -112,7 +118,9 @@ const Auth = () => {
           "http://localhost:5000/api/users/signup",
           "POST",
           JSON.stringify({
-            employeeNum: formState.inputs.employeeNum.value,
+            employeeNum: formState.inputs.employeeNum.value
+              .toString()
+              .replace(/-/g, ""),
             firstName: formState.inputs.firstName.value,
             lastName: formState.inputs.lastName.value,
             email: formState.inputs.email.value,
@@ -157,6 +165,54 @@ const Auth = () => {
     setShowConfirmModal(false);
   };
 
+  useEffect(() => {
+    const passwordValidator = () => {
+      if (!formState.inputs.password.isValid) {
+        const uppercaseRegExp = /(?=.*?[A-Z])/;
+        const lowercaseRegExp = /(?=.*?[a-z])/;
+        const digitsRegExp = /(?=.*?[0-9])/;
+        const specialCharRegExp = /(?=.*?[#?!@$%^&*-])/;
+        const minLengthRegExp = /.{8,}/;
+        const passwordLength = formState.inputs.password.value.trim().length;
+        const uppercasePassword = uppercaseRegExp.test(
+          formState.inputs.password.value
+        );
+        const lowercasePassword = lowercaseRegExp.test(
+          formState.inputs.password.value
+        );
+        const digitsPassword = digitsRegExp.test(
+          formState.inputs.password.value
+        );
+        const specialCharPassword = specialCharRegExp.test(
+          formState.inputs.password.value
+        );
+        const minLengthPassword = minLengthRegExp.test(
+          formState.inputs.password.value
+        );
+        let errMsg = "";
+        if (passwordLength === 0) {
+          errMsg = "Password is empty";
+        } else if (!minLengthPassword) {
+          errMsg = "At least minumum 8 characters";
+        } else if (!uppercasePassword) {
+          errMsg = "At least one Uppercase";
+        } else if (!lowercasePassword) {
+          errMsg = "At least one Lowercase";
+        } else if (!digitsPassword) {
+          errMsg = "At least one digit";
+        } else if (!specialCharPassword) {
+          errMsg = "At least one Special Characters";
+        } else {
+          errMsg = "";
+        }
+        setPasswordErr(errMsg);
+      }
+    };
+    passwordValidator();
+  }, [formState.inputs.password.value]);
+
+  const ALPHA_NUMERIC_DASH_REGEX = /^[0-9-]+$/;
+
   return (
     <React.Fragment>
       <Modal
@@ -178,13 +234,12 @@ const Auth = () => {
           information you provide in completing this registration will be used
           for eligibility verification only and processed according to CICT
           which includes important information on why and how CICT is processing
-          your personal data. 
-          <br/>
+          your personal data.
           <br />
-          I agree to the use or processing of my personal
-          and sensitive personal information by CICT for the purpose of
-          profiling related activities in accordance with the applicable local
-          data protection laws.
+          <br />I agree to the use or processing of my personal and sensitive
+          personal information by CICT for the purpose of profiling related
+          activities in accordance with the applicable local data protection
+          laws.
         </p>
       </Modal>
       <SuccessModal success={success} onClear={clearSuccess} />
@@ -221,9 +276,16 @@ const Auth = () => {
                   <Input
                     element="input"
                     id="employeeNum"
-                    type="number"
-                    validators={[VALIDATOR_MINLENGTH(6)]}
-                    helperText="Please input a valid employee number."
+                    type="text"
+                    onKeyDown={(event) => {
+                      if (event.keyCode !== 8) {
+                        if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {
+                          event.preventDefault();
+                        }
+                      }
+                    }}
+                    validators={[VALIDATOR_EMPLOYEENUMBER()]}
+                    helperText="Please input a valid employee number. Format-(XXXX-X)"
                     onInput={inputHandler}
                     label="Employee Number"
                     variant="outlined"
@@ -312,8 +374,14 @@ const Auth = () => {
                           element="input"
                           id="password"
                           type="password"
-                          validators={[VALIDATOR_MINLENGTH(6)]}
-                          helperText="Please input a minimum of 6 characters."
+                          validators={[
+                            VALIDATOR_MINLENGTH(8),
+                            VALIDATOR_PASSWORD_UPPERCASE(),
+                            VALIDATOR_PASSWORD_LOWERCASE(),
+                            VALIDATOR_PASSWORD_NUMBER(),
+                            VALIDATOR_PASSWORD_SPECIAL(),
+                          ]}
+                          helperText={passwordErr}
                           onInput={inputHandler}
                           label="Password"
                           variant="outlined"
@@ -326,7 +394,11 @@ const Auth = () => {
                           element="input"
                           id="confirmPassword"
                           type="password"
-                          validators={[VALIDATOR_CONFIRMPASSWORD(formState.inputs.password.value)]}
+                          validators={[
+                            VALIDATOR_CONFIRMPASSWORD(
+                              formState.inputs.password.value
+                            ),
+                          ]}
                           helperText="Please make sure your password match."
                           onInput={inputHandler}
                           label="Confirm Password"
@@ -344,7 +416,7 @@ const Auth = () => {
                         id="password"
                         type="password"
                         validators={[VALIDATOR_MINLENGTH(6)]}
-                        helperText="Please input a minimum of 6 characters."
+                        helperText="Please input a minimum of 8 characters."
                         onInput={inputHandler}
                         label="Password"
                         variant="outlined"

@@ -103,13 +103,17 @@ const RejectedItem = (props) => {
               <h6>Date of Registration</h6>
             </div>
           </div>
+          <div>
+            Rejected Reason/Note :{" "}
+            {props.deactivateNote ? props.deactivateNote : "N/A"}
+          </div>
         </div>
         <div className="container__actions__back-to-pending">
-            <Button type="button" onClick={showConfirmModalHandler}>
-              <h4>
-                <ReplayCircleFilledIcon sx={{ fontSize: "40px" }} />
-              </h4>
-            </Button>
+          <Button type="button" onClick={showConfirmModalHandler}>
+            <h4>
+              <ReplayCircleFilledIcon sx={{ fontSize: "40px" }} />
+            </h4>
+          </Button>
         </div>
       </Card>
     </React.Fragment>

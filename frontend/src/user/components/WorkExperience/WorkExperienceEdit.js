@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { FormControlLabel, Checkbox, TextField } from "@mui/material";
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -25,6 +25,8 @@ const WorkExperienceEdit = (props) => {
   const [yearError, setYearError] = useState();
   const [fromDateVal, setFromDateVal] = useState(new Date());
   const [toDateVal, setToDateVal] = useState(new Date());
+  const [inPresent, setInPresent] = useState(false);
+
   const [formState, inputHandler, setFormData] = useForm(
     {
       company: {
@@ -68,7 +70,10 @@ const WorkExperienceEdit = (props) => {
     event.preventDefault();
     const storedData = JSON.parse(sessionStorage.getItem("userData"));
 
-    if (fromDateVal.getFullYear() > toDateVal.getFullYear()) {
+    if (
+      fromDateVal.getFullYear() > toDateVal.getFullYear() &&
+      inPresent === false
+    ) {
       setYearError("Please input a valid time period. From - To period");
       return;
     }
@@ -80,8 +85,8 @@ const WorkExperienceEdit = (props) => {
         company: formState.inputs.company.value,
         position: formState.inputs.position.value,
         department: formState.inputs.department.value,
-        fromDate: fromDateVal.getFullYear(),
-        toDate: toDateVal.getFullYear(),
+        fromDate: fromDateVal,
+        toDate: inPresent ? "Present" : toDateVal,
         monthlySalary: formState.inputs.monthlySalary.value,
         salaryGrade: formState.inputs.salaryGrade.value,
         salaryStep: formState.inputs.salaryStep.value,
@@ -109,7 +114,7 @@ const WorkExperienceEdit = (props) => {
     if (toDateVal instanceof Date) {
       toChecker = toDateVal.getFullYear();
     }
-    if (fromChecker > toChecker) {
+    if (fromChecker > toChecker && inPresent === false) {
       setYearError(
         "Please input a valid time period. Year started to Year ended"
       );
@@ -124,9 +129,8 @@ const WorkExperienceEdit = (props) => {
         company: formState.inputs.company.value,
         position: formState.inputs.position.value,
         department: formState.inputs.department.value,
-        fromDate:
-          fromDateVal instanceof Date ? fromDateVal.getFullYear() : fromDateVal,
-        toDate: toDateVal instanceof Date ? toDateVal.getFullYear() : toDateVal,
+        fromDate: fromDateVal,
+        toDate: inPresent ? "Present" : toDateVal,
         monthlySalary: formState.inputs.monthlySalary.value,
         salaryGrade: formState.inputs.salaryGrade.value,
         salaryStep: formState.inputs.salaryStep.value,
@@ -149,9 +153,20 @@ const WorkExperienceEdit = (props) => {
   useEffect(() => {
     if (props.editData) {
       setFromDateVal(props.editData.fromDate);
-      setToDateVal(props.editData.toDate);
+      setToDateVal(
+        props.editData.toDate.toString() === "Present"
+          ? new Date()
+          : props.editData.toDate
+      );
+      setInPresent(
+        props.editData.toDate.toString() === "Present" ? true : false
+      );
     }
   }, []);
+
+  const sameAsResidentHandler = (event) => {
+    setInPresent(event.target.checked);
+  };
 
   return (
     <React.Fragment>
@@ -232,31 +247,6 @@ const WorkExperienceEdit = (props) => {
                 initialValid={formState.inputs.statusOfAppointment.isValid}
                 required
               />
-            </div>
-            <div className="from-to-govt">
-              <DatePicker
-                views={["year"]}
-                label="Select Year Started"
-                value={fromDateVal}
-                onChange={(newValue) => {
-                  setFromDateVal(newValue);
-                }}
-                renderInput={(params) => (
-                  <TextField {...params} required helperText={null} />
-                )}
-              />
-              <span />
-              <DatePicker
-                views={["year"]}
-                label="Select Year Ended"
-                value={toDateVal}
-                onChange={(newValue) => {
-                  setToDateVal(newValue);
-                }}
-                renderInput={(params) => (
-                  <TextField {...params} required helperText={null} />
-                )}
-              />
               <span />
               <Input
                 element="select"
@@ -270,6 +260,46 @@ const WorkExperienceEdit = (props) => {
                 initialValue={formState.inputs.government.value}
                 initialValid={formState.inputs.government.isValid}
                 required
+              />
+            </div>
+            <div className="from-to-govt">
+              <DatePicker
+                views={["year", "month"]}
+                label="Select Year Started"
+                value={fromDateVal}
+                onChange={(newValue) => {
+                  setFromDateVal(newValue);
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} required helperText={null} />
+                )}
+              />
+              <span />
+              <DatePicker
+                views={["year", "month"]}
+                label="Select Year Ended"
+                value={toDateVal}
+                onChange={(newValue) => {
+                  setToDateVal(newValue);
+                }}
+                disabled={inPresent}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    required={!inPresent}
+                    helperText={null}
+                  />
+                )}
+              />
+              <span />
+              <FormControlLabel
+                label="Present"
+                control={
+                  <Checkbox
+                    checked={inPresent}
+                    onChange={sameAsResidentHandler}
+                  />
+                }
               />
             </div>
             <div className="salary">

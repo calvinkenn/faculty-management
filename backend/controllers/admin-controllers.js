@@ -6,6 +6,7 @@ const HttpError = require("../models/http-error");
 
 const User = require("../models/user");
 const Admin = require("../models/admin");
+const Header = require("../models/header");
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -125,6 +126,23 @@ const actionHandler = async (req, res, next) => {
   }
 };
 
+const deactivateAccount = async (req, res, next) => {
+  //All action for buttons
+  const { userId, permissionUpdate, deactivateNote } = req.body;
+  const user = await User.findByIdAndUpdate(userId, {
+    permission: permissionUpdate,
+    deactivateNote: deactivateNote,
+  });
+
+  if (user) {
+    const pendingUsers = await User.find(
+      { permission: "pending" },
+      "-password"
+    );
+    res.json({ pendingUsers: pendingUsers, permission: permissionUpdate });
+  }
+};
+
 const unlockAccountHandler = async (req, res, next) => {
   //Unlock Account
   const { userId } = req.body;
@@ -175,6 +193,59 @@ const resetPasswordHandler = async (req, res, next) => {
   });
 };
 
+const getHeader = async (req, res, next) => {
+  const headerData = await Header.find();
+
+  if (!headerData) {
+    return res.json({ headerData: "no header found" });
+  }
+  res.json({ headerData: headerData });
+};
+
+const editHeaderText = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+  const { headerText, id } = req.body;
+
+  let editHeaderText = await Header.findByIdAndUpdate(id, {
+    headerText,
+  });
+
+  const newUpdate = await Header.find({ id: id });
+  if (editHeaderText) {
+    res
+      .status(201)
+      .json({ editHeaderText: newUpdate, message: "Header Text Updated" });
+  }
+};
+
+const editLogo = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errorsList = errors.array();
+    const newList = errorsList.map((error) => error.msg);
+    const error = new HttpError(newList[0], 422);
+    return next(error);
+  }
+  const { headerImage, id } = req.body;
+
+  let editHeaderImage = await Header.findByIdAndUpdate(id, {
+    headerImage: req.file.path,
+  });
+
+  const newUpdate = await Header.find({ id: id });
+  if (editHeaderImage) {
+    res
+      .status(201)
+      .json({ editHeaderImage: newUpdate, message: "Logo Updated" });
+  }
+};
+
 exports.login = login;
 exports.getActiveUsers = getActiveUsers;
 exports.getPendingUsers = getPendingUsers;
@@ -183,6 +254,10 @@ exports.getDeactivatedUsers = getDeactivatedUsers;
 exports.getResetUsers = getResetUsers;
 exports.getLockedUsers = getLockedUsers;
 exports.actionHandler = actionHandler;
+exports.deactivateAccount = deactivateAccount;
 exports.resetPasswordHandler = resetPasswordHandler;
 exports.unlockAccountHandler = unlockAccountHandler;
+exports.getHeader = getHeader;
+exports.editHeaderText = editHeaderText;
+exports.editLogo = editLogo;
 // exports.acceptPendingUser = acceptPendingUser;

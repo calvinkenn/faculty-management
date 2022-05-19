@@ -128,7 +128,7 @@ const EducationalEdit = (props) => {
         fromDate: fromDateVal.getFullYear(),
         toDate: toDateVal.getFullYear(),
         awards: inputList,
-        yearGraduated: yearGraduated.getFullYear(),
+        yearGraduated: toDateVal.getFullYear(),
         highestLevel: formState.inputs.highestLevel.value,
         userId: storedData.userId,
         token: storedData.token,
@@ -173,9 +173,7 @@ const EducationalEdit = (props) => {
         toDate: toDateVal instanceof Date ? toDateVal.getFullYear() : toDateVal,
         awards: inputList,
         yearGraduated:
-          yearGraduated instanceof Date
-            ? yearGraduated.getFullYear()
-            : yearGraduated,
+          toDateVal instanceof Date ? toDateVal.getFullYear() : toDateVal,
         highestLevel: formState.inputs.highestLevel.value,
         educId: props.editData._id,
         userId: storedData.userId,
@@ -317,7 +315,7 @@ const EducationalEdit = (props) => {
                 )}
               />
               <span />
-              <DatePicker
+              {/* <DatePicker
                 views={["year"]}
                 label="Select Year Graduated"
                 value={yearGraduated}
@@ -327,7 +325,7 @@ const EducationalEdit = (props) => {
                 renderInput={(params) => (
                   <TextField {...params} required helperText={null} />
                 )}
-              />
+              /> */}
             </div>
             <div className="acad-honor">
               {inputList.map((x, i) => {

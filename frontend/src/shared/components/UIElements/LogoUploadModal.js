@@ -3,11 +3,11 @@ import React from "react";
 import ModalUpload from "./ModalUpload";
 import Button from "../FormElements/Button";
 
-const ProfileUploadModal = (props) => {
+const LogoUploadModal = (props) => {
   return (
     <ModalUpload
       onCancel={props.onClear}
-      header={"Change Profile"}
+      header={"Edit Header"}
       show={!!props.display}
       onSubmit={props.submit}
       upload={
@@ -15,17 +15,20 @@ const ProfileUploadModal = (props) => {
           {props.buttonName}
         </Button>
       }
+      save={<Button type="submit">Save</Button>}
       cancel={
-        <div className="btn-cancel">
-          <Button type="button" onClick={props.cancel}>
-            Cancel
-          </Button>
-        </div>
+        <Button type="button" danger onClick={props.cancel}>
+          Cancel
+        </Button>
       }
     >
+      <div>
+        <center>{props.inputData}</center>
+      </div>
+      <br />
       <div>{props.display}</div>
     </ModalUpload>
   );
 };
 
-export default ProfileUploadModal;
+export default LogoUploadModal;

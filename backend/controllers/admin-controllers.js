@@ -232,17 +232,15 @@ const editLogo = async (req, res, next) => {
     const error = new HttpError(newList[0], 422);
     return next(error);
   }
-  const { headerImage, id } = req.body;
-
-  let editHeaderImage = await Header.findByIdAndUpdate(id, {
+  const { headerText, id } = req.body;
+  let edit1 = await Header.findByIdAndUpdate(id, {
     headerImage: req.file.path,
+    headerText,
   });
 
   const newUpdate = await Header.find({ id: id });
-  if (editHeaderImage) {
-    res
-      .status(201)
-      .json({ editHeaderImage: newUpdate, message: "Logo Updated" });
+  if (edit1) {
+    res.status(201).json({ edit1: newUpdate, message: "Header Updated" });
   }
 };
 

@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { CSSTransition } from 'react-transition-group';
+import React from "react";
+import ReactDOM from "react-dom";
+import { CSSTransition } from "react-transition-group";
 
-import Backdrop from './Backdrop';
-import './ModalUpload.css';
+import Backdrop from "./Backdrop";
+import "./ModalUpload.css";
 
-const ModalUploadOverlay = props => {
+const ModalUploadOverlay = (props) => {
   const content = (
     <div className={`modal ${props.className}`} style={props.style}>
       <header className={`modal__header ${props.headerClass}`}>
@@ -13,23 +13,29 @@ const ModalUploadOverlay = props => {
       </header>
       <form
         onSubmit={
-          props.onSubmit ? props.onSubmit : event => event.preventDefault()
+          props.onSubmit ? props.onSubmit : (event) => event.preventDefault()
         }
       >
         <div className={`modal__content ${props.contentClass}`}>
           {props.children}
         </div>
         <footer className={`modal__footer ${props.footerClass}`}>
-          {props.upload}
-          {props.cancel}
+          <div>
+            {props.upload}
+            {props.upload2}
+          </div>
+          <div>
+            {props.save}
+            {props.cancel}
+          </div>
         </footer>
       </form>
     </div>
   );
-  return ReactDOM.createPortal(content, document.getElementById('modal-hook'));
+  return ReactDOM.createPortal(content, document.getElementById("modal-hook"));
 };
 
-const ModalUpload = props => {
+const ModalUpload = (props) => {
   return (
     <React.Fragment>
       {props.show && <Backdrop onClick={props.onCancel} />}

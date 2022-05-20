@@ -4,6 +4,7 @@ const adminControllers = require("../controllers/admin-controllers");
 const checkAuth = require("../middleware/check-auth");
 const router = express.Router();
 const headerUpload = require("../middleware/file-upload");
+const headerUpload2 = require("../middleware/file-upload");
 
 router.post("/login", adminControllers.login);
 router.get("/getAllActiveUsers", adminControllers.getActiveUsers);

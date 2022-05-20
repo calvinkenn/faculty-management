@@ -81,8 +81,6 @@ const MainNavigation = (props) => {
     false
   );
 
-  console.log(headerData.headerImage);
-
   const openEditTextHandler = () => {
     setIsEditText(true);
   };
@@ -174,14 +172,6 @@ const MainNavigation = (props) => {
                 alt="logo"
               />
             </div>
-            {auth.isAdmin && (
-              <LogoUpload
-                center
-                updateLogo={setMessageUpdate}
-                previewUrl={headerData.headerImage}
-                id={headerData._id}
-              />
-            )}
           </div>
 
           <div className="nav-title-cont">
@@ -192,7 +182,7 @@ const MainNavigation = (props) => {
                   : "College of Information and Communications Technology"}
               </h4>
             )}
-            {isEditText && (
+            {/* {isEditText && (
               <Input
                 element="input"
                 id="headerText"
@@ -210,8 +200,8 @@ const MainNavigation = (props) => {
                 required
                 width={400}
               />
-            )}
-            {!isEditText && auth.isAdmin && (
+            )} */}
+            {/* {!isEditText && auth.isAdmin && (
               <muiBtn type="button" onClick={openEditTextHandler}>
                 <IconButton aria-label="edit" size="small">
                   <EditIcon fontSize="small" />
@@ -231,9 +221,19 @@ const MainNavigation = (props) => {
                   <CancelIcon fontSize="small" />
                 </IconButton>
               </muiBtn>
-            )}
+            )} */}
           </div>
         </h1>
+        {auth.isAdmin && (
+          <LogoUpload
+            center
+            update={setMessageUpdate}
+            previewUrl={headerData.headerImage}
+            previewUrl2={headerData.headerImage}
+            id={headerData._id}
+            headerText={headerData.headerText}
+          />
+        )}
         <nav className="main-navigation__header-nav">
           <NavLinks
             inProfile={props.inProfile}

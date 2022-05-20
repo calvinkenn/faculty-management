@@ -21,6 +21,11 @@
   cursor: default;
 }
 
+.button--danger {
+  background: #830000;
+  border-color: #830000;
+}
+
 /* .button {
   font: inherit;
   padding: 0.5rem 1.5rem;
@@ -53,11 +58,6 @@
 .button--inverse:active {
   color: white;
   background: #0a0a0a;
-}
-
-.button--danger {
-  background: #830000;
-  border-color: #830000;
 }
 
 .button--danger:hover,

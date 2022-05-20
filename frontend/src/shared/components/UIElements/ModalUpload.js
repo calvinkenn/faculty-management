@@ -20,14 +20,22 @@ const ModalUploadOverlay = (props) => {
           {props.children}
         </div>
         <footer className={`modal__footer ${props.footerClass}`}>
-          <div>
-            {props.upload}
-            {props.upload2}
-          </div>
-          <div>
-            {props.save}
-            {props.cancel}
-          </div>
+          {props.logo && (
+            <div className="upload">
+              {props.upload}
+              <div className="actions">
+                {props.save}
+                {props.cancel}
+              </div>
+            </div>
+          )}
+          {!props.logo && (
+            <div className="profile-upload">
+              {props.upload}
+              {props.save}
+              {props.cancel}
+            </div>
+          )}
         </footer>
       </form>
     </div>

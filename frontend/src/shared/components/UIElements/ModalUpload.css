@@ -35,6 +35,14 @@
   padding: 1rem 0.5rem;
 }
 
+.modal__footer .upload{
+  display: block;
+}
+
+.modal__footer .profile-upload{
+  display: block;
+}
+
 .modal__footer div{
   display: flex;
 }

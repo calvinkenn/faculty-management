@@ -21,6 +21,7 @@ const LogoUploadModal = (props) => {
           Cancel
         </Button>
       }
+      logo={true}
     >
       <div>
         <center>{props.inputData}</center>

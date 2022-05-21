@@ -2,6 +2,7 @@ import React from "react";
 
 import ResetItem from "./ResetItem";
 import "../list.css";
+import noData from "../../../assets/Image/no-data-found.png";
 
 const formatDate = (input) => {
   var datePart = input.match(/\d+/g),
@@ -14,7 +15,10 @@ const formatDate = (input) => {
 
 const ResetList = (props) => {
   if (props.list?.length === 0) {
-    return <div>No users requesting password reset found</div>;
+    return <div className="no-data-found">
+      <img src={noData} />
+      <h1>No Users Requesting Password Reset Found</h1>
+    </div>;
   }
   return (
     <div className="list">

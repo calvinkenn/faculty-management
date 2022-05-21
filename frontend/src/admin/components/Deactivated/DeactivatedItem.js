@@ -115,8 +115,8 @@ const DeactivatedItem = (props) => {
                 <h6>Date of Registration</h6>
               </div>
             </div>
-            <div>
-              Deactivated Reason/Note :{" "}
+            <div className="deact-note">
+              Deactivation Reason:{" "}
               {props.deactivateNote ? props.deactivateNote : "N/A"}
             </div>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PrintData, { ComponentToPrint } from "../PrintData/PrintData";
 import { Box, InputLabel, FormControl, Select, MenuItem } from "@mui/material";
+import noData from "../../../assets/Image/no-data-found.png";
 
 import OverviewList from "./OverviewList";
 
@@ -49,7 +50,10 @@ const Overview = (props) => {
         {filteredDataToPrint?.length > 0 ? (
           <PrintData activeUserData={filteredDataToPrint} filterValue={selectedFilter} />
         ) : (
-          <h2>No data to print</h2>
+          <div className="no-data-found">
+            <img src={noData} />
+            <h1>No Data to Print</h1>
+          </div>
         )}
       </div>
     );

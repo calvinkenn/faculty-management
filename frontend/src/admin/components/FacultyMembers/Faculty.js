@@ -4,6 +4,7 @@ import Pagination from "../../../shared/components/Pagination/Pagination";
 import Sort from "../../../shared/components/Sort/Sort";
 import Filter from "../../../shared/components/Filter/Filter";
 import FacultyList from "./FacultyList";
+import noData from "../../../assets/Image/no-data-found.png";
 
 const Faculty = (props) => {
   const [selectedFilter, setSelectedFilter] = useState(1);
@@ -112,7 +113,10 @@ const Faculty = (props) => {
             </React.Fragment>
           </div>
         ) : (
-          <h1>No Data to Display</h1>
+          <div className="no-data-found">
+            <img src={noData} />
+            <h1>No Data to Display</h1>
+          </div>
         )}
       </React.Fragment>
     </div>

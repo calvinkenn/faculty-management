@@ -2,10 +2,14 @@ import React from "react";
 
 import EducationalItem from "./EducationalItem";
 import "./EducationalList.css";
+import noData from "../../../assets/Image/no-data-found.png";
 
 const EducationalList = (props) => {
   if (props.userData.length === 0) {
-    return <div>no education found</div>;
+    return <div className="no-data-found">
+        <img src={noData} />
+        <h1>No Educational Background Found</h1>
+    </div>;
   }
   return (
     <div className="educational-list">

@@ -19,10 +19,11 @@
 
 .main-navigation__title {
   width: 100%;
-  max-width: 75%;
+  max-width: 100%;
   color: #121212;
   padding: 0.5% 1%;
   display: flex;
+  align-items: center;
 }
 
 .main-navigation__title a {
@@ -49,10 +50,17 @@
   align-items: center;
   margin-right: 1%;
 }
+.nav-logo-main-cont div{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 
 .nav-logo-main-cont img {
   width: 100%;
-  max-width: 50%;
+  max-width: 200px;
 }
 
 .nav-title-cont {

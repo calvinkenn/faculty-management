@@ -2,6 +2,7 @@ import React from "react";
 
 import CivilServiceItem from "./CivilServiceItem";
 import "./CivilServiceList.css";
+import noData from "../../../assets/Image/no-data-found.png";
 
 const formatDate = (input) => {
   var datePart = input.match(/\d+/g),
@@ -24,7 +25,10 @@ const formatDateLong = (date) => {
 
 const CivilServiceList = (props) => {
   if (props.items?.length === 0) {
-    return <div>no civil service/s found.</div>;
+    return <div className="no-data-found">
+      <img src={noData} />
+      <h1>No Licenses Found</h1>
+  </div>;
   }
   return (
     <div className="training-list">

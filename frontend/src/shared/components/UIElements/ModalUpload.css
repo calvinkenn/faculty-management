@@ -14,6 +14,21 @@
   font-size: 16px;
   padding: 0 4%;
 }
+
+.modal__content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2%;
+  margin-top: 5%;
+}
+
+.modal__content div{
+  width: 100%;
+  max-width: 100%;
+  padding: 1%;
+}
+
 .modal__header {
   width: 100%;
   padding: 0.5rem 0;
@@ -25,10 +40,6 @@
 
 .modal__header h2 {
   margin: 0.5rem;
-}
-
-.modal__content {
-  padding: 1rem 0.5rem;
 }
 
 .modal__footer {
@@ -45,6 +56,20 @@
 
 .modal__footer div{
   display: flex;
+  width: 100%;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.mission-cancel-edit span{
+  width: 100%;
+  max-width: 2%;
+}
+
+.actions span {
+  width: 100%;
+  max-width: 2%;
 }
 
 @media (min-width: 768px) {
@@ -75,6 +100,7 @@
   opacity: 0;
   transition: all 200ms;
 }
-.btn-cancel button{
+.btn-cancel button,
+.cancel-yes{
   background-color: #d32f2f;
 }

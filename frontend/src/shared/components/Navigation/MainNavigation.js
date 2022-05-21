@@ -132,13 +132,14 @@ const MainNavigation = (props) => {
           <React.Fragment>
             <div className="mission-cancel-edit">
               <Button
-                danger
+                
                 onClick={
                   showConfirmModal ? cancelEditHandler : submitEditHandler
                 }
               >
                 Yes
               </Button>
+              <span />
               <Button
                 inverse
                 onClick={
@@ -182,46 +183,6 @@ const MainNavigation = (props) => {
                   : "College of Information and Communications Technology"}
               </h4>
             )}
-            {/* {isEditText && (
-              <Input
-                element="input"
-                id="headerText"
-                type="text"
-                label="Header"
-                validators={[VALIDATOR_OPTIONAL()]}
-                helperText="Please input header"
-                onInput={inputHandler}
-                initialValue={
-                  headerData.headerText
-                    ? headerData.headerText
-                    : formState.inputs.headerText.value
-                }
-                initialValid={formState.inputs.headerText.isValid}
-                required
-                width={400}
-              />
-            )} */}
-            {/* {!isEditText && auth.isAdmin && (
-              <muiBtn type="button" onClick={openEditTextHandler}>
-                <IconButton aria-label="edit" size="small">
-                  <EditIcon fontSize="small" />
-                </IconButton>
-              </muiBtn>
-            )}
-            {isEditText && (
-              <muiBtn type="button" onClick={showSaveConfirmHandler}>
-                <IconButton aria-label="check" size="small">
-                  <CheckCircleIcon fontSize="small" />
-                </IconButton>
-              </muiBtn>
-            )}
-            {isEditText && (
-              <muiBtn type="button" onClick={showEditWarningHandler}>
-                <IconButton aria-label="save" size="small">
-                  <CancelIcon fontSize="small" />
-                </IconButton>
-              </muiBtn>
-            )} */}
           </div>
         </h1>
         {auth.isAdmin && (

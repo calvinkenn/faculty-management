@@ -73,13 +73,13 @@ const VisionEdit = (props) => {
           <React.Fragment>
             <div className="mission-cancel-edit">
               <Button
-                danger
                 onClick={
                   showConfirmModal ? cancelEditHandler : submitEditHandler
                 }
               >
                 Yes
               </Button>
+              <span />
               <Button
                 inverse
                 onClick={

@@ -277,6 +277,12 @@
 }
 /*Faculty Members end*/
 
+.deact-note{
+  width: 100%;
+  max-width: 100%;
+  margin-top: 2%;
+}
+
 /*Pending Appllication start*/
 .container__actions{
   display: flex;
@@ -296,3 +302,19 @@
   color: #f15c5c;
 }
 /*Pending Application end*/
+
+.no-data-found{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.no-data-found img{
+  width: 100%;
+  max-width: 65%;
+}
+.no-data-found h1{
+  color:#2e2e2e;
+}

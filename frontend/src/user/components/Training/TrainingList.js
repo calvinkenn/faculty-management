@@ -2,10 +2,14 @@ import React from "react";
 
 import TrainingItem from "./TrainingItem";
 import "./TrainingList.css";
+import noData from "../../../assets/Image/no-data-found.png";
 
 const TrainingList = (props) => {
   if (props.list?.length === 0) {
-    return <div>no training and seminars found.</div>;
+    return <div className="no-data-found">
+      <img src={noData} />
+      <h1>No Trainings and Seminars Found</h1>
+    </div>;
   }
   return (
     <div className="training-list">

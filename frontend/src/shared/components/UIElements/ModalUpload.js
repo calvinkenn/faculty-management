@@ -25,6 +25,7 @@ const ModalUploadOverlay = (props) => {
               {props.upload}
               <div className="actions">
                 {props.save}
+                <span />
                 {props.cancel}
               </div>
             </div>

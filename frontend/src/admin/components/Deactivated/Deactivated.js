@@ -4,6 +4,7 @@ import Pagination from "../../../shared/components/Pagination/Pagination";
 import Sort from "../../../shared/components/Sort/Sort";
 import Filter from "../../../shared/components/Filter/Filter";
 import DeactivatedList from "./DeactivatedList";
+import noData from "../../../assets/Image/no-data-found.png";
 
 const Deactivated = (props) => {
   const [selectedFilter, setSelectedFilter] = useState(1);
@@ -106,7 +107,10 @@ const Deactivated = (props) => {
           </React.Fragment>
         </div>
       ) : (
-        <h1>No Data to Display</h1>
+        <div className="no-data-found">
+          <img src={noData} />
+          <h1>No Data to Display</h1>
+        </div>
       )}
     </React.Fragment>
   );

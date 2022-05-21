@@ -126,7 +126,7 @@ const TrainingItem = (props) => {
                   </tr>
                   <tr>
                     <td className="label">
-                      <div>Type</div>
+                      <div>Location</div>
                     </td>
                     <td className="colon">:</td>
                     <td> {props.type}</td>

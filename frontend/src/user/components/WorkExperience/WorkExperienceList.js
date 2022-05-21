@@ -2,10 +2,14 @@ import React from "react";
 
 import WorkExperienceItem from "./WorkExperienceItem";
 import "./WorkExperienceList.css";
+import noData from "../../../assets/Image/no-data-found.png";
 
 const WorkExperienceList = (props) => {
   if (props.items?.length === 0) {
-    return <div>No work experience/s found.</div>;
+    return <div className="no-data-found">
+      <img src={noData} />
+      <h1>No Work Experiences Found</h1>
+    </div>;
   }
   return (
     <div className="work-list">

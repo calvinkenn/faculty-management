@@ -24,6 +24,15 @@
   justify-content: space-between;
 }
 
+.main-header .form-control{
+  width: 100%;
+  max-width: 20%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 main {
   margin-top: 5rem;
 }

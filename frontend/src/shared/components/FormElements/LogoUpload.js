@@ -2,12 +2,14 @@ import React, { useRef, useState, useEffect } from "react";
 
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import IconButton from "@mui/material/IconButton";
-import EditIcon from "@mui/icons-material/Edit";
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+// import EditIcon from "@mui/icons-material/Edit";
 import "./LogoUpload.css";
 import LogoUploadModal from "../UIElements/LogoUploadModal";
 import Input from "./Input";
 import { VALIDATOR_OPTIONAL } from "../../utils/validators";
 import { useForm } from "../../hooks/form-hook";
+
 
 const LogoUpload = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
@@ -187,11 +189,13 @@ const LogoUpload = (props) => {
       {/* <Button type="button" onClick={showModal}>
         Pick Image
       </Button> */}
-      <muiBtn type="button" onClick={showModal}>
-        <IconButton aria-label="photo" size="small">
-          <EditIcon fontSize="medium" />
-        </IconButton>
-      </muiBtn>
+      <div className="edit-header-btn">
+        <muiBtn type="button" onClick={showModal}>
+          <IconButton aria-label="photo" size="small">
+            <EditOutlinedIcon sx={{fontSize: '35px', color: '#000'}} />
+          </IconButton>
+        </muiBtn>
+      </div>
       {!isValid && <p>{props.errorText}</p>}
     </div>
   );

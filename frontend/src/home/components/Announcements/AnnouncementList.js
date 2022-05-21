@@ -2,6 +2,7 @@ import React from "react";
 
 import AnnouncementItem from "./AnnouncementItem";
 import "./AnnouncementList.css";
+import noAnnouncement from "../../../assets/Image/no-announcement.png"
 
 const formatDateLong = (date) => {
   const formatter = new Intl.DateTimeFormat("en-us", {
@@ -18,7 +19,10 @@ const formatDateLong = (date) => {
 
 const AnnouncementList = (props) => {
   if (props.items?.length === 0) {
-    return <div>no announcement</div>;
+    return <div className="no-data-found">
+      <img src={noAnnouncement} />
+      <h1>No Announcement</h1>
+    </div>;
   }
   return (
     <React.Fragment>

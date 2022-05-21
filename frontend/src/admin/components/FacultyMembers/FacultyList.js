@@ -2,6 +2,7 @@ import React from "react";
 
 import FacultyItem from "./FacultyItem";
 import "../list.css";
+import noData from "../../../assets/Image/no-data-found.png";
 
 const formatDate = (input) => {
   var datePart = input.match(/\d+/g),
@@ -14,7 +15,10 @@ const formatDate = (input) => {
 
 const FacultyList = (props) => {
   if (props.list?.length === 0) {
-    return <div>No active users found</div>;
+    return <div className="no-data-found">
+      <img src={noData} />
+      <h1>No Active Users Found</h1>
+    </div>;
   }
 
   console.log(props.sortedData);

@@ -122,7 +122,6 @@ const AnnouncementEdit = (props) => {
             <React.Fragment>
               <div className="mission-cancel-edit">
                 <Button
-                  danger
                   onClick={
                     showConfirmModal
                       ? cancelEditHandler
@@ -133,6 +132,7 @@ const AnnouncementEdit = (props) => {
                 >
                   Yes
                 </Button>
+                <span />
                 <Button
                   inverse
                   onClick={

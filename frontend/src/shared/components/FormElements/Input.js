@@ -78,7 +78,7 @@ const Input = (props) => {
         required={props.required}
         inputProps={props.inputProps}
         onKeyDown={props.onKeyDown}
-        style={{ width: props.width }}
+        // style={{ width: props.width }}
       />
     );
   } else if (props.element === "textarea") {
@@ -91,7 +91,7 @@ const Input = (props) => {
         multiline
         minRows={props.minRows}
         maxRows={Infinity}
-        style={{ width: props.width }}
+        // style={{ width: props.width }}
         onChange={changeHandler}
         onBlur={blurHandler}
         type={props.type}

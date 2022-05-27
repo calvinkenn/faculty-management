@@ -110,7 +110,9 @@ const Auth = () => {
           }
         );
         auth.login(responseData.userId, responseData.token);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
     } else if (isRegisterMode) {
       //code for signup
       try {
@@ -287,7 +289,7 @@ const Auth = () => {
                     validators={[VALIDATOR_EMPLOYEENUMBER()]}
                     helperText="Please input a valid employee number. Format-(XXXX-X)"
                     onInput={inputHandler}
-                    label="Employee Number"
+                    label="Employee Number/Format-(0000-0)"
                     variant="outlined"
                   />
                 )}
@@ -415,7 +417,7 @@ const Auth = () => {
                         element="input"
                         id="password"
                         type="password"
-                        validators={[VALIDATOR_MINLENGTH(6)]}
+                        validators={[VALIDATOR_MINLENGTH(8)]}
                         helperText="Please input a minimum of 8 characters."
                         onInput={inputHandler}
                         label="Password"

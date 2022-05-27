@@ -14,12 +14,12 @@ router.post(
       .isAlpha()
       .withMessage("Please input numbers only"),
     check("email")
-      .normalizeEmail()
+      // .normalizeEmail()
       .isEmail()
-      .withMessage("please input a valid email!"),
+      .withMessage("Please input a valid email!"),
     check("password")
       .isLength({ min: 6 })
-      .withMessage("please input password greater than 6 characters"),
+      .withMessage("Please input password greater than 6 characters"),
   ],
   userControllers.signup
 );

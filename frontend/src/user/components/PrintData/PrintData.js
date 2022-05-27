@@ -155,11 +155,11 @@ const PrintData = (props) => {
   const activeAccountData = () => {
     return (
       <React.Fragment>
-        <style type="text/css" media="print">
+        {/* <style type="text/css" media="print">
           {"\
           @page { size: landscape; }\
 "}
-        </style>
+        </style> */}
         <PrintHeader />
         <div className="print-container">
           <div className="print-data">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import emailjs from "emailjs-com";
 
 import Modal from "../../../shared/components/UIElements/Modal";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -9,12 +10,32 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "../item.css";
 
+const makeid = (length) => {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
+
 const ResetItem = (props) => {
   const { isLoading, error, success, sendRequest, clearError, clearSuccess } =
     useHttpClient();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const userResetHandler = async (event) => {
+    let randomCharacters = makeid(4);
+    const templateParams = {
+      newPassword:
+        props.lastName.toLowerCase() +
+        props.employeeNum +
+        "_" +
+        randomCharacters,
+      sendToThisEmail: props.email,
+    };
     setShowConfirmModal(false);
     event.preventDefault();
     try {
@@ -23,10 +44,31 @@ const ResetItem = (props) => {
         "PATCH",
         JSON.stringify({
           userId: props.id,
-          newPass: props.lastName.toLowerCase() + props.employeeNum,
+          newPass:
+            props.lastName.toLowerCase() +
+            props.employeeNum +
+            "_" +
+            randomCharacters,
         }),
         { "Content-Type": "application/json" }
       );
+
+      emailjs
+        .send(
+          "service_d5emoql",
+          "template_8qek2pc",
+          templateParams,
+          "Ot41VNtweh9noSj8e"
+        )
+        .then(
+          function (response) {
+            console.log("SUCCESS!", response.status, response.text);
+          },
+          function (error) {
+            console.log("FAILED...", error);
+          }
+        );
+
       props.updateResetUsers(
         responseData.updatedUser,
         responseData.permission + "_reset"

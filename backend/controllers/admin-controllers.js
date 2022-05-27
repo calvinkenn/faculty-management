@@ -187,7 +187,8 @@ const resetPasswordHandler = async (req, res, next) => {
   }
 
   res.status(200).json({
-    message: "Password is now: Last name(lower case) + Employee Number",
+    message:
+      "Password resetted, temporary password was sent to the email registered.",
     updatedUser: user,
     permission: "accepted",
   });

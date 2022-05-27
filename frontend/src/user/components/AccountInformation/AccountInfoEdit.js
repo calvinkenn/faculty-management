@@ -20,13 +20,17 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 //mikko is here
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 //end
+
 const AccountInfoEdit = (props) => {
   const { error, sendRequest, clearError } = useHttpClient();
   const [value, setValue] = useState();
   const [formState, inputHandler, setFormData] = useForm(
     {
       employeeNum: {
-        value: props.userEdit.employeeNum,
+        value: props.userEdit.employeeNum
+          .toString()
+          .match(/\d{4}|\d+/g)
+          .join("-"),
         isValid: props.userEdit.employeeNum ? true : false,
       },
       faculty: {
@@ -106,7 +110,7 @@ const AccountInfoEdit = (props) => {
                   element="input"
                   id="employeeNum"
                   type="text"
-                  label="Employee Number"
+                  label="Employee Number/Format-(0000-0)"
                   onKeyDown={(event) => {
                     if (event.keyCode !== 8) {
                       if (!ALPHA_NUMERIC_DASH_REGEX.test(event.key)) {

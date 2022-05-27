@@ -105,8 +105,8 @@ const AdminAuth = (props) => {
                       element="input"
                       id="password"
                       type="password"
-                      validators={[VALIDATOR_MINLENGTH(6)]}
-                      helperText="Please input a minimum of 6 characters."
+                      validators={[VALIDATOR_MINLENGTH(8)]}
+                      helperText="Please input a minimum of 8 characters."
                       onInput={inputHandler}
                       label="Password"
                       variant="outlined"

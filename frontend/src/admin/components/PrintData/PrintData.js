@@ -39,9 +39,7 @@ const PrintData = (props) => {
         <div className="print-container">
           <div className="print-data">
             <h1>
-              {filterData
-                ? filterData + " Faculty Data"
-                : "Faculty Data"}
+              {filterData ? filterData + " Faculty Data" : "Faculty Data"}
             </h1>
           </div>
           <table>

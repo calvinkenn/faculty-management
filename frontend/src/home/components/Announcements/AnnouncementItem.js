@@ -7,7 +7,7 @@ import { AuthContext } from "../../../shared/context/auth-context";
 import Modal from "../../../shared/components/UIElements/Modal";
 import Button from "../../../shared/components/FormElements/Button";
 import "./AnnouncementItem.css";
-import ArrowCircleRightRoundedIcon from '@mui/icons-material/ArrowCircleRightRounded';
+import ArrowCircleRightRoundedIcon from "@mui/icons-material/ArrowCircleRightRounded";
 
 const AnnouncementItem = (props) => {
   const auth = useContext(AuthContext);
@@ -61,7 +61,7 @@ const AnnouncementItem = (props) => {
           </React.Fragment>
         }
       >
-      <p>Do you want to proceed and delete this item?</p>
+        <p>Do you want to proceed and delete this item?</p>
       </Modal>
       <div className="announcement-cont">
         <div className="item">
@@ -72,23 +72,35 @@ const AnnouncementItem = (props) => {
             />
           </div>
           <div className="content-cont">
-            <div className="content-title"><h3>{props.title}</h3></div>
-            <div className="content-author"><h5>{props.author}</h5></div>
-            {props.editDate ? <div className="content-date-edited">Date Edited: {props.editDate}</div> : ""}
-              <p>
-                {" "}
-                <LinesEllipsisLoose
-                  text={props.content}
-                  maxLine="3"
-                  
-                />
-              </p>
+            <div className="content-title">
+              <h3>
+                <NavLink to={`/announcement/${props.id}`} style={{ textDecoration: 'none' }} exact>
+                  {props.title}
+                </NavLink>
+              </h3>
+            </div>
+            <div className="content-author">
+              <h5>{props.author}</h5>
+            </div>
+            {props.editDate ? (
+              <div className="content-date-edited">
+                Date Edited: {props.editDate}
+              </div>
+            ) : (
+              ""
+            )}
+            <p>
+              {" "}
+              <LinesEllipsisLoose text={props.content} maxLine="3" />
+            </p>
           </div>
           <div className="card-date-view-cont">
-            <div className="content-date-created"><p>{props.date}</p></div>
+            <div className="content-date-created">
+              <p>{props.date}</p>
+            </div>
             <div className="view-more-cont">
               <NavLink to={`/announcement/${props.id}`} exact>
-                <ArrowCircleRightRoundedIcon sx={{fontSize: '40px'}}/>
+                <ArrowCircleRightRoundedIcon sx={{ fontSize: "40px" }} />
               </NavLink>
             </div>
           </div>

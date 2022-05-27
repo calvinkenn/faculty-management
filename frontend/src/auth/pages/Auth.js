@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox, FormControlLabel, Tooltip } from "@mui/material";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -287,7 +288,7 @@ const Auth = () => {
                       }
                     }}
                     validators={[VALIDATOR_EMPLOYEENUMBER()]}
-                    helperText="Please input a valid employee number. Format-(XXXX-X)"
+                    helperText="Please input a valid employee number. Format-(0000-0)"
                     onInput={inputHandler}
                     label="Employee Number/Format-(0000-0)"
                     variant="outlined"
@@ -389,6 +390,14 @@ const Auth = () => {
                           variant="outlined"
                         />
                       )}
+                      <Tooltip
+                        title={
+                          "Use 8 or more characters with a mix of letters, numbers & symbols"
+                        }
+                        placement="top-start"
+                      >
+                        <HelpOutlineIcon sx={{ fontSize: "25px" }} />
+                      </Tooltip>
                     </div>
                     <div className="password-container">
                       {!isResetMode && (

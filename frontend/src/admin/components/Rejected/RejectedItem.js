@@ -104,8 +104,7 @@ const RejectedItem = (props) => {
             </div>
           </div>
           <div>
-            Rejected Reason/Note :{" "}
-            {props.deactivateNote ? props.deactivateNote : "N/A"}
+            Reason: {props.deactivateNote ? props.deactivateNote : "N/A"}
           </div>
         </div>
         <div className="container__actions__back-to-pending">

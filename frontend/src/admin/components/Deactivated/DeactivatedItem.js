@@ -116,8 +116,7 @@ const DeactivatedItem = (props) => {
               </div>
             </div>
             <div className="deact-note">
-              Deactivation Reason:{" "}
-              {props.deactivateNote ? props.deactivateNote : "N/A"}
+              Reason: {props.deactivateNote ? props.deactivateNote : "N/A"}
             </div>
           </div>
           <div className="container__actions">

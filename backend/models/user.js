@@ -47,7 +47,7 @@ const userSchema = mongoose.Schema({
   //Additional Info
   telephoneNum: { type: String, default: "" },
   cellphoneNum: { type: String, default: "" },
-  alternateEmail: { type: String, default: "" },
+  alternateEmail: { type: String },
 
   //for account access
   permission: { type: String, default: "pending" },

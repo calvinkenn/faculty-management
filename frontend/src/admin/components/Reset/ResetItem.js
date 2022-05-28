@@ -35,7 +35,9 @@ const ResetItem = (props) => {
         "_" +
         randomCharacters,
       sendToThisEmail: props.email,
+      sendToThisAlternateEmail: props.alternateEmail,
     };
+
     setShowConfirmModal(false);
     event.preventDefault();
     try {
@@ -56,7 +58,7 @@ const ResetItem = (props) => {
       emailjs
         .send(
           "service_d5emoql",
-          "template_8qek2pc",
+          props.alternateEmail ? "template_k5y0mpo" : "template_8qek2pc",
           templateParams,
           "Ot41VNtweh9noSj8e"
         )
@@ -69,10 +71,7 @@ const ResetItem = (props) => {
           }
         );
 
-      props.updateResetUsers(
-        responseData.updatedUser,
-        responseData.permission + "_reset"
-      );
+      props.updateResetUsers(responseData.updatedUser, responseData.permission);
       console.log(responseData.permission);
     } catch (err) {
       console.log(err);

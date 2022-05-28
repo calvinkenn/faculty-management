@@ -99,7 +99,9 @@ const reset = async (req, res, next) => {
   const { email } = req.body;
 
   try {
-    existingUser = await User.findOne({ email: email });
+    existingUser =
+      (await User.findOne({ email: email })) ||
+      (await User.findOne({ alternateEmail: email }));
   } catch (err) {
     const error = new HttpError("Email is not registered.", 500);
     return next(error);
@@ -123,21 +125,53 @@ const reset = async (req, res, next) => {
     .json({ message: "Reset Password Requested", updatedUser: updatedUser });
 };
 
+const isNumeric = (str) => {
+  if (typeof str != "string") return false; // we only process strings!
+  return (
+    !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+    !isNaN(parseFloat(str))
+  ); // ...and ensure strings of whitespace fail
+};
+
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   let existingUser;
   let isValidPassword = false;
 
-  //check if user is existing
-  try {
-    existingUser = await User.findOne({ email: email }) || await User.findOne({ employeeNum: email });
-  } catch (err) {
-    const error = new HttpError(
-      "Email/Employee Number is not registered.",
-      500
-    );
-    return next(error);
+  if (isNumeric(email)) {
+    try {
+      existingUser = await User.findOne({
+        $or: [
+          // { email: email },
+          // { alternateEmail: email },
+          { employeeNum: email },
+        ],
+      });
+    } catch (err) {
+      const error = new HttpError(
+        "Email/Employee Number is not registered.",
+        500
+      );
+      return next(error);
+    }
+  } else {
+    //check if user is existing
+    try {
+      existingUser = await User.findOne({
+        $or: [
+          { email: email },
+          { alternateEmail: email },
+          // { employeeNum: email },
+        ],
+      });
+    } catch (err) {
+      const error = new HttpError(
+        "Email/Employee Number is not registered.",
+        500
+      );
+      return next(error);
+    }
   }
 
   if (!existingUser) {

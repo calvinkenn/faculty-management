@@ -15,10 +15,12 @@ const formatDate = (input) => {
 
 const ResetList = (props) => {
   if (props.list?.length === 0) {
-    return <div className="no-data-found">
-      <img src={noData} />
-      <h1>No Users Requesting Password Reset Found</h1>
-    </div>;
+    return (
+      <div className="no-data-found">
+        <img src={noData} />
+        <h1>No Users Requesting Password Reset Found</h1>
+      </div>
+    );
   }
   return (
     <div className="list">
@@ -31,6 +33,7 @@ const ResetList = (props) => {
             firstName={reset.firstName}
             lastName={reset.lastName}
             email={reset.email}
+            alternateEmail={reset.alternateEmail}
             reset={reset.faculty}
             faculty={reset.faculty}
             employmentType={reset.employmentType}

@@ -120,6 +120,14 @@
   width: 100%;
   max-width: 100%;
 }
+
+.training-time-hrs div button{
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .training-time-hrs span,
 .type-conduct span {
   width: 100%;

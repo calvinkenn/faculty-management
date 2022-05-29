@@ -575,7 +575,7 @@ const PrintData = (props) => {
   });
 
   return (
-    <div>
+    <div className="user-print-btn">
       <button onClick={handlePrint} className="print-button">
         Print
       </button>

@@ -156,13 +156,13 @@ const ObjectivesEdit = (props) => {
           <React.Fragment>
             <div className="obj-cancel-edit">
               <Button
-                danger
                 onClick={
                   props.bsitObj ? submitBSITEditHandler : submitBLISEditHandler
                 }
               >
                 Yes
               </Button>
+              <span />
               <Button inverse onClick={closeSaveConfirmHandler}>
                 No
               </Button>
@@ -185,9 +185,10 @@ const ObjectivesEdit = (props) => {
         footer={
           <React.Fragment>
             <div className="obj-cancel-edit">
-              <Button danger onClick={cancelEditHandler}>
+              <Button onClick={cancelEditHandler}>
                 Yes
               </Button>
+              <span />
               <Button inverse onClick={closeEditWarningHandler}>
                 No
               </Button>

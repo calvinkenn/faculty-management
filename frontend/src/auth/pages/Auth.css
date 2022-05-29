@@ -76,12 +76,42 @@
 }
 
 .email-container,
-.password-container,
+/* .password-container, */
 .employeeNo-container{
   width: 100%;
   max-width: 100%;
   margin-bottom: 4%;
   display: grid;
+}
+
+.password-container{
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.password-container div{
+  width: 100%;
+  max-width: 100%;
+}
+
+.password-container span{
+  width: 100%;
+  max-width: 1%;
+}
+
+.agreement-container{
+  width: 100%;
+  max-width: 100%;
+}
+
+.tooltip-icon{
+  color: #404040;
+  width: 100%;
+  max-width: 10%;
 }
 
 .fullName-container{

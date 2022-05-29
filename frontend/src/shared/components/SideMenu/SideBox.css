@@ -35,8 +35,8 @@
 }
 
 .side-container li.active {
-  color: #f4f7ff;
-  background-color: #252525;
+  color: #121212;
+  background-color: #f4f7ff;
   border-radius: 50px 0 0 50px;
   font-weight: 600;
 }

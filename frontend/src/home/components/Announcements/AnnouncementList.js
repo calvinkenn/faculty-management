@@ -20,8 +20,8 @@ const formatDateLong = (date) => {
 const AnnouncementList = (props) => {
   if (props.items?.length === 0) {
     return <div className="no-data-found">
-      <img src={noAnnouncement} />
-      <h1>No Announcement</h1>
+      <img src={noAnnouncement} className="announcement-img"/>
+      <h2 className="no-announcement-title">No Announcement</h2>
     </div>;
   }
   return (

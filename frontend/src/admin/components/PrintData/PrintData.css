@@ -1,6 +1,3 @@
-.print-container {
-  margin: 0 1rem 0 1rem;
-}
 
 .print-data {
   margin-top: 25px;
@@ -24,12 +21,12 @@ table {
   border-radius: 10px;
 }
 th {
-  background-color: #ffc711;
+  background-color: #c7c7c7;
 }
 
 td,
 th {
-  border: 1px solid #ffe59d;
+  border: 1px solid #dbdbdb;
   border-collapse: collapse;
 }
 td,
@@ -52,10 +49,10 @@ th {
   color: #ffffff;
   margin-bottom: 1em;
 }
-th:hover {
+/* th:hover {
   color: white;
   cursor: pointer;
-}
+} */
 
 @media all {
   .page-break {

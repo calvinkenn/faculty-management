@@ -5,3 +5,15 @@
     margin-top: 2%;
     padding: 0 2%;
 }
+.no-data-found{
+    width: 100%;
+    max-width: 100%;
+}
+.no-data-found .announcement-img{
+    width: 100%;
+    max-width: 35%;
+}
+.no-announcement-title{
+    font-size: 2vw;
+    color: #303030;
+}

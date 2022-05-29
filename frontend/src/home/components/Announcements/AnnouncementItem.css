@@ -41,6 +41,15 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+
+.content-title a{
+  color: #303030;
+}
+
+.content-title a:hover{
+  color: #303030;
+}
+
 .content-author{
   margin-bottom: 5%;
 }

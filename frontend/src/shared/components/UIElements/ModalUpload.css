@@ -26,7 +26,7 @@
 .modal__content div{
   width: 100%;
   max-width: 100%;
-  padding: 1%;
+  /* padding: 1%; */
 }
 
 .modal__header {

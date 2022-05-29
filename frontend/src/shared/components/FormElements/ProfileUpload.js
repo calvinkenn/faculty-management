@@ -103,9 +103,9 @@ const ProfileUpload = (props) => {
         )}
         {previewUrl && isUploading && <img src={previewUrl} alt="Preview" />}
       </div>
-      {!isValid && <p>Make sure to upload a 2x2 or passport size picture</p>}
       {!isValid && <p>File type must be png/jpg/jpeg</p>}
       {!isValid && <p>Make sure the file is less than 5mb</p>}
+      {!isValid && <p>Make sure to upload a 2x2 or passport size picture</p>}
     </div>
   );
 

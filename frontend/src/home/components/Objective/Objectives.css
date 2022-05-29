@@ -105,3 +105,8 @@
   display: flex;
   justify-content: space-between;
 }
+
+.obj-cancel-edit span{
+  width: 100%;
+  max-width: 2%;
+}

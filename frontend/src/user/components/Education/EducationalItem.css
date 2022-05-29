@@ -77,6 +77,14 @@
     width: 100%;
     max-width: 100%;
 }
+
+.from-to-graduatedyear div button{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .level-unit span,
 .school-degree span,
 .from-to-graduatedyear span,

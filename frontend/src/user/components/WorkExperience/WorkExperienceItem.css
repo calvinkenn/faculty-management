@@ -67,6 +67,14 @@
     width: 100%;
     max-width: 100%;
 }
+
+.from-to-govt div button{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .company-dept-cont span,
 .from-to-govt span,
 .salary span{

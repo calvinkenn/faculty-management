@@ -6,8 +6,8 @@
 }
 
 .image-upload__preview {
-  width: 13rem;
-  height: 13rem;
+  width: 100%;
+  height: 20vh;
   border: 1px solid #ccc;
   display: flex;
   justify-content: center;
@@ -19,5 +19,9 @@
 .image-upload__preview img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+}
+
+.image-upload.center p{
+  text-align: center;
 }

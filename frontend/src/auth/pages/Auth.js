@@ -390,13 +390,14 @@ const Auth = () => {
                           variant="outlined"
                         />
                       )}
+                      <span />
                       <Tooltip
                         title={
                           "Use 8 or more characters with a mix of letters, numbers & symbols"
                         }
                         placement="top-start"
                       >
-                        <HelpOutlineIcon sx={{ fontSize: "25px" }} />
+                        <p className="tooltip-icon"><HelpOutlineIcon sx={{ fontSize: "25px" }} /></p>
                       </Tooltip>
                     </div>
                     <div className="password-container">
@@ -435,7 +436,7 @@ const Auth = () => {
                     )}
                   </div>
                 )}
-                <div className="password-container">
+                <div className="agreement-container">
                   {isRegisterMode && (
                     <FormControlLabel
                       disabled={!formState.isValid}

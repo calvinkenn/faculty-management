@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -104,7 +105,7 @@ const AdminAuth = (props) => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <AccountCircle />
+                            <PersonRoundedIcon sx={{ fontSize: "20px" }} />
                           </InputAdornment>
                         ),
                       }}
@@ -123,7 +124,7 @@ const AdminAuth = (props) => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <LockIcon />
+                            <LockIcon sx={{ fontSize: "20px" }} />
                           </InputAdornment>
                         ),
                       }}

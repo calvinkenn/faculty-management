@@ -4,7 +4,7 @@ import { FormControlLabel, Checkbox, TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import AbcIcon from "@mui/icons-material/Abc";
 import NumbersIcon from "@mui/icons-material/Numbers";
-import MoneyIcon from '@mui/icons-material/Money';
+import LocalAtmRoundedIcon from '@mui/icons-material/LocalAtmRounded';
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -203,7 +203,7 @@ const WorkExperienceEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <AbcIcon />
+                      <AbcIcon sx={{ fontSize: "30px" }}/>
                     </InputAdornment>
                   ),
                 }}
@@ -224,7 +224,7 @@ const WorkExperienceEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <AbcIcon />
+                      <AbcIcon sx={{ fontSize: "30px" }}/>
                     </InputAdornment>
                   ),
                 }}
@@ -244,7 +244,7 @@ const WorkExperienceEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <AbcIcon />
+                      <AbcIcon sx={{ fontSize: "30px" }} />
                     </InputAdornment>
                   ),
                 }}
@@ -342,7 +342,7 @@ const WorkExperienceEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <MoneyIcon />
+                      <LocalAtmRoundedIcon sx={{ fontSize: "25px" }} />
                     </InputAdornment>
                   ),
                 }}

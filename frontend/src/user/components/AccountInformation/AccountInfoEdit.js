@@ -130,7 +130,7 @@ const AccountInfoEdit = (props) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <NumbersIcon />
+                        <NumbersIcon sx={{fontSize: '20px'}}/>
                       </InputAdornment>
                     ),
                   }}
@@ -179,7 +179,7 @@ const AccountInfoEdit = (props) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <EmailIcon />
+                        <EmailIcon sx={{fontSize: '20px'}} />
                       </InputAdornment>
                     ),
                   }}

@@ -37,7 +37,7 @@ import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 //Mikko is here
 import OtherHousesIcon from "@mui/icons-material/OtherHouses";
 import HomeIcon from "@mui/icons-material/Home";
-import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
+import PermContactCalendarRoundedIcon from '@mui/icons-material/PermContactCalendarRounded';
 //end
 
 const ContactInfoEdit = (props) => {
@@ -385,7 +385,7 @@ const ContactInfoEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <NumbersIcon />
+                      <NumbersIcon sx={{fontSize: '20px'}} />
                     </InputAdornment>
                   ),
                 }}
@@ -403,7 +403,7 @@ const ContactInfoEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SignpostIcon />
+                      <SignpostIcon sx={{fontSize: '20px'}} />
                     </InputAdornment>
                   ),
                 }}
@@ -546,7 +546,7 @@ const ContactInfoEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <NumbersIcon />
+                      <NumbersIcon sx={{fontSize: '20px'}} />
                     </InputAdornment>
                   ),
                 }}
@@ -564,7 +564,7 @@ const ContactInfoEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SignpostIcon />
+                      <SignpostIcon sx={{fontSize: '20px'}} />
                     </InputAdornment>
                   ),
                 }}
@@ -684,7 +684,7 @@ const ContactInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-              <ContactPhoneIcon sx={{ fontSize: "30px" }} />
+              <PermContactCalendarRoundedIcon sx={{ fontSize: "30px" }} />
               <h1 className="Marginlang">Contact Information</h1>
             </div>
           </div>
@@ -702,7 +702,7 @@ const ContactInfoEdit = (props) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PhoneIcon />
+                    <PhoneIcon sx={{ fontSize: "20px" }} />
                   </InputAdornment>
                 ),
               }}
@@ -722,7 +722,7 @@ const ContactInfoEdit = (props) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PhoneIphoneIcon />
+                    <PhoneIphoneIcon sx={{ fontSize: "20px"}} />
                   </InputAdornment>
                 ),
               }}
@@ -741,7 +741,7 @@ const ContactInfoEdit = (props) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AlternateEmailIcon />
+                    <AlternateEmailIcon sx={{ fontSize: "20px" }} />
                   </InputAdornment>
                 ),
               }}

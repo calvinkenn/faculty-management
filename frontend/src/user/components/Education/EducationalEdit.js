@@ -6,6 +6,7 @@ import AbcIcon from "@mui/icons-material/Abc";
 import NumbersIcon from "@mui/icons-material/Numbers";
 import StarIcon from '@mui/icons-material/Star';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import SchoolRoundedIcon from '@mui/icons-material/SchoolRounded';
 
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
@@ -264,7 +265,7 @@ const EducationalEdit = (props) => {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <StarIcon />
+                      <StarIcon sx={{ fontSize: "20px" }} />
                     </InputAdornment>
                   ),
                 }}
@@ -286,7 +287,7 @@ const EducationalEdit = (props) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <SchoolIcon />
+                        <SchoolIcon sx={{ fontSize: "20px" }} />
                       </InputAdornment>
                     ),
                   }}
@@ -305,6 +306,13 @@ const EducationalEdit = (props) => {
                     initialValue={formState.inputs.degree.value}
                     initialValid={formState.inputs.degree.isValid}
                     required
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <SchoolIcon sx={{ fontSize: "20px" }} />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 )}
               </div>
@@ -361,7 +369,7 @@ const EducationalEdit = (props) => {
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
-                              <EmojiEventsIcon />
+                              <EmojiEventsIcon sx={{ fontSize: "20px" }} />
                             </InputAdornment>
                           ),
                         }}

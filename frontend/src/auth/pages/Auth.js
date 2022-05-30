@@ -2,12 +2,12 @@ import React, { useState, useContext, useEffect } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Checkbox, FormControlLabel, Tooltip } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
 import NumbersIcon from '@mui/icons-material/Numbers';
 import AbcIcon from '@mui/icons-material/Abc';
 import EmailIcon from '@mui/icons-material/Email';
-import CheckIcon from '@mui/icons-material/Check';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -302,7 +302,7 @@ const Auth = () => {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <NumbersIcon />
+                          <NumbersIcon sx={{ fontSize: "20px" }} />
                         </InputAdornment>
                       ),
                     }}
@@ -324,7 +324,7 @@ const Auth = () => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <AbcIcon />
+                            <AbcIcon sx={{ fontSize: "30px" }}/>
                           </InputAdornment>
                         ),
                       }}
@@ -345,7 +345,7 @@ const Auth = () => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <AbcIcon />
+                            <AbcIcon sx={{ fontSize: "30px" }}/>
                           </InputAdornment>
                         ),
                       }}
@@ -369,7 +369,7 @@ const Auth = () => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <AccountCircle />
+                            <PersonRoundedIcon sx={{ fontSize: "20px" }} />
                           </InputAdornment>
                         ),
                       }}
@@ -390,7 +390,7 @@ const Auth = () => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <EmailIcon />
+                            <EmailIcon sx={{ fontSize: "20px" }} />
                           </InputAdornment>
                         ),
                       }}
@@ -411,7 +411,7 @@ const Auth = () => {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <EmailIcon />
+                            <EmailIcon sx={{ fontSize: "20px" }}/>
                           </InputAdornment>
                         ),
                       }}
@@ -440,7 +440,7 @@ const Auth = () => {
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
-                                <LockIcon />
+                                <LockIcon sx={{ fontSize: "20px" }}/>
                               </InputAdornment>
                             ),
                           }}
@@ -454,7 +454,7 @@ const Auth = () => {
                         placement="top-start"
                       >
                         <p className="tooltip-icon">
-                          <HelpOutlineIcon sx={{ fontSize: "25px" }} />
+                          <HelpOutlineIcon sx={{ fontSize: "20px" }} />
                         </p>
                       </Tooltip>
                     </div>
@@ -476,7 +476,7 @@ const Auth = () => {
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
-                                <CheckIcon />
+                                <CheckCircleRoundedIcon sx={{ fontSize: "20px" }} />
                               </InputAdornment>
                             ),
                           }}
@@ -500,7 +500,7 @@ const Auth = () => {
                         InputProps={{
                           startAdornment: (
                             <InputAdornment position="start">
-                              <LockIcon />
+                              <LockIcon sx={{ fontSize: "20px" }} />
                             </InputAdornment>
                           ),
                         }}

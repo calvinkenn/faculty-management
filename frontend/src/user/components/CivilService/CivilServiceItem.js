@@ -144,15 +144,6 @@ const CivilServiceItem = (props) => {
                   <td>{props.licenseValidity}</td>
                 </tr>
               </table>
-              {/* <div>Career: {props.career}</div>
-              <div>Rating: {props.rating ? props.rating : "N/A"}</div>
-              <div>Date: {props.date}</div>
-              <div>Place of Examination: {props.examPlace}</div>
-              <div>
-                License Number:{" "}
-                {props.licenseNumber ? props.licenseNumber : "N/A"}
-              </div>
-              <div>License Validity: {props.licenseValidity}</div> */}
             </div>
           </div>
         </div>

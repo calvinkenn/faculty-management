@@ -41,9 +41,14 @@
     flex-direction: column;
 }
 
-.civil-service-cont div{
+/* .civil-service-cont div{
     margin-bottom: 1%;
-    flex: 1;
+} */
+
+.civil-service-cont svg{
+    width: 100%;
+    max-width: 100%;
+    display: flex;
 }
 
 .civ-ser-btn{

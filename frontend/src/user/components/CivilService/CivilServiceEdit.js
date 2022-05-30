@@ -186,11 +186,12 @@ const CivilServiceEdit = (props) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <WorkIcon />
+                    <WorkIcon sx={{ fontSize: "20px" }}/>
                   </InputAdornment>
                 ),
               }}
             />
+            <br />
             <Input
               element="input"
               id="rating"
@@ -204,11 +205,12 @@ const CivilServiceEdit = (props) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <StarIcon />
+                    <StarIcon sx={{ fontSize: "20px" }}/>
                   </InputAdornment>
                 ),
               }}
             />
+            <br />
             <Input
               element="input"
               id="date"
@@ -220,6 +222,7 @@ const CivilServiceEdit = (props) => {
               initialValue={formState.inputs.date.value}
               initialValid={formState.inputs.date.isValid}
             />
+            <br />
             <Input
               element="input"
               id="placeOfExam"
@@ -234,11 +237,12 @@ const CivilServiceEdit = (props) => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PlaceIcon />
+                    <PlaceIcon sx={{ fontSize: "20px" }}/>
                   </InputAdornment>
                 ),
               }}
             />
+            <br />
             {!props.addingItem && (
               <Input
                 element="input"
@@ -259,7 +263,7 @@ const CivilServiceEdit = (props) => {
                 }}
               />
             )}
-
+            <br />
             {!props.addingItem && (
               <Input
                 element="input"
@@ -278,7 +282,6 @@ const CivilServiceEdit = (props) => {
                 }
               />
             )}
-
             {props.addingItem && (
               <FormControlLabel
                 label="With License"
@@ -287,7 +290,6 @@ const CivilServiceEdit = (props) => {
                 }
               />
             )}
-
             {hasLicense && (
               <Input
                 element="input"

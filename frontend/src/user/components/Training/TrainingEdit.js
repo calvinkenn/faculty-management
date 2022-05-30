@@ -229,7 +229,7 @@ const TrainingEdit = (props) => {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <AbcIcon />
+                          <AbcIcon sx={{ fontSize: "30px" }}/>
                         </InputAdornment>
                       ),
                     }}
@@ -250,7 +250,7 @@ const TrainingEdit = (props) => {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <PlaceIcon />
+                          <PlaceIcon sx={{ fontSize: "20px" }} />
                         </InputAdornment>
                       ),
                     }}
@@ -296,7 +296,7 @@ const TrainingEdit = (props) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <QueryBuilderIcon />
+                        <QueryBuilderIcon sx={{ fontSize: "25px" }}/>
                       </InputAdornment>
                     ),
                   }}
@@ -344,7 +344,7 @@ const TrainingEdit = (props) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <AbcIcon />
+                        <AbcIcon sx={{ fontSize: "30px" }}/>
                       </InputAdornment>
                     ),
                   }}

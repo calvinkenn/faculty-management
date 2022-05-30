@@ -9,6 +9,19 @@ import Announcement from "../components/Announcements/Announcement";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./Announce.css";
 
+const formatDateLong = (date) => {
+  const formatter = new Intl.DateTimeFormat("en-us", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  });
+  const month1 = formatter.format(new Date(date));
+  return month1;
+};
+
 const Announce = (props) => {
   const { isLoading, sendRequest } = useHttpClient();
   const [announcementData, setAnnouncementData] = useState([]);
@@ -76,10 +89,13 @@ const Announce = (props) => {
   };
 
   const searchResults = announcementData?.filter((announcement) => {
+    console.log(announcement.date);
+    let date = formatDateLong(announcement.date);
     return (
       announcement.title?.toLowerCase().includes(searchField.toLowerCase()) ||
       announcement.author?.toLowerCase().includes(searchField.toLowerCase()) ||
-      announcement.content?.toLowerCase().includes(searchField.toLowerCase())
+      announcement.content?.toLowerCase().includes(searchField.toLowerCase()) ||
+      date?.toLowerCase().includes(searchField.toLowerCase())
     );
   });
 

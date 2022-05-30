@@ -44,7 +44,7 @@ const FilterAnnouncement = (props) => {
       </div>
       <span />
       {props.displayFilterValue == 2 && (
-        <div>
+        <div className="ann-date">
           <DatePicker
             views={["year", "month"]}
             label="Filter date"

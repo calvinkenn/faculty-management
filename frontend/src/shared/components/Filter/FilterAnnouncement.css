@@ -8,20 +8,23 @@
 
 .top-bar span {
     width: 100%;
-    max-width: 1%;
+    max-width: 0.5%;
 }
 
 .ann-search{
     width: 100%;
-    max-width: 85%;
+    max-width: 80%;
 }
 
-.ann-filter{
+.ann-filter,
+.ann-date{
     width: 100%;
-    max-width: 15%;
+    max-width: max-content;
+    padding: 0 0 0 1%;
 }
 
-.ann-filter div{
+.ann-filter div,
+.ann-date div{
     margin: 0;
     width: 100%;
     max-width: 100%;

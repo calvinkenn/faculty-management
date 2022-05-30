@@ -13,7 +13,7 @@
 
 .ann-search{
     width: 100%;
-    max-width: 80%;
+    max-width: 85%;
 }
 
 .ann-filter,
@@ -28,6 +28,17 @@
     margin: 0;
     width: 100%;
     max-width: 100%;
+}
+
+.ann-date button{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 100%;
+}
+
+.ann-date button:hover{
+    background-color: none;
 }
 
 .ann-search input {

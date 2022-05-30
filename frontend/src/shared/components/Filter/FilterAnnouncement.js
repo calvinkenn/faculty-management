@@ -24,7 +24,6 @@ const FilterAnnouncement = (props) => {
           />
         </form>
       </div>
-      <span />
       <div className="ann-filter">
         <Box sx={{ minWidth: 60 }}>
           <FormControl sx={{ m: 2, minWidth: 220 }}>

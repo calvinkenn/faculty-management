@@ -24,7 +24,6 @@ const FilterAnnouncement = (props) => {
           />
         </form>
       </div>
-      <span />
       <div className="ann-filter">
         <Box sx={{ minWidth: 60 }}>
           <FormControl sx={{ m: 2, minWidth: 220 }}>
@@ -44,7 +43,7 @@ const FilterAnnouncement = (props) => {
       </div>
       <span />
       {props.displayFilterValue == 2 && (
-        <div>
+        <div className="ann-date">
           <DatePicker
             views={["year", "month"]}
             label="Filter date"

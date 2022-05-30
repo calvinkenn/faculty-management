@@ -8,7 +8,7 @@
 
 .top-bar span {
     width: 100%;
-    max-width: 1%;
+    max-width: 0.5%;
 }
 
 .ann-search{
@@ -16,15 +16,29 @@
     max-width: 85%;
 }
 
-.ann-filter{
+.ann-filter,
+.ann-date{
     width: 100%;
-    max-width: 15%;
+    max-width: max-content;
+    padding: 0 0 0 1%;
 }
 
-.ann-filter div{
+.ann-filter div,
+.ann-date div{
     margin: 0;
     width: 100%;
     max-width: 100%;
+}
+
+.ann-date button{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    max-width: 100%;
+}
+
+.ann-date button:hover{
+    background-color: none;
 }
 
 .ann-search input {

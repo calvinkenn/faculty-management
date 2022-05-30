@@ -99,13 +99,15 @@ const Announcement = (props) => {
           <h1>Announcement</h1>
           {auth.isAdmin && <Button onClick={addModeHandler}>Add New</Button>}
         </div>
-        <FilterAnnouncement
-          onSearchChange={props.onSearchChange}
-          filterValue={props.filterValue}
-          onFilterChange={props.onFilterChange}
-          onDisplayFilterChange={props.onDisplayFilterChange}
-          displayFilterValue={props.displayFilterValue}
-        />
+        <div className="ann-search-filter">
+          <FilterAnnouncement
+            onSearchChange={props.onSearchChange}
+            filterValue={props.filterValue}
+            onFilterChange={props.onFilterChange}
+            onDisplayFilterChange={props.onDisplayFilterChange}
+            displayFilterValue={props.displayFilterValue}
+          />
+        </div>
         <AnnouncementList
           items={currentItems ? currentItems : props.announcementData}
           setIsEditModeHandler={editModeHandler}

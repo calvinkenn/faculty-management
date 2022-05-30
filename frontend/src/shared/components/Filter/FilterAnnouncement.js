@@ -14,7 +14,7 @@ import "./FilterAnnouncement.css";
 const FilterAnnouncement = (props) => {
   return (
     <div className="top-bar">
-      <div>
+      <div className="ann-search">
         <form>
           <input
             type="text"
@@ -24,7 +24,7 @@ const FilterAnnouncement = (props) => {
           />
         </form>
       </div>
-      <div>
+      <div className="ann-filter">
         <Box sx={{ minWidth: 60 }}>
           <FormControl sx={{ m: 2, minWidth: 220 }}>
             <InputLabel id="inputData">Select Data to Display</InputLabel>

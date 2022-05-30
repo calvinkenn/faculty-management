@@ -33,8 +33,12 @@ const ObjectivesItem = (props) => {
                 {" "}
                 {index + 1}. {item.bsitObjectives}
                 <br />
+                <br />
               </span>
             ))}
+          </div>
+          <div className="obj-edit">
+            {auth.isAdmin && <Button onClick={editModeBSITHandler}>Edit BSIT Objectives</Button>}
           </div>
         </div>
         <div className="blis-obj">
@@ -51,16 +55,20 @@ const ObjectivesItem = (props) => {
                 {" "}
                 {index + 1}. {item.blisObjectives}
                 <br />
+                <br />
               </span>
             ))}
+          </div>
+          <div className="obj-edit">
+            {auth.isAdmin && <Button onClick={editModeBLISHandler}>Edit BLIS Objectives</Button>}
           </div>
         </div>
       </div>
 
-      <div className="obj-edit">
+      {/* <div className="obj-edit">
         {auth.isAdmin && <Button onClick={editModeBSITHandler}>Edit BSIT Objectives</Button>}
         {auth.isAdmin && <Button onClick={editModeBLISHandler}>Edit BLIS Objectives</Button>}
-      </div>
+      </div> */}
     </div>
   );
 };

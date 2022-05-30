@@ -46,11 +46,15 @@ const TopActionBar = (props) => {
     // console.log("Cancelling...");
     // props.updateEditModeState(false);
   };
+
+  let headerMessage = ""
+
+
   return (
     <React.Fragment>
       <Modal
         show={showConfirmModal}
-        header="Cancel editing?"
+        header= {isAddMode ? "Cancel Adding" : "Cancel Editing"}
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>

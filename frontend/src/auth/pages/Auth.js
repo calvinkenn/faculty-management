@@ -321,13 +321,6 @@ const Auth = () => {
                       onInput={inputHandler}
                       label="First Name"
                       variant="outlined"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <AbcIcon sx={{ fontSize: "30px" }}/>
-                          </InputAdornment>
-                        ),
-                      }}
                     />
                   )}
                 </div>
@@ -342,13 +335,6 @@ const Auth = () => {
                       onInput={inputHandler}
                       label="Last Name"
                       variant="outlined"
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <AbcIcon sx={{ fontSize: "30px" }}/>
-                          </InputAdornment>
-                        ),
-                      }}
                     />
                   )}
                 </div>
@@ -368,9 +354,11 @@ const Auth = () => {
                       variant="outlined"
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
-                            <PersonRoundedIcon sx={{ fontSize: "20px" }} />
-                          </InputAdornment>
+                          <p>
+                            <InputAdornment position="start">
+                              <PersonRoundedIcon sx={{ fontSize: "20px" }} />
+                            </InputAdornment>
+                          </p>
                         ),
                       }}
                     />
@@ -389,9 +377,11 @@ const Auth = () => {
                       variant="outlined"
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
-                            <EmailIcon sx={{ fontSize: "20px" }} />
-                          </InputAdornment>
+                          <p>
+                            <InputAdornment position="start">
+                              <EmailIcon sx={{ fontSize: "20px" }} />
+                            </InputAdornment>
+                          </p>
                         ),
                       }}
                     />
@@ -410,9 +400,11 @@ const Auth = () => {
                       variant="outlined"
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
-                            <EmailIcon sx={{ fontSize: "20px" }}/>
-                          </InputAdornment>
+                          <p>
+                            <InputAdornment position="start">
+                              <EmailIcon sx={{ fontSize: "20px" }}/>
+                            </InputAdornment>
+                          </p>
                         ),
                       }}
                     />
@@ -439,9 +431,11 @@ const Auth = () => {
                           variant="outlined"
                           InputProps={{
                             startAdornment: (
-                              <InputAdornment position="start">
-                                <LockIcon sx={{ fontSize: "20px" }}/>
-                              </InputAdornment>
+                              <p>
+                                <InputAdornment position="start">
+                                  <LockIcon sx={{ fontSize: "20px" }}/>
+                                </InputAdornment>
+                              </p>
                             ),
                           }}
                         />
@@ -475,9 +469,11 @@ const Auth = () => {
                           variant="outlined"
                           InputProps={{
                             startAdornment: (
-                              <InputAdornment position="start">
-                                <CheckCircleRoundedIcon sx={{ fontSize: "20px" }} />
-                              </InputAdornment>
+                              <p>
+                                <InputAdornment position="start">
+                                  <CheckCircleRoundedIcon sx={{ fontSize: "20px" }} />
+                                </InputAdornment>
+                              </p>
                             ),
                           }}
                         />
@@ -499,9 +495,11 @@ const Auth = () => {
                         variant="outlined"
                         InputProps={{
                           startAdornment: (
-                            <InputAdornment position="start">
-                              <LockIcon sx={{ fontSize: "20px" }} />
-                            </InputAdornment>
+                            <p>
+                              <InputAdornment position="start">
+                                <LockIcon sx={{ fontSize: "20px" }} />
+                              </InputAdornment>
+                            </p>
                           ),
                         }}
                       />

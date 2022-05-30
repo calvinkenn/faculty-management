@@ -36,10 +36,6 @@
 .name-detail-cont {
   margin: 2% 0 1% 0;
 }
-/* .name-edit-cont, 
-.personal-info-edit{
-    margin: 3% 0;
-} */
 
 .first-mid-name-cont,
 .last-suffix-name-cont {
@@ -47,6 +43,7 @@
   max-width: 100%;
   display: grid;
   grid-template-columns: 49.5% 1% 49.5%;
+  margin-bottom: 1%;
 }
 
 .ext-name-cont {
@@ -62,7 +59,7 @@
   margin-bottom: 1.5%;
 }
 
-.box div {
+.box input{
   width: 100%;
   max-width: 100%;
 }
@@ -93,7 +90,7 @@
 .height-weight-bloodtype div {
   width: 100%;
   max-width: 100%;
-  flex: 1;
+  /* flex: 1; */
 }
 
 .bday-place-citizenship span,

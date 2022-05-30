@@ -264,9 +264,11 @@ const EducationalEdit = (props) => {
                 required
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <StarIcon sx={{ fontSize: "20px" }} />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <StarIcon sx={{ fontSize: "20px" }} />
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -286,9 +288,11 @@ const EducationalEdit = (props) => {
                   required
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">
-                        <SchoolIcon sx={{ fontSize: "20px" }} />
-                      </InputAdornment>
+                      <p>
+                        <InputAdornment position="start">
+                          <SchoolIcon sx={{ fontSize: "20px" }} />
+                        </InputAdornment>
+                      </p>
                     ),
                   }}
                 />
@@ -308,9 +312,11 @@ const EducationalEdit = (props) => {
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
-                          <SchoolIcon sx={{ fontSize: "20px" }} />
-                        </InputAdornment>
+                        <p>
+                          <InputAdornment position="start">
+                            <SchoolIcon sx={{ fontSize: "20px" }} />
+                          </InputAdornment>
+                        </p>
                       ),
                     }}
                   />
@@ -341,24 +347,12 @@ const EducationalEdit = (props) => {
                   <TextField {...params} required helperText={null} />
                 )}
               />
-              <span />
-              {/* <DatePicker
-                views={["year"]}
-                label="Select Year Graduated"
-                value={yearGraduated}
-                onChange={(newValue) => {
-                  setYearGraduated(newValue);
-                }}
-                renderInput={(params) => (
-                  <TextField {...params} required helperText={null} />
-                )}
-              /> */}
             </div>
             <div className="acad-honor">
               {inputList.map((x, i) => {
                 return (
                   <div className="awards">
-                    <div className="box">
+                    <div className="award-box">
                       <TextField
                         name="awards"
                         id="awards"
@@ -368,9 +362,11 @@ const EducationalEdit = (props) => {
                         onChange={(e) => handleInputChange(e, i)}
                         InputProps={{
                           startAdornment: (
-                            <InputAdornment position="start">
-                              <EmojiEventsIcon sx={{ fontSize: "20px" }} />
-                            </InputAdornment>
+                            <p>
+                              <InputAdornment position="start">
+                                <EmojiEventsIcon sx={{ fontSize: "20px" }} />
+                              </InputAdornment>
+                            </p>
                           ),
                         }}
                       />

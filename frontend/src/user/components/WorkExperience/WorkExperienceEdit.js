@@ -202,9 +202,11 @@ const WorkExperienceEdit = (props) => {
                 required
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <AbcIcon sx={{ fontSize: "30px" }}/>
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <AbcIcon sx={{ fontSize: "30px" }}/>
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -223,9 +225,11 @@ const WorkExperienceEdit = (props) => {
                 required
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <AbcIcon sx={{ fontSize: "30px" }}/>
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <AbcIcon sx={{ fontSize: "30px" }}/>
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -243,9 +247,11 @@ const WorkExperienceEdit = (props) => {
                 required
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <AbcIcon sx={{ fontSize: "30px" }} />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <AbcIcon sx={{ fontSize: "30px" }} />
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -341,9 +347,11 @@ const WorkExperienceEdit = (props) => {
                 required
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <LocalAtmRoundedIcon sx={{ fontSize: "25px" }} />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <LocalAtmRoundedIcon sx={{ fontSize: "25px" }} />
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />

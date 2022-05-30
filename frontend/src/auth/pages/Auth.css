@@ -96,7 +96,7 @@
 .password-container div{
   width: 100%;
   max-width: 100%;
-  flex: 1;
+  /* flex: 1; */
 }
 
 .password-container span{

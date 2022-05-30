@@ -104,9 +104,11 @@ const AdminAuth = (props) => {
                       variant="outlined"
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
-                            <PersonRoundedIcon sx={{ fontSize: "20px" }} />
-                          </InputAdornment>
+                          <p>
+                            <InputAdornment position="start">
+                              <PersonRoundedIcon sx={{ fontSize: "20px" }} />
+                            </InputAdornment>
+                          </p>
                         ),
                       }}
                     />
@@ -123,9 +125,11 @@ const AdminAuth = (props) => {
                       variant="outlined"
                       InputProps={{
                         startAdornment: (
-                          <InputAdornment position="start">
-                            <LockIcon sx={{ fontSize: "20px" }} />
-                          </InputAdornment>
+                          <p>
+                            <InputAdornment position="start">
+                              <LockIcon sx={{ fontSize: "20px" }} />
+                            </InputAdornment>
+                          </p>
                         ),
                       }}
                     />

@@ -29,11 +29,11 @@
 
 .content-container{
   width: 100%;
-  max-width: 70%;
+  max-width: 65%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin: 2% 5%;
+  margin: 2% 7%;
   margin-left: auto;
   border-radius: 10px;
 }

@@ -185,9 +185,11 @@ const CivilServiceEdit = (props) => {
               required
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                    <WorkIcon sx={{ fontSize: "20px" }}/>
-                  </InputAdornment>
+                  <p>
+                    <InputAdornment position="start">
+                      <WorkIcon sx={{ fontSize: "20px" }}/>
+                    </InputAdornment>
+                  </p>
                 ),
               }}
             />
@@ -204,9 +206,11 @@ const CivilServiceEdit = (props) => {
               initialValid={formState.inputs.rating.isValid}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                    <StarIcon sx={{ fontSize: "20px" }}/>
-                  </InputAdornment>
+                  <p>
+                    <InputAdornment position="start">
+                      <StarIcon sx={{ fontSize: "20px" }}/>
+                    </InputAdornment>
+                  </p>
                 ),
               }}
             />
@@ -236,13 +240,14 @@ const CivilServiceEdit = (props) => {
               required
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                    <PlaceIcon sx={{ fontSize: "20px" }}/>
-                  </InputAdornment>
+                  <p>
+                    <InputAdornment position="start">
+                      <PlaceIcon sx={{ fontSize: "20px" }}/>
+                    </InputAdornment>
+                  </p>
                 ),
               }}
             />
-            <br />
             {!props.addingItem && (
               <Input
                 element="input"
@@ -256,9 +261,11 @@ const CivilServiceEdit = (props) => {
                 initialValid={formState.inputs.licenseNumber.isValid}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <NumbersIcon />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <NumbersIcon sx={{ fontSize: "20px" }}/>
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -290,6 +297,7 @@ const CivilServiceEdit = (props) => {
                 }
               />
             )}
+            <br />
             {hasLicense && (
               <Input
                 element="input"
@@ -303,13 +311,16 @@ const CivilServiceEdit = (props) => {
                 initialValid={formState.inputs.licenseNumber.isValid}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <NumbersIcon />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <NumbersIcon sx={{ fontSize: "20px" }} />
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
             )}
+            <br />
             {hasLicense && (
               <Input
                 element="input"

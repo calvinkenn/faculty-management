@@ -228,9 +228,11 @@ const TrainingEdit = (props) => {
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
-                          <AbcIcon sx={{ fontSize: "30px" }}/>
-                        </InputAdornment>
+                        <p>
+                          <InputAdornment position="start">
+                            <AbcIcon sx={{ fontSize: "30px" }}/>
+                          </InputAdornment>
+                        </p>
                       ),
                     }}
                   />
@@ -249,9 +251,11 @@ const TrainingEdit = (props) => {
                     required
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment position="start">
-                          <PlaceIcon sx={{ fontSize: "20px" }} />
-                        </InputAdornment>
+                        <p>
+                          <InputAdornment position="start">
+                            <PlaceIcon sx={{ fontSize: "20px" }} />
+                          </InputAdornment>
+                        </p>
                       ),
                     }}
                   />
@@ -295,9 +299,11 @@ const TrainingEdit = (props) => {
                   required
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">
-                        <QueryBuilderIcon sx={{ fontSize: "25px" }}/>
-                      </InputAdornment>
+                      <p>
+                        <InputAdornment position="start">
+                          <QueryBuilderIcon sx={{ fontSize: "25px" }}/>
+                        </InputAdornment>
+                      </p>
                     ),
                   }}
                 />
@@ -343,9 +349,11 @@ const TrainingEdit = (props) => {
                   required
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">
-                        <AbcIcon sx={{ fontSize: "30px" }}/>
-                      </InputAdornment>
+                      <p>
+                        <InputAdornment position="start">
+                          <AbcIcon sx={{ fontSize: "30px" }}/>
+                        </InputAdornment>
+                      </p>
                     ),
                   }}
                 />

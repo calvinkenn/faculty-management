@@ -46,7 +46,7 @@
 .position-cont div{
     width: 100%;
     max-width: 100%;
-    flex: 1;
+    /* flex: 1; */
 }
 .company-dept-cont,
 .status-of-apt,
@@ -67,7 +67,7 @@
 .salary div{
     width: 100%;
     max-width: 100%;
-    flex: 1;
+    /* flex: 1; */
 }
 
 .from-to-govt div button{

@@ -138,9 +138,11 @@ const PasswordEdit = (props) => {
                   required
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">
-                        <LockIcon sx={{fontSize: '20px'}} />
-                      </InputAdornment>
+                      <p>
+                        <InputAdornment position="start">
+                          <LockIcon sx={{fontSize: '20px'}} />
+                        </InputAdornment>
+                      </p>
                     ),
                   }}
                 />
@@ -165,9 +167,11 @@ const PasswordEdit = (props) => {
                   required
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">
-                        <LockIcon sx={{fontSize: '20px'}} />
-                      </InputAdornment>
+                      <p>
+                        <InputAdornment position="start">
+                          <LockIcon sx={{fontSize: '20px'}} />
+                        </InputAdornment>
+                      </p>
                     ),
                   }}
                 />
@@ -186,9 +190,11 @@ const PasswordEdit = (props) => {
                   required
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">
-                        <CheckCircleRoundedIcon sx={{fontSize: '20px'}} />
-                      </InputAdornment>
+                      <p>
+                        <InputAdornment position="start">
+                          <CheckCircleRoundedIcon sx={{fontSize: '20px'}} />
+                        </InputAdornment>
+                      </p>
                     ),
                   }}
                 />

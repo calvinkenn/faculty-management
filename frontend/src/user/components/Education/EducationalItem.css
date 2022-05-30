@@ -67,16 +67,17 @@
     width: 100%;
     max-width: 100%;
     display: flex;
-    justify-content: space-between;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 .level-unit div,
 .school-degree div,
 .from-to-graduatedyear div{
     width: 100%;
     max-width: 100%;
-    flex: 1;
+    /* flex: 1; */
 }
 
 .from-to-graduatedyear div button{
@@ -105,11 +106,14 @@
     max-width: 49%;
     margin-bottom: 1.5%;
 }
-.awards .box {
+.award-box {
     width: 100%;
     max-width: 100%;
 }
-
+.award-box div{
+    width: 100%;
+    max-width: 100%;
+}
 .educ-action-btn{
     width: 100%;
     max-width: 10%;

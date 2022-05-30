@@ -384,9 +384,11 @@ const ContactInfoEdit = (props) => {
                 value={houseNoR}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <NumbersIcon sx={{fontSize: '20px'}} />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <NumbersIcon sx={{fontSize: '20px'}} />
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -402,9 +404,11 @@ const ContactInfoEdit = (props) => {
                 value={streetR}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <SignpostIcon sx={{fontSize: '20px'}} />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <SignpostIcon sx={{fontSize: '20px'}} />
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -545,9 +549,11 @@ const ContactInfoEdit = (props) => {
                 value={houseNoP}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <NumbersIcon sx={{fontSize: '20px'}} />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <NumbersIcon sx={{fontSize: '20px'}} />
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -563,9 +569,11 @@ const ContactInfoEdit = (props) => {
                 value={streetP}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <SignpostIcon sx={{fontSize: '20px'}} />
-                    </InputAdornment>
+                    <p>
+                      <InputAdornment position="start">
+                        <SignpostIcon sx={{fontSize: '20px'}} />
+                      </InputAdornment>
+                    </p>
                   ),
                 }}
               />
@@ -701,9 +709,11 @@ const ContactInfoEdit = (props) => {
               initialValid={formState.inputs.telephoneNum.isValid}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                    <PhoneIcon sx={{ fontSize: "20px" }} />
-                  </InputAdornment>
+                  <p>
+                    <InputAdornment position="start">
+                      <PhoneIcon sx={{ fontSize: "20px" }} />
+                    </InputAdornment>
+                  </p>
                 ),
               }}
             />
@@ -721,9 +731,11 @@ const ContactInfoEdit = (props) => {
               required
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                    <PhoneIphoneIcon sx={{ fontSize: "20px"}} />
-                  </InputAdornment>
+                  <p>
+                    <InputAdornment position="start">
+                      <PhoneIphoneIcon sx={{ fontSize: "20px"}} />
+                    </InputAdornment>
+                  </p>
                 ),
               }}
             />
@@ -740,9 +752,11 @@ const ContactInfoEdit = (props) => {
               initialValid={formState.inputs.alternateEmail.isValid}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
-                    <AlternateEmailIcon sx={{ fontSize: "20px" }} />
-                  </InputAdornment>
+                  <p>
+                    <InputAdornment position="start">
+                      <AlternateEmailIcon sx={{ fontSize: "20px" }} />
+                    </InputAdornment>
+                  </p>
                 ),
               }}
             />

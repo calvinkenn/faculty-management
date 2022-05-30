@@ -54,7 +54,7 @@ const TopActionBar = (props) => {
     <React.Fragment>
       <Modal
         show={showConfirmModal}
-        header= {isAddMode ? "Cancel Adding" : "Cancel Editing"}
+        header= {isAddMode ? "Cancel Adding?" : "Cancel Editing?"}
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>

@@ -203,7 +203,7 @@ const Profile = (props) => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Modal
         show={showConfirmModal}
-        header="Cancel editing?"
+        header={isAddMode ? "Cancel Adding?" : "Cancel Editing?"}
         footerClass="place-item__modal-actions"
         footer={
           <React.Fragment>

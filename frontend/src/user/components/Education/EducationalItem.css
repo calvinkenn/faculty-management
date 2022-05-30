@@ -76,6 +76,7 @@
 .from-to-graduatedyear div{
     width: 100%;
     max-width: 100%;
+    flex: 1;
 }
 
 .from-to-graduatedyear div button{

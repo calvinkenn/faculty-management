@@ -79,6 +79,7 @@ const Input = (props) => {
         inputProps={props.inputProps}
         onKeyDown={props.onKeyDown}
         // style={{ width: props.width }}
+        InputProps={props.InputProps}
       />
     );
   } else if (props.element === "textarea") {

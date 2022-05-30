@@ -1,4 +1,7 @@
 import React, { useContext } from "react";
+import InputAdornment from "@mui/material/InputAdornment";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import LockIcon from "@mui/icons-material/Lock";
 
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -98,6 +101,13 @@ const AdminAuth = (props) => {
                       onInput={inputHandler}
                       label="Email"
                       variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AccountCircle />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </div>
                   <div className="password-container">
@@ -110,6 +120,13 @@ const AdminAuth = (props) => {
                       onInput={inputHandler}
                       label="Password"
                       variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <LockIcon />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </div>
                 </div>

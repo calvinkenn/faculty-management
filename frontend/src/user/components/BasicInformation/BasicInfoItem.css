@@ -1,41 +1,40 @@
 .basic-container {
-    width: 100%;
-    display: flex;
-    /* border: 1px solid black; */
-    box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  /* border: 1px solid black; */
+  box-sizing: border-box;
 }
 
 .basic-container__data {
-    width: 100%;
-    max-width: 100%;
+  width: 100%;
+  max-width: 100%;
 }
 
 .basic-name-container,
 .personal-info-cont,
-.government-id-cont{
-    width: 100%;
-    max-width: -webkit-fill-available;
-    padding: 2%;
-    background-color: white;
-    border-radius: 15px;
-    margin: 2% 0;
-    box-shadow: #00000017 0 0 10px 0px;    
+.government-id-cont {
+  width: 100%;
+  max-width: -webkit-fill-available;
+  padding: 2%;
+  background-color: white;
+  border-radius: 15px;
+  margin: 2% 0;
+  box-shadow: #00000017 0 0 10px 0px;
 }
 
-.name-info-title-cont{
-    width: 100%;
-    max-width: 100%;
-    display: flex;
+.name-info-title-cont {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
 }
 
 .personal-info-detail-cont,
-.gov-id-detail-cont{
-    margin: 2% 0;
+.gov-id-detail-cont {
+  margin: 2% 0;
 }
 
-.name-detail-cont{
-    margin: 2% 0 1% 0;
-
+.name-detail-cont {
+  margin: 2% 0 1% 0;
 }
 /* .name-edit-cont, 
 .personal-info-edit{
@@ -43,104 +42,99 @@
 } */
 
 .first-mid-name-cont,
-.last-suffix-name-cont{
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.last-suffix-name-cont {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 49.5% 1% 49.5%;
 }
 
-.ext-name-cont{
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    flex-wrap: wrap;
+.ext-name-cont {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: 100% 100%;
 }
 
-.box{
-    width: 100%;
-    max-width: 49%;
-    margin-bottom: 1.5%;
+.box {
+  width: 100%;
+  max-width: 49%;
+  margin-bottom: 1.5%;
 }
 
-.box div{
-    width: 100%;
-    max-width: 100%;
+.box div {
+  width: 100%;
+  max-width: 100%;
 }
 
 .first-mid-name-cont div,
-.last-suffix-name-cont div{
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1%;
+.last-suffix-name-cont div {
+  margin-bottom: 1%;
 }
 
 .bday-place-citizenship,
 .gender-civil,
 .height-weight-bloodtype,
 .gov-id-edit {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 2%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2%;
+  display: flex;
+  flex-direction: row;
 
 }
 
-.gov-id-edit{
-    margin-top: 2%;
+.gov-id-edit {
+  margin-top: 2%;
 }
 
 .bday-place-citizenship div,
 .gender-civil div,
-.height-weight-bloodtype div{
-    width: 100%;
-    max-width: 100%;
+.height-weight-bloodtype div {
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
 }
 
 .bday-place-citizenship span,
 .gender-civil span,
 .height-weight-bloodtype span,
-.gov-id-edit span{
-    width: 100%;
-    max-width: 2%;
+.gov-id-edit span {
+  width: 100%;
+  max-width: 2%;
 }
 
 .first-mid-name-cont span,
-.last-suffix-name-cont span{
-    width: 100%;
-    max-width: 2%;
+.last-suffix-name-cont span {
+  width: 100%;
+  max-width: 2%;
 }
 
-.edit-submit-btn{
-    width: 100%;
-    max-width: 100%;
+.edit-submit-btn {
+  width: 100%;
+  max-width: 100%;
 }
 
-.edit-submit-btn button{
-    padding: 1%;
+.edit-submit-btn button {
+  padding: 1%;
 }
 
 .name-detail-cont table td,
 .personal-info-detail-cont table td,
-.gov-id-detail-cont table td{
-    padding: 10px;
-    border: none;
+.gov-id-detail-cont table td {
+  padding: 10px;
+  border: none;
 }
 .name-detail-cont table .label,
 .personal-info-detail-cont table .label,
-.gov-id-detail-cont table .label{
-    width: 100%;
-    max-width: 15%;
-    font-weight: 600;
+.gov-id-detail-cont table .label {
+  width: 100%;
+  max-width: 15%;
+  font-weight: 600;
 }
 .name-detail-cont table .colon,
 .personal-info-detail-cont table .colon,
-.gov-id-detail-cont table .colon{
-    width: 100%;
-    max-width: 2%;
+.gov-id-detail-cont table .colon {
+  width: 100%;
+  max-width: 2%;
 }

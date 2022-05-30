@@ -91,9 +91,10 @@
     width: 100%;
     max-width: 100%;
     margin-bottom: 2%;
+    display: grid;
 }
 
-.employee-num-cont div,
+/* .employee-num-cont div,
 .faculty-type-cont div,
 .employment-type-cont div,
 .email-edit-cont div,
@@ -102,7 +103,7 @@
 .confirm-pass-cont div {
     width: 100%;
     max-width: 100%;
-}
+} */
 
 .acc-edit-btn,
 .password-submit-btn {

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
+import AbcIcon from "@mui/icons-material/Abc";
+import NumbersIcon from "@mui/icons-material/Numbers";
+import StarIcon from '@mui/icons-material/Star';
+import PlaceIcon from '@mui/icons-material/Place';
+import WorkIcon from '@mui/icons-material/Work';
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -177,6 +183,13 @@ const CivilServiceEdit = (props) => {
               initialValue={formState.inputs.career.value}
               initialValid={formState.inputs.career.isValid}
               required
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <WorkIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             <Input
               element="input"
@@ -188,6 +201,13 @@ const CivilServiceEdit = (props) => {
               onInput={inputHandler}
               initialValue={formState.inputs.rating.value}
               initialValid={formState.inputs.rating.isValid}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <StarIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             <Input
               element="input"
@@ -211,6 +231,13 @@ const CivilServiceEdit = (props) => {
               initialValue={formState.inputs.placeOfExam.value}
               initialValid={formState.inputs.placeOfExam.isValid}
               required
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PlaceIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             {!props.addingItem && (
               <Input
@@ -223,6 +250,13 @@ const CivilServiceEdit = (props) => {
                 onInput={inputHandler}
                 initialValue={formState.inputs.licenseNumber.value}
                 initialValid={formState.inputs.licenseNumber.isValid}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
             )}
 
@@ -265,6 +299,13 @@ const CivilServiceEdit = (props) => {
                 onInput={inputHandler}
                 initialValue={formState.inputs.licenseNumber.value}
                 initialValid={formState.inputs.licenseNumber.isValid}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
             )}
             {hasLicense && (

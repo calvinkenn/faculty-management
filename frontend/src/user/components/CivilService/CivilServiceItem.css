@@ -43,6 +43,7 @@
 
 .civil-service-cont div{
     margin-bottom: 1%;
+    flex: 1;
 }
 
 .civ-ser-btn{

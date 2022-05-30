@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import InputAdornment from "@mui/material/InputAdornment";
+import AbcIcon from "@mui/icons-material/Abc";
+import PlaceIcon from '@mui/icons-material/Place';
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -222,6 +226,13 @@ const TrainingEdit = (props) => {
                     initialValue={formState.inputs.title.value}
                     initialValid={formState.inputs.title.isValid}
                     required
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <AbcIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </div>
                 <div className="training-type">
@@ -236,6 +247,13 @@ const TrainingEdit = (props) => {
                     initialValue={formState.inputs.type.value}
                     initialValid={formState.inputs.type.isValid}
                     required
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PlaceIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </div>
               </div>
@@ -275,6 +293,13 @@ const TrainingEdit = (props) => {
                   initialValue={formState.inputs.hours.value}
                   initialValid={formState.inputs.hours.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <QueryBuilderIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="type-conduct">
@@ -316,6 +341,13 @@ const TrainingEdit = (props) => {
                   initialValue={formState.inputs.conducted.value}
                   initialValid={formState.inputs.conducted.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AbcIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
             </div>

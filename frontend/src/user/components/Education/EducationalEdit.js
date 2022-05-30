@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import InputAdornment from "@mui/material/InputAdornment";
+import AbcIcon from "@mui/icons-material/Abc";
+import NumbersIcon from "@mui/icons-material/Numbers";
+import StarIcon from '@mui/icons-material/Star';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
@@ -256,6 +261,13 @@ const EducationalEdit = (props) => {
                 initialValue={formState.inputs.highestLevel.value}
                 initialValid={formState.inputs.highestLevel.isValid}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <StarIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
             <div className="school-degree">
@@ -271,6 +283,13 @@ const EducationalEdit = (props) => {
                   initialValue={formState.inputs.school.value}
                   initialValid={formState.inputs.school.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SchoolIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="degree">
@@ -339,6 +358,13 @@ const EducationalEdit = (props) => {
                         label="Academic Honors"
                         value={x.awards}
                         onChange={(e) => handleInputChange(e, i)}
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <EmojiEventsIcon />
+                            </InputAdornment>
+                          ),
+                        }}
                       />
                       <div className="btn-box">
                         {inputList.length !== 1 && (

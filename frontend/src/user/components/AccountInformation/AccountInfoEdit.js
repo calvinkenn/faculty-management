@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import InputAdornment from "@mui/material/InputAdornment";
+import EmailIcon from '@mui/icons-material/Email';
+import NumbersIcon from '@mui/icons-material/Numbers';
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -124,6 +127,13 @@ const AccountInfoEdit = (props) => {
                   initialValue={formState.inputs.employeeNum.value}
                   initialValid={formState.inputs.employeeNum.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <NumbersIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="faculty-type-cont">
@@ -166,6 +176,13 @@ const AccountInfoEdit = (props) => {
                   initialValue={formState.inputs.email.value}
                   initialValid={formState.inputs.email.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <EmailIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
             </div>

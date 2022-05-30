@@ -84,6 +84,7 @@
 .tel-cp-email div{
     width: 100%;
     max-width: 100%;
+    flex: 1;
 }
 .houseno-street-loctype span,
 .region-province span,

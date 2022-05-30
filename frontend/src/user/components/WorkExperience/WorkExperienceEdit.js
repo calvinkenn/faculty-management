@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { FormControlLabel, Checkbox, TextField } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
+import AbcIcon from "@mui/icons-material/Abc";
+import NumbersIcon from "@mui/icons-material/Numbers";
+import MoneyIcon from '@mui/icons-material/Money';
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -196,6 +200,13 @@ const WorkExperienceEdit = (props) => {
                 initialValue={formState.inputs.position.value}
                 initialValid={formState.inputs.position.isValid}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AbcIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
             <div className="company-dept-cont">
@@ -210,6 +221,13 @@ const WorkExperienceEdit = (props) => {
                 initialValue={formState.inputs.company.value}
                 initialValid={formState.inputs.company.isValid}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AbcIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <Input
@@ -223,6 +241,13 @@ const WorkExperienceEdit = (props) => {
                 initialValue={formState.inputs.department.value}
                 initialValid={formState.inputs.department.isValid}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <AbcIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
             <div className="status-of-apt">
@@ -314,6 +339,13 @@ const WorkExperienceEdit = (props) => {
                 initialValue={formState.inputs.monthlySalary.value}
                 initialValid={formState.inputs.monthlySalary.isValid}
                 required
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <MoneyIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <Input

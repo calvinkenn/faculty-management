@@ -1,6 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
+import InputAdornment from "@mui/material/InputAdornment";
 import { Checkbox, FormControlLabel, Tooltip } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import LockIcon from "@mui/icons-material/Lock";
+import NumbersIcon from '@mui/icons-material/Numbers';
+import AbcIcon from '@mui/icons-material/Abc';
+import EmailIcon from '@mui/icons-material/Email';
+import CheckIcon from '@mui/icons-material/Check';
 
 import { AuthContext } from "../../shared/context/auth-context";
 import Button from "../../shared/components/FormElements/Button";
@@ -292,6 +299,13 @@ const Auth = () => {
                     onInput={inputHandler}
                     label="Employee Number/Format-(0000-0)"
                     variant="outlined"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <NumbersIcon />
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 )}
               </div>
@@ -307,6 +321,13 @@ const Auth = () => {
                       onInput={inputHandler}
                       label="First Name"
                       variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AbcIcon />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   )}
                 </div>
@@ -321,6 +342,13 @@ const Auth = () => {
                       onInput={inputHandler}
                       label="Last Name"
                       variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AbcIcon />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   )}
                 </div>
@@ -338,6 +366,13 @@ const Auth = () => {
                       onInput={inputHandler}
                       label="Email/Employee Number"
                       variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <AccountCircle />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </div>
                 )}
@@ -352,6 +387,13 @@ const Auth = () => {
                       onInput={inputHandler}
                       label="Email"
                       variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <EmailIcon />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </div>
                 )}
@@ -366,6 +408,13 @@ const Auth = () => {
                       onInput={inputHandler}
                       label="Email"
                       variant="outlined"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <EmailIcon />
+                          </InputAdornment>
+                        ),
+                      }}
                     />
                   </div>
                 )}
@@ -388,6 +437,13 @@ const Auth = () => {
                           onInput={inputHandler}
                           label="Password"
                           variant="outlined"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <LockIcon />
+                              </InputAdornment>
+                            ),
+                          }}
                         />
                       )}
                       <span />
@@ -397,7 +453,9 @@ const Auth = () => {
                         }
                         placement="top-start"
                       >
-                        <p className="tooltip-icon"><HelpOutlineIcon sx={{ fontSize: "25px" }} /></p>
+                        <p className="tooltip-icon">
+                          <HelpOutlineIcon sx={{ fontSize: "25px" }} />
+                        </p>
                       </Tooltip>
                     </div>
                     <div className="password-container">
@@ -415,6 +473,13 @@ const Auth = () => {
                           onInput={inputHandler}
                           label="Confirm Password"
                           variant="outlined"
+                          InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <CheckIcon />
+                              </InputAdornment>
+                            ),
+                          }}
                         />
                       )}
                     </div>
@@ -432,6 +497,13 @@ const Auth = () => {
                         onInput={inputHandler}
                         label="Password"
                         variant="outlined"
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <LockIcon />
+                            </InputAdornment>
+                          ),
+                        }}
                       />
                     )}
                   </div>

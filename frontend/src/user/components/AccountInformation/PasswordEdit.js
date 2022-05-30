@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import InputAdornment from "@mui/material/InputAdornment";
+import LockIcon from '@mui/icons-material/Lock';
+import CheckIcon from '@mui/icons-material/Check';
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -133,6 +136,13 @@ const PasswordEdit = (props) => {
                   initialValue={formState.inputs.oldPassword.value}
                   initialValid={formState.inputs.oldPassword.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LockIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="new-pass-cont">
@@ -153,6 +163,13 @@ const PasswordEdit = (props) => {
                   initialValue={formState.inputs.newPassword.value}
                   initialValid={formState.inputs.newPassword.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LockIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="confirm-pass-cont">
@@ -167,6 +184,13 @@ const PasswordEdit = (props) => {
                   initialValue={formState.inputs.confirmNewPassword.value}
                   initialValid={formState.inputs.confirmNewPassword.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <CheckIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
             </div>

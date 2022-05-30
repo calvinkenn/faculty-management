@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
+import AbcIcon from "@mui/icons-material/Abc";
+import NumbersIcon from "@mui/icons-material/Numbers";
+import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
+import HeightIcon from '@mui/icons-material/Height';
 
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
@@ -203,6 +208,13 @@ const BasicInfoEdit = (props) => {
                   initialValue={formState.inputs.firstName.value}
                   initialValid={formState.inputs.firstName.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AbcIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <span />
                 <Input
@@ -215,6 +227,13 @@ const BasicInfoEdit = (props) => {
                   onInput={inputHandler}
                   initialValue={formState.inputs.middleName.value}
                   initialValid={formState.inputs.middleName.isValid}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AbcIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               <div className="last-suffix-name-cont">
@@ -229,6 +248,13 @@ const BasicInfoEdit = (props) => {
                   initialValue={formState.inputs.lastName.value}
                   initialValid={formState.inputs.lastName.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AbcIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <span />
                 <Input
@@ -241,6 +267,13 @@ const BasicInfoEdit = (props) => {
                   onInput={inputHandler}
                   initialValue={formState.inputs.suffixName.value}
                   initialValid={formState.inputs.suffixName.isValid}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AbcIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
               </div>
               {/* <div className="ext-name-cont">
@@ -316,6 +349,13 @@ const BasicInfoEdit = (props) => {
                   initialValue={formState.inputs.placeofBirth.value}
                   initialValid={formState.inputs.placeofBirth.isValid}
                   required
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment className="WEW" position="start">
+                        <AbcIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <span />
                 <Input
@@ -378,6 +418,13 @@ const BasicInfoEdit = (props) => {
                   onInput={inputHandler}
                   initialValue={formState.inputs.height.value}
                   initialValid={formState.inputs.height.isValid}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment className="WEW" position="start">
+                        <HeightIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <span />
                 <Input
@@ -390,6 +437,13 @@ const BasicInfoEdit = (props) => {
                   onInput={inputHandler}
                   initialValue={formState.inputs.weight.value}
                   initialValid={formState.inputs.weight.isValid}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment className="WEW" position="start">
+                        <MonitorWeightIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <span />
                 <Input
@@ -437,6 +491,13 @@ const BasicInfoEdit = (props) => {
                 onInput={inputHandler}
                 initialValue={formState.inputs.gssId.value}
                 initialValid={formState.inputs.gssId.isValid}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment className="WEW" position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <Input
@@ -449,6 +510,13 @@ const BasicInfoEdit = (props) => {
                 onInput={inputHandler}
                 initialValue={formState.inputs.pagibigId.value}
                 initialValid={formState.inputs.pagibigId.isValid}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment className="WEW" position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <Input
@@ -461,6 +529,13 @@ const BasicInfoEdit = (props) => {
                 onInput={inputHandler}
                 initialValue={formState.inputs.philHealthId.value}
                 initialValid={formState.inputs.philHealthId.isValid}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment className="WEW" position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <Input
@@ -473,6 +548,13 @@ const BasicInfoEdit = (props) => {
                 onInput={inputHandler}
                 initialValue={formState.inputs.sssNo.value}
                 initialValid={formState.inputs.sssNo.isValid}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment className="WEW" position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <Input
@@ -485,6 +567,13 @@ const BasicInfoEdit = (props) => {
                 onInput={inputHandler}
                 initialValue={formState.inputs.tinNo.value}
                 initialValid={formState.inputs.tinNo.isValid}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment className="WEW" position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
             </div>
           </div>

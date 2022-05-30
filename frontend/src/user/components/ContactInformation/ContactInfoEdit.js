@@ -1,4 +1,11 @@
 import React, { useState, useEffect } from "react";
+import InputAdornment from "@mui/material/InputAdornment";
+import PhoneIcon from '@mui/icons-material/Phone';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import SignpostIcon from '@mui/icons-material/Signpost';
+import NumbersIcon from '@mui/icons-material/Numbers';
+
 import {
   Checkbox,
   FormControlLabel,
@@ -27,11 +34,10 @@ import {
 import "../../components/EditForm.css";
 import ErrorModal from "../../../shared/components/UIElements/ErrorModal";
 
-
 //Mikko is here
-import OtherHousesIcon from '@mui/icons-material/OtherHouses';
-import HomeIcon from '@mui/icons-material/Home';
-import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import OtherHousesIcon from "@mui/icons-material/OtherHouses";
+import HomeIcon from "@mui/icons-material/Home";
+import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 //end
 
 const ContactInfoEdit = (props) => {
@@ -87,7 +93,7 @@ const ContactInfoEdit = (props) => {
   );
 
   useEffect(() => {
-    setIsSameAddress(props.userEdit.isSameAddress)
+    setIsSameAddress(props.userEdit.isSameAddress);
     //Set default Value
     setRegionAddrR(props.userEdit.regionR);
     setProvinceAddrR(props.userEdit.provinceR);
@@ -322,7 +328,8 @@ const ContactInfoEdit = (props) => {
         JSON.stringify({
           userId: storedData.userId,
           token: storedData.token,
-          isSameAddress, isSameAddress,
+          isSameAddress,
+          isSameAddress,
           houseNoR: houseNoR,
           streetR: streetR,
           locationTypeR: locationTypeR,
@@ -361,7 +368,8 @@ const ContactInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <OtherHousesIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Resident Address</h1>
+              <OtherHousesIcon sx={{ fontSize: "30px" }} />
+              <h1 className="Marginlang">Resident Address</h1>
             </div>
           </div>
           <div className="resident-add-edit">
@@ -374,6 +382,13 @@ const ContactInfoEdit = (props) => {
                 errorText="Invalid Email"
                 onChange={houseNoRHandler}
                 value={houseNoR}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <TextField
@@ -385,6 +400,13 @@ const ContactInfoEdit = (props) => {
                 errorText="Invalid Email"
                 onChange={streetRHandler}
                 value={streetR}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SignpostIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <FormControl sx={{ minWidth: 120 }}>
@@ -495,7 +517,8 @@ const ContactInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <HomeIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Permanent Address</h1>
+              <HomeIcon sx={{ fontSize: "30px" }} />
+              <h1 className="Marginlang">Permanent Address</h1>
             </div>
           </div>
           <div className="permanent-address-edit-cont">
@@ -520,6 +543,13 @@ const ContactInfoEdit = (props) => {
                 onChange={houseNoPHandler}
                 disabled={isSameAddress}
                 value={houseNoP}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <NumbersIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <TextField
@@ -531,6 +561,13 @@ const ContactInfoEdit = (props) => {
                 onChange={streetPHandler}
                 disabled={isSameAddress}
                 value={streetP}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SignpostIcon />
+                    </InputAdornment>
+                  ),
+                }}
               />
               <span />
               <FormControl sx={{ minWidth: 120 }}>
@@ -647,7 +684,8 @@ const ContactInfoEdit = (props) => {
           <div className="name-info-title-cont">
             <div className="basic-title-blank"></div>
             <div className="basic-title-text">
-            <ContactPhoneIcon sx={{fontSize: "30px"}}/><h1 className="Marginlang">Contact Information</h1>
+              <ContactPhoneIcon sx={{ fontSize: "30px" }} />
+              <h1 className="Marginlang">Contact Information</h1>
             </div>
           </div>
           <div className="tel-cp-email">
@@ -661,6 +699,13 @@ const ContactInfoEdit = (props) => {
               onInput={inputHandler}
               initialValue={formState.inputs.telephoneNum.value}
               initialValid={formState.inputs.telephoneNum.isValid}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PhoneIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             <span />
             <Input
@@ -674,6 +719,13 @@ const ContactInfoEdit = (props) => {
               initialValue={formState.inputs.cellphoneNum.value}
               initialValid={formState.inputs.cellphoneNum.isValid}
               required
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PhoneIphoneIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
             <span />
             <Input
@@ -686,6 +738,13 @@ const ContactInfoEdit = (props) => {
               onInput={inputHandler}
               initialValue={formState.inputs.alternateEmail.value}
               initialValid={formState.inputs.alternateEmail.isValid}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AlternateEmailIcon />
+                  </InputAdornment>
+                ),
+              }}
             />
           </div>
           <div className="contact-info-edit-btn">

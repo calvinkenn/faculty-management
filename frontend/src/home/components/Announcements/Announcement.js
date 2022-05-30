@@ -6,6 +6,7 @@ import Pagination from "../../../shared/components/Pagination/Pagination";
 import AnnouncementEdit from "./AnnouncementEdit";
 import Button from "../../../shared/components/FormElements/Button";
 import "./Announcement.css";
+import FilterAnnouncement from "../../../shared/components/Filter/FilterAnnouncement";
 
 const Announcement = (props) => {
   const auth = useContext(AuthContext);
@@ -27,23 +28,47 @@ const Announcement = (props) => {
     return announcement._id?.includes(editID);
   });
 
+  const filteredData = props.announcementData?.filter((announcement) => {
+    const newDate = new Date(announcement.date);
+    return (
+      newDate.getFullYear() == props.filterValue.getFullYear() &&
+      newDate.getMonth() == props.filterValue.getMonth()
+    );
+  });
+  console.log(props.filterValue);
   let displayPerPage = 5;
 
   useEffect(() => {
     // Fetch items from another resources.
     const endOffset = itemOffset + displayPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    //console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(
-      props.announcementData
-        ?.sort((a, b) => (a.date < b.date ? 1 : -1))
-        .slice(itemOffset, endOffset)
+      props.displayFilterValue == 2
+        ? filteredData
+        : props.announcementData
+            ?.sort((a, b) => (a.date < b.date ? 1 : -1))
+            .slice(itemOffset, endOffset)
     );
-    setPageCount(Math.ceil(props.announcementData?.length / displayPerPage));
-  }, [itemOffset, 5, props.announcementData]);
+    setPageCount(
+      Math.ceil(
+        props.displayFilterValue == 2
+          ? filteredData?.length
+          : props.announcementData?.length / displayPerPage
+      )
+    );
+  }, [
+    itemOffset,
+    5,
+    props.announcementData,
+    props.filterValue,
+    props.displayFilterValue,
+  ]);
 
   const handlePageClick = (event) => {
     const newOffset =
-      (event.selected * displayPerPage) % props.announcementData?.length;
+      (event.selected * displayPerPage) % props.displayFilterValue == 2
+        ? filteredData?.length
+        : props.announcementData?.length / displayPerPage;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
@@ -74,6 +99,13 @@ const Announcement = (props) => {
           <h1>Announcement</h1>
           {auth.isAdmin && <Button onClick={addModeHandler}>Add New</Button>}
         </div>
+        <FilterAnnouncement
+          onSearchChange={props.onSearchChange}
+          filterValue={props.filterValue}
+          onFilterChange={props.onFilterChange}
+          onDisplayFilterChange={props.onDisplayFilterChange}
+          displayFilterValue={props.displayFilterValue}
+        />
         <AnnouncementList
           items={currentItems ? currentItems : props.announcementData}
           setIsEditModeHandler={editModeHandler}

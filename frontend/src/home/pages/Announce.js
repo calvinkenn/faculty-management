@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import SuccessModal from "../../shared/components/UIElements/SuccessModal";
@@ -13,6 +15,9 @@ const Announce = (props) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isAddMode, setIsAddMode] = useState(false);
   const [message, setMessage] = useState("");
+  const [searchField, setSearchField] = useState("");
+  const [filterValue, setFilterValue] = useState(new Date());
+  const [displayFilterValue, setDisplayFilterValue] = useState(1);
 
   const editModeHandler = () => {
     setIsEditMode((prevState) => !prevState);
@@ -65,8 +70,31 @@ const Announce = (props) => {
     setMessage("");
   };
 
+  //SEARCH-----------------------------------------------------------------------
+  const onSearchChange = (event) => {
+    setSearchField(event.target.value);
+  };
+
+  const searchResults = announcementData?.filter((announcement) => {
+    return (
+      announcement.title?.toLowerCase().includes(searchField.toLowerCase()) ||
+      announcement.author?.toLowerCase().includes(searchField.toLowerCase()) ||
+      announcement.content?.toLowerCase().includes(searchField.toLowerCase())
+    );
+  });
+
+  //FILTER
+  const onFilterChange = (value) => {
+    setFilterValue(value);
+  };
+
+  const onDisplayFilterChange = (event) => {
+    setDisplayFilterValue(event.target.value);
+    setFilterValue(new Date());
+  };
+
   return (
-    <React.Fragment>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
       <SuccessModal success={message} onClear={clearSuccess} />
       {isLoading && <LoadingSpinner asOverlay />}
       <div className="home-main">
@@ -78,13 +106,18 @@ const Announce = (props) => {
               isEditMode={isEditMode}
               updateEditModeState={editModeHandler}
               updateAddModeState={addModeHandler}
-              announcementData={announcementData}
+              announcementData={searchResults}
               messageHandler={messageHandler}
+              onSearchChange={onSearchChange}
+              filterValue={filterValue}
+              onFilterChange={onFilterChange}
+              onDisplayFilterChange={onDisplayFilterChange}
+              displayFilterValue={displayFilterValue}
             />
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </LocalizationProvider>
   );
 };
 

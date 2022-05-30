@@ -35,7 +35,7 @@ const Announcement = (props) => {
       newDate.getMonth() == props.filterValue.getMonth()
     );
   });
-  console.log(props.filterValue);
+  console.log(filteredData);
   let displayPerPage = 5;
 
   useEffect(() => {
@@ -45,6 +45,8 @@ const Announcement = (props) => {
     setCurrentItems(
       props.displayFilterValue == 2
         ? filteredData
+            ?.sort((a, b) => (a.date < b.date ? 1 : -1))
+            .slice(itemOffset, endOffset)
         : props.announcementData
             ?.sort((a, b) => (a.date < b.date ? 1 : -1))
             .slice(itemOffset, endOffset)
@@ -52,23 +54,23 @@ const Announcement = (props) => {
     setPageCount(
       Math.ceil(
         props.displayFilterValue == 2
-          ? filteredData?.length
+          ? filteredData?.length / displayPerPage
           : props.announcementData?.length / displayPerPage
       )
     );
   }, [
     itemOffset,
     5,
-    props.announcementData,
+    filteredData?.length,
     props.filterValue,
     props.displayFilterValue,
   ]);
 
   const handlePageClick = (event) => {
     const newOffset =
-      (event.selected * displayPerPage) % props.displayFilterValue == 2
-        ? filteredData?.length
-        : props.announcementData?.length / displayPerPage;
+      props.displayFilterValue == 2
+        ? (event.selected * displayPerPage) % filteredData?.length
+        : (event.selected * displayPerPage) % props.announcementData?.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );

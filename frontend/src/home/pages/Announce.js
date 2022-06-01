@@ -89,7 +89,6 @@ const Announce = (props) => {
   };
 
   const searchResults = announcementData?.filter((announcement) => {
-    console.log(announcement.date);
     let date = formatDateLong(announcement.date);
     return (
       announcement.title?.toLowerCase().includes(searchField.toLowerCase()) ||

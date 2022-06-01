@@ -34,7 +34,7 @@ const NavLinks = (props) => {
             <Button inverse onClick={auth.logout}>
               YES
             </Button>
-            <Button onClick={cancelLogoutHandler}>NO</Button>
+            <Button danger onClick={cancelLogoutHandler}>NO</Button>
           </React.Fragment>
         }
       >

@@ -189,7 +189,7 @@ const ObjectivesEdit = (props) => {
                 Yes
               </Button>
               <span />
-              <Button inverse onClick={closeEditWarningHandler}>
+              <Button danger onClick={closeEditWarningHandler}>
                 No
               </Button>
             </div>

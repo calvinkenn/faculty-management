@@ -79,7 +79,7 @@ const MissionEdit = (props) => {
                 Yes
               </Button>
               <span />
-              <Button inverse onClick={showConfirmModal ? closeEditWarningHandler : closeSaveConfirmHandler}>
+              <Button danger onClick={showConfirmModal ? closeEditWarningHandler : closeSaveConfirmHandler}>
                 No
               </Button>
             </div>

@@ -35,7 +35,7 @@ const TopActionBarAdmin = (props) => {
             <Button inverse onClick={printHandle}>
               YES
             </Button>
-            <Button onClick={cancelPrintHandler}>NO</Button>
+            <Button danger onClick={cancelPrintHandler}>NO</Button>
           </React.Fragment>
         }
       >

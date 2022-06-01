@@ -141,7 +141,7 @@ const MainNavigation = (props) => {
               </Button>
               <span />
               <Button
-                inverse
+                danger
                 onClick={
                   showConfirmModal
                     ? closeEditWarningHandler

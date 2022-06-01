@@ -134,7 +134,7 @@ const AnnouncementEdit = (props) => {
                 </Button>
                 <span />
                 <Button
-                  inverse
+                  danger
                   onClick={
                     showConfirmModal
                       ? closeEditWarningHandler

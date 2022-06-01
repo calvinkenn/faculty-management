@@ -210,7 +210,7 @@ const Profile = (props) => {
             <Button inverse onClick={closeEditingDataHandler}>
               YES
             </Button>
-            <Button onClick={cancelEditingDataHandler}>NO</Button>
+            <Button danger onClick={cancelEditingDataHandler}>NO</Button>
           </React.Fragment>
         }
       >

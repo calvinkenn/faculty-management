@@ -35,7 +35,7 @@ const Announcement = (props) => {
       newDate.getMonth() == props.filterValue.getMonth()
     );
   });
-  console.log(filteredData);
+
   let displayPerPage = 5;
 
   useEffect(() => {
@@ -64,6 +64,7 @@ const Announcement = (props) => {
     filteredData?.length,
     props.filterValue,
     props.displayFilterValue,
+    props.announcementData.length,
   ]);
 
   const handlePageClick = (event) => {

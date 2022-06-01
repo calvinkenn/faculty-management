@@ -4,7 +4,7 @@ import { FormControlLabel, Checkbox, TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import AbcIcon from "@mui/icons-material/Abc";
 import NumbersIcon from "@mui/icons-material/Numbers";
-import LocalAtmRoundedIcon from '@mui/icons-material/LocalAtmRounded';
+import LocalAtmRoundedIcon from "@mui/icons-material/LocalAtmRounded";
 
 import Button from "../../../shared/components/FormElements/Button";
 import Input from "../../../shared/components/FormElements/Input";
@@ -204,7 +204,7 @@ const WorkExperienceEdit = (props) => {
                   startAdornment: (
                     <p>
                       <InputAdornment position="start">
-                        <AbcIcon sx={{ fontSize: "30px" }}/>
+                        <AbcIcon sx={{ fontSize: "30px" }} />
                       </InputAdornment>
                     </p>
                   ),
@@ -227,7 +227,7 @@ const WorkExperienceEdit = (props) => {
                   startAdornment: (
                     <p>
                       <InputAdornment position="start">
-                        <AbcIcon sx={{ fontSize: "30px" }}/>
+                        <AbcIcon sx={{ fontSize: "30px" }} />
                       </InputAdornment>
                     </p>
                   ),
@@ -324,9 +324,10 @@ const WorkExperienceEdit = (props) => {
               />
               <span />
               <FormControlLabel
-                label="Present"
+                label=" Present"
                 control={
                   <Checkbox
+                    style={{ marginRight: "5px" }}
                     checked={inPresent}
                     onChange={sameAsResidentHandler}
                   />

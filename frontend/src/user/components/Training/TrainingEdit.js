@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import InputAdornment from "@mui/material/InputAdornment";
 import AbcIcon from "@mui/icons-material/Abc";
-import PlaceIcon from '@mui/icons-material/Place';
+import PlaceIcon from "@mui/icons-material/Place";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 
 import Button from "../../../shared/components/FormElements/Button";
@@ -230,7 +230,7 @@ const TrainingEdit = (props) => {
                       startAdornment: (
                         <p>
                           <InputAdornment position="start">
-                            <AbcIcon sx={{ fontSize: "30px" }}/>
+                            <AbcIcon sx={{ fontSize: "30px" }} />
                           </InputAdornment>
                         </p>
                       ),
@@ -301,7 +301,7 @@ const TrainingEdit = (props) => {
                     startAdornment: (
                       <p>
                         <InputAdornment position="start">
-                          <QueryBuilderIcon sx={{ fontSize: "25px" }}/>
+                          <QueryBuilderIcon sx={{ fontSize: "25px" }} />
                         </InputAdornment>
                       </p>
                     ),
@@ -321,18 +321,11 @@ const TrainingEdit = (props) => {
                   initialValid={formState.inputs.typeOfLearning.isValid}
                   required
                   items={[
-                    "Culture",
-                    "Geography",
-                    "Health",
-                    "History",
-                    "Human activities",
-                    "Mathematics",
-                    "Nature",
-                    "People",
-                    "Philosophy",
-                    "Religion",
-                    "Society",
-                    "Technology",
+                    "Foundation",
+                    "Technical",
+                    "Supervisory",
+                    "Executive/Managerial",
+                    "Other",
                   ]}
                 />
                 <span />
@@ -351,7 +344,7 @@ const TrainingEdit = (props) => {
                     startAdornment: (
                       <p>
                         <InputAdornment position="start">
-                          <AbcIcon sx={{ fontSize: "30px" }}/>
+                          <AbcIcon sx={{ fontSize: "30px" }} />
                         </InputAdornment>
                       </p>
                     ),

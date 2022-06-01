@@ -96,7 +96,7 @@ const AccountInfoEdit = (props) => {
           </div>
           <div className="acc-details-edit">
             <div className="acc-input-edit">
-              <DatePicker
+              {/* <DatePicker
                 views={["year"]}
                 label="Year only"
                 value={value}
@@ -106,8 +106,8 @@ const AccountInfoEdit = (props) => {
                 renderInput={(params) => (
                   <TextField {...params} helperText={null} />
                 )}
-              />
-              <br />
+              /> */}
+              {/* <br /> */}
               <div className="employee-num-cont">
                 <Input
                   element="input"

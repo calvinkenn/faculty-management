@@ -12,6 +12,7 @@ import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined";
 import profile from "../../../assets/Image/Qw.png";
 import { useHttpClient } from "../../hooks/http-hook";
 import LoadingSpinner from "../UIElements/LoadingSpinner";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 const NavLinks = (props) => {
   const { sendRequest, isLoading } = useHttpClient();
@@ -102,6 +103,8 @@ const NavLinks = (props) => {
             />
             <span />
             {auth.isAdmin ? "Admin" : userData?.firstName}
+            <span />
+            <ArrowDropDownIcon />
           </div>
         </button>
         <ul class="dropdown-content">

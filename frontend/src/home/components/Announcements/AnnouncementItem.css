@@ -119,14 +119,14 @@
 .announcement-edit-btn button{
   width: 100%;
   max-width: 100%;
-  background-color: transparent;
-  border: 2px solid #ffc000;
+  background-color: #ffb000;
+  /* border: 2px solid #ffc000; */
   border-radius: 5px;
   font-weight: 600;
   font-size: 1em;
   margin-top: 1em;
   cursor: pointer;
-  color: #ffc000;
+  color: #ffffff;
   padding: 8%;
 }
 .announcement-del-btn button{

@@ -200,6 +200,7 @@ const MainNavigation = (props) => {
             inProfile={props.inProfile}
             inHome={props.inHome}
             inVMGO={props.inVMGO}
+            accountName={props.accountName}
             announcementCount={props.announcementCount}
           />
         </nav>

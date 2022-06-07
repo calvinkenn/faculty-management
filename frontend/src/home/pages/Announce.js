@@ -112,26 +112,28 @@ const Announce = (props) => {
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <SuccessModal success={message} onClear={clearSuccess} />
       {isLoading && <LoadingSpinner asOverlay />}
-      <div className="home-main">
-        <div className="home-main-container">
-          <MainNavigation inHome={true} />
-          <div className="announcement-container">
-            <Announcement
-              isAddMode={isAddMode}
-              isEditMode={isEditMode}
-              updateEditModeState={editModeHandler}
-              updateAddModeState={addModeHandler}
-              announcementData={searchResults}
-              messageHandler={messageHandler}
-              onSearchChange={onSearchChange}
-              filterValue={filterValue}
-              onFilterChange={onFilterChange}
-              onDisplayFilterChange={onDisplayFilterChange}
-              displayFilterValue={displayFilterValue}
-            />
+      {!isLoading && (
+        <div className="home-main">
+          <div className="home-main-container">
+            <MainNavigation inHome={true} />
+            <div className="announcement-container">
+              <Announcement
+                isAddMode={isAddMode}
+                isEditMode={isEditMode}
+                updateEditModeState={editModeHandler}
+                updateAddModeState={addModeHandler}
+                announcementData={searchResults}
+                messageHandler={messageHandler}
+                onSearchChange={onSearchChange}
+                filterValue={filterValue}
+                onFilterChange={onFilterChange}
+                onDisplayFilterChange={onDisplayFilterChange}
+                displayFilterValue={displayFilterValue}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </LocalizationProvider>
   );
 };

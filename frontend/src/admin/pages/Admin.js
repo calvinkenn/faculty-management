@@ -299,7 +299,7 @@ const Admin = (props) => {
         <div className="user-main-container">
           <SuccessModal success={success} onClear={clearModals} />
           <ErrorModal error={error} onClear={clearModals} />
-          <MainNavigation inProfile={true} />
+          <MainNavigation inProfile={true}/>
           <div className="profile-container">
             <SideBox className="side-container">
               <ul>

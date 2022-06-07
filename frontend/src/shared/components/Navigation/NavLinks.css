@@ -67,7 +67,7 @@
 
   .nav-links a {
     color: #292929;
-    text-decoration: none; 
+    text-decoration: none;
     display: flex;
     align-items: center;
   }
@@ -82,4 +82,119 @@
     background: #ffffff;
     color: #292929;
   }
+}
+
+/*DROPDOWN-------------------------*/
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: 1px solid black;
+  border-radius: 20px;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  min-width: 200px;
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: #ffc000;
+  color: white;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 15px 0 15px 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.dropdown-content li {
+  float: none;
+  color: black;
+  /* padding: 12px 16px; */
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  padding-bottom: 15px;
+}
+
+/* active nav */
+.dropdown-content li.active,
+.dropdown-content li a.active {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  cursor: default;
+}
+
+.dropdown-content li a {
+  text-decoration: none;
+}
+
+.dropdown-content li div {
+  display: flex;
+  justify-content: left;
+  padding: 15px 0 0 5px;
+}
+
+.dropdown-content li div p {
+  margin: 7px 0 0 10px;
+}
+
+.dropdown-content li div .announcement-count {
+  border-radius: 50%;
+  width: 15px;
+  height: 5px;
+  background-color: #f34343;
+  color: white;
+  position: absolute;
+  right: 0;
+  left: 20px;
+  top: 25px;
+}
+
+.dropdown-content li div .announcement-count p {
+  color: white;
+  position: absolute;
+  right: 0;
+  left: -3px;
+  top: -5px;
+  font-size: 12px;
+}
+
+.dropdown-content li:hover:not(.active),
+.dropdown-content li a:hover:not(.active) {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropbtn:hover {
+  cursor: pointer;
+}
+
+.dropbtn .drop-profile {
+  display: flex;
+  justify-content: center;
+}
+
+.dropbtn .drop-profile img {
+  width: 25px;
+  height: 25px;
 }

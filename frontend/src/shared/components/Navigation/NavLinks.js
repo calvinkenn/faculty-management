@@ -100,6 +100,7 @@ const NavLinks = (props) => {
               }
               alt="profile-pic"
             />
+            <span />
             {auth.isAdmin ? "Admin" : userData?.firstName}
           </div>
         </button>
@@ -133,75 +134,6 @@ const NavLinks = (props) => {
           </li>
         </ul>
       </div>
-
-      {/* <ul className="nav-links">
-        {auth.isLoggedIn && userIdByParams && (
-          <li>
-            <NavLink to="/" exact>
-              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Admin
-            </NavLink>
-          </li>
-        )}
-        {!auth.isAdmin && props.inHome && (
-          <li>
-            <NavLink to="/profile" exact>
-              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Profile
-            </NavLink>
-          </li>
-        )}
-        {auth.isAdmin && props.inHome && (
-          <li>
-            <NavLink to="/admin" exact>
-              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Admin
-            </NavLink>
-          </li>
-        )}
-        {auth.isLoggedIn && props.inProfile && (
-          <li>
-            <NavLink to="/announcement" exact>
-              {!auth.isAdmin && props.announcementCount > 0 ? (
-                <div className="announcement-count">
-                  {props.announcementCount}
-                </div>
-              ) : (
-                ""
-              )}
-              <NotificationsNoneIcon sx={{ fontSize: "35px" }} />
-            </NavLink>
-          </li>
-        )}
-        {props.inProfile && (
-          <li>
-            <NavLink to="/vmgo" exact>
-              <FeedOutlinedIcon sx={{ fontSize: "35px" }} />
-            </NavLink>
-          </li>
-        )}
-
-        {!auth.isAdmin && props.inVMGO && (
-          <li>
-            <NavLink to="/profile" exact>
-              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Profile
-            </NavLink>
-          </li>
-        )}
-
-        {auth.isAdmin && props.inVMGO && (
-          <li>
-            <NavLink to="/admin" exact>
-              <ArrowBackIcon sx={{ fontSize: "35px" }} /> Admin
-            </NavLink>
-          </li>
-        )}
-
-        {auth.isLoggedIn && (
-          <li>
-            <button onClick={showLogoutHandler}>
-              <ExitToAppIcon sx={{ fontSize: 35, color: "#292929" }} />
-            </button>
-          </li>
-        )}
-      </ul> */}
     </React.Fragment>
   );
 };

@@ -35,8 +35,9 @@
 
 .main-navigation__header-nav {
   display: none;
-  margin-right: 1%;
+  /* margin-right: 1%; */
   padding: 0.5%;
+  background-color: #f7f7f7;
 }
 
 .main-navigation__drawer-nav {
@@ -78,7 +79,8 @@
 
   .main-navigation__header-nav {
     display: block;
-    margin-right: 1%;
+    /* margin-right: 1%; */
     padding: 0.5%;
+    background-color: #f7f7f7;
   }
 }

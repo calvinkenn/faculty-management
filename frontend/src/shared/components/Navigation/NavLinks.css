@@ -93,12 +93,11 @@
 
 .dropdown .dropbtn {
   font-size: 16px;
-  border: 1px solid black;
-  border-radius: 20px;
+  border: none;
   outline: none;
   color: black;
   padding: 14px 16px;
-  background-color: inherit;
+  background-color: #f7f7f7;
   font-family: inherit;
   margin: 0;
   min-width: 200px;
@@ -106,8 +105,8 @@
 
 .navbar a:hover,
 .dropdown:hover .dropbtn {
-  background-color: #ffc000;
-  color: white;
+  background-color: #f7f7f7;
+  color: #202020;
 }
 
 .dropdown-content {
@@ -120,6 +119,8 @@
   padding: 15px 0 15px 0;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  right: 3px;
+  top: 65px;
 }
 
 .dropdown-content li {
@@ -129,7 +130,8 @@
   text-decoration: none;
   display: block;
   text-align: left;
-  padding-bottom: 15px;
+  padding: 0 15px 15px;
+  /* padding-bottom: 15px; */
 }
 
 /* active nav */
@@ -170,14 +172,14 @@
   color: white;
   position: absolute;
   right: 0;
-  left: -3px;
+  left: -5px;
   top: -5px;
   font-size: 12px;
 }
 
 .dropdown-content li:hover:not(.active),
 .dropdown-content li a:hover:not(.active) {
-  background-color: #ddd;
+  background-color: #efefef;
   cursor: pointer;
 }
 
@@ -189,9 +191,15 @@
   cursor: pointer;
 }
 
+.drop-profile span{
+  width: 200%;
+  max-width: 5%;
+}
+
 .dropbtn .drop-profile {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .dropbtn .drop-profile img {
